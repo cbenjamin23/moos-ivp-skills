@@ -43,6 +43,11 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
   logic in `pAutoPoke`.
 - Use `pMissionEval` as the primary verdict owner. Prefer mission-level booleans
   or simple scalar checks over harness-side parsing of raw MOOS traffic.
+- Treat `BHV_ERROR_SEEN=false` as a normal safety/integrity pass condition.
+  Treat `BHV_WARNING_SEEN` as evidence to report and investigate, but do not
+  make it part of the pass contract by default. Add
+  `pass_condition = BHV_WARNING_SEEN = false` only when the scenario is
+  explicitly warning-intolerant.
 - Keep `results.txt` scalar and parseable. The only hard schema requirement is
   `grade=<pass|fail>`; fields such as `form=`, `mmod=`, `eval=`, `timeout=`,
   domain facts, and `mhash=` are recommended evidence, not a mandatory metric

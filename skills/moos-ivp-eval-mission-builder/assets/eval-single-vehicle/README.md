@@ -28,6 +28,12 @@ part of the verdict. If a derived eval is behavior-specific and should reject
 any warning, add `pass_condition = BHV_WARNING_SEEN = false` deliberately and
 document the stricter contract.
 
+On current tested MOOS-IvP builds, this starter mission may report
+`bhv_warning=true` from a transient pHelmIvP waypoint warning even when the
+generated behavior file contains the waypoint and the mission completes. Treat
+that as known baseline evidence; investigate new, repeated, or scenario-specific
+warnings before deciding whether they should become pass conditions.
+
 ## Run
 
 Generate targets only:

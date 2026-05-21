@@ -79,4 +79,8 @@ elif [ "$CHECK_MODE" = "single_vehicle" ]; then
   fi
 fi
 
+if [ "$STATUS" -eq 0 ]; then
+  echo "PASS generated targets use requested non-default ports; temporary targets will be cleaned on exit"
+fi
+
 exit "$STATUS"

@@ -27,6 +27,10 @@ cannot, such as parsing `--veh_mport` without forwarding it into
 `launch_vehicle.sh`. For the bundled two-vehicle pattern, it checks both named
 vehicles rather than only the first generated vehicle target.
 
+The checker cleans generated targets on exit. A printed `PASS` line and exit
+code `0` mean the non-default ports were verified; regenerate targets with
+`./launch.sh --just_make ...` if you need to inspect them afterward.
+
 ## Target Generation
 
 From the mission directory:

@@ -1,0 +1,192 @@
+//-------------------------------------------------
+// FILE: meta_vehicle.moos
+// NAME: MOOS-IvP Skills
+//-------------------------------------------------
+
+ServerHost = $(IP_ADDR)
+ServerPort = $(MOOS_PORT)
+Community  = $(VNAME)
+
+#include plug_origin_warp.moos
+
+//----------------------------------------------------
+ProcessConfig = ANTLER
+{
+  MSBetweenLaunches = 100
+
+  Run = MOOSDB         @ NewConsole = false
+  Run = pRealm         @ NewConsole = false
+  Run = uProcessWatch  @ NewConsole = false
+  Run = uLoadWatch     @ NewConsole = false
+  Run = pShare         @ NewConsole = false
+  Run = pHostInfo      @ NewConsole = false
+  Run = pLogger        @ NewConsole = false
+  Run = uSimMarineV22  @ NewConsole = false
+  Run = pMarinePIDV22  @ NewConsole = false
+  Run = pNodeReporter  @ NewConsole = false
+  Run = uFldNodeBroker @ NewConsole = false
+  Run = pHelmIvP       @ NewConsole = false
+}
+
+//----------------------------------------------------
+ProcessConfig = pShare
+{
+  AppTick   = 4
+  CommsTick = 4
+
+  input = route = localhost:$(PSHARE_PORT)
+}
+
+//----------------------------------------------------
+ProcessConfig = pRealm
+{
+  AppTick   = 4
+  CommsTick = 4
+
+  relcast_interval = 0.8
+  summary_interval = 2.0
+}
+
+//----------------------------------------------------
+ProcessConfig = uProcessWatch
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  allow_retractions = true
+  watch_all = true
+  nowatch = uMAC*
+  nowatch = uXMS*
+  nowatch = uPokeDB*
+  nowatch = uQueryDB*
+  summary_wait = 12
+}
+
+//----------------------------------------------------
+ProcessConfig = uLoadWatch
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  thresh = app=pHelmIvP,      gapthresh=3
+  thresh = app=pHostInfo,     gapthresh=5
+  thresh = app=any,           gapthresh=2.0
+  thresh = app=uSimMarineV22, gapthresh=3
+
+  breach_trigger = 5
+}
+
+//----------------------------------------------------
+ProcessConfig = pHostInfo
+{
+  AppTick   = 1
+  CommsTick = 1
+}
+
+//----------------------------------------------------
+ProcessConfig = pLogger
+{
+  AppTick       = 5
+  CommsTick     = 5
+  File          = LOG_$(VNAME)
+  PATH          = ./
+  AsyncLog      = true
+  FileTimeStamp = true
+  WildCardLogging = true
+  WildCardOmitPattern = *_STATUS
+  WildCardOmitPattern = DB_VARSUMMARY
+  WildCardOmitPattern = DB_RWSUMMARY
+}
+
+//----------------------------------------------------
+ProcessConfig = uSimMarineV22
+{
+  AppTick   = 10
+  CommsTick = 10
+
+  start_pos = $(START_POS)
+  prefix    = NAV
+
+  max_speed        = $(MAX_SPD)
+  max_deceleration = 0.1
+  turn_rate        = 95
+  turn_spd_loss    = 0.6
+
+  post_des_thrust = DESIRED_THRUSTX
+  post_des_rudder = DESIRED_RUDDERX
+}
+
+//----------------------------------------------------
+ProcessConfig = pMarinePIDV22
+{
+  AppTick   = 10
+  CommsTick = 10
+
+  verbose       = true
+  depth_control = false
+  active_start  = true
+
+  yaw_pid_kp = 1.2
+  yaw_pid_kd = 0.1
+  yaw_pid_ki = 0.3
+  yaw_pid_integral_limit = 0.07
+
+  speed_pid_kp = 1.0
+  speed_pid_kd = 0.0
+  speed_pid_ki = 0.0
+  speed_pid_integral_limit = 0.07
+
+  maxrudder    = 100
+  maxthrust    = 100
+  speed_factor = 20
+}
+
+//----------------------------------------------------
+ProcessConfig = pNodeReporter
+{
+  AppTick   = 2
+  CommsTick = 2
+
+  platform_color = $(COLOR)
+  vessel_type    = kayak
+}
+
+//----------------------------------------------------
+ProcessConfig = uFldNodeBroker
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  try_shore_host = pshare_route=$(SHORE_IP):$(SHORE_PSHARE)
+
+  bridge = src=NODE_REPORT_LOCAL, alias=NODE_REPORT
+  bridge = src=NODE_MESSAGE_LOCAL, alias=NODE_MESSAGE
+  bridge = src=VIEW_POINT
+  bridge = src=VIEW_SEGLIST
+  bridge = src=VIEW_POLYGON
+  bridge = src=VIEW_CIRCLE
+  bridge = src=APPCAST
+  bridge = src=WPT_DONE
+  bridge = src=WPT_HIT
+  bridge = src=CYCLE_HIT
+  bridge = src=WAYPOINT_END
+  bridge = src=WPT_STAT
+  bridge = src=WPT_INDEX
+  bridge = src=CYCLE_INDEX
+  bridge = src=WPT_DIST_TO_NEXT
+  bridge = src=BHV_WARNING
+  bridge = src=BHV_ERROR
+}
+
+//----------------------------------------------------
+ProcessConfig = pHelmIvP
+{
+  AppTick   = 4
+  CommsTick = 4
+
+  behaviors = targ_$(VNAME).bhv
+  verbose   = false
+
+  domain = course:0:359:360
+  domain = speed:0:$(MAX_SPD):21
+}

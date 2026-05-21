@@ -1,0 +1,5 @@
+interface:
+  display_name: "MOOS-IvP Mission Builder"
+  short_description: "Build ordinary MOOS-IvP mission folders."
+  default_prompt: "Use $moos-ivp-mission-builder to create or repair a MOOS-IvP mission folder with launchers and meta files."
+

@@ -1,0 +1,4 @@
+interface:
+  display_name: "MOOS-IVP Docs"
+  short_description: "MIT PDF-backed MOOS-IvP docs lookup"
+  default_prompt: "Use $moos-ivp-docs to consult MIT MOOS-IvP PDFs and, if needed, inspect local ivp/src for authoritative answers."

@@ -1,0 +1,254 @@
+//-------------------------------------------------
+// FILE: meta_shoreside.moos
+// NAME: MOOS-IvP Skills
+//-------------------------------------------------
+
+ServerHost = $(IP_ADDR)
+ServerPort = $(MOOS_PORT)
+Community  = shoreside
+
+#include plug_origin_warp.moos
+
+//----------------------------------------------------
+ProcessConfig = ANTLER
+{
+  MSBetweenLaunches = 100
+
+  Run = MOOSDB          @ NewConsole = false
+  Run = pRealm          @ NewConsole = false
+  Run = uProcessWatch   @ NewConsole = false
+  Run = uLoadWatch      @ NewConsole = false
+  Run = pShare          @ NewConsole = false
+  Run = pHostInfo       @ NewConsole = false
+  Run = pLogger         @ NewConsole = false
+  Run = uFldShoreBroker @ NewConsole = false
+  Run = uFldNodeComms   @ NewConsole = false
+  Run = uTimerScript    @ NewConsole = false
+  Run = pMissionEval    @ NewConsole = false
+  Run = pAutoPoke       @ NewConsole = false
+  Run = pMissionHash    @ NewConsole = false
+#ifdef LAUNCH_GUI yes
+  Run = pMarineViewer   @ NewConsole = false
+#endif
+}
+
+//----------------------------------------------------
+ProcessConfig = pShare
+{
+  AppTick   = 4
+  CommsTick = 4
+
+  input = route = localhost:$(PSHARE_PORT)
+}
+
+//----------------------------------------------------
+ProcessConfig = pRealm
+{
+  AppTick   = 4
+  CommsTick = 4
+
+  relcast_interval = 0.8
+  summary_interval = 2.0
+}
+
+//----------------------------------------------------
+ProcessConfig = uProcessWatch
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  allow_retractions = true
+  watch_all = true
+  nowatch = uMAC*
+  nowatch = uXMS*
+  nowatch = uPokeDB*
+  nowatch = uQueryDB*
+  summary_wait = 12
+}
+
+//----------------------------------------------------
+ProcessConfig = uLoadWatch
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  thresh = app=pMarineViewer, gapthresh=5
+  thresh = app=uFldNodeComms, gapthresh=4
+  thresh = app=pHostInfo,     gapthresh=5
+  thresh = app=any,           gapthresh=2.0
+
+  breach_trigger = 5
+}
+
+//----------------------------------------------------
+ProcessConfig = pHostInfo
+{
+  AppTick   = 1
+  CommsTick = 1
+}
+
+//----------------------------------------------------
+ProcessConfig = pAutoPoke
+{
+  AppTick   = 2
+  CommsTick = 2
+
+  flag = DEPLOY_ALL=true
+  flag = MOOS_MANUAL_OVERRIDE_ALL=false
+  flag = WPT_DONE=false
+  flag = WPT_HIT=false
+  flag = CYCLE_HIT=false
+  flag = WAYPOINT_END=false
+  flag = TEST_EVAL_READY=false
+  flag = BHV_WARNING_SEEN=false
+  flag = BHV_ERROR_SEEN=false
+  flag = MISSION_TIMEOUT=false
+  flag = WPT_INDEX=-1
+  flag = CYCLE_INDEX=0
+  flag = WPT_DIST_TO_NEXT=-1
+
+  required_nodes = 1
+}
+
+//----------------------------------------------------
+ProcessConfig = uTimerScript
+{
+  AppTick   = 2
+  CommsTick = 2
+
+  condition = DEPLOY_ALL = true
+  event     = var=TEST_EVAL_READY, val=true, time=2.0
+  event     = var=MISSION_TIMEOUT, val=true, time=110
+}
+
+//----------------------------------------------------
+ProcessConfig = pMissionEval
+{
+  AppTick   = 4
+  CommsTick = 4
+
+  mailflag = @BHV_WARNING#BHV_WARNING_SEEN=true
+  mailflag = @BHV_ERROR#BHV_ERROR_SEEN=true
+
+  lead_condition = (WPT_DONE = true) or (MISSION_TIMEOUT = true)
+  pass_condition = WPT_DONE = true
+  pass_condition = WPT_HIT = true
+  pass_condition = CYCLE_HIT = true
+  pass_condition = WAYPOINT_END = true
+  pass_condition = BHV_ERROR_SEEN = false
+  pass_condition = MISSION_TIMEOUT = false
+
+  result_flag = MISSION_EVALUATED = true
+  pass_flag   = SAY_MOOS = pass
+  fail_flag   = SAY_MOOS = fail
+
+  mission_form = eval_single_vehicle
+  mission_mod  = $(MMOD:=single_point_arrival)
+
+  report_file   = results.txt
+  report_column = grade=$[GRADE]
+  report_column = form=$[MISSION_FORM]
+  report_column = mmod=$[MMOD]
+  report_column = eval=$[WPT_DONE]
+  report_column = wpt_done=$[WPT_DONE]
+  report_column = wpt_hit=$[WPT_HIT]
+  report_column = cycle_hit=$[CYCLE_HIT]
+  report_column = waypoint_end=$[WAYPOINT_END]
+  report_column = test_ready=$[TEST_EVAL_READY]
+  report_column = timeout=$[MISSION_TIMEOUT]
+  report_column = wpt_index=$[WPT_INDEX]
+  report_column = cycle_index=$[CYCLE_INDEX]
+  report_column = wpt_dist=$[WPT_DIST_TO_NEXT]
+  report_column = bhv_warning=$[BHV_WARNING_SEEN]
+  report_column = bhv_error=$[BHV_ERROR_SEEN]
+  report_column = mhash=$[MHASH_SHORT]
+}
+
+//----------------------------------------------------
+ProcessConfig = pLogger
+{
+  AppTick       = 5
+  CommsTick     = 5
+  File          = XLOG_SHORESIDE
+  PATH          = ./
+  AsyncLog      = true
+  FileTimeStamp = true
+  WildCardLogging = true
+  WildCardOmitPattern = *_STATUS
+  WildCardOmitPattern = DB_VARSUMMARY
+  WildCardOmitPattern = DB_RWSUMMARY
+}
+
+//----------------------------------------------------
+ProcessConfig = uFldShoreBroker
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  auto_bridge_appcast = true
+
+  qbridge = DEPLOY
+  qbridge = MOOS_MANUAL_OVERRIDE
+  qbridge = NODE_REPORT, NODE_MESSAGE
+  qbridge = WPT_DONE, WPT_HIT, CYCLE_HIT
+  qbridge = WAYPOINT_END, TEST_EVAL_READY, BHV_WARNING, BHV_ERROR, MISSION_TIMEOUT
+  qbridge = WPT_STAT, WPT_INDEX, CYCLE_INDEX, WPT_DIST_TO_NEXT
+}
+
+//----------------------------------------------------
+ProcessConfig = uFldNodeComms
+{
+  AppTick   = 2
+  CommsTick = 2
+
+  comms_range      = 500
+  critical_range   = 25
+  min_msg_interval = 15
+  max_msg_length   = 1000
+  groups           = true
+
+  view_node_rpt_pulses = false
+}
+
+//----------------------------------------------------
+ProcessConfig = pMarineViewer
+{
+  AppTick   = 4
+  CommsTick = 4
+
+  tiff_file            = MIT_SP.tif
+  set_pan_x            = 5
+  set_pan_y            = -115
+  zoom                 = 1.5
+  vehicles_shape_scale = 1.5
+  vehicles_name_mode   = names
+
+  appcast_viewable     = true
+  appcast_height       = 75
+  appcast_width        = 30
+  appcast_color_scheme = indigo
+  appcast_font_size    = large
+  procs_font_size      = large
+  nodes_font_size      = large
+
+  stale_report_thresh = 10
+  stale_remove_thresh = 18
+
+  scope = DEPLOY_ALL
+  scope = PROC_WATCH_SUMMARY
+  scope = PROC_WATCH_ALL_OK
+  scope = ULW_BREACH
+  scope = ULW_NEAR_BREACH
+  scope = WPT_DONE
+  scope = WPT_HIT
+  scope = CYCLE_HIT
+  scope = WAYPOINT_END
+  scope = MISSION_TIMEOUT
+  scope = MISSION_EVALUATED
+
+  button_1 = DEPLOY # DEPLOY_ALL=true
+  button_1 = MOOS_MANUAL_OVERRIDE_ALL=false
+
+  button_2 = ALLSTOP # DEPLOY_ALL=false
+  button_2 = MOOS_MANUAL_OVERRIDE_ALL=true
+}

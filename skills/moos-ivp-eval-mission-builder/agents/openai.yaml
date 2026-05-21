@@ -1,0 +1,4 @@
+interface:
+  display_name: "MOOS-IvP Eval Mission Builder"
+  short_description: "Build self-evaluating MOOS-IvP missions."
+  default_prompt: "Use $moos-ivp-eval-mission-builder to create or repair a self-evaluating MOOS-IvP mission."

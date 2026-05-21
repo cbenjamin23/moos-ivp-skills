@@ -1,0 +1,182 @@
+//-------------------------------------------------
+// FILE: meta_shoreside.moos
+// NAME: Author Name
+//-------------------------------------------------
+
+ServerHost = $(IP_ADDR)
+ServerPort = $(MOOS_PORT)
+Community  = shoreside
+
+#include plug_origin_warp.moos
+
+//----------------------------------------------------
+ProcessConfig = ANTLER
+{
+  MSBetweenLaunches = 100
+
+  Run = MOOSDB          @ NewConsole = false
+  Run = pRealm          @ NewConsole = false
+  Run = uProcessWatch   @ NewConsole = false
+  Run = uLoadWatch      @ NewConsole = false
+  Run = pShare          @ NewConsole = false
+  Run = pHostInfo       @ NewConsole = false
+  Run = pLogger         @ NewConsole = false
+  Run = uFldShoreBroker @ NewConsole = false
+  Run = uFldNodeComms   @ NewConsole = false
+#ifdef LAUNCH_GUI yes
+  Run = pMarineViewer   @ NewConsole = false
+#endif
+}
+
+//----------------------------------------------------
+ProcessConfig = pShare
+{
+  AppTick   = 4
+  CommsTick = 4
+
+  input = route = localhost:$(PSHARE_PORT)
+}
+
+//----------------------------------------------------
+ProcessConfig = pRealm
+{
+  AppTick   = 4
+  CommsTick = 4
+
+  relcast_interval = 0.8
+  summary_interval = 2.0
+}
+
+//----------------------------------------------------
+ProcessConfig = uProcessWatch
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  allow_retractions = true
+  watch_all = true
+  nowatch = uMAC*
+  nowatch = uXMS*
+  nowatch = uPokeDB*
+  nowatch = uQueryDB*
+  summary_wait = 12
+}
+
+//----------------------------------------------------
+ProcessConfig = uLoadWatch
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  thresh = app=pMarineViewer, gapthresh=5
+  thresh = app=uFldNodeComms, gapthresh=4
+  thresh = app=pHostInfo,     gapthresh=5
+  thresh = app=any,           gapthresh=2.0
+
+  breach_trigger = 5
+}
+
+//----------------------------------------------------
+ProcessConfig = pHostInfo
+{
+  AppTick   = 1
+  CommsTick = 1
+}
+
+//----------------------------------------------------
+ProcessConfig = pLogger
+{
+  AppTick       = 5
+  CommsTick     = 5
+  File          = XLOG_SHORESIDE
+  PATH          = ./
+  AsyncLog      = true
+  FileTimeStamp = true
+  WildCardLogging = true
+  WildCardOmitPattern = *_STATUS
+  WildCardOmitPattern = DB_VARSUMMARY
+  WildCardOmitPattern = DB_RWSUMMARY
+}
+
+//----------------------------------------------------
+ProcessConfig = uFldShoreBroker
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  auto_bridge_appcast = true
+
+  qbridge = DEPLOY, RETURN, STATION_KEEP
+  qbridge = MOOS_MANUAL_OVERRIDE
+  qbridge = NODE_REPORT, NODE_MESSAGE
+  qbridge = RETURN_UPDATES
+}
+
+//----------------------------------------------------
+ProcessConfig = uFldNodeComms
+{
+  AppTick   = 2
+  CommsTick = 2
+
+  comms_range      = 500
+  critical_range   = 25
+  min_msg_interval = 15
+  max_msg_length   = 1000
+  groups           = true
+
+  view_node_rpt_pulses = false
+}
+
+//----------------------------------------------------
+ProcessConfig = pMarineViewer
+{
+  AppTick   = 4
+  CommsTick = 4
+
+  tiff_file            = MIT_SP.tif
+  set_pan_x            = 5
+  set_pan_y            = -115
+  zoom                 = 1.5
+  vehicles_shape_scale = 1.5
+  vehicles_name_mode   = names
+
+  appcast_viewable     = true
+  appcast_height       = 75
+  appcast_width        = 30
+  appcast_color_scheme = indigo
+  appcast_font_size    = large
+  procs_font_size      = large
+  nodes_font_size      = large
+
+  stale_report_thresh = 10
+  stale_remove_thresh = 18
+
+  scope = DEPLOY_ALL
+  scope = RETURN_ALL
+  scope = STATION_KEEP_ALL
+  scope = PROC_WATCH_SUMMARY
+  scope = PROC_WATCH_ALL_OK
+  scope = ULW_BREACH
+  scope = ULW_NEAR_BREACH
+
+  left_context[return_point] = RETURN_$[UP_VNAME_CLOSEST] = true
+  left_context[return_point] = RETURN_UPDATES_$[UP_VNAME_CLOSEST] = points=$[XPOS],$[YPOS]
+
+  button_1 = DEPLOY # DEPLOY_ALL=true
+  button_1 = MOOS_MANUAL_OVERRIDE_ALL=false
+  button_1 = RETURN_ALL=false
+  button_1 = STATION_KEEP_ALL=false
+
+  button_2 = STATION # DEPLOY_ALL=true
+  button_2 = MOOS_MANUAL_OVERRIDE_ALL=false
+  button_2 = RETURN_ALL=false
+  button_2 = STATION_KEEP_ALL=true
+
+  button_3 = RETURN # RETURN_ALL=true
+  button_3 = STATION_KEEP_ALL=false
+
+  button_4 = ALLSTOP # DEPLOY_ALL=false
+  button_4 = RETURN_ALL=false
+  button_4 = STATION_KEEP_ALL=false
+  button_4 = MOOS_MANUAL_OVERRIDE_ALL=true
+}

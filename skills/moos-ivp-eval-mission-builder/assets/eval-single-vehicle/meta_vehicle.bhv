@@ -1,0 +1,50 @@
+//-------------------------------------------------
+// FILE: meta_vehicle.bhv
+// NAME: MOOS-IvP Skills
+//-------------------------------------------------
+
+initialize DEPLOY = false
+initialize WPT_DONE = false
+initialize WPT_HIT = false
+initialize CYCLE_HIT = false
+initialize WAYPOINT_END = false
+
+set MODE = ACTIVE {
+  DEPLOY = true
+} INACTIVE
+
+set MODE = TRANSITING {
+  MODE = ACTIVE
+}
+
+//----------------------------------------------------
+Behavior = BHV_Waypoint
+{
+  name      = waypt_survey
+  pwt       = 100
+  condition = MODE==TRANSITING
+
+  perpetual = false
+  endflag   = WPT_DONE = true
+  endflag   = WAYPOINT_END = true
+  endflag   = DESIRED_SPEED = 0
+  wptflag   = WPT_HIT = true
+  cycleflag = CYCLE_HIT = true
+
+  speed          = $(STOCK_SPD)
+  capture_line   = true
+  capture_radius = 5.0
+  slip_radius    = 15.0
+  points         = $(VDEST_POS)
+  repeat         = 0
+
+  wpt_status       = WPT_STAT
+  wpt_index        = WPT_INDEX
+  cycle_index_var  = CYCLE_INDEX
+  wpt_dist_to_next = WPT_DIST_TO_NEXT
+
+  visual_hints = nextpt_color=yellow
+  visual_hints = nextpt_vertex_size=8
+  visual_hints = vertex_color=dodger_blue, edge_color=white
+  visual_hints = vertex_size=5, edge_size=1
+}

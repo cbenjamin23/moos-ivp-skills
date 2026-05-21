@@ -1,0 +1,12 @@
+# Local/generated files
+*.log
+*.tmp
+.DS_Store
+
+# Build and packaging output
+dist/
+build/
+test-runs/
+
+# Local MOOS skill config belongs outside the repo; see config/example-config.toml.
+config/local-config.toml

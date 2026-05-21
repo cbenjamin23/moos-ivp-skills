@@ -1,0 +1,12 @@
+# Copy to ~/.config/moos-ivp-skills/config.toml and edit for your machine.
+
+author_name = "Your Name"
+
+[paths]
+moos_ivp = "/path/to/moos-ivp"
+missions_auto = "/path/to/missions-auto"
+moos_ivp_cicd = "/path/to/moos-ivp-cicd-testing"
+
+[behavior_loading]
+prefer_ivp_behavior_dirs = true
+

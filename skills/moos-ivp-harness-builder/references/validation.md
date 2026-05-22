@@ -57,7 +57,7 @@ Before trusting results, reconcile README case tokens with the script's
 ## Small Wave
 
 ```bash
-./zlaunch.sh --jobs=2 --port_base=31000 --keep_workdirs
+./zlaunch.sh --jobs=2 --port_base=9600 --keep_workdirs
 ```
 
 Inspect preserved workdirs to confirm each case has generated targets with

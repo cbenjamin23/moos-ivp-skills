@@ -52,6 +52,9 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
   collision state, or other mission outcomes.
 - Expose `--case`, `--jobs`, `--port_base`, `--keep_workdirs`, `--gui`,
   `--nogui`, and `--max_time` when the harness can support them.
+- Default generated harnesses to `PORT_BASE=9000`. Use higher fresh bases only
+  as explicit run-time overrides for CI or local sessions that may collide with
+  ordinary missions in the `9000` range.
 - Use headless mode as the grouped-run default. Keep `--gui` available for an
   individual case when visual inspection is useful.
 - For wave execution, give each live case its own temp mission copy and port

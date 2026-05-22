@@ -82,6 +82,9 @@ need_grep 'shore_mport|veh_mport|shore_pshare|veh_pshare' "zlaunch.sh" "stem por
 if [ -f "$harness_dir/zlaunch.sh" ] && ! search_file 'PSHARE_OFFSET|PORT_STRIDE[[:space:]]*/[[:space:]]*2' "$harness_dir/zlaunch.sh"; then
   echo "WARN zlaunch.sh does not show the midpoint pShare offset pattern; check custom port capacity manually"
 fi
+if [ -f "$harness_dir/zlaunch.sh" ] && search_file '^[[:space:]]*PORT_BASE=[23][0-9][0-9][0-9][0-9]([^0-9]|$)' "$harness_dir/zlaunch.sh"; then
+  echo "WARN zlaunch.sh defaults to a high PORT_BASE; ordinary generated harnesses should default to 9000 and use high bases as explicit overrides"
+fi
 need_grep 'keep_workdirs|KEEP_WORKDIRS' "zlaunch.sh" "preserved workdir support"
 
 if [ -f "$harness_dir/zlaunch.sh" ] && search_file 'nspatch' "$harness_dir/zlaunch.sh"; then

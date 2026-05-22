@@ -7,6 +7,7 @@ Parallel harness runs need independent mission copies and independent ports.
 For ordinary one-or-more-vehicle behavior harnesses:
 
 ```bash
+PORT_BASE=9000
 PORT_STRIDE=30
 PSHARE_OFFSET=$((PORT_STRIDE / 2))
 case_base=$((PORT_BASE + case_idx * PORT_STRIDE))
@@ -47,8 +48,10 @@ vehicle pShare:   9046
 
 That spacing keeps simultaneously running cases from sharing listeners.
 
-Use a fresh high `PORT_BASE`, such as `30000`, when CI or local parallel work
-may collide with ordinary missions in the `9000` range.
+Use `9000` as the ordinary generated default. For local collision checks, pick
+a fresh unused `9000`-range base such as `9600`. Use a higher base, such as
+`30000`, only as an explicit override when CI or local parallel work may collide
+with ordinary missions in the `9000` range.
 
 ## Wave Execution
 

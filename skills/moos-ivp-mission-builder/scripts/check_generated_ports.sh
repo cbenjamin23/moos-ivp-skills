@@ -1,11 +1,65 @@
 #!/bin/bash
 set -u
 
-MISSION_DIR="${1:-.}"
+MISSION_DIR="."
+PORT_BASE=9100
+KEEP_TARGETS="no"
 STATUS=0
 
+usage() {
+  cat <<'EOF'
+Usage:
+  check_generated_ports.sh [mission-dir] [--port_base=N] [--keep-targets]
+
+Options:
+  --port_base=N   Base MOOSDB port for generated target checks.
+                  pShare ports use N+200. Default: 9100.
+  --keep-targets  Preserve generated targ_* files after the check.
+  -h, --help      Show this help.
+EOF
+}
+
+for arg in "$@"; do
+  case "$arg" in
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    --port_base=*)
+      PORT_BASE="${arg#*=}"
+      ;;
+    --keep-targets)
+      KEEP_TARGETS="yes"
+      ;;
+    -*)
+      echo "unknown option: $arg" >&2
+      usage >&2
+      exit 2
+      ;;
+    *)
+      MISSION_DIR="$arg"
+      ;;
+  esac
+done
+
+case "$PORT_BASE" in
+  ''|*[!0-9]*)
+    echo "invalid --port_base: $PORT_BASE" >&2
+    exit 2
+    ;;
+esac
+
+SHORE_MPORT=$PORT_BASE
+VEH_MPORT=$((PORT_BASE + 1))
+BRAVO_MPORT=$((PORT_BASE + 2))
+SHORE_PSHARE=$((PORT_BASE + 200))
+VEH_PSHARE=$((PORT_BASE + 201))
+BRAVO_PSHARE=$((PORT_BASE + 202))
+
 cd "$MISSION_DIR" || exit 2
-trap './clean.sh >/dev/null 2>&1 || true' EXIT
+if [ "$KEEP_TARGETS" != "yes" ]; then
+  trap './clean.sh >/dev/null 2>&1 || true' EXIT
+fi
 
 if [ ! -x "./launch.sh" ]; then
   echo "missing executable launch.sh"
@@ -14,21 +68,21 @@ fi
 
 ./clean.sh >/dev/null 2>&1 || true
 
-ARGS=(--just_make --nogui --shore_mport=9100 --shore_pshare=9300 7)
+ARGS=(--just_make --nogui --shore_mport="$SHORE_MPORT" --shore_pshare="$SHORE_PSHARE" 7)
 CHECK_MODE="shoreside"
 
 HELP="$(./launch.sh --help 2>&1 || true)"
 if echo "$HELP" | grep -q -- '--alpha_mport' && \
    echo "$HELP" | grep -q -- '--bravo_mport'; then
-  ARGS=(--just_make --nogui --shore_mport=9100 --shore_pshare=9300)
-  ARGS+=(--alpha_mport=9101 --alpha_pshare=9301)
-  ARGS+=(--bravo_mport=9102 --bravo_pshare=9302 7)
+  ARGS=(--just_make --nogui --shore_mport="$SHORE_MPORT" --shore_pshare="$SHORE_PSHARE")
+  ARGS+=(--alpha_mport="$VEH_MPORT" --alpha_pshare="$VEH_PSHARE")
+  ARGS+=(--bravo_mport="$BRAVO_MPORT" --bravo_pshare="$BRAVO_PSHARE" 7)
   CHECK_MODE="alpha_bravo"
 elif echo "$HELP" | grep -q -- '--veh_mport'; then
-  ARGS=(--just_make --nogui --shore_mport=9100 --veh_mport=9101 --shore_pshare=9300 --veh_pshare=9301 7)
+  ARGS=(--just_make --nogui --shore_mport="$SHORE_MPORT" --veh_mport="$VEH_MPORT" --shore_pshare="$SHORE_PSHARE" --veh_pshare="$VEH_PSHARE" 7)
   CHECK_MODE="single_vehicle"
 elif echo "$HELP" | grep -q -- '--alpha_mport'; then
-  ARGS=(--just_make --nogui --shore_mport=9100 --alpha_mport=9101 --shore_pshare=9300 --alpha_pshare=9301 7)
+  ARGS=(--just_make --nogui --shore_mport="$SHORE_MPORT" --alpha_mport="$VEH_MPORT" --shore_pshare="$SHORE_PSHARE" --alpha_pshare="$VEH_PSHARE" 7)
   CHECK_MODE="single_vehicle"
 fi
 
@@ -43,10 +97,10 @@ if [ ! -f targ_shoreside.moos ]; then
   echo "missing generated targ_shoreside.moos"
   STATUS=1
 else
-  grep -q 'ServerPort *= *9100' targ_shoreside.moos || {
-    echo "targ_shoreside.moos: expected ServerPort 9100"; STATUS=1; }
-  grep -q 'input *= *route *= *localhost:9300' targ_shoreside.moos || {
-    echo "targ_shoreside.moos: expected pShare route localhost:9300"; STATUS=1; }
+  grep -q "ServerPort *= *$SHORE_MPORT" targ_shoreside.moos || {
+    echo "targ_shoreside.moos: expected ServerPort $SHORE_MPORT"; STATUS=1; }
+  grep -q "input *= *route *= *localhost:$SHORE_PSHARE" targ_shoreside.moos || {
+    echo "targ_shoreside.moos: expected pShare route localhost:$SHORE_PSHARE"; STATUS=1; }
 fi
 
 check_vehicle_target() {
@@ -65,22 +119,22 @@ check_vehicle_target() {
     echo "$target: expected $label ServerPort $mport"; STATUS=1; }
   grep -q "input *= *route *= *localhost:$pshare" "$target" || {
     echo "$target: expected $label pShare route localhost:$pshare"; STATUS=1; }
-  grep -q 'try_shore_host *= *pshare_route=.*:9300' "$target" || {
-    echo "$target: expected $label broker route to shoreside pShare 9300"; STATUS=1; }
+  grep -q "try_shore_host *= *pshare_route=.*:$SHORE_PSHARE" "$target" || {
+    echo "$target: expected $label broker route to shoreside pShare $SHORE_PSHARE"; STATUS=1; }
 }
 
 if [ "$CHECK_MODE" = "alpha_bravo" ]; then
-  check_vehicle_target targ_alpha.moos 9101 9301 alpha
-  check_vehicle_target targ_bravo.moos 9102 9302 bravo
+  check_vehicle_target targ_alpha.moos "$VEH_MPORT" "$VEH_PSHARE" alpha
+  check_vehicle_target targ_bravo.moos "$BRAVO_MPORT" "$BRAVO_PSHARE" bravo
 elif [ "$CHECK_MODE" = "single_vehicle" ]; then
   VEH_TARGET="$(ls targ_*.moos 2>/dev/null | grep -v 'targ_shoreside.moos' | head -1 || true)"
   if [ "$VEH_TARGET" != "" ]; then
-    check_vehicle_target "$VEH_TARGET" 9101 9301 "first vehicle"
+    check_vehicle_target "$VEH_TARGET" "$VEH_MPORT" "$VEH_PSHARE" "first vehicle"
   fi
 fi
 
 if [ "$STATUS" -eq 0 ]; then
-  echo "PASS generated targets use requested non-default ports; temporary targets will be cleaned on exit"
+  echo "PASS generated targets use requested non-default ports: mode=$CHECK_MODE shore_mport=$SHORE_MPORT shore_pshare=$SHORE_PSHARE keep_targets=$KEEP_TARGETS"
 fi
 
 exit "$STATUS"

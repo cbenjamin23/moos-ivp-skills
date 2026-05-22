@@ -18,7 +18,7 @@ targets.
 Run:
 
 ```bash
-scripts/check_generated_ports.sh <mission-dir>
+scripts/check_generated_ports.sh <mission-dir> --port_base=9100
 ```
 
 This runs `launch.sh --just_make --nogui` with non-default ports and confirms
@@ -27,9 +27,10 @@ cannot, such as parsing `--veh_mport` without forwarding it into
 `launch_vehicle.sh`. For the bundled two-vehicle pattern, it checks both named
 vehicles rather than only the first generated vehicle target.
 
-The checker cleans generated targets on exit. A printed `PASS` line and exit
-code `0` mean the non-default ports were verified; regenerate targets with
-`./launch.sh --just_make ...` if you need to inspect them afterward.
+The checker cleans generated targets on exit unless `--keep-targets` is passed.
+A printed `PASS` line and exit code `0` mean the non-default ports were
+verified. Regenerate targets with `./launch.sh --just_make ...` or pass
+`--keep-targets` if you need to inspect them afterward.
 
 ## Target Generation
 

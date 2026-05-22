@@ -1,13 +1,10 @@
 # Scripts
 
-Planned helper scripts:
+Repository-level helper scripts live here.
 
-- `configure-moos-skills.sh`
-- `discover-moos-env.sh`
-- `validate-moos-env.sh`
-- `validate-skills.sh`
-- `package-codex-plugin.sh`
+- `check_plugin_integrity.sh` validates the distributable plugin shape:
+  marketplace/plugin JSON, skill symlink, skill frontmatter, UI metadata, and
+  obvious stale local names or private workspace paths.
 
-These scripts should support setup and packaging. They should not be required
-for an agent to understand the skills.
-
+These scripts support setup and packaging. They should not be required for an
+agent to understand the skills.

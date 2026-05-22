@@ -98,8 +98,9 @@ For custom app source, use `moos-app-builder`. For custom behavior source, use
 - Read `references/validation.md` before reporting a mission as done.
 - Use `scripts/static_check_mission.sh <mission-dir>` for a quick structural
   check after creating a mission.
-- Use `scripts/check_generated_ports.sh <mission-dir>` to verify that non-default
-  port overrides are reflected in generated targets.
+- Use `scripts/check_generated_ports.sh <mission-dir> --port_base=<base>` to
+  verify that non-default port overrides are reflected in generated targets.
+  Add `--keep-targets` when you need to inspect the generated files afterward.
 
 ## Validation Checklist
 

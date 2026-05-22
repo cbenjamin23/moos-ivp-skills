@@ -21,8 +21,8 @@ derive the final grade itself.
 Also verify the stem contract:
 
 ```bash
-./zlaunch.sh --just_make --shore_mport=30000 --veh_mport=30001 \
-  --shore_pshare=30010 --veh_pshare=30011 --mmod=contract_check 10
+./zlaunch.sh --just_make --shore_mport=9000 --veh_mport=9001 \
+  --shore_pshare=9015 --veh_pshare=9016 --mmod=contract_check 10
 ```
 
 Inspect generated targets for those ports and inspect launchers for `nsplug -x`
@@ -46,7 +46,7 @@ Confirm the harness output includes:
 ## Serial Suite
 
 ```bash
-./zlaunch.sh --jobs=1 --port_base=30000
+./zlaunch.sh --jobs=1 --port_base=9000
 ```
 
 Serial mode should not depend on default ports.

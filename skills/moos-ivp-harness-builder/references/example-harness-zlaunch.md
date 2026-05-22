@@ -16,8 +16,9 @@ TIME_WARP=10
 MAX_TIME=90
 CASE=""
 JOBS=1
-PORT_BASE=30000
+PORT_BASE=9000
 PORT_STRIDE=30
+PSHARE_OFFSET=$((PORT_STRIDE / 2))
 KEEP_WORKDIRS="no"
 NOGUI="--nogui"
 
@@ -129,8 +130,8 @@ run_case() {
   local case_base=$((PORT_BASE + case_idx * PORT_STRIDE))
   local shore_mport=$((case_base + 0))
   local veh_mport=$((case_base + 1))
-  local shore_pshare=$((case_base + 10))
-  local veh_pshare=$((case_base + 11))
+  local shore_pshare=$((case_base + PSHARE_OFFSET))
+  local veh_pshare=$((case_base + PSHARE_OFFSET + 1))
 
   get_case_config "$case_name" || return 1
   if ! apply_case_patches "$workdir"; then

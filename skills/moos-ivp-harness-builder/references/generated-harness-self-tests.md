@@ -148,10 +148,14 @@ find "$run_root" -name 'targ_*.moos' -print0 |
     }'
 ```
 
-Then verify no listener port is duplicated, no target kept stock defaults such
-as `9000/9001/9200/9201` unless intentionally selected, and the largest computed
-offset satisfies:
+Then verify no listener port is duplicated and the largest computed offset
+satisfies:
 
 ```text
 PORT_BASE + (case_count - 1) * PORT_STRIDE + max_offset < 65535
 ```
+
+For the midpoint block scheme, `max_offset` is normally
+`PSHARE_OFFSET + vehicle_count`. With `PORT_STRIDE=30` and
+`PSHARE_OFFSET=15`, this supports up to 14 vehicles per case before MOOSDB and
+pShare offsets overlap. Increase `PORT_STRIDE` before exceeding that limit.

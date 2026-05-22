@@ -72,10 +72,18 @@ The harness should exit nonzero but still emit one normalized result line for
 every selected case. Do not stop serial execution after the first failing case
 unless the user explicitly asked for fail-fast behavior.
 
+Also test the empty-output path: if a nonempty selected case list produces zero
+case rows, the harness must exit nonzero with a clear diagnostic. Do not let a
+case-loop bug return success with an empty `results.txt`.
+
 In bash, avoid declaring and referencing local variables in the same statement,
 such as `local name="$1" out="$RUN_ROOT/$name.out"`. Expand dependent paths on
 later lines after the source variable is assigned. This catches a common
 generated-harness failure where no per-case result files are written.
+
+Keep generated harness scripts portable to the system Bash commonly shipped on
+macOS. Avoid `mapfile`, `readarray`, associative arrays, and other Bash 4+
+features unless the project explicitly controls the shell runtime.
 
 Recommended ordinary case fields:
 

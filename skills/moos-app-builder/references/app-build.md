@@ -116,6 +116,11 @@ both the app `ProcessConfig` and the launcher context that starts it, such as a
 minimal `ProcessConfig = ANTLER` block or the existing mission's launcher
 pattern.
 
+For apps built in an external user project, make binary discovery explicit. A
+mission launched by `pAntler` normally needs the app executable on `PATH`; use a
+launcher-local `PATH=<project>/bin:$PATH` extension for disposable samples, or
+document the user's persistent shell/project setup for normal workflows.
+
 ## Build Commands
 
 Use the project build style if present. For a minimal scratch project:

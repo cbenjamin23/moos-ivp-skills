@@ -58,6 +58,9 @@ Before using MOOS-IvP paths, resolve `MOOS_IVP_ROOT` from the user's request, `M
      `ProcessConfig` and the `pAntler` or launcher context that actually starts
      the app.
    - Add the app to `pAntler` or the mission launcher pattern only if the existing mission uses that style.
+   - Ensure the launcher can find the built app binary. For external projects,
+     either document that the project `bin/` must be on `PATH` or add a narrow
+     launcher-local `PATH` extension for the sample mission.
 7. Validate.
    - Configure/build the project or target when feasible.
    - Run the generated binary with `--help`, `--example`, and `--interface`.

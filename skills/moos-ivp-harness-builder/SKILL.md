@@ -130,6 +130,12 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
   and preserve launch return codes or setup evidence when available.
 - Selected runs produce one normalized result line for every selected case,
   including setup errors and intentional failures.
+- A selected run that produces zero case rows is a harness failure and should
+  exit nonzero with a clear diagnostic. This catches portability bugs where the
+  case loop never actually ran.
+- Keep harness shell code portable to macOS system Bash. Avoid `mapfile`,
+  `readarray`, associative arrays, and other Bash 4+ conveniences unless the
+  project explicitly controls the shell runtime.
 - `--keep_workdirs` preserves enough files to inspect generated targets and
   `results.txt`.
 - Preserved workdirs show generated targets using distinct forwarded ports and

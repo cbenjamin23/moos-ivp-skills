@@ -69,6 +69,13 @@ fi
 if [ -f "$harness_dir/zlaunch.sh" ] && search_file 'expected[[:space:]]*=|EXPECTED=' "$harness_dir/zlaunch.sh"; then
   echo "WARN zlaunch.sh appears to compare expected/actual grades; new harnesses should make pMissionEval own expected-negative semantics"
 fi
+if [ -f "$harness_dir/zlaunch.sh" ] && search_file '(^|[^[:alnum:]_])(mapfile|readarray)([^[:alnum:]_]|$)|declare[[:space:]]+-A' "$harness_dir/zlaunch.sh"; then
+  echo "FAIL zlaunch.sh uses bash features unavailable in macOS system bash; avoid mapfile/readarray/associative arrays in portable harnesses"
+  fail=1
+fi
+if [ -f "$harness_dir/zlaunch.sh" ] && ! search_file 'no cases selected|no selected cases|selected_count|case_count|CASE_COUNT|result_count|RESULT_COUNT|rows_written|result_rows' "$harness_dir/zlaunch.sh"; then
+  echo "WARN zlaunch.sh does not show an obvious zero-selected/zero-result guard; selected runs should exit nonzero if no case rows are produced"
+fi
 need_grep 'mktemp|cp -R' "zlaunch.sh" "temp mission copy pattern"
 need_grep 'PORT_STRIDE|case_base|port_base' "zlaunch.sh" "port block isolation"
 need_grep 'shore_mport|veh_mport|shore_pshare|veh_pshare' "zlaunch.sh" "stem port forwarding"

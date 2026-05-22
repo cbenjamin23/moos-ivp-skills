@@ -53,6 +53,11 @@ done
 need_grep 'Cases|Current Matrix' "README.md" "case matrix documentation"
 need_grep '--case' "zlaunch.sh" "--case support"
 need_grep '--jobs' "zlaunch.sh" "--jobs support"
+if [ -f "$harness_dir/zlaunch.sh" ] &&
+   search_file '--jobs' "$harness_dir/zlaunch.sh" &&
+   ! search_file 'run_wave|WAVE_|[[:space:]]&([[:space:]]|$)|(^|[^[:alnum:]_])wait([^[:alnum:]_]|$)|background' "$harness_dir/zlaunch.sh"; then
+  echo "WARN zlaunch.sh accepts --jobs but does not show obvious wave/background execution; omit --jobs or implement real grouped execution"
+fi
 need_grep '--port_base' "zlaunch.sh" "--port_base support"
 need_grep '--max_time' "zlaunch.sh" "--max_time support"
 need_grep 'get_case_config|case[[:space:]].*in' "zlaunch.sh" "explicit case mapping"

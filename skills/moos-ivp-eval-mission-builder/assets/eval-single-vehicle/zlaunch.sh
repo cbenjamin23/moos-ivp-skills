@@ -14,28 +14,6 @@ scoped_cleanup() {
   repo_dir=`git -C "$PWD" rev-parse --show-toplevel 2>/dev/null`
   if [ "$repo_dir" != "" ] && [ -x "$repo_dir/scripts/harness_teardown.sh" ]; then
     "$repo_dir/scripts/harness_teardown.sh" "$PWD"
-    return
-  fi
-
-  if command -v lsof >/dev/null 2>&1; then
-    pids=`lsof -t +D "$PWD" 2>/dev/null | sort -u`
-    for pid in $pids; do
-      comm=`ps -p "$pid" -o comm= 2>/dev/null | tr -d ' '`
-      case "$comm" in
-        MOOSDB|pAntler|pRealm|uProcessWatch|uLoadWatch|pShare|pHostInfo|pLogger|uSimMarineV22|pMarinePIDV22|pNodeReporter|uFldNodeBroker|pHelmIvP|uFldShoreBroker|uFldNodeComms|uTimerScript|pMissionEval|pAutoPoke|pMissionHash|pMarineViewer)
-          kill -INT "$pid" 2>/dev/null || true
-          ;;
-      esac
-    done
-    sleep 1
-    for pid in $pids; do
-      comm=`ps -p "$pid" -o comm= 2>/dev/null | tr -d ' '`
-      case "$comm" in
-        MOOSDB|pAntler|pRealm|uProcessWatch|uLoadWatch|pShare|pHostInfo|pLogger|uSimMarineV22|pMarinePIDV22|pNodeReporter|uFldNodeBroker|pHelmIvP|uFldShoreBroker|uFldNodeComms|uTimerScript|pMissionEval|pAutoPoke|pMissionHash|pMarineViewer)
-          kill -TERM "$pid" 2>/dev/null || true
-          ;;
-      esac
-    done
   fi
 }
 

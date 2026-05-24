@@ -113,6 +113,10 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
 - Generated targets contain `pMissionEval`, explicit initialization
   (`pAutoPoke`, `uTimerScript`, or an app-owned producer), and any evaluator
   apps needed for reported columns such as `pMissionHash`.
+- If `pMissionHash` is used for `mhash=` evidence, keep it headless-only by
+  default; GUI targets should not launch both `pMissionHash` and
+  `pMarineViewer` unless the overlapping pMarineViewer hash feature is
+  deliberately disabled.
 - Generated targets include bridged graded variables if the verdict depends on
   vehicle-local posts.
 - `./zlaunch.sh --just_make <warp>` succeeds when `xlaunch.sh` is on `PATH`.

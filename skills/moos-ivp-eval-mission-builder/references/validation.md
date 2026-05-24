@@ -29,7 +29,9 @@ Inspect generated targets for:
 - whether any `AUTO_LAUNCHED`-guarded evaluator apps are included or excluded
   exactly as intended
 - if `mhash=` is reported, `pMissionHash` is present in the generated target for
-  the selected `--gui` or `--nogui` mode
+  headless `--nogui` validation
+- GUI targets do not launch both `pMissionHash` and `pMarineViewer` unless the
+  pMarineViewer mission-hash feature was explicitly disabled
 
 ## Headless Run
 

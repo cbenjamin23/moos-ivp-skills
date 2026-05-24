@@ -105,6 +105,12 @@ fi
 if meta_has 'report_column[[:space:]]*=.*mhash='; then
   need_meta_grep 'pMissionHash' "pMissionHash for mhash column"
 fi
+if [ -f "$mission_dir/targ_shoreside.moos" ] &&
+   search_file 'Run[[:space:]]*=[[:space:]]*pMissionHash' "$mission_dir/targ_shoreside.moos" &&
+   search_file 'Run[[:space:]]*=[[:space:]]*pMarineViewer' "$mission_dir/targ_shoreside.moos"; then
+  echo "FAIL generated targ_shoreside.moos launches both pMissionHash and pMarineViewer; keep pMissionHash headless-only unless pMarineViewer mission-hash publication is disabled"
+  fail=1
+fi
 need_grep 'xlaunch.sh' "zlaunch.sh" "xlaunch call"
 need_grep '--max_time' "zlaunch.sh" "max_time support"
 need_grep 'results.txt' "zlaunch.sh" "results truncation or handling"

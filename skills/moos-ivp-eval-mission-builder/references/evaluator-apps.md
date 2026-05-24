@@ -140,8 +140,13 @@ verdict, such as `form=` and `mmod=` in app-level evals. Use `report_column` for
 the verdict and measured facts that are part of the result evidence.
 
 If the report contains `mhash=$[MHASH_SHORT]`, make sure `pMissionHash` is
-launched in the generated mode being tested. Do not validate only the template;
-inspect the actual `targ_shoreside.moos` for `--gui` and `--nogui` variants.
+launched in the headless generated target being tested. Do not run
+`pMissionHash` and `pMarineViewer` together by default: `pMissionHash` is the
+headless mission-hash producer, while GUI runs normally let `pMarineViewer`
+publish the mission hash. Guard `pMissionHash` behind the headless mode, or
+explicitly disable the overlapping pMarineViewer hash feature if a scenario
+truly needs both apps. Validate the actual `targ_shoreside.moos` for both
+`--gui` and `--nogui`; do not validate only the template.
 
 ## Bridging Graded Variables
 

@@ -29,8 +29,7 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
   `--mmod`, and port overrides, but it should not contain case loops or result
   aggregation.
 - Keep `zlaunch.sh` thin: parse automation arguments, truncate `results.txt`,
-  call shared `xlaunch.sh`, then run only scoped cleanup if a local helper is
-  available.
+  call shared `xlaunch.sh`, then validate that `results.txt` contains `grade=`.
 - Let `xlaunch.sh --max_time=<secs>` own `uMayFinish` and the timed wait/stop
   contract. Do not duplicate that lifecycle in mission-local wrappers.
 - Do not synthesize `grade=` or write the final result row from `zlaunch.sh`,
@@ -122,5 +121,8 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
 - Runtime warnings are either eliminated or surfaced in `results.txt` with an
   explicit choice about whether they affect the verdict.
 - No mission wrapper uses global `ktm`, `pkill`, or unrelated cleanup.
+- Ordinary vehicle eval wrappers should not add process-discovery cleanup; add
+  scoped cleanup only for app-only/unit-style shapes or when live validation
+  proves `xlaunch.sh` leaves mission-owned processes behind.
 - GUI runs retain normal operator controls unless the user requested a
   headless-only mission.

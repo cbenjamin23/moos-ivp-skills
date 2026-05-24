@@ -4,18 +4,9 @@
 #  Mission: eval-single-vehicle
 #   Author: MOOS-IvP Skills
 #------------------------------------------------------------
-#  Part 1: Set convenience functions for terminal output and
-#          catching SIGINT (ctrl-c).
+#  Part 1: Set convenience functions for terminal output.
 #------------------------------------------------------------
 vecho() { if [ "$VERBOSE" != "" ]; then echo "$ME: $1"; fi; }
-on_exit() { echo; echo "$ME: Halting all apps"; kill -- -$$; }
-trap on_exit SIGINT
-scoped_cleanup() {
-  repo_dir=`git -C "$PWD" rev-parse --show-toplevel 2>/dev/null`
-  if [ "$repo_dir" != "" ] && [ -x "$repo_dir/scripts/harness_teardown.sh" ]; then
-    "$repo_dir/scripts/harness_teardown.sh" "$PWD"
-  fi
-}
 
 #------------------------------------------------------------
 #  Part 2: Set global variable default values
@@ -94,13 +85,6 @@ if [ "${JUST_MAKE}" = "" ]; then
     echo "$ME: results.txt does not contain a grade= result"
     status=1
   fi
-fi
-
-#------------------------------------------------------------
-#  Part 5: Apply scoped cleanup if the host repo provides it
-#------------------------------------------------------------
-if [ "${JUST_MAKE}" = "" ]; then
-  scoped_cleanup
 fi
 
 exit "$status"

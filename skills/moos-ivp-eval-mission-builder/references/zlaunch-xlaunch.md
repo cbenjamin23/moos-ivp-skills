@@ -61,18 +61,18 @@ receives the final value through `--max_time=<secs>` and passes it to
 
 ## Cleanup
 
-Prefer scoped cleanup after non-generation runs when the repository already
-provides a helper such as `scripts/harness_teardown.sh`. Call it with the mission
-directory or temp root. If no helper exists, ordinary vehicle eval missions
-should normally rely on `xlaunch.sh` rather than inventing process cleanup in
-the mission wrapper.
+Ordinary vehicle eval missions should normally rely on `xlaunch.sh` for
+teardown. Do not add process-discovery cleanup to the wrapper unless live
+validation shows that the mission shape actually leaves mission-owned processes
+behind.
 
-Only add a portable fallback when the mission shape or testing shows a real
-need, such as a unit-style app eval with only a shoreside MOOSDB and one app
-under test. In that case, filter to known MOOS app process names or recorded
-child PIDs. Do not blindly pipe every PID from `lsof +D "$PWD"` to `kill`; that
-can match the invoking shell or audit commands. Do not add global `ktm`, broad
-`pkill`, or machine-wide process sweeps.
+For unit-style app evals or other small launch shapes that prove leaky, prefer a
+repo-provided scoped helper such as `scripts/harness_teardown.sh`, called with
+the mission directory or temp root. If a portable fallback is truly necessary,
+filter to known MOOS app process names or recorded child PIDs. Do not blindly
+pipe every PID from `lsof +D "$PWD"` to `kill`; that can match the invoking
+shell or audit commands. Do not add global `ktm`, broad `pkill`, or machine-wide
+process sweeps.
 
 ## Common Mistakes
 

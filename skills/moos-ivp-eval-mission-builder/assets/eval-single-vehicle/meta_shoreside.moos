@@ -23,7 +23,6 @@ ProcessConfig = ANTLER
   Run = pLogger         @ NewConsole = false
   Run = uFldShoreBroker @ NewConsole = false
   Run = uFldNodeComms   @ NewConsole = false
-  Run = uTimerScript    @ NewConsole = false
   Run = pMissionEval    @ NewConsole = false
   Run = pAutoPoke       @ NewConsole = false
   Run = pMissionHash    @ NewConsole = false
@@ -99,26 +98,13 @@ ProcessConfig = pAutoPoke
   flag = WPT_HIT=false
   flag = CYCLE_HIT=false
   flag = WAYPOINT_END=false
-  flag = TEST_EVAL_READY=false
   flag = BHV_WARNING_SEEN=false
   flag = BHV_ERROR_SEEN=false
-  flag = MISSION_TIMEOUT=false
   flag = WPT_INDEX=-1
   flag = CYCLE_INDEX=0
   flag = WPT_DIST_TO_NEXT=-1
 
   required_nodes = 1
-}
-
-//----------------------------------------------------
-ProcessConfig = uTimerScript
-{
-  AppTick   = 2
-  CommsTick = 2
-
-  condition = DEPLOY_ALL = true
-  event     = var=TEST_EVAL_READY, val=true, time=2.0
-  event     = var=MISSION_TIMEOUT, val=true, time=110
 }
 
 //----------------------------------------------------
@@ -130,13 +116,11 @@ ProcessConfig = pMissionEval
   mailflag = @BHV_WARNING#BHV_WARNING_SEEN=true
   mailflag = @BHV_ERROR#BHV_ERROR_SEEN=true
 
-  lead_condition = (WPT_DONE = true) or (MISSION_TIMEOUT = true)
-  pass_condition = WPT_DONE = true
+  lead_condition = WPT_DONE = true
   pass_condition = WPT_HIT = true
   pass_condition = CYCLE_HIT = true
   pass_condition = WAYPOINT_END = true
   pass_condition = BHV_ERROR_SEEN = false
-  pass_condition = MISSION_TIMEOUT = false
 
   result_flag = MISSION_EVALUATED = true
   pass_flag   = SAY_MOOS = pass
@@ -154,8 +138,6 @@ ProcessConfig = pMissionEval
   report_column = wpt_hit=$[WPT_HIT]
   report_column = cycle_hit=$[CYCLE_HIT]
   report_column = waypoint_end=$[WAYPOINT_END]
-  report_column = test_ready=$[TEST_EVAL_READY]
-  report_column = timeout=$[MISSION_TIMEOUT]
   report_column = wpt_index=$[WPT_INDEX]
   report_column = cycle_index=$[CYCLE_INDEX]
   report_column = wpt_dist=$[WPT_DIST_TO_NEXT]
@@ -191,7 +173,7 @@ ProcessConfig = uFldShoreBroker
   qbridge = MOOS_MANUAL_OVERRIDE
   qbridge = NODE_REPORT, NODE_MESSAGE
   qbridge = WPT_DONE, WPT_HIT, CYCLE_HIT
-  qbridge = WAYPOINT_END, TEST_EVAL_READY, BHV_WARNING, BHV_ERROR, MISSION_TIMEOUT
+  qbridge = WAYPOINT_END, BHV_WARNING, BHV_ERROR
   qbridge = WPT_STAT, WPT_INDEX, CYCLE_INDEX, WPT_DIST_TO_NEXT
 }
 
@@ -243,7 +225,6 @@ ProcessConfig = pMarineViewer
   scope = WPT_HIT
   scope = CYCLE_HIT
   scope = WAYPOINT_END
-  scope = MISSION_TIMEOUT
   scope = MISSION_EVALUATED
 
   button_1 = DEPLOY # DEPLOY_ALL=true

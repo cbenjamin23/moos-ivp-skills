@@ -11,8 +11,10 @@ communities are on the local host.
 ## Evaluation
 
 `pAutoPoke` starts the mission and initializes evaluation variables.
-`pMissionEval` evaluates when `WPT_DONE=true` or `MISSION_TIMEOUT=true` and
-writes `results.txt`.
+`pMissionEval` uses the waypoint completion event as its lead condition and
+writes `results.txt` when that event occurs. `zlaunch.sh` forwards
+`--max_time` to `xlaunch.sh`, which runs `uMayFinish` as the outer
+infrastructure ceiling.
 
 The passing baseline requires:
 
@@ -21,7 +23,6 @@ The passing baseline requires:
 - `CYCLE_HIT=true`
 - `WAYPOINT_END=true`
 - `BHV_ERROR_SEEN=false`
-- `MISSION_TIMEOUT=false`
 
 The baseline reports `BHV_WARNING_SEEN` as evidence but does not make that field
 part of the verdict. If a derived eval is behavior-specific and should reject

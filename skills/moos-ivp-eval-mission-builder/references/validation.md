@@ -41,12 +41,10 @@ Confirm:
 
 - the process exits without manual input
 - `results.txt` contains `grade=pass` or the intended failing grade
-- a too-short timeout exits nonzero or is otherwise reported as missing
-  `grade=`
-- expected non-completion paths, such as no arrival before mission timeout,
-  produce mission-owned `grade=fail` rather than no result
-- mission timeout occurs comfortably before `--max_time`; avoid a wrapper
-  timeout racing the mission-owned fail result
+- for event-driven evals, missing `grade=` after `uMayFinish`/`--max_time` is
+  reported as an infrastructure failure
+- for time-window evals, expected non-completion paths produce mission-owned
+  `grade=fail` before wrapper `--max_time`
 - `MISSION_EVALUATED=true` is visible in logs when needed
 - logs are free of unexpected config, deprecation, and runtime warnings
 - no leftover MOOSDB or pShare process remains for the mission

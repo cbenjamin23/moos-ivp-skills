@@ -25,8 +25,11 @@ explain what failed. Use `reason=` for runner failures unless the mission itself
 chooses to emit a compact mission-owned reason.
 
 Optional provenance fields such as `form=`, `mmod=`, and `mhash=` are useful but
-not required. If both `case=` and `mmod=` are present, they should normally
-match.
+not required. `case=` is the harness row key. `mmod=` is the stem mission's own
+variation label, surfaced through `pMissionEval`'s `mission_mod` / `$[MMOD]`.
+They may match when each case is exactly one stem mission variation. They should
+diverge when the harness case names runner behavior, timing, an expected setup
+failure, or multiple checks over the same stem variant.
 
 The stem mission must decide the grade through `pMissionEval`. A target file
 field such as `grade_hint`, or a shell wrapper that echoes `grade=`, is not a

@@ -50,11 +50,7 @@ case "$PORT_BASE" in
 esac
 
 SHORE_MPORT=$PORT_BASE
-VEH_MPORT=$((PORT_BASE + 1))
-BRAVO_MPORT=$((PORT_BASE + 2))
 SHORE_PSHARE=$((PORT_BASE + 200))
-VEH_PSHARE=$((PORT_BASE + 201))
-BRAVO_PSHARE=$((PORT_BASE + 202))
 
 cd "$MISSION_DIR" || exit 2
 if [ "$KEEP_TARGETS" != "yes" ]; then
@@ -68,22 +64,52 @@ fi
 
 ./clean.sh >/dev/null 2>&1 || true
 
-ARGS=(--just_make --nogui --shore_mport="$SHORE_MPORT" --shore_pshare="$SHORE_PSHARE" 7)
+ARGS=(--just_make --nogui --shore_mport="$SHORE_MPORT" --shore_pshare="$SHORE_PSHARE")
 CHECK_MODE="shoreside"
 
 HELP="$(./launch.sh --help 2>&1 || true)"
-if echo "$HELP" | grep -q -- '--alpha_mport' && \
-   echo "$HELP" | grep -q -- '--bravo_mport'; then
-  ARGS=(--just_make --nogui --shore_mport="$SHORE_MPORT" --shore_pshare="$SHORE_PSHARE")
-  ARGS+=(--alpha_mport="$VEH_MPORT" --alpha_pshare="$VEH_PSHARE")
-  ARGS+=(--bravo_mport="$BRAVO_MPORT" --bravo_pshare="$BRAVO_PSHARE" 7)
-  CHECK_MODE="alpha_bravo"
-elif echo "$HELP" | grep -q -- '--veh_mport'; then
-  ARGS=(--just_make --nogui --shore_mport="$SHORE_MPORT" --veh_mport="$VEH_MPORT" --shore_pshare="$SHORE_PSHARE" --veh_pshare="$VEH_PSHARE" 7)
-  CHECK_MODE="single_vehicle"
-elif echo "$HELP" | grep -q -- '--alpha_mport'; then
-  ARGS=(--just_make --nogui --shore_mport="$SHORE_MPORT" --alpha_mport="$VEH_MPORT" --shore_pshare="$SHORE_PSHARE" --alpha_pshare="$VEH_PSHARE" 7)
-  CHECK_MODE="single_vehicle"
+VEH_NAMES=()
+VEH_MPORTS=()
+VEH_PSHARES=()
+
+for opt in $(printf '%s\n' "$HELP" | grep -Eo -- '--[A-Za-z0-9_]+_mport' | sort -u); do
+  name="${opt#--}"
+  name="${name%_mport}"
+  [ "$name" = "shore" ] && continue
+  VEH_NAMES+=("$name")
+done
+
+if [ "${#VEH_NAMES[@]}" -gt 1 ]; then
+  FILTERED_NAMES=()
+  for name in "${VEH_NAMES[@]}"; do
+    [ "$name" = "veh" ] && continue
+    FILTERED_NAMES+=("$name")
+  done
+  VEH_NAMES=("${FILTERED_NAMES[@]}")
+fi
+
+idx=1
+for name in "${VEH_NAMES[@]}"; do
+  mport=$((PORT_BASE + idx))
+  pshare=$((PORT_BASE + 200 + idx))
+  ARGS+=("--${name}_mport=$mport")
+  if printf '%s\n' "$HELP" | grep -q -- "--${name}_pshare"; then
+    ARGS+=("--${name}_pshare=$pshare")
+  else
+    echo "launch.sh help advertises --${name}_mport but not --${name}_pshare"
+    STATUS=1
+  fi
+  VEH_MPORTS+=("$mport")
+  VEH_PSHARES+=("$pshare")
+  idx=$((idx + 1))
+done
+
+ARGS+=(7)
+
+if [ "${#VEH_NAMES[@]}" -eq 1 ]; then
+  CHECK_MODE="single_vehicle:${VEH_NAMES[0]}"
+elif [ "${#VEH_NAMES[@]}" -gt 1 ]; then
+  CHECK_MODE="multi_vehicle:${#VEH_NAMES[@]}"
 fi
 
 if ! ./launch.sh "${ARGS[@]}" >/tmp/moos_ivp_generated_ports.$$ 2>&1; then
@@ -123,18 +149,19 @@ check_vehicle_target() {
     echo "$target: expected $label broker route to shoreside pShare $SHORE_PSHARE"; STATUS=1; }
 }
 
-if [ "$CHECK_MODE" = "alpha_bravo" ]; then
-  check_vehicle_target targ_alpha.moos "$VEH_MPORT" "$VEH_PSHARE" alpha
-  check_vehicle_target targ_bravo.moos "$BRAVO_MPORT" "$BRAVO_PSHARE" bravo
-elif [ "$CHECK_MODE" = "single_vehicle" ]; then
-  VEH_TARGET="$(ls targ_*.moos 2>/dev/null | grep -v 'targ_shoreside.moos' | head -1 || true)"
-  if [ "$VEH_TARGET" != "" ]; then
-    check_vehicle_target "$VEH_TARGET" "$VEH_MPORT" "$VEH_PSHARE" "first vehicle"
+idx=0
+for name in "${VEH_NAMES[@]}"; do
+  target="targ_${name}.moos"
+  if [ ! -f "$target" ] && [ "${#VEH_NAMES[@]}" -eq 1 ]; then
+    first_target="$(ls targ_*.moos 2>/dev/null | grep -v 'targ_shoreside.moos' | head -1 || true)"
+    [ "$first_target" != "" ] && target="$first_target"
   fi
-fi
+  check_vehicle_target "$target" "${VEH_MPORTS[$idx]}" "${VEH_PSHARES[$idx]}" "$name"
+  idx=$((idx + 1))
+done
 
 if [ "$STATUS" -eq 0 ]; then
-  echo "PASS generated targets use requested non-default ports: mode=$CHECK_MODE shore_mport=$SHORE_MPORT shore_pshare=$SHORE_PSHARE keep_targets=$KEEP_TARGETS"
+  echo "PASS generated targets use requested non-default ports: mode=$CHECK_MODE vehicles=${#VEH_NAMES[@]} shore_mport=$SHORE_MPORT shore_pshare=$SHORE_PSHARE keep_targets=$KEEP_TARGETS"
 fi
 
 exit "$STATUS"

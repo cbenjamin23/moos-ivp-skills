@@ -19,7 +19,6 @@ ProcessConfig = pAutoPoke
   flag = WAYPOINT_END=false
   flag = BHV_WARNING_SEEN=false
   flag = BHV_ERROR_SEEN=false
-  flag = MISSION_TIMEOUT=false
 
   required_nodes = 1
 }
@@ -35,11 +34,17 @@ every graded variable has an explicit initial value or a clear producer before
 
 ## `pMissionEval`
 
-Use one clear verdict-time lead condition and a small set of pass conditions.
-The lead should mean "the stimulus has run long enough to judge the outcome,"
-not merely "the mission started." For moving missions, prefer a timeout-backed
-lead so non-completion becomes a mission-owned `grade=fail` instead of a missing
-result.
+Use clear verdict-time lead conditions and a small set of pass conditions.
+Prefer event-driven leads: evaluate when the mission-owned completion event
+occurs. Use `uMayFinish` through `xlaunch.sh --max_time` as the outer
+infrastructure ceiling.
+
+Multiple `lead_condition` lines in the same aspect are valid, but they are
+ANDed: all must be true before pass/fail conditions are evaluated. If a
+`lead_condition` appears after pass/fail conditions, it starts the next ordered
+aspect. Do not encode boolean OR directly in the config, such as `A or B`; if
+evaluation truly needs "event A or event B" semantics, publish a helper boolean
+from `uTimerScript` or a mission-owned app and use that as the lead.
 
 ```text
 ProcessConfig = pMissionEval
@@ -50,13 +55,11 @@ ProcessConfig = pMissionEval
   mailflag = @BHV_WARNING#BHV_WARNING_SEEN=true
   mailflag = @BHV_ERROR#BHV_ERROR_SEEN=true
 
-  lead_condition = (WPT_DONE = true) or (MISSION_TIMEOUT = true)
-  pass_condition = WPT_DONE = true
+  lead_condition = WPT_DONE = true
   pass_condition = WPT_HIT = true
   pass_condition = CYCLE_HIT = true
   pass_condition = WAYPOINT_END = true
   pass_condition = BHV_ERROR_SEEN = false
-  pass_condition = MISSION_TIMEOUT = false
 
   result_flag = MISSION_EVALUATED = true
   pass_flag   = SAY_MOOS = pass
@@ -73,26 +76,64 @@ ProcessConfig = pMissionEval
   report_column = wpt_done=$[WPT_DONE]
   report_column = bhv_warning=$[BHV_WARNING_SEEN]
   report_column = bhv_error=$[BHV_ERROR_SEEN]
-  report_column = timeout=$[MISSION_TIMEOUT]
   report_column = mhash=$[MHASH_SHORT]
 }
 ```
 
-`zlaunch.sh` should still treat a missing `grade=` as an infrastructure failure,
-but the better mission design is to report `grade=fail` for expected
-non-completion paths such as timeout, no arrival, or no app response.
+`zlaunch.sh` should still treat a missing `grade=` as an infrastructure failure.
+For the shared `xlaunch.sh`, `--max_time=<secs>` is passed to `uMayFinish`; it
+is an outer ceiling, not a `pMissionEval` config value.
+
+Use a time-driven evaluation window only when "did not complete by time T" is a
+normal mission outcome that should produce mission-owned `grade=fail`:
+
+```text
+ProcessConfig = uTimerScript
+{
+  AppTick   = 2
+  CommsTick = 2
+
+  condition = DEPLOY_ALL = true
+  event     = var=EVAL_WINDOW_DONE, val=true, time=110
+}
+
+ProcessConfig = pMissionEval
+{
+  lead_condition = EVAL_WINDOW_DONE = true
+  pass_condition = WPT_DONE = true
+  pass_condition = BHV_ERROR_SEEN = false
+}
+```
+
+Keep the mission evaluation window comfortably below wrapper `--max_time`,
+normally by at least 5-10 wall-clock seconds after time warp effects and process
+startup. An evaluation window at 110 seconds with `--max_time=120` is acceptable
+for a compact example, but generated missions should parameterize or document
+the margin when copying the pattern.
+
+Use ordered multi-aspect evaluation when a scenario has distinct phases that
+should each be checked at its own event:
+
+```text
+lead_condition = SURVEY_STARTED = true
+pass_condition = SENSOR_READY = true
+
+lead_condition = SURVEY_DONE = true
+pass_condition = COVERAGE_OK = true
+
+lead_condition = RETURN_DONE = true
+pass_condition = BHV_ERROR_SEEN = false
+```
+
+The later `lead_condition` lines start new ordered aspects because they appear
+after pass/fail conditions. Multiple lead conditions before the first pass/fail
+condition are readiness gates for the same aspect and are ANDed.
 
 For behavior-specific evals, consider grading unexpected `BHV_WARNING` as a
 failure with `pass_condition = BHV_WARNING_SEEN = false`. Do not add that pass
 condition blindly to ordinary moving examples: some otherwise healthy missions
 may post warnings from inactive or auxiliary behaviors. Report the warning field
 first, then decide whether it belongs in the verdict for that scenario.
-
-Keep the mission timeout comfortably below wrapper `--max_time`, normally by at
-least 5-10 wall-clock seconds after time warp effects and process startup. A
-mission timeout at 110 seconds with `--max_time=120` is acceptable for a compact
-example, but generated missions should parameterize or document the margin when
-copying the pattern.
 
 Use `prereport_column` for stable prefix fields that should appear before the
 verdict, such as `form=` and `mmod=` in app-level evals. Use `report_column` for

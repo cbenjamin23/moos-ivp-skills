@@ -31,8 +31,8 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
 - Keep `zlaunch.sh` thin: parse automation arguments, truncate `results.txt`,
   call shared `xlaunch.sh`, then run only scoped cleanup if a local helper is
   available.
-- Let `xlaunch.sh` own `uMayFinish` and the timed wait/stop contract. Do not
-  duplicate that lifecycle in mission-local wrappers.
+- Let `xlaunch.sh --max_time=<secs>` own `uMayFinish` and the timed wait/stop
+  contract. Do not duplicate that lifecycle in mission-local wrappers.
 - Do not synthesize `grade=` or write the final result row from `zlaunch.sh`,
   `launch.sh`, or target-file parsing. `pMissionEval` must own the verdict and
   write `results.txt`; wrappers may only truncate, launch, wait, validate
@@ -43,6 +43,17 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
   logic in `pAutoPoke`.
 - Use `pMissionEval` as the primary verdict owner. Prefer mission-level booleans
   or simple scalar checks over harness-side parsing of raw MOOS traffic.
+- Prefer event-driven `pMissionEval` leads: evaluate when the mission-owned
+  completion event occurs. Use `uMayFinish` through `xlaunch.sh --max_time` as
+  the outer infrastructure ceiling. Use a time-driven evaluation-window lead
+  only when non-completion is an expected mission outcome that should produce
+  mission-owned `grade=fail`.
+- Multiple `lead_condition` lines in the same aspect are allowed, but they are
+  ANDed: all must be true before pass/fail conditions are evaluated. A
+  `lead_condition` after pass/fail conditions starts the next ordered aspect.
+  Do not write boolean OR directly in `lead_condition`; publish a helper
+  boolean from `uTimerScript` or a mission-owned app only when evaluation truly
+  needs "event A or event B" semantics.
 - Treat `BHV_ERROR_SEEN=false` as a normal safety/integrity pass condition.
   Treat `BHV_WARNING_SEEN` as evidence to report and investigate, but do not
   make it part of the pass contract by default. Add
@@ -68,12 +79,17 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
    - arrival/collision/encounter outcome
    - load/process/host info signal
 3. Add evaluation state to the relevant `.bhv` or app config.
+   - When adapting an ordinary waypoint mission, make the graded behavior
+     finite, such as `repeat = 0`, or add an explicit completion flag. A
+     repeating operator survey is usually not a valid eval completion signal.
 4. Bridge graded vehicle-local variables to shoreside when needed.
 5. Add `pAutoPoke` or an equivalent explicit initializer for deploy and
    evaluation variables.
-6. Add `pMissionEval` with one lead condition, clear pass conditions,
+6. Add `pMissionEval` with simple lead condition(s), clear pass conditions,
    `result_flag = MISSION_EVALUATED = true`, and `report_file = results.txt`.
-7. Add or update `zlaunch.sh` to call `xlaunch.sh --max_time=<secs>`.
+7. Add or update `zlaunch.sh` to set a mission-appropriate `MAX_TIME` default,
+   accept `--max_time=<secs>` as an override, and forward the final value to
+   `xlaunch.sh --max_time=<secs>`.
 8. Add or update `README.md` with scenario, grading signal, and run commands.
 9. Validate target generation, then run the headless cycle and inspect
    `results.txt`.

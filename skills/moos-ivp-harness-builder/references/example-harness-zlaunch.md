@@ -140,6 +140,7 @@ run_case() {
   fi
 
   local launch_rc=0
+  # Use the case token as MMOD only when each case is one stem variation.
   (
     cd "$workdir" || exit 1
     : > results.txt

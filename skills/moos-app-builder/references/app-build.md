@@ -116,10 +116,35 @@ both the app `ProcessConfig` and the launcher context that starts it, such as a
 minimal `ProcessConfig = ANTLER` block or the existing mission's launcher
 pattern.
 
-For apps built in an external user project, make binary discovery explicit. A
-mission launched by `pAntler` normally needs the app executable on `PATH`; use a
-launcher-local `PATH=<project>/bin:$PATH` extension for disposable samples, or
-document the user's persistent shell/project setup for normal workflows.
+For apps built in an external user project, make binary discovery explicit. The
+preferred runnable validation is a small `pAntler` mission that launches the app
+by name, with the project `bin/` made available through a launcher-local `PATH`
+extension for disposable samples:
+
+```bash
+PATH=/path/to/project/bin:$PATH pAntler mission.moos
+```
+
+```text
+ProcessConfig = ANTLER
+{
+  Run = pOdometry @ NewConsole = false
+}
+
+ProcessConfig = pOdometry
+{
+  AppTick   = 4
+  CommsTick = 4
+}
+```
+
+For normal workflows, document the user's persistent shell/project setup that
+puts the project `bin/` on `PATH`.
+
+Prefer this `pAntler` path for runnable validation. Directly invoking an
+external app by path can change the MOOS process name and miss
+`ProcessConfig = <AppName>`, so do not use direct app-by-path invocation as the
+default runtime check.
 
 ## Build Commands
 

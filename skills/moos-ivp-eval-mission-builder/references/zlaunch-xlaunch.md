@@ -55,6 +55,10 @@ if [ "${JUST_MAKE}" = "" ]; then
 fi
 ```
 
+The mission-local `MAX_TIME` is only a shell default. The shared `xlaunch.sh`
+receives the final value through `--max_time=<secs>` and passes it to
+`uMayFinish`; it is not a `.moos` or `pMissionEval` configuration variable.
+
 ## Cleanup
 
 Prefer scoped cleanup after non-generation runs. In repositories that provide a

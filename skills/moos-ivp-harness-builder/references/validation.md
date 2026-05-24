@@ -46,10 +46,12 @@ Confirm the harness output includes:
 ## Serial Suite
 
 ```bash
-./zlaunch.sh --jobs=1 --port_base=9000
+./zlaunch.sh --port_base=9000
 ```
 
-Serial mode should not depend on default ports.
+Serial mode should not depend on default ports. If the harness exposes
+`--jobs`, also run a single-wave check such as `--jobs=1` and at least one
+grouped run such as `--jobs=2`; serial-only harnesses should omit `--jobs`.
 
 Before trusting results, reconcile README case tokens with the script's
 `CASES` / `ALL_CASES` list and `get_case_config`.
@@ -65,6 +67,11 @@ distinct MOOSDB and pShare ports.
 
 Preserved workdirs should be under one harness-owned run root, not scattered in
 system temp directories.
+
+After the grouped run exits, actively check the forwarded MOOSDB and pShare
+ports from each case block for remaining listeners. Static checks can reject
+broad cleanup patterns, but they cannot prove that the generated stem actually
+stopped every launched process.
 
 A one-case debug run may bypass the isolated temp-copy path in some harness
 styles. Use a grouped run with preserved workdirs when validating port

@@ -50,8 +50,13 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
 - Keep evaluation levels strict: app-level harnesses should grade the app under
   test; moving/integration harnesses may grade arrival, encounter outcome,
   collision state, or other mission outcomes.
-- Expose `--case`, `--jobs`, `--port_base`, `--keep_workdirs`, `--gui`,
-  `--nogui`, and `--max_time` when the harness can support them.
+- Expose `--case`, `--port_base`, `--keep_workdirs`, `--gui`, `--nogui`, and
+  `--max_time` when the harness can support them. Expose `--jobs` only when it
+  runs real grouped waves with backgrounded cases and a `wait` barrier; serial
+  harnesses should omit `--jobs`.
+- Treat harness `--max_time` as a run-time ceiling override forwarded to each
+  stem eval mission's `zlaunch.sh`; do not use it as harness-side grading
+  logic.
 - Default generated harnesses to `PORT_BASE=9000`. Use higher fresh bases only
   as explicit run-time overrides for CI or local sessions that may collide with
   ordinary missions in the `9000` range.
@@ -103,6 +108,7 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
   `--port_base`.
 - Read `references/generated-harness-self-tests.md` before reporting a new or
   heavily changed harness as trustworthy.
+- Read `references/validation.md` before reporting a harness as done.
 - Read `references/timing-and-benchmarking.md` before tuning `--jobs`, sleeps,
   `--max_time`, or benchmarking grouped runs.
 - Read `references/scoped-teardown.md` before writing cleanup logic.
@@ -118,14 +124,17 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
   tokens and prose intent.
 - `./zlaunch.sh --case=<case> --max_time=<secs>` works for at least one nominal
   case and one expected-negative case if the suite has both.
-- `./zlaunch.sh --jobs=1 --port_base=<base>` works.
-- A grouped run with `--jobs=2` or higher uses distinct temp directories and
+- If `--jobs` is exposed, `./zlaunch.sh --jobs=1 --port_base=<base>` works, and
+  a grouped run with `--jobs=2` or higher uses distinct temp directories and
   distinct port blocks.
 - Aggregated results include `case=` and the mission's original result columns,
   especially `grade=` and useful evidence fields such as `eval=`,
   `warning_count=`, `expected=`, `observed=`, or case-specific scalars.
-- `form=`, `mmod=`, and `mhash=` are optional provenance. If both `case=` and
-  `mmod=` appear, they should normally match unless the mismatch is documented.
+- `form=`, `mmod=`, and `mhash=` are optional provenance. `case=` is the
+  harness row key. `mmod=` is the stem mission's own variation label. They may
+  match when each harness case maps one-to-one to a stem variation, but do not
+  force them to match when the harness case represents runner behavior, timing,
+  expected failure machinery, or multiple cases over the same mission variant.
 - Ordinary case success is `grade=pass`. Any row with `grade!=pass` should make
   the harness exit nonzero unless the harness is explicitly testing failure
   machinery.

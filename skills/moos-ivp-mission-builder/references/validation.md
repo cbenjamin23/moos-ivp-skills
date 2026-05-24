@@ -24,8 +24,9 @@ scripts/check_generated_ports.sh <mission-dir> --port_base=9100
 This runs `launch.sh --just_make --nogui` with non-default ports and confirms
 the generated targets reflect those ports. It catches mistakes that static grep
 cannot, such as parsing `--veh_mport` without forwarding it into
-`launch_vehicle.sh`. For the bundled two-vehicle pattern, it checks both named
-vehicles rather than only the first generated vehicle target.
+`launch_vehicle.sh`. It discovers advertised `--<vehicle>_mport` options from
+`launch.sh --help`, so it checks all named generated vehicle targets rather than
+only the first vehicle.
 
 The checker cleans generated targets on exit unless `--keep-targets` is passed.
 A printed `PASS` line and exit code `0` mean the non-default ports were

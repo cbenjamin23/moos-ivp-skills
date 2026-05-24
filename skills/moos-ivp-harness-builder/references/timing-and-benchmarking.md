@@ -7,7 +7,9 @@ mission logic is correct.
 
 For fast threshold or geometry cases, keep enough `--max_time` slack that
 `uMayFinish` is not the accidental bottleneck. Raise the ceiling before
-inventing a new completion contract.
+inventing a new completion contract. In normal harnesses, `--max_time` is a
+run-time override forwarded to the stem mission's `zlaunch.sh`, not a
+harness-side grading rule.
 
 If a case produces no `grade=`, distinguish between:
 

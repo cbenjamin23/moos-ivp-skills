@@ -95,7 +95,13 @@ need_meta_grep 'ProcessConfig[[:space:]]*=[[:space:]]*pMissionEval' "pMissionEva
 need_meta_grep 'result_flag[[:space:]]*=[[:space:]]*MISSION_EVALUATED[[:space:]]*=[[:space:]]*true' "MISSION_EVALUATED result flag"
 need_meta_grep 'report_file[[:space:]]*=[[:space:]]*results.txt' "results.txt report file"
 need_meta_grep 'report_column[[:space:]]*=.*grade=' "grade report column"
+need_meta_grep 'lead_condition[[:space:]]*=' "lead condition"
 need_meta_grep 'pass_condition[[:space:]]*=' "pass condition"
+if meta_has 'lead_condition[[:space:]]*=.*[[:space:]][Oo][Rr][[:space:]]' ||
+   meta_has 'lead_condition[[:space:]]*=.*\|\|'; then
+  echo "FAIL compound OR lead_condition detected; publish a helper boolean such as EVAL_WINDOW_DONE and use that as the pMissionEval lead"
+  fail=1
+fi
 if meta_has 'report_column[[:space:]]*=.*mhash='; then
   need_meta_grep 'pMissionHash' "pMissionHash for mhash column"
 fi

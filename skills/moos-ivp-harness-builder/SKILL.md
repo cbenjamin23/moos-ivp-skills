@@ -67,8 +67,11 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
 - Create per-case temp mission copies under a harness-owned run root, not a
   generic system temp location. `--keep_workdirs` should preserve one auditable
   run tree beneath the harness directory.
-- Use scoped teardown between cases, between waves, and at harness exit. Do not
-  use global `ktm`, `pkill`, or machine-wide cleanup as the normal path.
+- Use scoped teardown between cases, between waves, and at harness exit. Prefer
+  copying `assets/harness_teardown.sh` into the generated project as
+  `scripts/harness_teardown.sh`, sourcing it from harness launchers, and calling
+  `harness_teardown_stop_root` on the harness-owned run root or case directory.
+  Do not use global `ktm`, `pkill`, or machine-wide cleanup as the normal path.
 - If a case is timing-sensitive only when grouped, document it as a solo-wave
   case instead of disabling all parallelism.
 
@@ -93,10 +96,12 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
    - serial and wave execution
    - result aggregation
    - cleanup traps
-6. Implement port forwarding from harness to stem mission and verify generated
+6. Add the teardown helper asset to the generated project if there is not
+   already an equivalent root-scoped helper.
+7. Implement port forwarding from harness to stem mission and verify generated
    targets reflect those ports.
-7. Add `--keep_workdirs` for debugging preserved temp copies.
-8. Validate one case, all serial cases, then a small wave run on a fresh
+8. Add `--keep_workdirs` for debugging preserved temp copies.
+9. Validate one case, all serial cases, then a small wave run on a fresh
    `--port_base`.
 
 ## Reference Use
@@ -113,6 +118,9 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
   `--max_time`, or benchmarking grouped runs.
 - Read `references/scoped-teardown.md` before writing cleanup logic.
 - Read `references/example-harness-zlaunch.md` for a compact runner skeleton.
+- Reuse `assets/harness_teardown.sh` by copying it into generated harness
+  projects as `scripts/harness_teardown.sh` when they do not already provide an
+  equivalent root-scoped helper.
 - Run `scripts/static_check_harness.sh <harness-dir>` for a structural check.
 
 ## Validation Checklist
@@ -153,4 +161,6 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
 - Preserved workdirs show generated targets using distinct forwarded ports and
   any intended `.moosx` / `.bhvx` sidecars.
 - No harness path relies on global `ktm`, `pkill`, or `killall`.
+- Harness cleanup uses a root-scoped teardown helper or an equivalent recorded
+  PID cleanup path; generated harnesses should not invent broad process cleanup.
 - Logs do not contain unexpected warnings hidden by case aggregation.

@@ -2,14 +2,32 @@
 
 Harness cleanup should be bounded to the mission or temp-run root it created.
 
+For generated distribution harnesses, copy the skill asset
+`assets/harness_teardown.sh` into the generated project as
+`scripts/harness_teardown.sh` unless the project already has an equivalent
+root-scoped helper. Make it executable and source it from harness launchers.
+
 ## Preferred Shape
 
 ```bash
+REPO_DIR="$(cd "$HARNESS_DIR/../.." && pwd)"
+TEARDOWN_HELPER="$REPO_DIR/scripts/harness_teardown.sh"
+
+if [ -f "$TEARDOWN_HELPER" ]; then
+  . "$TEARDOWN_HELPER"
+else
+  echo "$ME: Missing teardown helper: $TEARDOWN_HELPER"
+  exit 1
+fi
+
+stop_mission_apps() {
+  local mission_root="$1"
+  harness_teardown_stop_root "$mission_root" >/dev/null 2>&1 || true
+}
+
 cleanup() {
   if [ -n "${RUN_ROOT:-}" ] && [ -d "$RUN_ROOT" ]; then
-    if [ -x "$TEARDOWN_HELPER" ]; then
-      "$TEARDOWN_HELPER" "$RUN_ROOT"
-    fi
+    stop_mission_apps "$RUN_ROOT"
     if [ "$KEEP_WORKDIRS" != "yes" ]; then
       rm -rf "$RUN_ROOT"
     fi
@@ -19,8 +37,8 @@ cleanup() {
 trap cleanup EXIT
 ```
 
-Use a repository helper when available, but keep the call scoped to the temp
-root or mission directory.
+Keep every helper call scoped to the temp root, case directory, or stem mission
+directory owned by the harness.
 
 When a helper exposes shell functions, source it and call the root-scoped
 function rather than invoking a broad cleanup command:
@@ -30,12 +48,15 @@ source "$REPO_DIR/scripts/harness_teardown.sh"
 harness_teardown_stop_root "$RUN_ROOT"
 ```
 
-Portable fallback cleanup should still be root-scoped, for example by selecting
-only known MOOS app processes holding files under the harness-owned run root.
+Portable fallback cleanup should still be root-scoped, for example by recording
+child PIDs when launching each case. Avoid rewriting process discovery in each
+harness when the asset helper can be copied instead.
+
 Do not pipe every PID from `lsof +D "$RUN_ROOT"` directly to `kill`; that can
-match the invoking shell or audit tools whose current directory is under the
-run root. Filter to known MOOS app process names or, better, record child PIDs
-when launching each case.
+match the invoking shell or audit tools whose current directory is under the run
+root. If process discovery is unavoidable, filter to known MOOS app process
+names and require their cwd to be under the harness-owned root, as the asset
+helper does.
 
 ## Avoid
 

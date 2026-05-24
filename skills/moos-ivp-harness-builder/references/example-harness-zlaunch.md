@@ -11,6 +11,7 @@ set -u
 ME=`basename "$0"`
 HARNESS_DIR="$(cd "$(dirname "$0")" && pwd)"
 MISSION_DIR="$HARNESS_DIR/../../missions/example_eval"
+TEARDOWN_HELPER="$HARNESS_DIR/../../scripts/harness_teardown.sh"
 RESULTS_FILE="$HARNESS_DIR/results.txt"
 TIME_WARP=10
 MAX_TIME=90
@@ -21,8 +22,32 @@ PORT_STRIDE=30
 PSHARE_OFFSET=$((PORT_STRIDE / 2))
 KEEP_WORKDIRS="no"
 NOGUI="--nogui"
+RUN_ROOT=""
 
 CASES=(baseline_pass blocked_fail)
+
+if [ -f "$TEARDOWN_HELPER" ]; then
+  . "$TEARDOWN_HELPER"
+else
+  echo "$ME: Missing teardown helper: $TEARDOWN_HELPER"
+  exit 1
+fi
+
+stop_mission_apps() {
+  local mission_root="$1"
+  harness_teardown_stop_root "$mission_root" >/dev/null 2>&1 || true
+}
+
+cleanup() {
+  if [ -n "${RUN_ROOT:-}" ] && [ -d "$RUN_ROOT" ]; then
+    stop_mission_apps "$RUN_ROOT"
+    if [ "$KEEP_WORKDIRS" != "yes" ]; then
+      rm -rf "$RUN_ROOT"
+    fi
+  fi
+}
+
+trap cleanup EXIT
 
 get_case_config() {
   NO_PATCH="no"
@@ -152,6 +177,7 @@ run_case() {
 
   local result_line
   result_line="$(format_result_row "$case_name" "$workdir/results.txt" "$launch_rc")"
+  stop_mission_apps "$workdir"
   echo "$result_line"
   case_passed "$result_line"
 }
@@ -165,5 +191,10 @@ evidence produces `grade=pass`; do not make the harness compare
 Setup errors, including unknown cases, missing patch files, launch script
 failures, and missing `grade=`, should emit `case=<case> grade=fail
 reason=<runner_reason>`. Full harnesses should add robust argument parsing,
-temp-copy creation, wave barriers, cleanup traps, README/script case
-reconciliation, target-port inspection, and `--keep_workdirs`.
+temp-copy creation, wave barriers, README/script case reconciliation,
+target-port inspection, and `--keep_workdirs`.
+
+Generated harness repositories should include the helper asset at
+`scripts/harness_teardown.sh`. Source it once near startup, call
+`harness_teardown_stop_root` through a small `stop_mission_apps` wrapper, and
+use that wrapper after each case plus in the exit cleanup trap.

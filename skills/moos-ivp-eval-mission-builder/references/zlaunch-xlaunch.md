@@ -69,6 +69,12 @@ from `lsof +D "$PWD"` to `kill`; that can match the invoking shell or audit
 commands. Filter to known MOOS app process names or recorded child PIDs. Do not
 add global `ktm`, broad `pkill`, or machine-wide process sweeps.
 
+This matters even for unit-style eval missions with only a shoreside MOOSDB and
+one app under test. Do not assume `xlaunch.sh` will reap every process in these
+small launch shapes. If the wrapper accepts MOOSDB or pShare port overrides, the
+cleanup path should use the forwarded ports and known MOOS app names to remove
+only the processes from that run.
+
 ## Common Mistakes
 
 - Reimplementing `uMayFinish` in `zlaunch.sh`.

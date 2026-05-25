@@ -1,7 +1,9 @@
 # Agent Notes
 
-- Edit canonical skills under `skills/`.
-- After skill changes, run the sync scripts and integrity check:
+## Core Edits
+
+- Edit canonical skills under `skills/`; plugin adapter copies are generated.
+- After skill changes, run:
 
 ```bash
 ./scripts/sync_codex_plugin.sh
@@ -9,8 +11,15 @@
 ./scripts/check_plugin_integrity.sh
 ```
 
+## Commits
+
 - Use Conventional Commits: https://www.conventionalcommits.org/en/v1.0.0/
-- Version only installable plugin changes, not repo-only docs/scripts.
-- Keep published versions synchronized across plugin manifests, marketplace
-  metadata, git tag, and GitHub Release.
-- Semver: patch = fixes, minor = new capability, major = breaking change.
+
+## Official Versioning
+
+- Do not bump versions for repo-only docs/scripts.
+- Bump versions only when publishing installable plugin changes.
+- Use `./scripts/bump_plugin_version.sh X.Y.Z`; patch = fixes, minor = new
+  capability, major = breaking change.
+- For a published version, manifests, marketplace metadata, git tag, and GitHub
+  Release should all use `X.Y.Z`.

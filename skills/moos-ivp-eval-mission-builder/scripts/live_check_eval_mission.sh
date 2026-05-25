@@ -91,6 +91,7 @@ port_pids() {
        -sTCP:LISTEN 2>/dev/null | sort -u
 }
 
+# shellcheck disable=SC2329
 cleanup_leftovers() {
   local pids
   if [ "${WORKDIR:-}" != "" ] && [ -d "$WORKDIR" ] && [ -f "$TEARDOWN_HELPER" ]; then
@@ -102,11 +103,13 @@ cleanup_leftovers() {
   fi
   pids="$(port_pids)"
   if [ "$pids" != "" ]; then
+    # shellcheck disable=SC2086
     kill $pids 2>/dev/null || true
     sleep 1
   fi
   pids="$(port_pids)"
   if [ "$pids" != "" ]; then
+    # shellcheck disable=SC2086
     kill -9 $pids 2>/dev/null || true
   fi
   if [ "$KEEP_WORKDIR" != "yes" ] && [ "${TMP_ROOT:-}" != "" ] && [ -d "$TMP_ROOT" ]; then

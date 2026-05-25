@@ -153,7 +153,13 @@ idx=0
 for name in "${VEH_NAMES[@]}"; do
   target="targ_${name}.moos"
   if [ ! -f "$target" ] && [ "${#VEH_NAMES[@]}" -eq 1 ]; then
-    first_target="$(ls targ_*.moos 2>/dev/null | grep -v 'targ_shoreside.moos' | head -1 || true)"
+    first_target=""
+    for candidate in targ_*.moos; do
+      [ -e "$candidate" ] || continue
+      [ "$candidate" = "targ_shoreside.moos" ] && continue
+      first_target="$candidate"
+      break
+    done
     [ "$first_target" != "" ] && target="$first_target"
   fi
   check_vehicle_target "$target" "${VEH_MPORTS[$idx]}" "${VEH_PSHARES[$idx]}" "$name"

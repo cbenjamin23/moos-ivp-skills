@@ -57,7 +57,7 @@ need_meta_grep() {
   local pattern="$1"
   local label="$2"
   local found=0
-  for file in `meta_files`; do
+  for file in $(meta_files); do
     if [ -f "$file" ] && search_file "$pattern" "$file"; then
       found=1
     fi
@@ -70,7 +70,7 @@ need_meta_grep() {
 
 meta_has() {
   local pattern="$1"
-  for file in `meta_files`; do
+  for file in $(meta_files); do
     if [ -f "$file" ] && search_file "$pattern" "$file"; then
       return 0
     fi

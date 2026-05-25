@@ -1,6 +1,6 @@
 {
   "name": "moos-ivp-skills",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "MOOS-IvP skills for apps, behaviors, missions, CI harnesses, documentation, and alog analysis.",
   "author": {
     "name": "Charles Benjamin",

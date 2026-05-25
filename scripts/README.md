@@ -3,8 +3,10 @@
 Repository-level helper scripts live here.
 
 - `check_plugin_integrity.sh` validates marketplace/plugin JSON, self-contained
-  plugin skill copies, canonical skill parity, skill frontmatter, and stale
-  private names/paths.
+  plugin skill copies, version sync, canonical skill parity, skill frontmatter,
+  and stale private names/paths.
+- `bump_plugin_version.sh X.Y.Z` updates the Codex manifest, Claude manifest,
+  and Claude marketplace entry to the same plugin version.
 - `sync_codex_plugin.sh` copies canonical `skills/` into the Codex plugin
   adapter and runs validation. Run it after editing canonical skills and before
   sharing a Codex-distributable checkpoint.

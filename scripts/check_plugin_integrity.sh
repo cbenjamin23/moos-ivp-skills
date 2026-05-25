@@ -3,6 +3,15 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "$0")/.." && pwd)"
 fail=0
+tmp_files=()
+trap 'if [ "${#tmp_files[@]}" -gt 0 ]; then rm -f "${tmp_files[@]}"; fi' EXIT
+
+make_tmp() {
+  local tmp
+  tmp="$(mktemp "${TMPDIR:-/tmp}/moos_ivp_integrity.XXXXXX")"
+  tmp_files+=("$tmp")
+  printf '%s\n' "$tmp"
+}
 
 note() {
   printf '%s\n' "$*"
@@ -31,6 +40,60 @@ check_json "plugins/codex/moos-ivp-skills/.codex-plugin/plugin.json"
 check_json ".claude-plugin/marketplace.json"
 check_json "plugins/claude/moos-ivp-skills/.claude-plugin/plugin.json"
 
+if python3 - "$repo_root" <<'PY'
+import json
+import re
+import sys
+from pathlib import Path
+
+repo_root = Path(sys.argv[1])
+version_re = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
+
+def load_json(rel):
+    path = repo_root / rel
+    with path.open() as handle:
+        return json.load(handle)
+
+try:
+    codex = load_json("plugins/codex/moos-ivp-skills/.codex-plugin/plugin.json").get("version")
+    claude = load_json("plugins/claude/moos-ivp-skills/.claude-plugin/plugin.json").get("version")
+    marketplace = load_json(".claude-plugin/marketplace.json")
+    claude_marketplace = None
+    for plugin in marketplace.get("plugins", []):
+        if plugin.get("name") == "moos-ivp-skills":
+            claude_marketplace = plugin.get("version")
+            break
+
+    versions = {
+        "Codex manifest": codex,
+        "Claude manifest": claude,
+        "Claude marketplace": claude_marketplace,
+    }
+
+    errors = []
+    for label, version in versions.items():
+        if not isinstance(version, str) or not version_re.fullmatch(version):
+            errors.append(f"{label} version is not X.Y.Z: {version!r}")
+
+    if len(set(versions.values())) != 1:
+        errors.append(
+            "plugin versions differ: "
+            + ", ".join(f"{label}={version!r}" for label, version in versions.items())
+        )
+except Exception as exc:
+    errors = [f"unable to read plugin versions: {exc}"]
+
+if errors:
+    for error in errors:
+        print(error, file=sys.stderr)
+    raise SystemExit(1)
+PY
+then
+  note "PASS plugin versions are synchronized"
+else
+  fail_msg "plugin versions must match across manifests and marketplace metadata"
+fi
+
 plugin_skills="$repo_root/plugins/codex/moos-ivp-skills/skills"
 if [ -d "$plugin_skills" ] && [ ! -L "$plugin_skills" ]; then
   note "PASS plugin skills directory is self-contained"
@@ -39,13 +102,13 @@ else
 fi
 
 if [ -d "$plugin_skills" ] && [ ! -L "$plugin_skills" ]; then
-  if diff -qr "$repo_root/skills" "$plugin_skills" >/tmp/moos_ivp_skill_diff.$$ 2>/dev/null; then
+  skill_diff_tmp="$(make_tmp)"
+  if diff -qr "$repo_root/skills" "$plugin_skills" >"$skill_diff_tmp" 2>/dev/null; then
     note "PASS plugin skills match canonical skills"
   else
-    cat /tmp/moos_ivp_skill_diff.$$ >&2
-    fail_msg "plugin skills differ from canonical skills; run scripts/sync_codex_plugin.sh"
+    cat "$skill_diff_tmp" >&2
+    fail_msg "Codex plugin skills differ from canonical skills; run scripts/sync_codex_plugin.sh"
   fi
-  rm -f /tmp/moos_ivp_skill_diff.$$
 fi
 
 claude_plugin_skills="$repo_root/plugins/claude/moos-ivp-skills/skills"
@@ -56,13 +119,13 @@ else
 fi
 
 if [ -d "$claude_plugin_skills" ] && [ ! -L "$claude_plugin_skills" ]; then
-  if diff -qr "$repo_root/skills" "$claude_plugin_skills" >/tmp/moos_ivp_claude_skill_diff.$$ 2>/dev/null; then
+  claude_skill_diff_tmp="$(make_tmp)"
+  if diff -qr "$repo_root/skills" "$claude_plugin_skills" >"$claude_skill_diff_tmp" 2>/dev/null; then
     note "PASS Claude plugin skills match canonical skills"
   else
-    cat /tmp/moos_ivp_claude_skill_diff.$$ >&2
+    cat "$claude_skill_diff_tmp" >&2
     fail_msg "Claude plugin skills differ from canonical skills; run scripts/sync_claude_plugin.sh"
   fi
-  rm -f /tmp/moos_ivp_claude_skill_diff.$$
 fi
 
 skill_count=0
@@ -103,12 +166,16 @@ if [ "$skill_count" -eq 0 ]; then
   fail_msg "no skills found under skills/*/SKILL.md"
 fi
 
-if grep -R -n --exclude-dir=.git --exclude=check_plugin_integrity.sh --exclude=sync_codex_plugin.sh --exclude=sync_claude_plugin.sh \
-  '/Documents/Codex/' "$repo_root" >/tmp/moos_ivp_skill_paths.$$ 2>/dev/null; then
-  cat /tmp/moos_ivp_skill_paths.$$ >&2
+private_path_tmp="$(make_tmp)"
+if grep -R -n --exclude-dir=.git \
+  --exclude=bump_plugin_version.sh \
+  --exclude=check_plugin_integrity.sh \
+  --exclude=sync_codex_plugin.sh \
+  --exclude=sync_claude_plugin.sh \
+  '/Documents/Codex/' "$repo_root" >"$private_path_tmp" 2>/dev/null; then
+  cat "$private_path_tmp" >&2
   fail_msg "private Codex workspace path found"
 fi
-rm -f /tmp/moos_ivp_skill_paths.$$
 
 legacy_alog_skill='moos-alog''-cli-tools'
 legacy_mission_cycle='moos-ivp''-mission-cycle'
@@ -116,7 +183,9 @@ legacy_cicd_repo='moos-ivp''-cicd'
 legacy_missions_auto='missions''-auto'
 legacy_missions_auto_key='missions''_auto'
 legacy_cicd_key='moos_ivp''_cicd'
+stale_name_tmp="$(make_tmp)"
 if grep -R -n --exclude-dir=.git \
+  --exclude=bump_plugin_version.sh \
   --exclude=check_plugin_integrity.sh \
   --exclude=sync_codex_plugin.sh \
   --exclude=sync_claude_plugin.sh \
@@ -126,23 +195,26 @@ if grep -R -n --exclude-dir=.git \
   -e "$legacy_missions_auto" \
   -e "$legacy_missions_auto_key" \
   -e "$legacy_cicd_key" \
-  "$repo_root/skills" "$repo_root/README.md" "$repo_root/.agents" "$repo_root/.claude-plugin" "$repo_root/plugins" "$repo_root/config" "$repo_root/scripts" \
-  >/tmp/moos_ivp_skill_stale.$$ 2>/dev/null; then
-  cat /tmp/moos_ivp_skill_stale.$$ >&2
+  "$repo_root/skills" "$repo_root/README.md" "$repo_root/.agents" "$repo_root/.claude-plugin" "$repo_root/plugins" "$repo_root/scripts" \
+  >"$stale_name_tmp" 2>/dev/null; then
+  cat "$stale_name_tmp" >&2
   fail_msg "stale skill name found in active distribution surface"
 fi
-rm -f /tmp/moos_ivp_skill_stale.$$
 
 legacy_teardown='harness''_teardown'
-if grep -R -n --exclude-dir=.git --exclude=check_plugin_integrity.sh --exclude=sync_codex_plugin.sh --exclude=sync_claude_plugin.sh \
+teardown_stale_tmp="$(make_tmp)"
+if grep -R -n --exclude-dir=.git \
+  --exclude=bump_plugin_version.sh \
+  --exclude=check_plugin_integrity.sh \
+  --exclude=sync_codex_plugin.sh \
+  --exclude=sync_claude_plugin.sh \
   "$legacy_teardown" \
   "$repo_root/skills/moos-ivp-harness-builder" \
   "$repo_root/skills/moos-ivp-eval-mission-builder" \
-  >/tmp/moos_ivp_teardown_stale.$$ 2>/dev/null; then
-  cat /tmp/moos_ivp_teardown_stale.$$ >&2
+  >"$teardown_stale_tmp" 2>/dev/null; then
+  cat "$teardown_stale_tmp" >&2
   fail_msg "legacy teardown helper name found in eval/harness skills"
 fi
-rm -f /tmp/moos_ivp_teardown_stale.$$
 
 eval_teardown="$repo_root/skills/moos-ivp-eval-mission-builder/assets/moos_scoped_teardown.sh"
 harness_asset="$repo_root/skills/moos-ivp-harness-builder/assets/moos_scoped_teardown.sh"

@@ -18,6 +18,10 @@ carry self-contained copies generated from that source for distribution.
 
 ## Plugins
 
+This repo is both the maintainer workspace and the marketplace source. Only the
+adapter directories below are installed as plugins; root-level docs and scripts
+are for maintaining and validating the release.
+
 Codex:
 
 ```text
@@ -42,7 +46,7 @@ plugins/<product>/...    Product adapters around the skills.
 .agents/plugins/        Codex marketplace metadata.
 .claude-plugin/         Claude Code marketplace metadata.
 scripts/                Setup, validation, and packaging helpers.
-docs/                   Design notes for skill boundaries and setup.
+docs/                   Distribution notes.
 test-runs/              Ignored local validation output, not distribution source.
 ```
 
@@ -70,5 +74,6 @@ claude plugin validate plugins/claude/moos-ivp-skills --strict
 
 ## Distribution Status
 
-This repository is distributable as both a Codex marketplace and a Claude Code
-marketplace. Scratch installs have been validated for both adapters.
+This public GitHub repository is distributable as both a Codex marketplace and a
+Claude Code marketplace. Scratch installs from the GitHub URL have been
+validated for both adapters at `v1.0.0`.

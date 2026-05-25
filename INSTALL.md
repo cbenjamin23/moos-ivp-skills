@@ -17,7 +17,7 @@ codex plugin add moos-ivp-skills@moos-ivp-skills
 From GitHub:
 
 ```bash
-codex plugin marketplace add cbenjamin23/moos-ivp-skills --ref main
+codex plugin marketplace add https://github.com/cbenjamin23/moos-ivp-skills
 codex plugin add moos-ivp-skills@moos-ivp-skills
 ```
 
@@ -39,9 +39,26 @@ claude plugin install moos-ivp-skills@moos-ivp-skills
 From GitHub:
 
 ```bash
-claude plugin marketplace add cbenjamin23/moos-ivp-skills
+claude plugin marketplace add https://github.com/cbenjamin23/moos-ivp-skills
 claude plugin install moos-ivp-skills@moos-ivp-skills
 ```
+
+These GitHub install paths have been tested from clean temporary Codex and
+Claude homes against the public repository.
+
+## What Gets Installed
+
+The marketplace files point at product-specific adapter directories:
+
+```text
+plugins/codex/moos-ivp-skills/
+plugins/claude/moos-ivp-skills/
+```
+
+Those adapters contain the shipped plugin manifests and copied `skills/`
+folders. Root-level files such as `scripts/`, `docs/`, and this `INSTALL.md`
+remain in the GitHub repository for maintainers, but they are not part of the
+installed plugin payload unless a marketplace manifest points at them.
 
 ## Development Sync
 

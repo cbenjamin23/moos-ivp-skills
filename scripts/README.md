@@ -13,4 +13,8 @@ Repository-level helper scripts live here.
   available.
 
 These scripts support setup and packaging. They should not be required for an
-agent to understand the skills.
+agent to understand the skills, and the marketplace entries do not install this
+directory as part of the plugin payload.
+
+Skill-local scripts are different: scripts under `skills/<skill>/scripts/` are
+part of the skill itself and are copied into each shipped plugin adapter.

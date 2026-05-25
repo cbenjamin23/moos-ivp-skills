@@ -100,7 +100,6 @@ ProcessConfig = pAutoPoke
   flag = WPT_HIT=false
   flag = CYCLE_HIT=false
   flag = WAYPOINT_END=false
-  flag = BHV_WARNING_SEEN=false
   flag = BHV_ERROR_SEEN=false
   flag = WPT_INDEX=-1
   flag = CYCLE_INDEX=0
@@ -115,7 +114,6 @@ ProcessConfig = pMissionEval
   AppTick   = 4
   CommsTick = 4
 
-  mailflag = @BHV_WARNING#BHV_WARNING_SEEN=true
   mailflag = @BHV_ERROR#BHV_ERROR_SEEN=true
 
   lead_condition = WPT_DONE = true
@@ -143,7 +141,6 @@ ProcessConfig = pMissionEval
   report_column = wpt_index=$[WPT_INDEX]
   report_column = cycle_index=$[CYCLE_INDEX]
   report_column = wpt_dist=$[WPT_DIST_TO_NEXT]
-  report_column = bhv_warning=$[BHV_WARNING_SEEN]
   report_column = bhv_error=$[BHV_ERROR_SEEN]
   report_column = mhash=$[MHASH_SHORT]
 }
@@ -175,7 +172,7 @@ ProcessConfig = uFldShoreBroker
   qbridge = MOOS_MANUAL_OVERRIDE
   qbridge = NODE_REPORT, NODE_MESSAGE
   qbridge = WPT_DONE, WPT_HIT, CYCLE_HIT
-  qbridge = WAYPOINT_END, BHV_WARNING, BHV_ERROR
+  qbridge = WAYPOINT_END, BHV_ERROR
   qbridge = WPT_STAT, WPT_INDEX, CYCLE_INDEX, WPT_DIST_TO_NEXT
 }
 

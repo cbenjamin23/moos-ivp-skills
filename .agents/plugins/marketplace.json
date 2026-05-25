@@ -5,10 +5,10 @@
   },
   "plugins": [
     {
-      "name": "moos-ivp",
+      "name": "moos-ivp-skills",
       "source": {
         "source": "local",
-        "path": "./plugins/codex/moos-ivp"
+        "path": "./plugins/codex/moos-ivp-skills"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -18,4 +18,3 @@
     }
   ]
 }
-

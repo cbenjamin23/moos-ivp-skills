@@ -35,7 +35,7 @@ Behavior = BHV_Waypoint
   capture_line   = true
   capture_radius = 5.0
   slip_radius    = 15.0
-  points         = $(VDEST_POS)
+  point          = $(VDEST_POS)
   repeat         = 0
 
   wpt_status       = WPT_STAT

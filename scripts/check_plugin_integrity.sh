@@ -27,13 +27,13 @@ check_json() {
 }
 
 check_json ".agents/plugins/marketplace.json"
-check_json "plugins/codex/moos-ivp/.codex-plugin/plugin.json"
+check_json "plugins/codex/moos-ivp-skills/.codex-plugin/plugin.json"
 
-plugin_skills="$repo_root/plugins/codex/moos-ivp/skills"
+plugin_skills="$repo_root/plugins/codex/moos-ivp-skills/skills"
 if [ -L "$plugin_skills" ] && [ -e "$plugin_skills" ]; then
   note "PASS plugin skills symlink resolves"
 else
-  fail_msg "plugin skills symlink missing or broken: plugins/codex/moos-ivp/skills"
+  fail_msg "plugin skills symlink missing or broken: plugins/codex/moos-ivp-skills/skills"
 fi
 
 skill_count=0
@@ -91,6 +91,36 @@ if grep -R -n --exclude-dir=.git \
   fail_msg "stale skill name found in active distribution surface"
 fi
 rm -f /tmp/moos_ivp_skill_stale.$$
+
+if grep -R -n --exclude-dir=.git --exclude=check_plugin_integrity.sh \
+  'harness_teardown' \
+  "$repo_root/skills/moos-ivp-harness-builder" \
+  "$repo_root/skills/moos-ivp-eval-mission-builder" \
+  >/tmp/moos_ivp_teardown_stale.$$ 2>/dev/null; then
+  cat /tmp/moos_ivp_teardown_stale.$$ >&2
+  fail_msg "legacy harness_teardown name found in eval/harness skills"
+fi
+rm -f /tmp/moos_ivp_teardown_stale.$$
+
+eval_teardown="$repo_root/skills/moos-ivp-eval-mission-builder/assets/moos_scoped_teardown.sh"
+harness_teardown="$repo_root/skills/moos-ivp-harness-builder/assets/moos_scoped_teardown.sh"
+if [ ! -f "$eval_teardown" ]; then
+  fail_msg "missing eval skill moos_scoped_teardown.sh asset"
+elif [ ! -x "$eval_teardown" ]; then
+  fail_msg "eval skill moos_scoped_teardown.sh is not executable"
+fi
+if [ ! -f "$harness_teardown" ]; then
+  fail_msg "missing harness skill moos_scoped_teardown.sh asset"
+elif [ ! -x "$harness_teardown" ]; then
+  fail_msg "harness skill moos_scoped_teardown.sh is not executable"
+fi
+if [ -f "$eval_teardown" ] && [ -f "$harness_teardown" ]; then
+  if cmp -s "$eval_teardown" "$harness_teardown"; then
+    note "PASS duplicated moos_scoped_teardown.sh assets match"
+  else
+    fail_msg "eval and harness moos_scoped_teardown.sh assets differ"
+  fi
+fi
 
 if [ "$fail" -eq 0 ]; then
   note "PASS plugin integrity checks ($skill_count skills)"

@@ -17,7 +17,6 @@ ProcessConfig = pAutoPoke
   flag = WPT_HIT=false
   flag = CYCLE_HIT=false
   flag = WAYPOINT_END=false
-  flag = BHV_WARNING_SEEN=false
   flag = BHV_ERROR_SEEN=false
 
   required_nodes = 1
@@ -52,7 +51,6 @@ ProcessConfig = pMissionEval
   AppTick   = 4
   CommsTick = 4
 
-  mailflag = @BHV_WARNING#BHV_WARNING_SEEN=true
   mailflag = @BHV_ERROR#BHV_ERROR_SEEN=true
 
   lead_condition = WPT_DONE = true
@@ -74,7 +72,6 @@ ProcessConfig = pMissionEval
   report_column = mmod=$[MMOD]
   report_column = eval=$[WPT_DONE]
   report_column = wpt_done=$[WPT_DONE]
-  report_column = bhv_warning=$[BHV_WARNING_SEEN]
   report_column = bhv_error=$[BHV_ERROR_SEEN]
   report_column = mhash=$[MHASH_SHORT]
 }
@@ -129,11 +126,12 @@ The later `lead_condition` lines start new ordered aspects because they appear
 after pass/fail conditions. Multiple lead conditions before the first pass/fail
 condition are readiness gates for the same aspect and are ANDed.
 
-For behavior-specific evals, consider grading unexpected `BHV_WARNING` as a
-failure with `pass_condition = BHV_WARNING_SEEN = false`. Do not add that pass
-condition blindly to ordinary moving examples: some otherwise healthy missions
-may post warnings from inactive or auxiliary behaviors. Report the warning field
-first, then decide whether it belongs in the verdict for that scenario.
+For behavior-specific evals, inspect `BHV_WARNING` during development, but do
+not add a sticky warning flag or pass condition by default. Some otherwise
+healthy missions may post transient or retracted warnings from inactive,
+auxiliary, or still-initializing behaviors. Add a warning metric only when the
+scenario is explicitly warning-intolerant and the warning signal has been
+verified as stable evidence.
 
 Use `prereport_column` for stable prefix fields that should appear before the
 verdict, such as `form=` and `mmod=` in app-level evals. Use `report_column` for
@@ -160,7 +158,6 @@ bridge = src=WPT_DONE
 bridge = src=WPT_HIT
 bridge = src=CYCLE_HIT
 bridge = src=WAYPOINT_END
-bridge = src=BHV_WARNING
 bridge = src=BHV_ERROR
 ```
 
@@ -169,7 +166,7 @@ Shoreside broker:
 ```text
 qbridge = WPT_DONE, WPT_HIT, CYCLE_HIT, WAYPOINT_END
 qbridge = WPT_STAT, WPT_INDEX, CYCLE_INDEX, WPT_DIST_TO_NEXT
-qbridge = BHV_WARNING, BHV_ERROR
+qbridge = BHV_ERROR
 ```
 
 For multi-vehicle missions, `required_nodes` or equivalent readiness conditions

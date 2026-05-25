@@ -115,6 +115,7 @@ need_grep 'xlaunch.sh' "zlaunch.sh" "xlaunch call"
 need_grep '--max_time' "zlaunch.sh" "max_time support"
 need_grep 'results.txt' "zlaunch.sh" "results truncation or handling"
 need_grep 'grade=' "zlaunch.sh" "missing grade detection"
+need_grep 'moos_scoped_teardown|scripts/moos_scoped_teardown\.sh|TEARDOWN_HELPER' "zlaunch.sh" "scoped teardown helper"
 
 if [ -f "$mission_dir/zlaunch.sh" ]; then
   if search_file 'grade=.*>[[:space:]]*results[.]txt|printf[[:space:]].*grade=.*results[.]txt|grade_hint' "$mission_dir/zlaunch.sh"; then

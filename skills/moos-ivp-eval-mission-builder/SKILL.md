@@ -29,13 +29,17 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
   `--mmod`, and port overrides, but it should not contain case loops or result
   aggregation.
 - Keep `zlaunch.sh` thin: parse automation arguments, truncate `results.txt`,
-  call shared `xlaunch.sh`, then validate that `results.txt` contains `grade=`.
+  call shared `xlaunch.sh`, validate that `results.txt` contains `grade=`, then
+  apply project-local scoped cleanup.
 - Let `xlaunch.sh --max_time=<secs>` own `uMayFinish` and the timed wait/stop
   contract. Do not duplicate that lifecycle in mission-local wrappers.
 - Do not synthesize `grade=` or write the final result row from `zlaunch.sh`,
   `launch.sh`, or target-file parsing. `pMissionEval` must own the verdict and
   write `results.txt`; wrappers may only truncate, launch, wait, validate
   presence of `grade=`, and clean up.
+- For cleanup backstops, copy `assets/moos_scoped_teardown.sh` into the target
+  project as `scripts/moos_scoped_teardown.sh` if it does not already exist.
+  Reuse an existing project helper unless it is clearly stale or incompatible.
 - Prefer `pAutoPoke` to seed deploy and evaluation variables in moving
   missions. Unit-style evals may use `uTimerScript` or the app under test for
   readiness when there is no vehicle/deploy lifecycle. Do not put pass/fail
@@ -54,10 +58,11 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
   boolean from `uTimerScript` or a mission-owned app only when evaluation truly
   needs "event A or event B" semantics.
 - Treat `BHV_ERROR_SEEN=false` as a normal safety/integrity pass condition.
-  Treat `BHV_WARNING_SEEN` as evidence to report and investigate, but do not
-  make it part of the pass contract by default. Add
-  `pass_condition = BHV_WARNING_SEEN = false` only when the scenario is
-  explicitly warning-intolerant.
+  Treat `BHV_WARNING` as advisory development evidence by default: inspect and
+  investigate it with appcasts or `.alog` tools, but do not add a sticky
+  `BHV_WARNING_SEEN` mailflag, result column, or pass condition unless the
+  scenario is explicitly warning-intolerant and the warning signal is known to be
+  stable rather than transient/retracted.
 - Keep `results.txt` scalar and parseable. The only hard schema requirement is
   `grade=<pass|fail>`; fields such as `form=`, `mmod=`, `eval=`, `timeout=`,
   domain facts, and `mhash=` are recommended evidence, not a mandatory metric
@@ -104,8 +109,14 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
 - Read `references/validation.md` before reporting an eval mission as done.
 - Copy `assets/eval-single-vehicle/` when a concrete minimal moving example is
   useful.
+- Copy `assets/moos_scoped_teardown.sh` into the target project as
+  `scripts/moos_scoped_teardown.sh` when the project does not already have an
+  equivalent root-scoped helper.
 - Run `scripts/static_check_eval_mission.sh <mission-dir>` for a quick
   structural check.
+- Run `scripts/live_check_eval_mission.sh <mission-dir> --port_base=<free-base>`
+  for bundled-example or high-trust validation when MOOS-IvP runtime tools are
+  available.
 
 ## Validation Checklist
 
@@ -122,11 +133,14 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
 - `./zlaunch.sh --just_make <warp>` succeeds when `xlaunch.sh` is on `PATH`.
 - Headless `./zlaunch.sh --max_time=<secs> <warp>` exits cleanly.
 - `results.txt` contains one parseable result line with `grade=`.
-- Runtime warnings are either eliminated or surfaced in `results.txt` with an
-  explicit choice about whether they affect the verdict.
+- Runtime warnings are investigated during validation; only stable,
+  scenario-relevant warning metrics are surfaced in `results.txt`.
+- High-trust checks use `scripts/live_check_eval_mission.sh` or equivalent to
+  verify result rows, surface warning evidence, and detect leftover listeners on
+  scoped ports.
 - No mission wrapper uses global `ktm`, `pkill`, or unrelated cleanup.
-- Ordinary vehicle eval wrappers should not add process-discovery cleanup; add
-  scoped cleanup only for app-only/unit-style shapes or when live validation
-  proves `xlaunch.sh` leaves mission-owned processes behind.
+- Eval wrappers use project-local `scripts/moos_scoped_teardown.sh` as a scoped
+  backstop after `xlaunch.sh`; they do not use global `ktm`, `pkill`, or broad
+  process discovery.
 - GUI runs retain normal operator controls unless the user requested a
   headless-only mission.

@@ -87,7 +87,7 @@ fi
 need_grep 'mktemp|cp -R' "zlaunch.sh" "temp mission copy pattern"
 need_grep 'PORT_STRIDE|case_base|port_base' "zlaunch.sh" "port block isolation"
 need_grep 'shore_mport|veh_mport|shore_pshare|veh_pshare' "zlaunch.sh" "stem port forwarding"
-need_grep 'harness_teardown_stop_root|scripts/harness_teardown\.sh|TEARDOWN_HELPER|recorded.*PID|child.*PID' "zlaunch.sh" "root-scoped teardown helper or recorded PID cleanup"
+need_grep 'moos_scoped_teardown_stop_root|scripts/moos_scoped_teardown\.sh|TEARDOWN_HELPER|recorded.*PID|child.*PID' "zlaunch.sh" "root-scoped teardown helper or recorded PID cleanup"
 if [ -f "$harness_dir/zlaunch.sh" ] && ! search_file 'PSHARE_OFFSET|PORT_STRIDE[[:space:]]*/[[:space:]]*2' "$harness_dir/zlaunch.sh"; then
   echo "WARN zlaunch.sh does not show the midpoint pShare offset pattern; check custom port capacity manually"
 fi
@@ -102,6 +102,11 @@ if [ -f "$harness_dir/zlaunch.sh" ] && search_file 'nspatch' "$harness_dir/zlaun
 fi
 
 if [ -f "$harness_dir/zlaunch.sh" ]; then
+  legacy_teardown_pattern='harness''_teardown'
+  if search_file "$legacy_teardown_pattern" "$harness_dir/zlaunch.sh"; then
+    echo "FAIL zlaunch.sh references legacy teardown naming; use scripts/moos_scoped_teardown.sh and moos_scoped_teardown_stop_root"
+    fail=1
+  fi
   if command -v rg >/dev/null 2>&1; then
     rg -n '(^|[^[:alnum:]_])(ktm|pkill|killall)([^[:alnum:]_]|$)' "$harness_dir/zlaunch.sh" >/dev/null && bad_cleanup=yes || bad_cleanup=no
   else

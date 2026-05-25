@@ -68,9 +68,9 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
   generic system temp location. `--keep_workdirs` should preserve one auditable
   run tree beneath the harness directory.
 - Use scoped teardown between cases, between waves, and at harness exit. Prefer
-  copying `assets/harness_teardown.sh` into the generated project as
-  `scripts/harness_teardown.sh`, sourcing it from harness launchers, and calling
-  `harness_teardown_stop_root` on the harness-owned run root or case directory.
+  copying `assets/moos_scoped_teardown.sh` into the generated project as
+  `scripts/moos_scoped_teardown.sh`, sourcing it from harness launchers, and calling
+  `moos_scoped_teardown_stop_root` on the harness-owned run root or case directory.
   Do not use global `ktm`, `pkill`, or machine-wide cleanup as the normal path.
 - If a case is timing-sensitive only when grouped, document it as a solo-wave
   case instead of disabling all parallelism.
@@ -118,8 +118,8 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
   `--max_time`, or benchmarking grouped runs.
 - Read `references/scoped-teardown.md` before writing cleanup logic.
 - Read `references/example-harness-zlaunch.md` for a compact runner skeleton.
-- Reuse `assets/harness_teardown.sh` by copying it into generated harness
-  projects as `scripts/harness_teardown.sh` when they do not already provide an
+- Reuse `assets/moos_scoped_teardown.sh` by copying it into generated harness
+  projects as `scripts/moos_scoped_teardown.sh` when they do not already provide an
   equivalent root-scoped helper.
 - Run `scripts/static_check_harness.sh <harness-dir>` for a structural check.
 

@@ -3,15 +3,15 @@
 Harness cleanup should be bounded to the mission or temp-run root it created.
 
 For generated distribution harnesses, copy the skill asset
-`assets/harness_teardown.sh` into the generated project as
-`scripts/harness_teardown.sh` unless the project already has an equivalent
+`assets/moos_scoped_teardown.sh` into the generated project as
+`scripts/moos_scoped_teardown.sh` unless the project already has an equivalent
 root-scoped helper. Make it executable and source it from harness launchers.
 
 ## Preferred Shape
 
 ```bash
 REPO_DIR="$(cd "$HARNESS_DIR/../.." && pwd)"
-TEARDOWN_HELPER="$REPO_DIR/scripts/harness_teardown.sh"
+TEARDOWN_HELPER="$REPO_DIR/scripts/moos_scoped_teardown.sh"
 
 if [ -f "$TEARDOWN_HELPER" ]; then
   . "$TEARDOWN_HELPER"
@@ -22,7 +22,7 @@ fi
 
 stop_mission_apps() {
   local mission_root="$1"
-  harness_teardown_stop_root "$mission_root" >/dev/null 2>&1 || true
+  moos_scoped_teardown_stop_root "$mission_root" >/dev/null 2>&1 || true
 }
 
 cleanup() {
@@ -44,8 +44,8 @@ When a helper exposes shell functions, source it and call the root-scoped
 function rather than invoking a broad cleanup command:
 
 ```bash
-source "$REPO_DIR/scripts/harness_teardown.sh"
-harness_teardown_stop_root "$RUN_ROOT"
+source "$REPO_DIR/scripts/moos_scoped_teardown.sh"
+moos_scoped_teardown_stop_root "$RUN_ROOT"
 ```
 
 Portable fallback cleanup should still be root-scoped, for example by recording

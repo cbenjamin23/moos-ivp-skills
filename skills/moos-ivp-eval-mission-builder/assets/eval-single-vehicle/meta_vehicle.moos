@@ -174,7 +174,6 @@ ProcessConfig = uFldNodeBroker
   bridge = src=WPT_INDEX
   bridge = src=CYCLE_INDEX
   bridge = src=WPT_DIST_TO_NEXT
-  bridge = src=BHV_WARNING
   bridge = src=BHV_ERROR
 }
 

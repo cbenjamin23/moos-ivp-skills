@@ -8,6 +8,19 @@
 #------------------------------------------------------------
 vecho() { if [ "$VERBOSE" != "" ]; then echo "$ME: $1"; fi; }
 
+find_teardown_helper() {
+  local dir
+  dir="$PWD"
+  while [ "$dir" != "/" ]; do
+    if [ -x "$dir/scripts/moos_scoped_teardown.sh" ]; then
+      echo "$dir/scripts/moos_scoped_teardown.sh"
+      return 0
+    fi
+    dir="$(dirname "$dir")"
+  done
+  return 1
+}
+
 #------------------------------------------------------------
 #  Part 2: Set global variable default values
 #------------------------------------------------------------
@@ -84,6 +97,14 @@ if [ "${JUST_MAKE}" = "" ]; then
   if ! grep -q 'grade=' results.txt 2>/dev/null; then
     echo "$ME: results.txt does not contain a grade= result"
     status=1
+  fi
+
+  TEARDOWN_HELPER="$(find_teardown_helper)"
+  if [ "$TEARDOWN_HELPER" = "" ]; then
+    echo "$ME: Missing scoped teardown helper: scripts/moos_scoped_teardown.sh"
+    status=1
+  else
+    "$TEARDOWN_HELPER" "$PWD" || status=1
   fi
 fi
 

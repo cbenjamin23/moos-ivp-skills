@@ -52,6 +52,15 @@ if [ "${JUST_MAKE}" = "" ]; then
     echo "$ME: results.txt does not contain a grade= result"
     status=1
   fi
+
+  repo_dir=`git -C "$PWD" rev-parse --show-toplevel 2>/dev/null`
+  TEARDOWN_HELPER="$repo_dir/scripts/moos_scoped_teardown.sh"
+  if [ "$repo_dir" = "" ] || [ ! -x "$TEARDOWN_HELPER" ]; then
+    echo "$ME: Missing scoped teardown helper: scripts/moos_scoped_teardown.sh"
+    status=1
+  else
+    "$TEARDOWN_HELPER" "$PWD" || status=1
+  fi
 fi
 ```
 
@@ -61,18 +70,17 @@ receives the final value through `--max_time=<secs>` and passes it to
 
 ## Cleanup
 
-Ordinary vehicle eval missions should normally rely on `xlaunch.sh` for
-teardown. Do not add process-discovery cleanup to the wrapper unless live
-validation shows that the mission shape actually leaves mission-owned processes
-behind.
+For eval missions that need a cleanup backstop, copy
+`assets/moos_scoped_teardown.sh` from this skill into the target project as
+`scripts/moos_scoped_teardown.sh` if that script does not already exist. Source
+or call the project-local helper from `zlaunch.sh` after `xlaunch.sh`, passing
+the mission directory or temp root. This mirrors the scoped cleanup style used by
+CI mission wrappers without creating a dependency on the skill installation path.
 
-For unit-style app evals or other small launch shapes that prove leaky, prefer a
-repo-provided scoped helper such as `scripts/harness_teardown.sh`, called with
-the mission directory or temp root. If a portable fallback is truly necessary,
-filter to known MOOS app process names or recorded child PIDs. Do not blindly
-pipe every PID from `lsof +D "$PWD"` to `kill`; that can match the invoking
-shell or audit commands. Do not add global `ktm`, broad `pkill`, or machine-wide
-process sweeps.
+If a portable fallback is truly necessary, filter to known MOOS app process
+names or recorded child PIDs. Do not blindly pipe every PID from `lsof +D
+"$PWD"` to `kill`; that can match the invoking shell or audit commands. Do not
+add global `ktm`, broad `pkill`, or machine-wide process sweeps.
 
 ## Common Mistakes
 

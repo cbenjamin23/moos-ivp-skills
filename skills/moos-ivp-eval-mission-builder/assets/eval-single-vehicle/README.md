@@ -24,16 +24,12 @@ The passing baseline requires:
 - `WAYPOINT_END=true`
 - `BHV_ERROR_SEEN=false`
 
-The baseline reports `BHV_WARNING_SEEN` as evidence but does not make that field
-part of the verdict. If a derived eval is behavior-specific and should reject
-any warning, add `pass_condition = BHV_WARNING_SEEN = false` deliberately and
-document the stricter contract.
-
-On current tested MOOS-IvP builds, this starter mission may report
-`bhv_warning=true` from a transient pHelmIvP waypoint warning even when the
-generated behavior file contains the waypoint and the mission completes. Treat
-that as known baseline evidence; investigate new, repeated, or scenario-specific
-warnings before deciding whether they should become pass conditions.
+The baseline does not report a sticky `BHV_WARNING_SEEN` result field.
+`BHV_WARNING` traffic is useful development evidence, but transient or retracted
+helm warnings should not become part of the default mission verdict. Investigate
+warnings during validation with appcasts or `.alog` tools; only add a warning
+metric deliberately when the scenario is explicitly warning-intolerant and the
+warning signal is known to be stable.
 
 ## Run
 
@@ -60,7 +56,8 @@ Run with GUI for visual inspection:
 - `launch.sh` launches the full mission.
 - `launch_vehicle.sh` launches one vehicle community.
 - `launch_shoreside.sh` launches the shoreside community.
-- `zlaunch.sh` calls shared `xlaunch.sh` for headless evaluation.
+- `zlaunch.sh` calls shared `xlaunch.sh` for headless evaluation, then uses
+  project-local `scripts/moos_scoped_teardown.sh` as a scoped cleanup backstop.
 - `meta_vehicle.moos` configures vehicle MOOS apps.
 - `meta_vehicle.bhv` configures helm behaviors.
 - `meta_shoreside.moos` configures shoreside apps, evaluator apps, and buttons.

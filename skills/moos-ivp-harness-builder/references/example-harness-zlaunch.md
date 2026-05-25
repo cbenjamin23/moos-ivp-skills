@@ -11,7 +11,7 @@ set -u
 ME=`basename "$0"`
 HARNESS_DIR="$(cd "$(dirname "$0")" && pwd)"
 MISSION_DIR="$HARNESS_DIR/../../missions/example_eval"
-TEARDOWN_HELPER="$HARNESS_DIR/../../scripts/harness_teardown.sh"
+TEARDOWN_HELPER="$HARNESS_DIR/../../scripts/moos_scoped_teardown.sh"
 RESULTS_FILE="$HARNESS_DIR/results.txt"
 TIME_WARP=10
 MAX_TIME=90
@@ -35,7 +35,7 @@ fi
 
 stop_mission_apps() {
   local mission_root="$1"
-  harness_teardown_stop_root "$mission_root" >/dev/null 2>&1 || true
+  moos_scoped_teardown_stop_root "$mission_root" >/dev/null 2>&1 || true
 }
 
 cleanup() {
@@ -195,6 +195,6 @@ temp-copy creation, wave barriers, README/script case reconciliation,
 target-port inspection, and `--keep_workdirs`.
 
 Generated harness repositories should include the helper asset at
-`scripts/harness_teardown.sh`. Source it once near startup, call
-`harness_teardown_stop_root` through a small `stop_mission_apps` wrapper, and
+`scripts/moos_scoped_teardown.sh`. Source it once near startup, call
+`moos_scoped_teardown_stop_root` through a small `stop_mission_apps` wrapper, and
 use that wrapper after each case plus in the exit cleanup trap.

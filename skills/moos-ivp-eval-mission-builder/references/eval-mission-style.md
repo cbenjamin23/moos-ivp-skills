@@ -87,7 +87,7 @@ The contract is flexible: `grade=<pass|fail>` is required, and the remaining
 fields should be the metrics that explain this mission's verdict. Recommended
 fields like `form`, `mmod`, `eval`, `timeout`, and `mhash` are useful defaults,
 not a reason to omit better domain metrics such as `cpa`, `collision`,
-`node_count`, `heading_error`, `payload_ok`, or `warning_seen`.
+`node_count`, `heading_error`, `payload_ok`, or `process_count`.
 
 Only `pMissionEval` should write the final grade row. Do not make `zlaunch.sh`
 derive `grade=` from a generated target, a patch marker, `grade_hint`, or a

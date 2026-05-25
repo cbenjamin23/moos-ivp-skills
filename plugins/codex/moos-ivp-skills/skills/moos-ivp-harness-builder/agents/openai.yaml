@@ -1,0 +1,4 @@
+interface:
+  display_name: "MOOS-IvP Harness Builder"
+  short_description: "Build multi-case MOOS-IvP harnesses."
+  default_prompt: "Use $moos-ivp-harness-builder to create or repair a multi-case MOOS-IvP regression harness."

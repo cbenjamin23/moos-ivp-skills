@@ -1,0 +1,26 @@
+{
+  "name": "moos-ivp-skills",
+  "owner": {
+    "name": "Charles Benjamin"
+  },
+  "description": "MOOS-IvP skills for coding agents.",
+  "plugins": [
+    {
+      "name": "moos-ivp-skills",
+      "displayName": "MOOS-IvP Skills",
+      "source": "./plugins/claude/moos-ivp-skills",
+      "description": "MOOS-IvP development, missions, harnesses, documentation, and alog analysis.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Charles Benjamin"
+      },
+      "category": "Developer Tools",
+      "tags": [
+        "moos",
+        "moos-ivp",
+        "marine-robotics",
+        "coding-agents"
+      ]
+    }
+  ]
+}

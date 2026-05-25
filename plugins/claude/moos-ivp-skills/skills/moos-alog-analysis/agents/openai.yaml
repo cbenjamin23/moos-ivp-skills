@@ -1,0 +1,4 @@
+interface:
+  display_name: "MOOS ALog Analysis"
+  short_description: "Analyze existing MOOS .alog files."
+  default_prompt: "Use $moos-alog-analysis to analyze these existing .alog files and choose targeted commands for my question."

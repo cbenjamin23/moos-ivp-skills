@@ -5,8 +5,8 @@ documentation lookup, and post-mission analysis.
 
 This repository is intentionally agent-neutral at the top level. The canonical
 skill source lives under `skills/`. Product-specific adapters or plugins should
-wrap that source rather than become the only copy. The Codex adapter currently
-symlinks to the canonical skill tree for local testing.
+wrap that source rather than become the only copy. The Codex adapter carries a
+self-contained copy generated from the canonical skill tree for distribution.
 
 ## Skills
 
@@ -39,12 +39,27 @@ docs/                   Design notes for skill boundaries and setup.
 test-runs/              Ignored local validation output, not distribution source.
 ```
 
+See `docs/distribution-adapters.md` for Codex and Claude Code distribution
+notes.
+
 ## Validation
 
 Run the repo integrity check before sharing changes:
 
 ```bash
 ./scripts/check_plugin_integrity.sh
+```
+
+After editing canonical skills, sync the Codex plugin copy:
+
+```bash
+./scripts/sync_codex_plugin.sh
+```
+
+To sync and validate the Claude Code plugin copy:
+
+```bash
+./scripts/sync_claude_plugin.sh
 ```
 
 To validate the Codex plugin manifest with the local plugin creator validator:
@@ -56,7 +71,6 @@ python3 ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py \
 
 ## Distribution Status
 
-This repository is ready for local Codex plugin testing. Before broad public
-distribution, decide on a license, replace the development symlink in the Codex
-adapter with a self-contained skill copy or release artifact, and confirm the
-manifest metadata.
+This repository is Codex-distributable from the repo marketplace. Canonical
+skills remain under `skills/`; the Codex plugin copy is refreshed with
+`scripts/sync_codex_plugin.sh`.

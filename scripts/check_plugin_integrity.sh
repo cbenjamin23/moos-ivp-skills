@@ -28,12 +28,41 @@ check_json() {
 
 check_json ".agents/plugins/marketplace.json"
 check_json "plugins/codex/moos-ivp-skills/.codex-plugin/plugin.json"
+check_json ".claude-plugin/marketplace.json"
+check_json "plugins/claude/moos-ivp-skills/.claude-plugin/plugin.json"
 
 plugin_skills="$repo_root/plugins/codex/moos-ivp-skills/skills"
-if [ -L "$plugin_skills" ] && [ -e "$plugin_skills" ]; then
-  note "PASS plugin skills symlink resolves"
+if [ -d "$plugin_skills" ] && [ ! -L "$plugin_skills" ]; then
+  note "PASS plugin skills directory is self-contained"
 else
-  fail_msg "plugin skills symlink missing or broken: plugins/codex/moos-ivp-skills/skills"
+  fail_msg "plugin skills directory must be a real self-contained directory: plugins/codex/moos-ivp-skills/skills"
+fi
+
+if [ -d "$plugin_skills" ] && [ ! -L "$plugin_skills" ]; then
+  if diff -qr "$repo_root/skills" "$plugin_skills" >/tmp/moos_ivp_skill_diff.$$ 2>/dev/null; then
+    note "PASS plugin skills match canonical skills"
+  else
+    cat /tmp/moos_ivp_skill_diff.$$ >&2
+    fail_msg "plugin skills differ from canonical skills; run scripts/sync_codex_plugin.sh"
+  fi
+  rm -f /tmp/moos_ivp_skill_diff.$$
+fi
+
+claude_plugin_skills="$repo_root/plugins/claude/moos-ivp-skills/skills"
+if [ -d "$claude_plugin_skills" ] && [ ! -L "$claude_plugin_skills" ]; then
+  note "PASS Claude plugin skills directory is self-contained"
+else
+  fail_msg "Claude plugin skills directory must be a real self-contained directory: plugins/claude/moos-ivp-skills/skills"
+fi
+
+if [ -d "$claude_plugin_skills" ] && [ ! -L "$claude_plugin_skills" ]; then
+  if diff -qr "$repo_root/skills" "$claude_plugin_skills" >/tmp/moos_ivp_claude_skill_diff.$$ 2>/dev/null; then
+    note "PASS Claude plugin skills match canonical skills"
+  else
+    cat /tmp/moos_ivp_claude_skill_diff.$$ >&2
+    fail_msg "Claude plugin skills differ from canonical skills; run scripts/sync_claude_plugin.sh"
+  fi
+  rm -f /tmp/moos_ivp_claude_skill_diff.$$
 fi
 
 skill_count=0
@@ -74,7 +103,7 @@ if [ "$skill_count" -eq 0 ]; then
   fail_msg "no skills found under skills/*/SKILL.md"
 fi
 
-if grep -R -n --exclude-dir=.git --exclude=check_plugin_integrity.sh \
+if grep -R -n --exclude-dir=.git --exclude=check_plugin_integrity.sh --exclude=sync_codex_plugin.sh --exclude=sync_claude_plugin.sh \
   '/Documents/Codex/' "$repo_root" >/tmp/moos_ivp_skill_paths.$$ 2>/dev/null; then
   cat /tmp/moos_ivp_skill_paths.$$ >&2
   fail_msg "private Codex workspace path found"
@@ -85,9 +114,11 @@ legacy_alog_skill='moos-alog''-cli-tools'
 legacy_mission_cycle='moos-ivp''-mission-cycle'
 if grep -R -n --exclude-dir=.git \
   --exclude=check_plugin_integrity.sh \
+  --exclude=sync_codex_plugin.sh \
+  --exclude=sync_claude_plugin.sh \
   -e "$legacy_alog_skill" \
   -e "$legacy_mission_cycle" \
-  "$repo_root/skills" "$repo_root/README.md" "$repo_root/.agents" "$repo_root/plugins" "$repo_root/config" "$repo_root/scripts" \
+  "$repo_root/skills" "$repo_root/README.md" "$repo_root/.agents" "$repo_root/.claude-plugin" "$repo_root/plugins" "$repo_root/config" "$repo_root/scripts" \
   >/tmp/moos_ivp_skill_stale.$$ 2>/dev/null; then
   cat /tmp/moos_ivp_skill_stale.$$ >&2
   fail_msg "stale skill name found in active distribution surface"
@@ -95,7 +126,7 @@ fi
 rm -f /tmp/moos_ivp_skill_stale.$$
 
 legacy_teardown='harness''_teardown'
-if grep -R -n --exclude-dir=.git --exclude=check_plugin_integrity.sh \
+if grep -R -n --exclude-dir=.git --exclude=check_plugin_integrity.sh --exclude=sync_codex_plugin.sh --exclude=sync_claude_plugin.sh \
   "$legacy_teardown" \
   "$repo_root/skills/moos-ivp-harness-builder" \
   "$repo_root/skills/moos-ivp-eval-mission-builder" \

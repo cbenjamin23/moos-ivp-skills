@@ -81,10 +81,12 @@ if grep -R -n --exclude-dir=.git --exclude=check_plugin_integrity.sh \
 fi
 rm -f /tmp/moos_ivp_skill_paths.$$
 
+legacy_alog_skill='moos-alog''-cli-tools'
+legacy_mission_cycle='moos-ivp''-mission-cycle'
 if grep -R -n --exclude-dir=.git \
   --exclude=check_plugin_integrity.sh \
-  -e 'moos-alog-cli-tools' \
-  -e 'moos-ivp-mission-cycle' \
+  -e "$legacy_alog_skill" \
+  -e "$legacy_mission_cycle" \
   "$repo_root/skills" "$repo_root/README.md" "$repo_root/.agents" "$repo_root/plugins" "$repo_root/config" "$repo_root/scripts" \
   >/tmp/moos_ivp_skill_stale.$$ 2>/dev/null; then
   cat /tmp/moos_ivp_skill_stale.$$ >&2
@@ -92,30 +94,31 @@ if grep -R -n --exclude-dir=.git \
 fi
 rm -f /tmp/moos_ivp_skill_stale.$$
 
+legacy_teardown='harness''_teardown'
 if grep -R -n --exclude-dir=.git --exclude=check_plugin_integrity.sh \
-  'harness_teardown' \
+  "$legacy_teardown" \
   "$repo_root/skills/moos-ivp-harness-builder" \
   "$repo_root/skills/moos-ivp-eval-mission-builder" \
   >/tmp/moos_ivp_teardown_stale.$$ 2>/dev/null; then
   cat /tmp/moos_ivp_teardown_stale.$$ >&2
-  fail_msg "legacy harness_teardown name found in eval/harness skills"
+  fail_msg "legacy teardown helper name found in eval/harness skills"
 fi
 rm -f /tmp/moos_ivp_teardown_stale.$$
 
 eval_teardown="$repo_root/skills/moos-ivp-eval-mission-builder/assets/moos_scoped_teardown.sh"
-harness_teardown="$repo_root/skills/moos-ivp-harness-builder/assets/moos_scoped_teardown.sh"
+harness_asset="$repo_root/skills/moos-ivp-harness-builder/assets/moos_scoped_teardown.sh"
 if [ ! -f "$eval_teardown" ]; then
   fail_msg "missing eval skill moos_scoped_teardown.sh asset"
 elif [ ! -x "$eval_teardown" ]; then
   fail_msg "eval skill moos_scoped_teardown.sh is not executable"
 fi
-if [ ! -f "$harness_teardown" ]; then
+if [ ! -f "$harness_asset" ]; then
   fail_msg "missing harness skill moos_scoped_teardown.sh asset"
-elif [ ! -x "$harness_teardown" ]; then
+elif [ ! -x "$harness_asset" ]; then
   fail_msg "harness skill moos_scoped_teardown.sh is not executable"
 fi
-if [ -f "$eval_teardown" ] && [ -f "$harness_teardown" ]; then
-  if cmp -s "$eval_teardown" "$harness_teardown"; then
+if [ -f "$eval_teardown" ] && [ -f "$harness_asset" ]; then
+  if cmp -s "$eval_teardown" "$harness_asset"; then
     note "PASS duplicated moos_scoped_teardown.sh assets match"
   else
     fail_msg "eval and harness moos_scoped_teardown.sh assets differ"

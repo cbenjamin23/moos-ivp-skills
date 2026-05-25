@@ -63,7 +63,11 @@ Before using MOOS-IvP paths, resolve `MOOS_IVP_ROOT` from the user's request, `M
    - Configure/build the project.
    - Confirm the shared library lands in the project `lib/`.
    - Confirm the shared library exports `createBehavior` before runtime loading.
-   - If mission config changed, verify `pHelmIvP` can load the behavior; use runtime launch only when requested or necessary. For direct checks, launch with the app name `pHelmIvP` on `PATH` or pass `--alias=pHelmIvP` so the process reads `ProcessConfig = pHelmIvP`.
+   - If mission config changed, verify `pHelmIvP` can load the behavior through
+     a normal `pAntler` mission launch when feasible. Treat direct `pHelmIvP`
+     execution as a narrow fallback only; if used, launch with app name
+     `pHelmIvP` on `PATH` or pass `--alias=pHelmIvP` so the process reads
+     `ProcessConfig = pHelmIvP`.
    - For isolated runtime tests, set `IVP_BEHAVIOR_DIRS` to only the generated
      project `lib` directory unless inherited behavior dirs are part of the
      test.

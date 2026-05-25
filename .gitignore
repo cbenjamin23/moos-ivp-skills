@@ -2,6 +2,11 @@
 *.log
 *.tmp
 .DS_Store
+targ_*
+LOG_*/
+XLOG_*
+*.alog
+.LastOpenedMOOSLogDirectory
 
 # Build and packaging output
 dist/

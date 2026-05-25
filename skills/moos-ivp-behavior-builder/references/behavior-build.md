@@ -144,7 +144,12 @@ Use the macOS or Linux command as appropriate.
 
 ## Runtime Load Check
 
-`pHelmIvP` needs a live MOOSDB before it reaches behavior loading. Start a
-minimal mission with `pAntler`, or start `MOOSDB` on the intended port before
-running a direct helm process. Running `pHelmIvP` alone may block on connection
-and never exercise dynamic loading.
+`pHelmIvP` needs a live MOOSDB before it reaches behavior loading. Prefer a
+minimal mission launched with `pAntler`, with `ProcessConfig = pHelmIvP` and the
+project behavior library available through `IVP_BEHAVIOR_DIRS` or an explicit
+mission-local `ivp_behavior_dir` when that is the chosen convention.
+
+Direct helm execution is only a fallback for narrow loader checks. If used,
+start `MOOSDB` on the intended port first and preserve the MOOS app identity:
+run `pHelmIvP` by name on `PATH` or pass `--alias=pHelmIvP`. Running
+`pHelmIvP` alone may block on connection and never exercise dynamic loading.

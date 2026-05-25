@@ -23,7 +23,7 @@ directory, so local edits remain visible through the plugin package.
 Once this repository is published and the branch is ready for other users:
 
 ```bash
-codex plugin marketplace add charlesbenjamin/moos-ivp-skills --ref main
+codex plugin marketplace add cbenjamin23/moos-ivp-skills --ref main
 ```
 
 If the marketplace was already added, update it with:

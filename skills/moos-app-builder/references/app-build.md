@@ -157,3 +157,8 @@ cmake --build build
 ./bin/pOdometry --example
 ./bin/pOdometry --interface
 ```
+
+Treat those direct binary invocations as smoke checks for startup and
+self-documentation only. They are not mission runtime validation. When runtime
+configuration matters, launch the app through `pAntler` with
+`ProcessConfig = <AppName>` and make the project `bin/` available on `PATH`.

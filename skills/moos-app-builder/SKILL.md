@@ -24,7 +24,9 @@ Before using MOOS-IvP paths, resolve `MOOS_IVP_ROOT` from the user's request, `M
 - Use short comments before non-obvious logic blocks; do not add comments that merely restate simple code.
 - Reuse existing MOOS-IvP libraries and helpers before writing new parsing, geometry, contact, logic, or AppCasting support code.
 - Use local style: MOOS variables are usually uppercase with underscores; mission config params are usually lowercase snake case; C++ members use `m_`; helpers commonly use `handleMail*`, `handleConfig*`, `post*`, `update*`.
-- Build and run at least `--help`, `--example`, and `--interface` before finishing when feasible.
+- Build and run `--help`, `--example`, and `--interface` as binary smoke checks
+  before finishing when feasible. These prove the app starts and its
+  self-documentation is wired; they do not prove mission runtime config.
 - Do not commit or present build directories/binaries as source changes unless the user's project already tracks generated artifacts.
 
 ## Workflow
@@ -64,7 +66,11 @@ Before using MOOS-IvP paths, resolve `MOOS_IVP_ROOT` from the user's request, `M
      setup that puts the project `bin/` on `PATH`.
 7. Validate.
    - Configure/build the project or target when feasible.
-   - Run the generated binary with `--help`, `--example`, and `--interface`.
+   - Run the generated binary with `--help`, `--example`, and `--interface` as
+     smoke checks when those options are supported.
+   - If runtime config matters, validate through a normal `pAntler` launch with
+     `ProcessConfig = <AppName>` rather than treating a direct binary run as
+     equivalent.
    - If a mission was touched, launch only when the user asked for runtime validation or the change is risky enough to justify it.
 
 ## Reference Use
@@ -81,3 +87,7 @@ Before using MOOS-IvP paths, resolve `MOOS_IVP_ROOT` from the user's request, `M
 - `registerVariables()` lists every subscribed variable.
 - `showInterfaceAndExit()` matches actual subscriptions/publications.
 - Build succeeds, or the blocker is reported with the exact missing dependency/error.
+- `--help`, `--example`, and `--interface` reflect the real app and do not
+  crash when supported.
+- Runtime config, when relevant, is verified through `pAntler` with
+  `ProcessConfig = <AppName>`, not by direct app-by-path execution alone.

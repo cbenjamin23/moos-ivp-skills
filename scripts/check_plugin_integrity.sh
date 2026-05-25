@@ -112,12 +112,20 @@ rm -f /tmp/moos_ivp_skill_paths.$$
 
 legacy_alog_skill='moos-alog''-cli-tools'
 legacy_mission_cycle='moos-ivp''-mission-cycle'
+legacy_cicd_repo='moos-ivp''-cicd'
+legacy_missions_auto='missions''-auto'
+legacy_missions_auto_key='missions''_auto'
+legacy_cicd_key='moos_ivp''_cicd'
 if grep -R -n --exclude-dir=.git \
   --exclude=check_plugin_integrity.sh \
   --exclude=sync_codex_plugin.sh \
   --exclude=sync_claude_plugin.sh \
   -e "$legacy_alog_skill" \
   -e "$legacy_mission_cycle" \
+  -e "$legacy_cicd_repo" \
+  -e "$legacy_missions_auto" \
+  -e "$legacy_missions_auto_key" \
+  -e "$legacy_cicd_key" \
   "$repo_root/skills" "$repo_root/README.md" "$repo_root/.agents" "$repo_root/.claude-plugin" "$repo_root/plugins" "$repo_root/config" "$repo_root/scripts" \
   >/tmp/moos_ivp_skill_stale.$$ 2>/dev/null; then
   cat /tmp/moos_ivp_skill_stale.$$ >&2

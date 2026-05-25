@@ -41,7 +41,6 @@ skills/                 Canonical, agent-neutral skill folders.
 plugins/<product>/...    Product adapters around the skills.
 .agents/plugins/        Codex marketplace metadata.
 .claude-plugin/         Claude Code marketplace metadata.
-config/                 Example local MOOS environment config.
 scripts/                Setup, validation, and packaging helpers.
 docs/                   Design notes for skill boundaries and setup.
 test-runs/              Ignored local validation output, not distribution source.

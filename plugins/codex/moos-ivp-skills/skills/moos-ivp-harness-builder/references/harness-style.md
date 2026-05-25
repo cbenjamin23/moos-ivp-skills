@@ -97,6 +97,6 @@ builder's `scenario-and-grading.md`. Keep the scenario model realistic enough to
 test the app or behavior path being claimed, and avoid copying CI reference
 geometry blindly when a simpler or safer baseline exposes the same contract.
 
-Real `moos-ivp-cicd` examples are good references, but their README prose may
-lag behind the scripts. Trust current launch scripts, generated target files,
-and live results over stale prose when the two disagree.
+If a local reference mission's README prose disagrees with its launch scripts,
+generated target files, or live results, trust the executable mission evidence
+over stale prose.

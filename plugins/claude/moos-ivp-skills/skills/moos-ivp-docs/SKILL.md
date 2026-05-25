@@ -74,13 +74,14 @@ Use local source inspection when:
 - the user asks what the current checkout actually does
 - the local checkout version is newer or more specific than the available MIT PDFs
 
-Use this repo search order:
+When local MOOS-IvP source is needed, resolve the checkout in this order:
 
-1. Current workspace root if it already contains `ivp/src`
-2. Parent directories of the current workspace
-3. Sibling directories near the current workspace
-4. Common home roots such as `~/moos-ivp`, `~/src/moos-ivp`, `~/repos/moos-ivp`, and `~/projects/moos-ivp`
-5. A bounded, shallow home-directory search for a folder named `moos-ivp`
+1. Path explicitly provided by the user.
+2. `MOOS_IVP_ROOT` from the shell environment.
+3. Active task workspace if it contains `ivp/src`.
+4. Parent or sibling directories near the active task workspace.
+5. Common home locations such as `~/moos-ivp`, `~/src/moos-ivp`, `~/repos/moos-ivp`, and `~/projects/moos-ivp`.
+6. A bounded shallow home search for a directory named `moos-ivp`, excluding noisy folders.
 
 Prefer explicit common-root checks before broad `find` searches. If a bounded
 home search is needed on macOS or a permissions-noisy system, suppress expected
@@ -89,6 +90,8 @@ permission noise, for example with `2>/dev/null`.
 Validate a candidate repo by confirming:
 - `ivp/src` exists
 - recognizable app or behavior directories exist under `ivp/src`
+
+If local source is required and no valid checkout is found, stop and ask the user for the checkout path. Do not answer source-specific questions from memory or weaker evidence.
 
 If multiple repos are found, prefer the current workspace repo when applicable. Otherwise prefer the repo nearest to the current working directory and state which repo you used.
 

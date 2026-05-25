@@ -53,6 +53,19 @@ Edit canonical skills under `skills/`, then refresh plugin copies:
 ./scripts/check_plugin_integrity.sh
 ```
 
+## MOOS-IvP Path
+
+Some skills need a local MOOS-IvP checkout for generators, headers, libraries,
+and examples. Prefer setting:
+
+```bash
+export MOOS_IVP_ROOT=/path/to/moos-ivp
+```
+
+You can also give the path directly in the prompt. If neither is provided, the
+skills look in the current workspace, nearby folders, and common locations such
+as `~/moos-ivp`.
+
 ## Validate
 
 Before sharing a checkout or release candidate:

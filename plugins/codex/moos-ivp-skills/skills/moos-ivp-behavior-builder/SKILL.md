@@ -9,7 +9,20 @@ description: Build or modify user-owned IvP helm behaviors outside the core MOOS
 
 Use this skill for custom IvP helm behavior development against the local MOOS-IvP checkout. Treat MOOS-IvP as the dependency and example source unless the user explicitly asks to patch core MOOS-IvP.
 
-Before using MOOS-IvP paths, resolve `MOOS_IVP_ROOT` from the user's request, `MOOS_IVP_SKILLS_CONFIG`, `~/.config/moos-ivp-skills/config.toml`, the current workspace, or nearby/common checkout locations such as `~/moos-ivp`.
+## MOOS-IvP Checkout Resolution
+
+When this skill needs a local MOOS-IvP checkout, resolve it in this order:
+
+1. Path explicitly provided by the user.
+2. `MOOS_IVP_ROOT` from the shell environment.
+3. Active task workspace if it contains `ivp/src`.
+4. Parent or sibling directories near the active task workspace.
+5. Common home locations such as `~/moos-ivp`, `~/src/moos-ivp`, `~/repos/moos-ivp`, and `~/projects/moos-ivp`.
+6. A bounded shallow home search for a directory named `moos-ivp`, excluding noisy folders.
+
+Validate a candidate by confirming `ivp/src` exists and `scripts/GenBehavior` is executable.
+
+If no valid checkout is found and the task requires behavior source generation, build wiring, examples, headers, or libraries, stop and ask the user for the checkout path before editing code, generating build files, or using placeholder paths.
 
 ## Core Rules
 

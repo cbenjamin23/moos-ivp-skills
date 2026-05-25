@@ -5,72 +5,62 @@ This repository exposes Codex and Claude Code plugins named `moos-ivp-skills`.
 Codex marketplace metadata lives at `.agents/plugins/marketplace.json`.
 Claude Code marketplace metadata lives at `.claude-plugin/marketplace.json`.
 
-## Codex Local Development Install
+## Codex Install
 
-From any checkout of this repository:
+From a local checkout:
 
 ```bash
 codex plugin marketplace add /absolute/path/to/moos-ivp-skills
+codex plugin add moos-ivp-skills@moos-ivp-skills
 ```
 
-Then restart Codex and enable the `MOOS-IvP Skills` plugin if it is not already
-enabled.
-
-When changing skills during local development, edit the canonical `skills/`
-directory and then run:
-
-```bash
-./scripts/sync_codex_plugin.sh
-```
-
-This refreshes the self-contained skill copy under
-`plugins/codex/moos-ivp-skills/skills`.
-
-## Git Marketplace Install
-
-Once this repository is published and the branch is ready for other users:
+From GitHub:
 
 ```bash
 codex plugin marketplace add cbenjamin23/moos-ivp-skills --ref main
+codex plugin add moos-ivp-skills@moos-ivp-skills
 ```
 
-If the marketplace was already added, update it with:
+To refresh a configured Git marketplace:
 
 ```bash
 codex plugin marketplace upgrade
 ```
 
-Codex installs plugins into its plugin cache and loads the installed copy. This
-repo keeps the Codex plugin package self-contained by copying canonical skills
-into the plugin adapter before sharing.
+## Claude Code Install
 
-## Validate
-
-Before sharing a checkout or release candidate:
-
-```bash
-./scripts/check_plugin_integrity.sh
-python3 ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py \
-  plugins/codex/moos-ivp-skills
-claude plugin validate . --strict
-claude plugin validate plugins/claude/moos-ivp-skills --strict
-```
-
-## Claude Code Local Development Install
-
-From any checkout of this repository:
+From a local checkout:
 
 ```bash
 claude plugin marketplace add /absolute/path/to/moos-ivp-skills
 claude plugin install moos-ivp-skills@moos-ivp-skills
 ```
 
-When changing skills during local development, edit the canonical `skills/`
-directory and then run:
+From GitHub:
 
 ```bash
-./scripts/sync_claude_plugin.sh
+claude plugin marketplace add cbenjamin23/moos-ivp-skills
+claude plugin install moos-ivp-skills@moos-ivp-skills
 ```
 
-This refreshes the self-contained skill copy under
-`plugins/claude/moos-ivp-skills/skills`.
+## Development Sync
+
+Edit canonical skills under `skills/`, then refresh plugin copies:
+
+```bash
+./scripts/sync_codex_plugin.sh
+./scripts/sync_claude_plugin.sh
+./scripts/check_plugin_integrity.sh
+```
+
+## Validate
+
+Before sharing a checkout or release candidate:
+
+```bash
+python3 ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py \
+  plugins/codex/moos-ivp-skills
+claude plugin validate . --strict
+claude plugin validate plugins/claude/moos-ivp-skills --strict
+./scripts/check_plugin_integrity.sh
+```

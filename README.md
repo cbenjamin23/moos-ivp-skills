@@ -3,10 +3,8 @@
 Portable `SKILL.md` workflows for MOOS-IvP development, mission work, CI harnesses,
 documentation lookup, and post-mission analysis.
 
-This repository is intentionally agent-neutral at the top level. The canonical
-skill source lives under `skills/`. Product-specific adapters or plugins should
-wrap that source rather than become the only copy. The Codex adapter carries a
-self-contained copy generated from the canonical skill tree for distribution.
+The canonical skill source lives under `skills/`. Codex and Claude Code adapters
+carry self-contained copies generated from that source for distribution.
 
 ## Skills
 
@@ -18,21 +16,31 @@ self-contained copy generated from the canonical skill tree for distribution.
 - `moos-ivp-eval-mission-builder` - build self-evaluating test missions.
 - `moos-ivp-harness-builder` - build multi-case harnesses and regression suites, including `nspatch` variants.
 
-## Codex Plugin
+## Plugins
 
-The Codex plugin adapter lives at `plugins/codex/moos-ivp-skills/`.
+Codex:
 
-Its manifest is `plugins/codex/moos-ivp-skills/.codex-plugin/plugin.json`.
-The repo marketplace is `.agents/plugins/marketplace.json`.
+```text
+.agents/plugins/marketplace.json
+plugins/codex/moos-ivp-skills/
+```
 
-For install and testing notes, see `INSTALL.md`.
+Claude Code:
+
+```text
+.claude-plugin/marketplace.json
+plugins/claude/moos-ivp-skills/
+```
+
+For install commands, see `INSTALL.md`.
 
 ## Repository Layout
 
 ```text
 skills/                 Canonical, agent-neutral skill folders.
 plugins/<product>/...    Product adapters around the skills.
-.agents/plugins/        Agent marketplace metadata for this repo.
+.agents/plugins/        Codex marketplace metadata.
+.claude-plugin/         Claude Code marketplace metadata.
 config/                 Example local MOOS environment config.
 scripts/                Setup, validation, and packaging helpers.
 docs/                   Design notes for skill boundaries and setup.
@@ -44,33 +52,24 @@ notes.
 
 ## Validation
 
-Run the repo integrity check before sharing changes:
-
-```bash
-./scripts/check_plugin_integrity.sh
-```
-
-After editing canonical skills, sync the Codex plugin copy:
+After editing canonical skills, refresh both plugin copies:
 
 ```bash
 ./scripts/sync_codex_plugin.sh
-```
-
-To sync and validate the Claude Code plugin copy:
-
-```bash
 ./scripts/sync_claude_plugin.sh
+./scripts/check_plugin_integrity.sh
 ```
 
-To validate the Codex plugin manifest with the local plugin creator validator:
+Direct validators:
 
 ```bash
 python3 ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py \
   plugins/codex/moos-ivp-skills
+claude plugin validate . --strict
+claude plugin validate plugins/claude/moos-ivp-skills --strict
 ```
 
 ## Distribution Status
 
-This repository is Codex-distributable from the repo marketplace. Canonical
-skills remain under `skills/`; the Codex plugin copy is refreshed with
-`scripts/sync_codex_plugin.sh`.
+This repository is distributable as both a Codex marketplace and a Claude Code
+marketplace. Scratch installs have been validated for both adapters.

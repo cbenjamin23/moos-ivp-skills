@@ -10,7 +10,7 @@
 ```
 
 - Use Conventional Commits: https://www.conventionalcommits.org/en/v1.0.0/
-- Use lightweight release discipline: normal commits do not need a version bump.
-- Bump plugin versions, tag, and create a GitHub Release only when intentionally
-  publishing a new installable plugin version.
-- Do not bump versions for root docs or maintainer-only scripts.
+- Version only installable plugin changes, not repo-only docs/scripts.
+- Keep published versions synchronized across plugin manifests, marketplace
+  metadata, git tag, and GitHub Release.
+- Semver: patch = fixes, minor = new capability, major = breaking change.

@@ -12,14 +12,17 @@
   "keywords": [
     "moos",
     "moos-ivp",
+    "ivp",
+    "marine-autonomy",
     "marine-robotics",
-    "agent-skills"
+    "autonomy",
+    "robotics"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "MOOS-IvP Skills",
-    "shortDescription": "MOOS-IvP app, behavior, mission, harness, docs, and alog skills.",
-    "longDescription": "Portable skills for building MOOS apps, IvP helm behaviors, runnable missions, self-evaluating eval missions, test harnesses, documentation-backed answers, and MOOS .alog analysis.",
+    "shortDescription": "Agent workflows for MOOS-IvP development",
+    "longDescription": "Build MOOS apps, IvP helm behaviors, runnable missions, self-evaluating missions, and test harnesses. Consult MOOS-IvP documentation and analyze MOOS .alog files.",
     "developerName": "Charles Benjamin",
     "category": "Developer Tools",
     "capabilities": [

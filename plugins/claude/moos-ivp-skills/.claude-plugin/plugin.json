@@ -12,8 +12,11 @@
   "keywords": [
     "moos",
     "moos-ivp",
+    "ivp",
+    "marine-autonomy",
     "marine-robotics",
-    "agent-skills"
+    "autonomy",
+    "robotics"
   ],
   "skills": "./skills/"
 }

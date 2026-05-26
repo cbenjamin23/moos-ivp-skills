@@ -3,7 +3,7 @@
   "owner": {
     "name": "Charles Benjamin"
   },
-  "description": "MOOS-IvP app, behavior, mission, harness, docs, and alog skills.",
+  "description": "Agent workflows for MOOS-IvP development",
   "plugins": [
     {
       "name": "moos-ivp-skills",

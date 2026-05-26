@@ -19,7 +19,7 @@
   "interface": {
     "displayName": "MOOS-IvP Skills",
     "shortDescription": "MOOS-IvP development and mission skills.",
-    "longDescription": "Portable skills for building MOOS apps, IvP behaviors, ordinary missions, self-evaluating missions, regression harnesses, documentation-backed answers, and alog analysis.",
+    "longDescription": "Portable skills for building MOOS apps, IvP behaviors, ordinary missions, self-evaluating missions, test harnesses, documentation-backed answers, and alog analysis.",
     "developerName": "Charles Benjamin",
     "category": "Developer Tools",
     "capabilities": [

@@ -1,7 +1,7 @@
 {
   "name": "moos-ivp-skills",
   "version": "1.0.0",
-  "description": "MOOS-IvP skills for apps, behaviors, missions, CI harnesses, documentation, and alog analysis.",
+  "description": "MOOS-IvP skills for apps, IvP behaviors, missions, test harnesses, documentation, and alog analysis.",
   "author": {
     "name": "Charles Benjamin",
     "url": "https://github.com/cbenjamin23"
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "MOOS-IvP Skills",
-    "shortDescription": "MOOS-IvP development and mission skills.",
-    "longDescription": "Portable skills for building MOOS apps, IvP behaviors, ordinary missions, self-evaluating missions, test harnesses, documentation-backed answers, and alog analysis.",
+    "shortDescription": "MOOS-IvP app, behavior, mission, harness, docs, and alog skills.",
+    "longDescription": "Portable skills for building MOOS apps, IvP helm behaviors, runnable missions, self-evaluating eval missions, test harnesses, documentation-backed answers, and MOOS .alog analysis.",
     "developerName": "Charles Benjamin",
     "category": "Developer Tools",
     "capabilities": [

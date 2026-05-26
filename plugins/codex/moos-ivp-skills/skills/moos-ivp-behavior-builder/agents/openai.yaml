@@ -1,4 +1,0 @@
-interface:
-  display_name: "MOOS-IvP Behavior Builder"
-  short_description: "Build user IvP helm behaviors."
-  default_prompt: "Use $moos-ivp-behavior-builder to create or modify a custom IvP helm behavior."

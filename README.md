@@ -9,7 +9,7 @@ carry self-contained copies generated from that source for distribution.
 ## Skills
 
 - `moos-app-builder` - build or modify user-owned MOOS apps.
-- `moos-ivp-behavior-builder` - build or modify user-owned IvP helm behaviors.
+- `ivp-behavior-builder` - build or modify user-owned IvP helm behaviors.
 - `moos-ivp-docs` - consult upstream MOOS-IvP docs and local source.
 - `moos-alog-analysis` - analyze existing `.alog` files with MOOS log tools.
 - `moos-ivp-mission-builder` - build ordinary MOOS-IvP mission folders from canonical examples.
@@ -75,5 +75,5 @@ claude plugin validate plugins/claude/moos-ivp-skills --strict
 ## Distribution Status
 
 This public GitHub repository is distributable as both a Codex marketplace and a
-Claude Code marketplace. Scratch installs from the GitHub URL have been
-validated for both adapters at `v1.0.0`.
+Claude Code marketplace. Marketplace manifests and plugin adapter payloads are
+validated locally with the commands above before release.

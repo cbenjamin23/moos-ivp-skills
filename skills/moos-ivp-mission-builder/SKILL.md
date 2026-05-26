@@ -13,7 +13,7 @@ headless-capable, but it should remain human-readable and runnable on its own.
 Optimize for the quality of that single mission, not for batch execution.
 
 For custom app source, use `moos-app-builder`. For custom behavior source, use
-`moos-ivp-behavior-builder`. For `.alog` evidence, use `moos-alog-analysis`.
+`ivp-behavior-builder`. For `.alog` evidence, use `moos-alog-analysis`.
 
 ## Core Rules
 

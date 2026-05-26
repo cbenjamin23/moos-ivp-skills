@@ -1,9 +1,9 @@
 ---
-name: moos-ivp-behavior-builder
+name: ivp-behavior-builder
 description: Build or modify user-owned IvP helm behaviors outside the core MOOS-IvP source tree. Use when an AI coding agent needs to create a C++ BHV_* behavior, implement IvPBehavior lifecycle methods, build a behavior shared library, make pHelmIvP find behavior libraries through IVP_BEHAVIOR_DIRS, or add .bhv mission configuration for a custom helm behavior.
 ---
 
-# MOOS-IvP Behavior Builder
+# IvP Behavior Builder
 
 ## Overview
 

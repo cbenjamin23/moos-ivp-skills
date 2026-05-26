@@ -10,7 +10,7 @@
       "displayName": "MOOS-IvP Skills",
       "source": "./plugins/claude/moos-ivp-skills",
       "description": "MOOS-IvP development, missions, harnesses, documentation, and alog analysis.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "author": {
         "name": "Charles Benjamin"
       },

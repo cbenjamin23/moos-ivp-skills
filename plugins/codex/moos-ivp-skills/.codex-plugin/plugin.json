@@ -36,6 +36,8 @@
       "Use MOOS-IvP skills to analyze this .alog mission run."
     ],
     "websiteURL": "https://github.com/cbenjamin23/moos-ivp-skills",
-    "brandColor": "#0F766E"
+    "brandColor": "#0E4E77",
+    "composerIcon": "./assets/moos-ivp-logo.png",
+    "logo": "./assets/moos-ivp-logo.png"
   }
 }

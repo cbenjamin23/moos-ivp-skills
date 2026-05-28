@@ -36,6 +36,11 @@ Claude Code:
 plugins/claude/moos-ivp-skills/
 ```
 
+Other agent harnesses that support skill-style instructions can usually use the
+canonical `skills/` directory directly. If your harness is not Codex or Claude
+Code, ask your agent to copy or load the skill folders from `skills/` into the
+location its harness expects.
+
 For install commands, see `INSTALL.md`.
 
 ## Repository Layout

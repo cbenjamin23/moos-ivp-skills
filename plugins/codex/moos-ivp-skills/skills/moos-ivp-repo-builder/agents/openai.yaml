@@ -1,0 +1,4 @@
+interface:
+  display_name: "MOOS-IvP Repo Builder"
+  short_description: "Create MOOS-IvP extension repos"
+  default_prompt: "Use $moos-ivp-repo-builder to create a fresh MOOS-IvP extension repository."

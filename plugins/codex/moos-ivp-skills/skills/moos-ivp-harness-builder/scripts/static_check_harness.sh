@@ -53,7 +53,7 @@ done
 need_grep 'Cases|Current Matrix' "README.md" "case matrix documentation"
 need_grep '--case' "zlaunch.sh" "--case support"
 if [ -f "$harness_dir/zlaunch.sh" ] && ! search_file '--jobs' "$harness_dir/zlaunch.sh"; then
-  echo "WARN zlaunch.sh omits --jobs; serial-only harnesses may omit it, but generated regression harnesses should usually implement wave execution"
+  echo "WARN zlaunch.sh omits --jobs; serial-only harnesses may omit it, but generated test harnesses should usually implement wave execution"
 fi
 if [ -f "$harness_dir/zlaunch.sh" ] &&
    search_file '--jobs' "$harness_dir/zlaunch.sh" &&

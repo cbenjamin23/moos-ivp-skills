@@ -39,7 +39,7 @@ Keep three surfaces reconciled:
 
 After editing cases, compare all three before running the suite. A case listed
 in the README but missing from `get_case_config` is documentation drift. A case
-in `ALL_CASES` but absent from the README is an undocumented regression.
+in `ALL_CASES` but absent from the README is an undocumented case.
 
 Intentional setup-error or expected-negative cases must be documented just like
 nominal cases.

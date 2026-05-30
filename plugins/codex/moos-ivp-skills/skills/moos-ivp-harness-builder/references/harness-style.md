@@ -1,6 +1,6 @@
 # Harness Style
 
-A harness is a regression runner around one or more self-evaluating stem
+A test harness runs one or more self-evaluating stem
 missions. The stem mission decides `grade=pass` or `grade=fail` through
 `pMissionEval`. The harness decides which cases to run, how to patch each temp
 copy, and how to publish each case row. For ordinary harnesses, the published

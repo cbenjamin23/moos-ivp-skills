@@ -14,7 +14,7 @@ carry self-contained copies generated from that source for distribution.
 - `moos-alog-analysis` - analyze existing `.alog` files with MOOS log tools.
 - `moos-ivp-mission-builder` - build ordinary MOOS-IvP mission folders from canonical examples.
 - `moos-ivp-eval-mission-builder` - build self-evaluating test missions.
-- `moos-ivp-harness-builder` - build multi-case harnesses and regression suites, including `nspatch` variants.
+- `moos-ivp-harness-builder` - build multi-case test harnesses, including `nspatch` variants.
 
 ## Plugins
 

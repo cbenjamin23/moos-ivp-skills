@@ -1,6 +1,6 @@
 ---
 name: moos-ivp-harness-builder
-description: Build or repair multi-case MOOS-IvP test harnesses and regression suites. Use when orchestrating case matrices, per-case mission copies, mission-owned result rows, serial or wave execution, --jobs, --port_base, per-case MOOSDB/pShare port isolation, scoped teardown, nspatch-driven variants, and preserved workdirs for debugging. Do not use for one ordinary mission or one self-evaluating eval mission.
+description: Build or repair multi-case MOOS-IvP test harnesses. Use when orchestrating case matrices, per-case mission copies, mission-owned result rows, serial or wave execution, --jobs, --port_base, per-case MOOSDB/pShare port isolation, scoped teardown, nspatch-driven variants, and preserved workdirs for debugging. Do not use for one ordinary mission or one self-evaluating eval mission.
 ---
 
 # MOOS-IvP Harness Builder
@@ -20,6 +20,11 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
 
 - Start from a stem mission that runs headlessly and writes `results.txt` with a
   `grade=` column.
+- Prefer placing harness directories at the repository root, alongside
+  `missions/`, for example `harnesses/<name>/`. Keep stem missions under
+  `missions/` and have the harness refer to them with explicit relative paths.
+  Other layouts are acceptable when project conventions or packaging require
+  them.
 - The stem mission must be a real eval mission: `pMissionEval` writes the
   `grade=` row. Do not accept a stem where `zlaunch.sh` or shell code
   synthesizes `grade=` from target files, patch markers, or harness knowledge.

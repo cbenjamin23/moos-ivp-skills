@@ -27,7 +27,7 @@ Avoid:
 - hiding expected-negative cases from the matrix
 
 The matrix is source documentation and should be accurate enough for generated
-catalogs or CI pages to consume later.
+catalogs or automation status pages to consume later.
 
 ## Drift Check
 

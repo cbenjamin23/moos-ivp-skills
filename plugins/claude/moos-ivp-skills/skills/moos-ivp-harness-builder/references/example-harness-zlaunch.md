@@ -3,6 +3,8 @@
 This is an architecture sketch, not a complete drop-in script. Use it to keep
 the responsibilities in the right place, then add the full argument parsing,
 wave mechanics, cleanup traps, and self-tests described in the other references.
+The path example assumes `harnesses/<family>_harnesses/HNN-<harness_name>/`;
+for `harnesses/<harness_name>/`, compute `REPO_DIR` with `../..` instead.
 
 ```bash
 #!/bin/bash
@@ -10,8 +12,9 @@ set -u
 
 ME=`basename "$0"`
 HARNESS_DIR="$(cd "$(dirname "$0")" && pwd)"
-MISSION_DIR="$HARNESS_DIR/../../missions/example_eval"
-TEARDOWN_HELPER="$HARNESS_DIR/../../scripts/moos_scoped_teardown.sh"
+REPO_DIR="$(cd "$HARNESS_DIR/../../.." && pwd)"
+MISSION_DIR="$REPO_DIR/missions/<family>_missions/<stem_mission>"
+TEARDOWN_HELPER="$REPO_DIR/scripts/moos_scoped_teardown.sh"
 RESULTS_FILE="$HARNESS_DIR/results.txt"
 TIME_WARP=10
 MAX_TIME=90
@@ -195,6 +198,6 @@ temp-copy creation, wave barriers, README/script case reconciliation,
 target-port inspection, and `--keep_workdirs`.
 
 Generated harness repositories should include the helper asset at
-`scripts/moos_scoped_teardown.sh`. Source it once near startup, call
+`<project-root>/scripts/moos_scoped_teardown.sh`. Source it once near startup, call
 `moos_scoped_teardown_stop_root` through a small `stop_mission_apps` wrapper, and
 use that wrapper after each case plus in the exit cleanup trap.

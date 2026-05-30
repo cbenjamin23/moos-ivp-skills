@@ -35,6 +35,83 @@ The stem mission must decide the grade through `pMissionEval`. A target file
 field such as `grade_hint`, or a shell wrapper that echoes `grade=`, is not a
 self-evaluating mission.
 
+## Directory Layout
+
+Use this layout guidance when creating a new harness directory and wiring it to
+the stem mission it runs. Prefer root-level `missions/` and `harnesses/`
+directories so the harness is visibly separate from the mission it copies,
+patches, and runs. For larger projects with many related missions or harnesses,
+group both sides by family:
+
+```text
+repo-root/
+  scripts/
+    moos_scoped_teardown.sh
+  missions/
+    <family>_missions/
+      <stem_mission>/
+        README.md
+        clean.sh
+        launch.sh
+        launch_shoreside.sh
+        launch_vehicle.sh
+        xlaunch.sh
+        zlaunch.sh
+        meta_shoreside.moos
+        meta_vehicle.moos
+        meta_vehicle.bhv
+        results.txt                  # run output
+  harnesses/
+    <family>_harnesses/
+      HNN-<harness_name>/
+        README.md
+        zlaunch.sh
+        results.txt                  # run output
+        NSPATCH.md
+        <case-name>-shoreside.xmoos
+        <case-name>-vehicle.xmoos
+        <case-name>-vehicle.xbhv
+```
+
+For small projects, the family grouping level may be omitted:
+
+```text
+repo-root/
+  scripts/
+    moos_scoped_teardown.sh
+  missions/
+    <stem_mission>/
+      README.md
+      clean.sh
+      launch.sh
+      launch_shoreside.sh
+      launch_vehicle.sh
+      xlaunch.sh
+      zlaunch.sh
+      meta_shoreside.moos
+      meta_vehicle.moos
+      meta_vehicle.bhv
+  harnesses/
+    <harness_name>/
+      README.md
+      zlaunch.sh
+      results.txt
+```
+
+Use explicit relative paths from the harness to the stem mission. For a harness
+under `harnesses/<family>_harnesses/HNN-<harness_name>/`, compute the repository
+root with `../../..`; for `harnesses/<harness_name>/`, use `../..`.
+
+Treat the tree as a shape reference, not a mandatory file list. Single-community
+unit stems that do not launch a vehicle are the edge case that may omit vehicle
+launchers and vehicle templates. Most moving or multi-community stems should
+include `launch_shoreside.sh`, `launch_vehicle.sh`, `meta_vehicle.moos`, and
+`meta_vehicle.bhv`. Patch-driven harnesses commonly carry `.xmoos`, `.xbhv`, or
+`NSPATCH.md`; pure runner harnesses may only need `README.md` and `zlaunch.sh`.
+Mission-specific extras such as `plugs.moos`, `case_*.moos`, field files,
+obstacle files, or `init_field.sh` are fine when the stem mission needs them,
+but do not treat them as required harness-layout defaults.
+
 ## Harness Owns
 
 - case matrix documentation
@@ -94,7 +171,7 @@ or scalar and writes the mission-owned grade.
 
 For obstacle, contact, or geometry-heavy harnesses, also read the eval mission
 builder's `scenario-and-grading.md`. Keep the scenario model realistic enough to
-test the app or behavior path being claimed, and avoid copying CI reference
+test the app or behavior path being claimed, and avoid copying reference
 geometry blindly when a simpler or safer baseline exposes the same contract.
 
 If a local reference mission's README prose disagrees with its launch scripts,

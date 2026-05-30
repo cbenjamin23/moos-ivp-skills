@@ -38,8 +38,9 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
   write `results.txt`; wrappers may only truncate, launch, wait, validate
   presence of `grade=`, and clean up.
 - For cleanup backstops, copy `assets/moos_scoped_teardown.sh` into the target
-  project as `scripts/moos_scoped_teardown.sh` if it does not already exist.
-  Reuse an existing project helper unless it is clearly stale or incompatible.
+  project as `<project-root>/scripts/moos_scoped_teardown.sh` if it does not
+  already exist. Reuse an existing project-root helper unless it is clearly
+  stale or incompatible.
 - Prefer `pAutoPoke` to seed deploy and evaluation variables in moving
   missions. Unit-style evals may use `uTimerScript` or the app under test for
   readiness when there is no vehicle/deploy lifecycle. Do not put pass/fail
@@ -110,8 +111,8 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
 - Copy `assets/eval-single-vehicle/` when a concrete minimal moving example is
   useful.
 - Copy `assets/moos_scoped_teardown.sh` into the target project as
-  `scripts/moos_scoped_teardown.sh` when the project does not already have an
-  equivalent root-scoped helper.
+  `<project-root>/scripts/moos_scoped_teardown.sh` when the project does not
+  already have an equivalent root-scoped helper.
 - Run `scripts/static_check_eval_mission.sh <mission-dir>` for a quick
   structural check.
 - Run `scripts/live_check_eval_mission.sh <mission-dir> --port_base=<free-base>`
@@ -139,7 +140,7 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
   verify result rows, surface warning evidence, and detect leftover listeners on
   scoped ports.
 - No mission wrapper uses global `ktm`, `pkill`, or unrelated cleanup.
-- Eval wrappers use project-local `scripts/moos_scoped_teardown.sh` as a scoped
+- Eval wrappers use `<project-root>/scripts/moos_scoped_teardown.sh` as a scoped
   backstop after `xlaunch.sh`; they do not use global `ktm`, `pkill`, or broad
   process discovery.
 - GUI runs retain normal operator controls unless the user requested a

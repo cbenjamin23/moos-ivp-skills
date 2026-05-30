@@ -113,10 +113,10 @@ Run patch case A followed by no-patch or different-patch case B. Assert:
 ## Teardown Containment
 
 Generated harness repositories should carry the copied helper at
-`scripts/moos_scoped_teardown.sh`, source it from harness launchers, and call
-`moos_scoped_teardown_stop_root` on each case directory or run root. If the project
-already has an equivalent helper, verify that it has the same root-scoped
-property.
+`<project-root>/scripts/moos_scoped_teardown.sh`, source it from harness
+launchers, and call `moos_scoped_teardown_stop_root` on each case directory or
+run root. If the project already has an equivalent helper, verify that it has
+the same root-scoped property.
 
 When the environment allows it, start an unrelated MOOS mission outside the
 harness run root, run the harness, then assert only processes under the

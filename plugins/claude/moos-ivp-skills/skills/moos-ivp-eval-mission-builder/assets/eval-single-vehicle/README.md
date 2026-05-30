@@ -57,7 +57,7 @@ Run with GUI for visual inspection:
 - `launch_vehicle.sh` launches one vehicle community.
 - `launch_shoreside.sh` launches the shoreside community.
 - `zlaunch.sh` calls shared `xlaunch.sh` for headless evaluation, then uses
-  project-local `scripts/moos_scoped_teardown.sh` as a scoped cleanup backstop.
+  `<project-root>/scripts/moos_scoped_teardown.sh` as a scoped cleanup backstop.
 - `meta_vehicle.moos` configures vehicle MOOS apps.
 - `meta_vehicle.bhv` configures helm behaviors.
 - `meta_shoreside.moos` configures shoreside apps, evaluator apps, and buttons.

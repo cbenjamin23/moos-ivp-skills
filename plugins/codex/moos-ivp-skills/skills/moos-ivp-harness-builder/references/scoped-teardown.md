@@ -1,16 +1,21 @@
 # Scoped Teardown
 
-Harness cleanup should be bounded to the mission or temp-run root it created.
+Use this guidance when writing cleanup code for a harness launcher. Harness
+cleanup should only stop MOOS processes that belong to the stem mission copy or
+temp-run root created by that harness run.
 
-For generated distribution harnesses, copy the skill asset
-`assets/moos_scoped_teardown.sh` into the generated project as
-`scripts/moos_scoped_teardown.sh` unless the project already has an equivalent
-root-scoped helper. Make it executable and source it from harness launchers.
+For generated harnesses, copy the skill asset `assets/moos_scoped_teardown.sh`
+into the target project as `<project-root>/scripts/moos_scoped_teardown.sh`
+unless the project already has an equivalent root-scoped helper. Make it
+executable, source it from harness launchers, and pass it the harness-owned
+mission directory, case directory, or run root.
 
 ## Preferred Shape
 
 ```bash
-REPO_DIR="$(cd "$HARNESS_DIR/../.." && pwd)"
+# Use ../../.. for harnesses/<family>_harnesses/<name>;
+# use ../.. for harnesses/<name>.
+REPO_DIR="$(cd "$HARNESS_DIR/../../.." && pwd)"
 TEARDOWN_HELPER="$REPO_DIR/scripts/moos_scoped_teardown.sh"
 
 if [ -f "$TEARDOWN_HELPER" ]; then

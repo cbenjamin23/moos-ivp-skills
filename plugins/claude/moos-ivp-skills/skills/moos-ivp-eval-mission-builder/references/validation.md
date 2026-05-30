@@ -50,9 +50,9 @@ Confirm:
 - `MISSION_EVALUATED=true` is visible in logs when needed
 - logs are inspected for unexpected config, deprecation, and runtime warnings
 - no leftover MOOSDB or pShare process remains for the mission
-- `scripts/moos_scoped_teardown.sh` exists in the target project and is
-  executable, copied from `assets/moos_scoped_teardown.sh` if it was not already
-  present
+- `<project-root>/scripts/moos_scoped_teardown.sh` exists in the target project
+  and is executable, copied from `assets/moos_scoped_teardown.sh` if it was not
+  already present
 
 Use `moos-alog-analysis` for targeted post-run evidence when the mission grade
 is not enough to understand what happened.
@@ -67,7 +67,7 @@ scripts/live_check_eval_mission.sh <mission-dir> --port_base=<free-base>
 ```
 
 It copies the mission to a temp directory, installs the bundled
-`moos_scoped_teardown.sh` as a project-local `scripts/` helper, runs
+`moos_scoped_teardown.sh` as a project-root `scripts/` helper, runs
 `zlaunch.sh --nogui` on explicit non-default ports, checks the final `grade=`
 row, reports `BHV_WARNING` evidence as advisory output, checks for leftover
 listeners on the scoped ports, and then cleans up any scoped leftovers it finds.

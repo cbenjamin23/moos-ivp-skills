@@ -50,8 +50,8 @@ That spacing keeps simultaneously running cases from sharing listeners.
 
 Use `9000` as the ordinary generated default. For local collision checks, pick
 a fresh unused `9000`-range base such as `9600`. Use a higher base, such as
-`30000`, only as an explicit override when CI or local parallel work may collide
-with ordinary missions in the `9000` range.
+`30000`, only as an explicit override when automation or local parallel work may
+collide with ordinary missions in the `9000` range.
 
 ## Wave Execution
 

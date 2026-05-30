@@ -19,8 +19,9 @@ If a case produces no `grade=`, distinguish between:
 
 ## Wall Clock Vs MOOS Time
 
-When reporting runtime, distinguish wall-clock time from MOOS time. For CI and
-developer feedback, wall-clock runtime is usually the metric that matters.
+When reporting runtime, distinguish wall-clock time from MOOS time. For
+automation and developer feedback, wall-clock runtime is usually the metric that
+matters.
 
 ## Benchmark Shape
 

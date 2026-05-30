@@ -73,10 +73,10 @@ ports from each case block for remaining listeners. Static checks can reject
 broad cleanup patterns, but they cannot prove that the generated stem actually
 stopped every launched process.
 
-For generated harnesses, verify `scripts/moos_scoped_teardown.sh` exists, is
-executable, and is sourced by the harness launcher unless the project already
-has an equivalent root-scoped helper. The helper is a cleanup backstop; it
-should not replace normal mission completion through the stem `zlaunch.sh` /
+For generated harnesses, verify `<project-root>/scripts/moos_scoped_teardown.sh`
+exists, is executable, and is sourced by the harness launcher unless the project
+already has an equivalent root-scoped helper. The helper is a cleanup backstop;
+it should not replace normal mission completion through the stem `zlaunch.sh` /
 `xlaunch.sh` path.
 
 A one-case debug run may bypass the isolated temp-copy path in some harness

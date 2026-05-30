@@ -21,10 +21,13 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
 - Start from a stem mission that runs headlessly and writes `results.txt` with a
   `grade=` column.
 - Prefer placing harness directories at the repository root, alongside
-  `missions/`, for example `harnesses/<name>/`. Keep stem missions under
-  `missions/` and have the harness refer to them with explicit relative paths.
-  Other layouts are acceptable when project conventions or packaging require
-  them.
+  `missions/`, for example `harnesses/<harness_name>/` paired with
+  `missions/<stem_mission>/`. In larger repositories, use optional family
+  grouping for both sides, such as
+  `harnesses/<family>_harnesses/HNN-<harness_name>/` paired with
+  `missions/<family>_missions/<stem_mission>/`. Have the harness refer to stem
+  missions with explicit relative paths. Other layouts are acceptable when
+  project conventions or packaging require them.
 - The stem mission must be a real eval mission: `pMissionEval` writes the
   `grade=` row. Do not accept a stem where `zlaunch.sh` or shell code
   synthesizes `grade=` from target files, patch markers, or harness knowledge.
@@ -63,8 +66,8 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
   stem eval mission's `zlaunch.sh`; do not use it as harness-side grading
   logic.
 - Default generated harnesses to `PORT_BASE=9000`. Use higher fresh bases only
-  as explicit run-time overrides for CI or local sessions that may collide with
-  ordinary missions in the `9000` range.
+  as explicit run-time overrides for automation or local sessions that may
+  collide with ordinary missions in the `9000` range.
 - Use headless mode as the grouped-run default. Keep `--gui` available for an
   individual case when visual inspection is useful.
 - For wave execution, give each live case its own temp mission copy and port
@@ -74,9 +77,10 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
   run tree beneath the harness directory.
 - Use scoped teardown between cases, between waves, and at harness exit. Prefer
   copying `assets/moos_scoped_teardown.sh` into the generated project as
-  `scripts/moos_scoped_teardown.sh`, sourcing it from harness launchers, and calling
-  `moos_scoped_teardown_stop_root` on the harness-owned run root or case directory.
-  Do not use global `ktm`, `pkill`, or machine-wide cleanup as the normal path.
+  `<project-root>/scripts/moos_scoped_teardown.sh`, sourcing it from harness
+  launchers, and calling `moos_scoped_teardown_stop_root` on the harness-owned
+  run root or case directory. Do not use global `ktm`, `pkill`, or machine-wide
+  cleanup as the normal path.
 - If a case is timing-sensitive only when grouped, document it as a solo-wave
   case instead of disabling all parallelism.
 
@@ -124,8 +128,8 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
 - Read `references/scoped-teardown.md` before writing cleanup logic.
 - Read `references/example-harness-zlaunch.md` for a compact runner skeleton.
 - Reuse `assets/moos_scoped_teardown.sh` by copying it into generated harness
-  projects as `scripts/moos_scoped_teardown.sh` when they do not already provide an
-  equivalent root-scoped helper.
+  projects as `<project-root>/scripts/moos_scoped_teardown.sh` when they do not
+  already provide an equivalent root-scoped helper.
 - Run `scripts/static_check_harness.sh <harness-dir>` for a structural check.
 
 ## Validation Checklist

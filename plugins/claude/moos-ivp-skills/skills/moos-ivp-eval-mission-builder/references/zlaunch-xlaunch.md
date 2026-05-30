@@ -72,10 +72,10 @@ receives the final value through `--max_time=<secs>` and passes it to
 
 For eval missions that need a cleanup backstop, copy
 `assets/moos_scoped_teardown.sh` from this skill into the target project as
-`scripts/moos_scoped_teardown.sh` if that script does not already exist. Source
-or call the project-local helper from `zlaunch.sh` after `xlaunch.sh`, passing
-the mission directory or temp root. This mirrors the scoped cleanup style used by
-CI mission wrappers without creating a dependency on the skill installation path.
+`<project-root>/scripts/moos_scoped_teardown.sh` if that script does not already
+exist. Source or call that helper from `zlaunch.sh` after `xlaunch.sh`, passing
+the mission directory or temp root. The goal is to keep cleanup scoped to the
+mission run without requiring files from the skill directory at runtime.
 
 If a portable fallback is truly necessary, filter to known MOOS app process
 names or recorded child PIDs. Do not blindly pipe every PID from `lsof +D

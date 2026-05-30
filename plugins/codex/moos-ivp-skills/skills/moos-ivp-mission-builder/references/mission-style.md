@@ -176,8 +176,8 @@ match the common waypoint mission pattern: set `depth_control = false` in
 motion.
 
 Do not add `pAutoPoke`, `pMissionEval`, `uMayFinish`, or `pMissionHash` to an
-ordinary mission unless the user asks for self-evaluation. Richer CI/example
-missions often add `pRealm`, `uProcessWatch`, `uLoadWatch`, `uFldNodeComms`,
+ordinary mission unless the user asks for self-evaluation. Richer test or
+example missions often add `pRealm`, `uProcessWatch`, `uLoadWatch`, `uFldNodeComms`,
 and mission-specific monitors, but those should be introduced only when they
 serve the requested standalone mission.
 

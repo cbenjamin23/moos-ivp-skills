@@ -1,6 +1,6 @@
 # MOOS-IvP Skills
 
-Portable `SKILL.md` workflows for MOOS-IvP development, mission work, CI harnesses,
+Portable `SKILL.md` workflows for MOOS-IvP development, mission work, test harnesses,
 documentation lookup, and post-mission analysis.
 
 The canonical skill source lives under `skills/`. Codex and Claude Code adapters

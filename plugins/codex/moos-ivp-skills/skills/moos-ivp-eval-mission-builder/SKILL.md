@@ -1,6 +1,6 @@
 ---
 name: moos-ivp-eval-mission-builder
-description: Build or repair one self-evaluating MOOS-IvP mission. Use when creating headless-capable mission folders with explicit startup initialization, pMissionEval pass/fail checks, results.txt output, uMayFinish completion through xlaunch.sh, zlaunch.sh automation, scoped teardown, and validation for a single test scenario. Do not use for ordinary operator missions or multi-case harness orchestration.
+description: "Build or repair one self-evaluating MOOS-IvP mission by adding an evaluation layer to an ordinary mission: headless startup, pMissionEval grading, results.txt, uMayFinish/xlaunch completion, zlaunch automation, scoped teardown, and single-scenario validation."
 ---
 
 # MOOS-IvP Eval Mission Builder

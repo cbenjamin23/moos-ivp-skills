@@ -1,6 +1,6 @@
 ---
 name: moos-app-builder
-description: Build or modify user-owned MOOS applications outside the core MOOS-IvP source tree. Use when an AI coding agent needs to create a new C++ MOOS app, wire it into an extension/project build, implement MOOS mail/config/iterate logic, update app help/interface text, or add mission config for a custom MOOS process.
+description: "Build or modify user-owned MOOS apps outside the core MOOS-IvP source tree: C++ app generation, project build wiring, MOOS mail/config/iterate logic, app help/interface text, and app-specific ProcessConfig examples."
 ---
 
 # MOOS App Builder

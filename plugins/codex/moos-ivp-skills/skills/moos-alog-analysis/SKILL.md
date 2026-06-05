@@ -1,6 +1,6 @@
 ---
 name: moos-alog-analysis
-description: "Analyze existing MOOS .alog files to reconstruct a mission or debug a specific incident. Run `alog*` commands directly in the current shell. If you already know the variable names or a specific variable set, go straight to targeted `aloggrep` queries; use `aloghelm` for helm context; use the compact `alogvars.sh` wrapper for discovery only when names are still unknown; read raw log lines only when exact payload format or source ambiguity matters."
+description: "Analyze existing MOOS .alog files to reconstruct missions, debug incidents, inspect helm context, or extract timestamped evidence with aloggrep, aloghelm, alogscan, and compact variable discovery."
 ---
 
 # MOOS ALog Analysis

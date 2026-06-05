@@ -1,6 +1,6 @@
 ---
 name: moos-ivp-repo-builder
-description: Create a user-owned MOOS-IvP extension repository from the moos-ivp-extend template. Use when an AI coding agent needs to clone and customize a fresh external MOOS-IvP project, confirm the local MOOS-IvP dependency, configure PATH and IVP_BEHAVIOR_DIRS, initialize Git independently from the template, and validate the baseline build before handing off to app, behavior, or mission skills.
+description: "Create a user-owned MOOS-IvP extension repository from moos-ivp-extend: clone/customize the template, confirm the local MOOS-IvP dependency, configure PATH and IVP_BEHAVIOR_DIRS, initialize independent Git, and validate the baseline build before app, behavior, or mission work."
 ---
 
 # MOOS-IvP Repo Builder

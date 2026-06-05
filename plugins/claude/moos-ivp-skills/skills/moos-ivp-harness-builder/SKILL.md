@@ -1,6 +1,6 @@
 ---
 name: moos-ivp-harness-builder
-description: Build or repair multi-case MOOS-IvP test harnesses. Use when orchestrating case matrices, per-case mission copies, mission-owned result rows, serial or wave execution, --jobs, --port_base, per-case MOOSDB/pShare port isolation, scoped teardown, nspatch-driven variants, and preserved workdirs for debugging. Do not use for one ordinary mission or one self-evaluating eval mission.
+description: "Build or repair multi-case MOOS-IvP test harnesses around self-evaluating stem missions: case matrices, per-case mission copies, result aggregation, serial or wave execution, port isolation, scoped teardown, and nspatch variants. Use moos-ivp-eval-mission-builder for stem missions."
 ---
 
 # MOOS-IvP Harness Builder

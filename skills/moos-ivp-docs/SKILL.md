@@ -1,6 +1,6 @@
 ---
 name: moos-ivp-docs
-description: Consult the live MIT MOOS-IvP PDF index and cite the most relevant upstream documentation for MOOS-IvP apps, behaviors, parameters, and concepts. Use when the user explicitly asks for documentation-backed answers, when upstream MOOS-IvP semantics are uncertain, or when an AI coding agent needs to compare MIT docs against a local moos-ivp checkout under ivp/src.
+description: "Consult MIT MOOS-IvP PDFs and local ivp/src for documentation-backed answers about apps, behaviors, parameters, concepts, upstream semantics, or doc-vs-source differences."
 ---
 
 # MOOS-IVP Docs

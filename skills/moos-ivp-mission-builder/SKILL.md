@@ -1,6 +1,6 @@
 ---
 name: moos-ivp-mission-builder
-description: Build or repair ordinary standalone MOOS-IvP mission folders. Use when an AI coding agent needs to create or edit mission-level launchers, clean.sh, meta_*.moos, meta_*.bhv, pAntler process layouts, vehicle/shoreside communities, port arguments, nsplug target generation, pMarineViewer deploy buttons, or mission README files for one runnable mission. Do not use for multi-case harness orchestration or self-evaluating pMissionEval/uMayFinish test missions.
+description: "Build or repair the ordinary mission layer for one standalone MOOS-IvP mission: launchers, meta files, helm layout, communities, ports, nsplug targets, viewer setup, and README updates. For self-evaluating missions, use moos-ivp-eval-mission-builder as the primary skill."
 ---
 
 # MOOS-IvP Mission Builder

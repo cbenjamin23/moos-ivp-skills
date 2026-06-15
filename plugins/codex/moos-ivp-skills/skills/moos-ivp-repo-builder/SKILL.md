@@ -21,7 +21,7 @@ repo, delegate follow-on work to:
 
 ## Defaults
 
-- Template source: `https://github.com/pavlab-mit/moos-ivp-extend.git`
+- Template source: `https://github.com/moos-ivp/moos-ivp-extend.git`
 - Git handling: fresh repo. Remove the template `.git/`, then run `git init`.
 - Shell profile: `~/.bashrc`
 - Environment additions:
@@ -109,7 +109,7 @@ which path will be used in the confirmation.
 4. Clone the template into the target path:
 
    ```bash
-   git clone https://github.com/pavlab-mit/moos-ivp-extend.git <target-repo>
+   git clone https://github.com/moos-ivp/moos-ivp-extend.git <target-repo>
    ```
 
 5. Detach the template Git metadata and initialize a fresh repo:
@@ -124,6 +124,9 @@ which path will be used in the confirmation.
    - Keep one top-level README by default. Prefer `README.md`, migrate any
      useful unique text from legacy `README` if needed, then remove `README`.
      Keep both only if the user explicitly asks.
+   - Remove inherited template CI metadata by default, including
+     `.github/workflows/build_extend.yml` and `.gitlab-ci.yml`, and remove any
+     README badges or links that refer to the upstream template CI.
    - Update README title and obvious references from `moos-ivp-extend` to the
      new repo name in the retained README.
    - Use the repository author name in the top-level CMake `# NAME:` line and

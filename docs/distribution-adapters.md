@@ -3,6 +3,12 @@
 The canonical source for this repository is `skills/`. Product-specific plugin
 adapters carry generated copies so installed plugins are self-contained.
 
+We intentionally keep generated copies instead of symlinking adapter `skills/`
+directories back to the canonical source. Codex currently drops plugin symlinks
+during cache installation, which can produce an installed plugin with no skills.
+Claude Code can dereference in-marketplace symlinks, but Git symlink checkout is
+not portable enough on Windows to make that the default distribution shape.
+
 The GitHub repository can include maintainer-only files beside the shipped
 plugins. Installers read the marketplace file first, then install the adapter
 path named by that marketplace entry. In this repo that means `scripts/`,

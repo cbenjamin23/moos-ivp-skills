@@ -46,39 +46,10 @@ For install commands, see `INSTALL.md`.
 ## Repository Layout
 
 ```text
-skills/                 Canonical, agent-neutral skill folders.
-plugins/<product>/...    Product adapters around the skills.
-.agents/plugins/        Codex marketplace metadata.
-.claude-plugin/         Claude Code marketplace metadata.
-scripts/                Setup, validation, and packaging helpers.
-docs/                   Distribution notes.
-test-runs/              Ignored local validation output, not distribution source.
+skills/                  Canonical, agent-neutral skill folders.
+plugins/codex/...        Codex plugin adapter.
+plugins/claude/...       Claude Code plugin adapter.
+INSTALL.md               Install commands and MOOS-IvP path setup.
+docs/                    Maintainer distribution notes.
+scripts/                 Maintainer sync, validation, and release helpers.
 ```
-
-See `docs/distribution-adapters.md` for Codex and Claude Code distribution
-notes.
-
-## Validation
-
-After editing canonical skills, refresh both plugin copies:
-
-```bash
-./scripts/sync_codex_plugin.sh
-./scripts/sync_claude_plugin.sh
-./scripts/check_plugin_integrity.sh
-```
-
-Direct validators:
-
-```bash
-python3 ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py \
-  plugins/codex/moos-ivp-skills
-claude plugin validate . --strict
-claude plugin validate plugins/claude/moos-ivp-skills --strict
-```
-
-## Distribution Status
-
-This public GitHub repository is distributable as both a Codex marketplace and a
-Claude Code marketplace. Marketplace manifests and plugin adapter payloads are
-validated locally with the commands above before release.

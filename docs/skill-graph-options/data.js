@@ -23,7 +23,7 @@ window.SKILL_GRAPH = {
     { source: "repo", target: "mission" },
     { source: "app", target: "mission" },
     { source: "behavior", target: "mission" },
-    { source: "docs", target: "mission" },
+    { source: "mission", target: "docs" },
     { source: "mission", target: "app" },
     { source: "mission", target: "behavior" },
     { source: "mission", target: "eval" },

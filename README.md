@@ -1,7 +1,16 @@
 # MOOS-IvP Skills
 
-Portable `SKILL.md` workflows for MOOS-IvP development, mission work, test harnesses,
-documentation lookup, and post-mission analysis.
+Portable `SKILL.md` workflows for MOOS-IvP development: apps, behaviors,
+missions, self-evaluating scenarios, test harnesses, documentation lookup, and
+post-mission analysis.
+
+The skills are intentionally interwoven. For example, `moos-ivp-mission-builder`
+can use `moos-ivp-docs` to confirm behavior or app parameters in the initial
+construction process, then use `moos-alog-analysis` to inspect runtime evidence.
+Likewise, `moos-ivp-eval-mission-builder` explicitly starts with
+`moos-ivp-mission-builder` for ordinary mission layout before adding
+eval-specific headless launch, grading, `results.txt`, and completion
+functionality.
 
 The canonical skill source lives under `skills/`. Codex and Claude Code adapters
 carry self-contained copies generated from that source for distribution.

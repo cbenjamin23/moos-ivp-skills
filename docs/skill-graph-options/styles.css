@@ -311,6 +311,7 @@ body.is-readme-export .graph-frame {
   width: 1312px;
   height: 610px;
   min-height: 610px;
+  border: 0;
   border-radius: 8px;
   box-shadow: none;
 }
@@ -321,7 +322,7 @@ body.is-readme-export .graph-target {
 }
 
 body.is-readme-export .hud {
-  left: calc(50% - 24px);
+  left: calc(50% + 6px);
   bottom: 20px;
   font-size: 15px;
   gap: 10px 22px;

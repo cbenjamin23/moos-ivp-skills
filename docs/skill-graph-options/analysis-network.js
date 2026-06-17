@@ -184,7 +184,7 @@ function baseStyle() {
         "border-opacity": variantName === "clinical" ? 1 : 0.86,
         "border-width": variantName === "blueprint" ? 2.2 : 1.4,
         "color": colors.label,
-        "font-size": variantName === "compact" ? 11 : 12,
+        "font-size": 13,
         "font-weight": 700,
         "height": (ele) => (18 + ele.data("weight") * baseNode) * nodeScale,
         "label": "data(label)",
@@ -282,7 +282,9 @@ function applyGraphState(updateUrl = true) {
   cy.style(baseStyle());
   cy.nodes().forEach((node) => node.position(variant.positions[node.id()]));
   cy.elements().removeClass("faded selectedNeighborhood");
-  cy.fit(undefined, document.body.classList.contains("is-readme-export") ? 124 : variant.padding);
+  const isReadmeExport = document.body.classList.contains("is-readme-export");
+  cy.fit(undefined, isReadmeExport ? 124 : variant.padding);
+  if (isReadmeExport) cy.panBy({ x: 30, y: 0 });
   if (updateUrl) writeUrlState();
 }
 

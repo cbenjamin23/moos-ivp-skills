@@ -283,7 +283,7 @@ function applyGraphState(updateUrl = true) {
   cy.nodes().forEach((node) => node.position(variant.positions[node.id()]));
   cy.elements().removeClass("faded selectedNeighborhood");
   const isReadmeExport = document.body.classList.contains("is-readme-export");
-  cy.fit(undefined, isReadmeExport ? 124 : variant.padding);
+  cy.fit(undefined, isReadmeExport ? 58 : variant.padding);
   if (isReadmeExport) cy.panBy({ x: 30, y: 0 });
   if (updateUrl) writeUrlState();
 }

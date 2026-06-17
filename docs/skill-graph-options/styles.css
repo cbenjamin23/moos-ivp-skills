@@ -309,16 +309,16 @@ body.is-readme-export .control-panel {
 
 body.is-readme-export .graph-frame {
   width: 1312px;
-  height: 610px;
-  min-height: 610px;
+  height: 700px;
+  min-height: 700px;
   border: 0;
   border-radius: 8px;
   box-shadow: none;
 }
 
 body.is-readme-export .graph-target {
-  height: 570px;
-  min-height: 570px;
+  height: 650px;
+  min-height: 650px;
 }
 
 body.is-readme-export .hud {

@@ -27,32 +27,22 @@ carry self-contained copies generated from that source for distribution.
 - `moos-ivp-eval-mission-builder` - build self-evaluating test missions.
 - `moos-ivp-harness-builder` - build multi-case test harnesses, including `nspatch` variants.
 
-## Plugins
+## Install
 
-This repo is both the maintainer workspace and the marketplace source. Only the
-adapter directories below are installed as plugins; root-level docs and scripts
-are for maintaining and validating the release.
-
-Codex:
+For Codex or Claude Code, copy the GitHub link:
 
 ```text
-.agents/plugins/marketplace.json
-plugins/codex/moos-ivp-skills/
+https://github.com/cbenjamin23/moos-ivp-skills
 ```
 
-Claude Code:
+Then add it as a plugin marketplace in the Codex or Claude Code GUI, or ask the
+agent to install the `moos-ivp-skills` plugin from that link.
 
-```text
-.claude-plugin/marketplace.json
-plugins/claude/moos-ivp-skills/
-```
+If you are not using Codex or Claude Code, use the canonical `skills/`
+directory directly. Ask your agent or harness to copy or load the skill folders
+from `skills/` into the place it expects skill-style instructions.
 
-Other agent harnesses that support skill-style instructions can usually use the
-canonical `skills/` directory directly. If your harness is not Codex or Claude
-Code, ask your agent to copy or load the skill folders from `skills/` into the
-location its harness expects.
-
-For install commands, see `INSTALL.md`.
+For more detailed instructions, see `INSTALL.md`.
 
 ## Repository Layout
 

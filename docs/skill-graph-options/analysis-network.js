@@ -108,17 +108,17 @@ const variants = {
   compact: {
     title: "Compact",
     nodeShape: "ellipse",
-    padding: 70,
+    padding: 36,
     defaultColorScheme: "discipline",
     positions: {
-      repo: { x: 275, y: 285 },
-      app: { x: 275, y: 125 },
-      behavior: { x: 275, y: 445 },
+      repo: { x: 240, y: 285 },
+      app: { x: 240, y: 125 },
+      behavior: { x: 240, y: 445 },
       docs: { x: 510, y: 445 },
       mission: { x: 510, y: 285 },
-      eval: { x: 670, y: 285 },
-      harness: { x: 765, y: 105 },
-      alog: { x: 765, y: 455 }
+      eval: { x: 695, y: 285 },
+      harness: { x: 830, y: 105 },
+      alog: { x: 830, y: 455 }
     }
   },
   clinical: {

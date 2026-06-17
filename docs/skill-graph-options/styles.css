@@ -202,18 +202,20 @@ h1 {
 
 .hud {
   position: absolute;
-  left: 14px;
+  left: 50%;
   bottom: 14px;
+  transform: translateX(-50%);
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 13px;
+  justify-content: center;
+  gap: 9px 20px;
   max-width: calc(100% - 28px);
-  padding: 9px 10px;
+  padding: 10px 15px;
   border: 1px solid rgba(168, 181, 196, 0.7);
   border-radius: 7px;
   background: rgba(255, 255, 255, 0.88);
   color: #506070;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 675;
   backdrop-filter: blur(10px);
 }
@@ -225,8 +227,8 @@ h1 {
 }
 
 .dot {
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
 }
 

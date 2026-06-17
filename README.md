@@ -12,6 +12,8 @@ Likewise, `moos-ivp-eval-mission-builder` explicitly starts with
 eval-specific headless launch, grading, `results.txt`, and completion
 functionality.
 
+![MOOS-IvP skill dependency graph](docs/skill-graph-options/compact-skill-network.png)
+
 The canonical skill source lives under `skills/`. Codex and Claude Code adapters
 carry self-contained copies generated from that source for distribution.
 

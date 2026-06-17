@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MOOS-IvP Analysis Network</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+  </head>
+  <body>
+    <main class="page is-viewer">
+      <header class="viewer-head">
+        <div>
+          <p class="eyebrow" id="variantEyebrow">Analysis Network</p>
+          <h1 id="variantTitle">Journal</h1>
+        </div>
+        <div class="toolbar" aria-label="Graph style variants">
+          <button class="variant-button" type="button" data-variant="journal">Journal</button>
+          <button class="variant-button" type="button" data-variant="blueprint">Blueprint</button>
+          <button class="variant-button" type="button" data-variant="compact">Compact</button>
+          <button class="variant-button" type="button" data-variant="clinical">Clinical</button>
+          <a class="back-link" href="./index.html">All options</a>
+        </div>
+      </header>
+
+      <div class="control-panel" aria-label="Graph display controls">
+        <label for="labelPlacement">
+          Label placement
+          <select id="labelPlacement">
+            <option value="above">Above nodes</option>
+            <option value="right">Right of nodes</option>
+            <option value="center">Inside nodes</option>
+            <option value="below">Below nodes</option>
+          </select>
+        </label>
+        <label for="colorScheme">
+          Color scheme
+          <select id="colorScheme">
+            <option value="discipline">Discipline</option>
+            <option value="colorblind">Colorblind-safe</option>
+            <option value="graphite">Graphite</option>
+            <option value="instrument">Instrument</option>
+          </select>
+        </label>
+        <label for="nodeScale">
+          Node scale
+          <input id="nodeScale" type="range" min="70" max="135" value="100" />
+        </label>
+        <label for="arrowScale">
+          Arrow scale
+          <input id="arrowScale" type="range" min="70" max="180" value="100" />
+        </label>
+      </div>
+
+      <section class="graph-frame">
+        <div id="graph" class="graph-target"></div>
+        <div class="hud">
+          <span><i class="dot foundation"></i>Foundation</span>
+          <span><i class="dot surface"></i>Config / semantics</span>
+          <span><i class="dot mission"></i>Mission system</span>
+          <span><i class="dot evidence"></i>Evidence</span>
+        </div>
+      </section>
+    </main>
+    <script src="./analysis-network.js"></script>
+  </body>
+</html>

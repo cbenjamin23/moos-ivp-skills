@@ -12,8 +12,10 @@ behavior layout, mission README, and target generation. The mission may be
 headless-capable, but it should remain human-readable and runnable on its own.
 Optimize for the quality of that single mission, not for batch execution.
 
-For custom app source, use `moos-app-builder`. For custom behavior source, use
-`ivp-behavior-builder`. For `.alog` evidence, use `moos-alog-analysis`.
+For custom app config surfaces, use `moos-app-builder`. For custom behavior
+config surfaces, use `ivp-behavior-builder`. For upstream app or behavior
+parameters not already clear from the chosen baseline or local repo convention,
+use `moos-ivp-docs`. For post-mission analysis, use `moos-alog-analysis`.
 
 ## Core Rules
 

@@ -108,17 +108,17 @@ const variants = {
   compact: {
     title: "Compact",
     nodeShape: "ellipse",
-    padding: 36,
+    padding: 70,
     defaultColorScheme: "discipline",
     positions: {
-      repo: { x: 240, y: 285 },
-      app: { x: 240, y: 125 },
-      behavior: { x: 240, y: 445 },
+      repo: { x: 225, y: 285 },
+      app: { x: 225, y: 125 },
+      behavior: { x: 225, y: 445 },
       docs: { x: 510, y: 445 },
       mission: { x: 510, y: 285 },
-      eval: { x: 695, y: 285 },
-      harness: { x: 830, y: 105 },
-      alog: { x: 830, y: 455 }
+      eval: { x: 710, y: 285 },
+      harness: { x: 850, y: 125 },
+      alog: { x: 850, y: 455 }
     }
   },
   clinical: {
@@ -282,7 +282,7 @@ function applyGraphState(updateUrl = true) {
   cy.style(baseStyle());
   cy.nodes().forEach((node) => node.position(variant.positions[node.id()]));
   cy.elements().removeClass("faded selectedNeighborhood");
-  cy.fit(undefined, variant.padding);
+  cy.fit(undefined, document.body.classList.contains("is-readme-export") ? 124 : variant.padding);
   if (updateUrl) writeUrlState();
 }
 
@@ -327,6 +327,9 @@ document.getElementById("arrowScale").addEventListener("input", (event) => {
 });
 
 const params = new URLSearchParams(window.location.search);
+if (params.get("export") === "readme") {
+  document.body.classList.add("is-readme-export");
+}
 const requestedVariant = params.get("variant") || "journal";
 state.variant = variants[requestedVariant] ? requestedVariant : "journal";
 state.colorScheme = variants[state.variant].defaultColorScheme;

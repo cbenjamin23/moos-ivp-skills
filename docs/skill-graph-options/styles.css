@@ -289,6 +289,50 @@ h1 {
   accent-color: #2f6fb6;
 }
 
+body.is-readme-export {
+  background: #ffffff;
+}
+
+body.is-readme-export .page {
+  min-height: auto;
+  padding: 0;
+}
+
+body.is-readme-export .page.is-viewer {
+  display: block;
+}
+
+body.is-readme-export .viewer-head,
+body.is-readme-export .control-panel {
+  display: none;
+}
+
+body.is-readme-export .graph-frame {
+  width: 1312px;
+  height: 610px;
+  min-height: 610px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+body.is-readme-export .graph-target {
+  height: 570px;
+  min-height: 570px;
+}
+
+body.is-readme-export .hud {
+  left: calc(50% - 24px);
+  bottom: 20px;
+  font-size: 15px;
+  gap: 10px 22px;
+  padding: 11px 18px;
+}
+
+body.is-readme-export .dot {
+  width: 10px;
+  height: 10px;
+}
+
 @media (max-width: 840px) {
   .page {
     padding: 14px;

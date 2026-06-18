@@ -23,15 +23,16 @@ repo, delegate follow-on work to:
 
 - Template source: `https://github.com/moos-ivp/moos-ivp-extend.git`
 - Git handling: fresh repo. Remove the template `.git/`, then run `git init`.
-- Shell profile: `~/.bashrc`
+- Environment file: `<repo>/env.sh`
+- Persistent shell integration: ask before editing a shell profile
 - Environment additions:
   - add `<repo>/bin` and `<repo>/scripts` to `PATH`
   - add `<repo>/lib` to `IVP_BEHAVIOR_DIRS`
 - Keep the example app, behavior, and missions unless the user asks for a
   clean shell.
 
-Use a different template repo, shell profile, or no persistent shell edits only
-when the user explicitly asks.
+Use a different template repo or skip the repo-local environment file only when
+the user explicitly asks.
 
 ## Confirmation Gate
 
@@ -41,7 +42,8 @@ Before cloning or editing files, collect and confirm:
 2. Repository author name and optional organization string for customized
    project text. This is not the same as Git commit identity.
 3. Whether examples should stay or be removed.
-4. Shell profile target, defaulting to `~/.bashrc`.
+4. Whether to add persistent shell integration by sourcing `<repo>/env.sh` from
+   the user's preferred shell profile. If yes, confirm the profile path.
 
 If the user already gave these values and said to proceed, treat that as the
 confirmation. Otherwise, stop and ask a concise confirmation question before
@@ -60,12 +62,21 @@ Good first move:
 3. Ask for the repo name.
 
 Then ask for the target location, project display author, examples/defaults,
-and `.bashrc` confirmation as needed. If the user says "wherever is fine",
+and shell integration preference as needed. If the user says "wherever is fine",
 suggest a concrete default path and confirm it. Prefer a sibling of the
 validated `moos-ivp` checkout, for example `~/my-new-repo` when
 `MOOS_IVP_ROOT` is `~/moos-ivp`. Do not default to nesting the new repo inside
 an unrelated active workspace. Explain that the project display author is for
 README/CMake text, not a Git committer email.
+
+When proposing persistent shell integration, show the concise block that would
+be added to the selected profile:
+
+```bash
+# >>> moos-ivp repo: <repo-name> >>>
+[ -f "<absolute-repo-path>/env.sh" ] && . "<absolute-repo-path>/env.sh"
+# <<< moos-ivp repo: <repo-name> <<<
+```
 
 Before side effects, summarize the resolved values in one sentence and ask for
 explicit confirmation.
@@ -161,31 +172,48 @@ which path will be used in the confirmation.
 7. If the user requested a clean shell, remove sample source and mission
    directories carefully and keep the build skeleton valid. Otherwise retain
    examples so the baseline build has known artifacts to verify.
-8. Update shell environment in the selected profile.
-   - Default target is `~/.bashrc`.
-   - Create the file if it does not exist.
-   - Preserve user content.
+8. Create the repo-local shell environment file.
+   - Write `<repo>/env.sh`.
    - Resolve the absolute paths for the new repo's `bin`, `scripts`, and
-     `lib` directories before writing the profile.
-   - Avoid duplicate entries if those absolute paths are already present.
-   - Append the managed block near the end of the profile so it extends the
-     final PATH/behavior-dir values already built by the user's shell file.
-     Do not insert it before later lines that reset or export PATH.
+     `lib` directories before writing the file.
+   - Make repeated sourcing idempotent so PATH and `IVP_BEHAVIOR_DIRS` do not
+     accumulate duplicate entries.
+   - Keep the file source-compatible with common Bash and zsh startup files.
+   - Use this shape:
+
+     ```bash
+     #!/usr/bin/env bash
+     # Source this file to use this MOOS-IvP extension repo.
+     case ":$PATH:" in *":<absolute-repo-bin>:"*) ;; *) PATH="$PATH:<absolute-repo-bin>" ;; esac
+     case ":$PATH:" in *":<absolute-repo-scripts>:"*) ;; *) PATH="$PATH:<absolute-repo-scripts>" ;; esac
+     case ":${IVP_BEHAVIOR_DIRS:-}:" in *":<absolute-repo-lib>:"*) ;; *) IVP_BEHAVIOR_DIRS="${IVP_BEHAVIOR_DIRS:+$IVP_BEHAVIOR_DIRS:}<absolute-repo-lib>" ;; esac
+     export PATH
+     export IVP_BEHAVIOR_DIRS
+     ```
+
+9. If the user opted into persistent shell integration, update the selected
+   shell profile.
+   - Ask for the profile path instead of assuming one. If the user named a
+     shell, suggest its usual profile, such as `~/.zshrc` for zsh or
+     `~/.bashrc` for Bash, and ask for confirmation. If the user did not name a
+     shell, ask which profile to update and offer common choices: `~/.zshrc`,
+     `~/.bashrc`, or no profile edit.
+   - Create the profile file if it does not exist.
+   - Preserve user content.
+   - Append the managed source block near the end of the profile so it runs
+     after earlier PATH setup. Do not insert it before later lines that reset or
+     export PATH.
    - Use a clearly marked block:
 
      ```bash
      # >>> moos-ivp repo: <repo-name> >>>
-     PATH="$PATH:<absolute-repo-bin>"
-     PATH="$PATH:<absolute-repo-scripts>"
-     IVP_BEHAVIOR_DIRS="$IVP_BEHAVIOR_DIRS:<absolute-repo-lib>"
-     export PATH
-     export IVP_BEHAVIOR_DIRS
+     [ -f "<absolute-repo-path>/env.sh" ] && . "<absolute-repo-path>/env.sh"
      # <<< moos-ivp repo: <repo-name> <<<
      ```
 
-   - If the user opted out of persistent profile edits, print the equivalent
-     `export` commands instead.
-9. Validate the baseline.
+   - If the user opted out, leave the profile unchanged and tell them they can
+     run `. <repo>/env.sh` in a shell session.
+10. Validate the baseline.
    - Run `./build.sh` from a normal tool-capable shell, not from a shell whose
      profile has hidden basic build tools. The repo CMake should already have
      the resolved `moos-ivp` path wired in, so build validation should not
@@ -194,15 +222,17 @@ which path will be used in the confirmation.
      - `bin/pXRelayTest` exists and is executable
      - `lib/libBHV_SimpleWaypoint.dylib` on macOS or
        `lib/libBHV_SimpleWaypoint.so` on Linux exists
-   - Validate the profile edit separately by sourcing or otherwise applying the
-     selected profile and confirming the new absolute `bin`, `scripts`, and
-     `lib` paths appear in `PATH` / `IVP_BEHAVIOR_DIRS`.
+   - Validate `<repo>/env.sh` separately by sourcing it in a shell and
+     confirming the new absolute `bin`, `scripts`, and `lib` paths appear in
+     `PATH` / `IVP_BEHAVIOR_DIRS`.
+   - If a persistent profile source block was added, validate that applying the
+     selected profile reaches the same environment.
    - If sourcing the user's profile hides build tools such as `mkdir`, `make`,
      or `cmake`, report that as a profile/tooling issue, not as a repo build
      failure.
    - Run `which pXRelayTest` or `command -v pXRelayTest` only after applying
-     the profile changes.
-10. Initialize the first commit when the user asked for Git setup or when they
+     `<repo>/env.sh` or the selected profile.
+11. Initialize the first commit when the user asked for Git setup or when they
     asked for a ready fresh repo, but only if Git identity is already
     configured or the user supplied both a commit author name and email.
     Repository author text collected earlier is for project files, not enough
@@ -222,13 +252,15 @@ which path will be used in the confirmation.
 
 - Expand `~` to an absolute path before writing shell profile blocks.
 - Quote paths in shell exports.
-- Do not edit `.zshrc`, `.bash_profile`, `.profile`, or other files unless the
-  user specifies them.
+- Do not edit any shell profile unless the user opts into persistent shell
+  integration and confirms the profile path.
 - Do not remove an existing matching block for another repo.
 - If replacing a block for the same repo path, replace only the managed block
   with the same marker.
 - Keep profile edits idempotent: running the skill twice should not append
   duplicate path entries.
+- Keep the repo-local `env.sh` as the source of the PATH and
+  `IVP_BEHAVIOR_DIRS` details; shell profiles should only source that file.
 
 ## Validation Checklist
 
@@ -240,11 +272,11 @@ which path will be used in the confirmation.
   repo is not a sibling of `moos-ivp`.
 - `./build.sh` succeeds, or the exact compiler/configuration blocker is
   reported.
-- `PATH` and `IVP_BEHAVIOR_DIRS` setup was written to the selected profile or
-  provided as session exports.
+- `PATH` and `IVP_BEHAVIOR_DIRS` setup was written to `<repo>/env.sh`.
+- If requested, the selected shell profile sources `<repo>/env.sh`.
 - Generated `bin/` and `lib/` artifacts are not treated as source changes.
-- Final message names the new repo path, profile path, validation result, and
-  the next appropriate skills.
+- Final message names the new repo path, env file path, profile path if
+  updated, validation result, and the next appropriate skills.
 
 ## Failure Handling
 
@@ -252,7 +284,7 @@ which path will be used in the confirmation.
 - Non-empty target path: stop unless the user explicitly asked to reuse it.
 - Clone failure: report the template URL and Git error.
 - Build failure: report the first actionable CMake or compiler error.
-- Shell profile write failure: leave the repo intact and provide manual export
-  commands.
+- Shell profile write failure: leave the repo intact and tell the user to
+  source `<repo>/env.sh` manually.
 - Git commit failure due to identity: leave files initialized and staged state
   as-is; tell the user to configure Git identity.

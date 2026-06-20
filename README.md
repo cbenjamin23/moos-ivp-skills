@@ -19,6 +19,7 @@ carry self-contained copies generated from that source for distribution.
 
 ## Skills
 
+- `moos-ivp-installer` - install or repair an upstream MOOS-IvP checkout.
 - `moos-app-builder` - build or modify user-owned MOOS apps.
 - `ivp-behavior-builder` - build or modify user-owned IvP helm behaviors.
 - `moos-ivp-docs` - consult upstream MOOS-IvP docs and local source.

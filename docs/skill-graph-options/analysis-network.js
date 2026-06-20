@@ -79,8 +79,9 @@ const variants = {
     padding: 90,
     defaultColorScheme: "discipline",
     positions: {
+      installer: { x: 120, y: 130 },
       repo: { x: 120, y: 270 },
-      app: { x: 325, y: 130 },
+      app: { x: 575, y: 130 },
       behavior: { x: 325, y: 270 },
       docs: { x: 325, y: 410 },
       mission: { x: 575, y: 270 },
@@ -95,8 +96,9 @@ const variants = {
     padding: 105,
     defaultColorScheme: "instrument",
     positions: {
+      installer: { x: 120, y: 140 },
       repo: { x: 120, y: 280 },
-      app: { x: 325, y: 140 },
+      app: { x: 585, y: 140 },
       behavior: { x: 325, y: 280 },
       docs: { x: 325, y: 420 },
       mission: { x: 585, y: 280 },
@@ -111,8 +113,9 @@ const variants = {
     padding: 70,
     defaultColorScheme: "discipline",
     positions: {
+      installer: { x: 225, y: 125 },
       repo: { x: 225, y: 285 },
-      app: { x: 225, y: 125 },
+      app: { x: 510, y: 125 },
       behavior: { x: 225, y: 445 },
       docs: { x: 510, y: 445 },
       mission: { x: 510, y: 285 },
@@ -127,8 +130,9 @@ const variants = {
     padding: 95,
     defaultColorScheme: "graphite",
     positions: {
+      installer: { x: 120, y: 150 },
       repo: { x: 120, y: 280 },
-      app: { x: 330, y: 150 },
+      app: { x: 575, y: 150 },
       behavior: { x: 330, y: 280 },
       docs: { x: 330, y: 410 },
       mission: { x: 575, y: 280 },

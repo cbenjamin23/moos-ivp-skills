@@ -8,6 +8,7 @@ window.SKILL_GRAPH = {
   // `weight` is a manual visual emphasis used for node sizing, not a
   // measured code metric such as lines of code or file count.
   nodes: [
+    { id: "installer", label: "moos-ivp-installer", short: "installer", group: "foundation", weight: 2 },
     { id: "repo", label: "moos-ivp-repo-builder", short: "repo-builder", group: "foundation", weight: 2 },
     { id: "app", label: "moos-app-builder", short: "app-builder", group: "surface", weight: 3 },
     { id: "behavior", label: "ivp-behavior-builder", short: "behavior-builder", group: "surface", weight: 3 },
@@ -18,6 +19,7 @@ window.SKILL_GRAPH = {
     { id: "alog", label: "moos-alog-analysis", short: "alog-analysis", group: "evidence", weight: 4 }
   ],
   links: [
+    { source: "installer", target: "repo" },
     { source: "repo", target: "app" },
     { source: "repo", target: "behavior" },
     { source: "repo", target: "mission" },

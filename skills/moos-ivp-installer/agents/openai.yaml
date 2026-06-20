@@ -1,0 +1,5 @@
+interface:
+  display_name: "MOOS-IvP Installer"
+  short_description: "Install upstream MOOS-IvP."
+  brand_color: "#0E4E77"
+  default_prompt: "Use $moos-ivp-installer to install or repair a local MOOS-IvP checkout."

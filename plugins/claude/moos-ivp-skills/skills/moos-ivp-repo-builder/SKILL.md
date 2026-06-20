@@ -247,6 +247,11 @@ which path will be used in the confirmation.
     blocker instead of inventing identity values. Do not ask for Git email
     during the initial setup unless the user specifically wants the first
     commit completed in the same turn.
+12. If no remote was attached, mention the natural next step: create an empty
+    GitHub repository under the user's account or organization, add it as
+    `origin`, and push `main`. Do not perform this unless the user explicitly
+    asks. Remind the user that if their GitHub credentials are connected, the
+    AI agent can create the GitHub repo, add the remote, and push for them.
 
 ## Environment Editing Rules
 
@@ -277,6 +282,9 @@ which path will be used in the confirmation.
 - Generated `bin/` and `lib/` artifacts are not treated as source changes.
 - Final message names the new repo path, env file path, profile path if
   updated, validation result, and the next appropriate skills.
+- If `git remote -v` is empty, final message suggests publishing the repo as an
+  optional next step and says the AI agent can do it for the user when GitHub
+  credentials are connected.
 
 ## Failure Handling
 

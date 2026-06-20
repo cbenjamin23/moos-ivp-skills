@@ -19,12 +19,12 @@ carry self-contained copies generated from that source for distribution.
 
 ## Skills
 
-- `moos-ivp-installer` - install or repair an upstream MOOS-IvP checkout.
+- `moos-ivp-mission-builder` - build and test ordinary MOOS-IvP mission folders.
 - `moos-app-builder` - build or modify user-owned MOOS apps.
 - `ivp-behavior-builder` - build or modify user-owned IvP helm behaviors.
 - `moos-ivp-docs` - consult upstream MOOS-IvP docs and local source.
 - `moos-alog-analysis` - analyze existing `.alog` files with MOOS log tools.
-- `moos-ivp-mission-builder` - build ordinary MOOS-IvP mission folders from canonical examples.
+- `moos-ivp-installer` - install or repair an upstream MOOS-IvP checkout.
 - `moos-ivp-eval-mission-builder` - build self-evaluating test missions.
 - `moos-ivp-harness-builder` - build multi-case test harnesses, including `nspatch` variants.
 

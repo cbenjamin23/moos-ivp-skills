@@ -282,9 +282,6 @@ which path will be used in the confirmation.
 - Generated `bin/` and `lib/` artifacts are not treated as source changes.
 - Final message names the new repo path, env file path, profile path if
   updated, validation result, and the next appropriate skills.
-- If `git remote -v` is empty, final message suggests publishing the repo as an
-  optional next step and says the AI agent can do it for the user when GitHub
-  credentials are connected.
 
 ## Failure Handling
 

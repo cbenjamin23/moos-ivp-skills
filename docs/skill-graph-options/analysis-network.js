@@ -72,6 +72,12 @@ const state = {
   arrowScale: 1
 };
 
+const readmeExport = {
+  fitPadding: 70,
+  panX: 20,
+  panY: -19
+};
+
 const variants = {
   journal: {
     title: "Journal",
@@ -287,8 +293,12 @@ function applyGraphState(updateUrl = true) {
   cy.nodes().forEach((node) => node.position(variant.positions[node.id()]));
   cy.elements().removeClass("faded selectedNeighborhood");
   const isReadmeExport = document.body.classList.contains("is-readme-export");
-  cy.fit(undefined, isReadmeExport ? 30 : variant.padding);
-  if (isReadmeExport) cy.panBy({ x: 20, y: 0 });
+  if (isReadmeExport) {
+    cy.fit(undefined, readmeExport.fitPadding);
+    cy.panBy({ x: readmeExport.panX, y: readmeExport.panY });
+  } else {
+    cy.fit(undefined, variant.padding);
+  }
   if (updateUrl) writeUrlState();
 }
 

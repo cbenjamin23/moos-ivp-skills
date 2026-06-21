@@ -1,7 +1,7 @@
 window.SKILL_GRAPH = {
   groups: {
     foundation: { label: "Foundation", color: "#6ea8fe" },
-    surface: { label: "Config / Semantics", color: "#72d3a4" },
+    surface: { label: "Development", color: "#72d3a4" },
     mission: { label: "Mission System", color: "#e8b96a" },
     evidence: { label: "Evidence", color: "#d88ac7" }
   },

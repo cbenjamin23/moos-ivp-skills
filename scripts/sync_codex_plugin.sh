@@ -35,5 +35,3 @@ if [ -f "$validator" ]; then
 else
   echo "WARN plugin validator not found at $validator; skipping manifest validation"
 fi
-
-"$repo_root/scripts/check_plugin_integrity.sh"

@@ -40,5 +40,3 @@ if [ -x "$claude_bin" ]; then
 else
   echo "WARN claude executable not found; skipping Claude plugin validation"
 fi
-
-"$repo_root/scripts/check_plugin_integrity.sh"

@@ -53,13 +53,23 @@ done
 need_grep 'Cases|Current Matrix' "README.md" "case matrix documentation"
 need_grep '--case' "zlaunch.sh" "--case support"
 if [ -f "$harness_dir/zlaunch.sh" ] && ! search_file '--jobs' "$harness_dir/zlaunch.sh"; then
-  echo "WARN zlaunch.sh omits --jobs; serial-only harnesses may omit it, but generated test harnesses should usually implement wave execution"
+  echo "WARN zlaunch.sh omits --jobs; serial-only harnesses may omit it, but generated test harnesses should usually implement rolling execution"
 fi
-if [ -f "$harness_dir/zlaunch.sh" ] &&
-   search_file '--jobs' "$harness_dir/zlaunch.sh" &&
-   ! search_file 'run_wave|WAVE_|[[:space:]]&([[:space:]]|$)|(^|[^[:alnum:]_])wait([^[:alnum:]_]|$)|background' "$harness_dir/zlaunch.sh"; then
-  echo "FAIL zlaunch.sh accepts --jobs but does not show obvious wave/background execution; omit --jobs or implement real grouped execution"
-  fail=1
+if [ -f "$harness_dir/zlaunch.sh" ] && search_file '--jobs' "$harness_dir/zlaunch.sh"; then
+  if ! search_file '[[:space:]]&([[:space:]]|$)|background' "$harness_dir/zlaunch.sh"; then
+    echo "FAIL zlaunch.sh accepts --jobs but does not show obvious backgrounded case execution; omit --jobs or implement real parallel execution"
+    fail=1
+  fi
+  if search_file 'wait[[:space:]]+-p[[:space:]][^[:space:]]+[[:space:]]+-n|wait[[:space:]]+-n[[:space:]]+-p[[:space:]]' "$harness_dir/zlaunch.sh"; then
+    :
+  elif search_file 'wait[[:space:]]+-n' "$harness_dir/zlaunch.sh"; then
+    echo "WARN zlaunch.sh uses wait -n without wait -p; rolling scheduling works, but PID-to-case bookkeeping is less direct"
+  elif search_file '(^|[^[:alnum:]_])wait([^[:alnum:]_]|$)' "$harness_dir/zlaunch.sh"; then
+    echo "WARN zlaunch.sh appears to use legacy batch-barrier waits; new generated harnesses should prefer rolling wait -p -n scheduling"
+  else
+    echo "FAIL zlaunch.sh accepts --jobs but does not show obvious wait-based completion handling"
+    fail=1
+  fi
 fi
 need_grep '--port_base' "zlaunch.sh" "--port_base support"
 need_grep '--max_time' "zlaunch.sh" "--max_time support"
@@ -77,9 +87,12 @@ fi
 if [ -f "$harness_dir/zlaunch.sh" ] && search_file 'expected[[:space:]]*=|EXPECTED=' "$harness_dir/zlaunch.sh"; then
   echo "WARN zlaunch.sh appears to compare expected/actual grades; new harnesses should make pMissionEval own expected-negative semantics"
 fi
-if [ -f "$harness_dir/zlaunch.sh" ] && search_file '(^|[^[:alnum:]_])(mapfile|readarray)([^[:alnum:]_]|$)|declare[[:space:]]+-A' "$harness_dir/zlaunch.sh"; then
-  echo "FAIL zlaunch.sh uses bash features unavailable in macOS system bash; avoid mapfile/readarray/associative arrays in portable harnesses"
-  fail=1
+if [ -f "$harness_dir/zlaunch.sh" ] &&
+   search_file '(^|[^[:alnum:]_])(mapfile|readarray)([^[:alnum:]_]|$)|declare[[:space:]]+-A|wait[[:space:]]+-p|wait[[:space:]]+-n' "$harness_dir/zlaunch.sh"; then
+  if ! search_file 'BASH_VERSINFO|need_bash|Bash[[:space:]]*>?=[[:space:]]*5\.1|HARNESS_BASH' "$harness_dir/zlaunch.sh"; then
+    echo "FAIL zlaunch.sh uses modern Bash features but does not show an early Bash 5.1+ guard/message"
+    fail=1
+  fi
 fi
 if [ -f "$harness_dir/zlaunch.sh" ] && ! search_file 'no cases selected|no selected cases|selected_count|case_count|CASE_COUNT|result_count|RESULT_COUNT|rows_written|result_rows' "$harness_dir/zlaunch.sh"; then
   echo "WARN zlaunch.sh does not show an obvious zero-selected/zero-result guard; selected runs should exit nonzero if no case rows are produced"

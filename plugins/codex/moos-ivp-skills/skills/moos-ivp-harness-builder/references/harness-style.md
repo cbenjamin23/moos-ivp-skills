@@ -113,9 +113,9 @@ but do not treat them as required harness-layout defaults.
 ## Harness Owns
 
 - case matrix documentation
-- case-to-patch mapping
+- case-to-setup mapping
 - per-case temp mission copies
-- serial or wave execution
+- serial or rolling execution
 - per-case port blocks
 - result publication
 - runner-failure rows

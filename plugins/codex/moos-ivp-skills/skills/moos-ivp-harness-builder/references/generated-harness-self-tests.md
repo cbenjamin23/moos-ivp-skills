@@ -9,7 +9,7 @@ Compare:
 
 - README case tokens
 - `CASES` or `ALL_CASES`
-- `get_case_config`
+- case setup mapping, such as `get_case_config` or `apply_case_overlays`
 
 Fail on missing, extra, duplicate, or undocumented expected-negative cases. Do
 not let an expected-negative case exist only as a script token.
@@ -26,15 +26,17 @@ lookup.
 
 ## Patch Contract
 
-Each case should declare explicit patch targets or an explicit `no_patch`
-marker. Avoid deriving patch filenames only from the case name; a missing patch
-can silently become a stock-mission run.
+Each case should declare its setup explicitly. Patch cases should name patch
+targets, fixture cases should name fixture files, stem-argument cases should
+name the forwarded arguments, and baseline cases should be visibly empty.
+Avoid deriving patch filenames only from the case name; a missing patch can
+silently become a stock-mission run.
 
 For patch cases, assert every declared patch file exists before launching the
-case. For no-patch cases, assert no stale `.moosx` or `.bhvx` sidecar survives
-from an earlier case.
+case. For cases without overlays, assert no stale `.moosx` or `.bhvx` sidecar
+survives from an earlier case.
 
-## Serial/Wave Parity
+## Serial/Rolling Parity
 
 Run the same small selected case set two ways:
 
@@ -44,8 +46,10 @@ Run the same small selected case set two ways:
 ```
 
 Compare normalized result fields, generated target ports, sidecar presence, and
-case count. Serial and wave paths may use different mechanics, but they should
-not change the intended case result.
+case count. Serial and rolling paths may use different mechanics, but they
+should not change the intended case result. With unequal case durations,
+`--jobs=2` should start a pending case as soon as one active case finishes
+rather than waiting for the whole batch to drain.
 
 Preserved workdirs should live under one harness-owned run root, such as
 `<harness>/workdirs/<run-id>/...`. Avoid `mktemp` defaults that scatter case
@@ -81,9 +85,12 @@ such as `local name="$1" out="$RUN_ROOT/$name.out"`. Expand dependent paths on
 later lines after the source variable is assigned. This catches a common
 generated-harness failure where no per-case result files are written.
 
-Keep generated harness scripts portable to the system Bash commonly shipped on
-macOS. Avoid `mapfile`, `readarray`, associative arrays, and other Bash 4+
-features unless the project explicitly controls the shell runtime.
+For modern generated harnesses, require Bash 5.1+ near the top of `zlaunch.sh`
+and use `wait -p <pidvar> -n` for rolling scheduling. Test the old-Bash failure
+path when practical, for example by running macOS `/bin/bash ./zlaunch.sh -h`.
+It should either re-exec a configured modern Bash or fail early with a clear
+install/configuration message. Only legacy portable harnesses should avoid
+associative arrays, `wait -n`, and `wait -p`.
 
 Recommended ordinary case fields:
 
@@ -104,7 +111,8 @@ subject is failure machinery itself.
 
 ## Sidecar Leak Check
 
-Run patch case A followed by no-patch or different-patch case B. Assert:
+Run patch case A followed by a case with no overlays or different overlays.
+Assert:
 
 - B's preserved workdir contains only intended sidecars
 - the stem mission directory is clean after exit
@@ -138,7 +146,7 @@ complete.
 
 ## Copyable Port Audit
 
-After a grouped run with `--keep_workdirs`, scan the preserved target files:
+After a rolling run with `--keep_workdirs`, scan the preserved target files:
 
 ```bash
 run_root=<preserved-run-root>

@@ -53,21 +53,28 @@ a fresh unused `9000`-range base such as `9600`. Use a higher base, such as
 `30000`, only as an explicit override when automation or local parallel work may
 collide with ordinary missions in the `9000` range.
 
-## Wave Execution
+## Rolling Execution
 
-Wave execution is a batch barrier model:
+New generated harnesses should use work-conserving rolling execution when they
+expose `--jobs`:
 
 1. Start up to `--jobs=N` cases.
-2. Wait for every case in the wave.
-3. Teardown the wave's mission copies.
-4. Start the next wave.
+2. Wait for the next active case to finish with `wait -p <pidvar> -n`.
+3. Record that case's result row and tear down its mission copy.
+4. Immediately start the next pending case if one remains.
+
+This requires Bash 5.1+ for `wait -p` and reliable PID-to-case bookkeeping. Add
+an explicit version guard near the top of generated `zlaunch.sh`, with a clear
+message for macOS users who are still on Apple `/bin/bash` 3.2. Batch-barrier
+waves are acceptable as a legacy fallback when a project intentionally targets
+Bash 3.2, but they are not the preferred default for new generated harnesses.
 
 Do not reuse slot ports by default. Unique case blocks give clearer diagnostics
 and reduce risk from lingering MOOSDB or pShare clients.
 
-Do not run two harness batches at the same time if their MOOSDB or pShare port
-blocks can overlap. This includes serial and wave runs that both rely on the
-same default `PORT_BASE`.
+Do not run two harness invocations at the same time if their MOOSDB or pShare
+port blocks can overlap. This includes serial and rolling runs that both rely on
+the same default `PORT_BASE`.
 
 ## Stem Contract
 
@@ -75,7 +82,7 @@ The stem mission launch path must accept and propagate forwarded ports. A
 harness is not isolated if `launch.sh` accepts `--port_base` but generated
 targets silently keep default ports.
 
-Minimum forwarded arguments for a one-vehicle stem:
+Minimum forwarded port arguments for a one-vehicle stem:
 
 ```text
 --shore_mport=<port>
@@ -85,14 +92,14 @@ Minimum forwarded arguments for a one-vehicle stem:
 ```
 
 Check `targ_shoreside.moos` and `targ_<vehicle>.moos` inside preserved workdirs
-before trusting a wave run.
+before trusting a rolling run.
 
 ## `--case` Trap
 
-Some harnesses run `--case=<name>` through the shared stem directory for quick
-debugging, while grouped runs use temp copies and isolated port blocks. Do not
-use a single `--case` run as proof that wave port isolation works. Validate a
-small grouped run with `--keep_workdirs` when isolation matters.
+Some legacy harnesses run `--case=<name>` through the shared stem directory for
+quick debugging, while parallel runs use temp copies and isolated port blocks.
+Do not use a single `--case` run as proof that rolling port isolation works.
+Validate a small `--jobs=2` run with `--keep_workdirs` when isolation matters.
 
 If a harness drives `uMayFinish` directly instead of using the stem's
 `zlaunch.sh`, give each live case a unique `uMayFinish` alias. Reusing the

@@ -50,13 +50,13 @@ Confirm the harness output includes:
 ```
 
 Serial mode should not depend on default ports. If the harness exposes
-`--jobs`, also run a single-wave check such as `--jobs=1` and at least one
-grouped run such as `--jobs=2`; serial-only harnesses should omit `--jobs`.
+`--jobs`, also run a single-slot check such as `--jobs=1` and at least one
+rolling run such as `--jobs=2`; serial-only harnesses should omit `--jobs`.
 
 Before trusting results, reconcile README case tokens with the script's
 `CASES` / `ALL_CASES` list and `get_case_config`.
 
-## Small Wave
+## Small Rolling Run
 
 ```bash
 ./zlaunch.sh --jobs=2 --port_base=9600 --keep_workdirs
@@ -68,7 +68,7 @@ distinct MOOSDB and pShare ports.
 Preserved workdirs should be under one harness-owned run root, not scattered in
 system temp directories.
 
-After the grouped run exits, actively check the forwarded MOOSDB and pShare
+After the rolling run exits, actively check the forwarded MOOSDB and pShare
 ports from each case block for remaining listeners. Static checks can reject
 broad cleanup patterns, but they cannot prove that the generated stem actually
 stopped every launched process.
@@ -79,19 +79,19 @@ already has an equivalent root-scoped helper. The helper is a cleanup backstop;
 it should not replace normal mission completion through the stem `zlaunch.sh` /
 `xlaunch.sh` path.
 
-A one-case debug run may bypass the isolated temp-copy path in some harness
-styles. Use a grouped run with preserved workdirs when validating port
-isolation, sidecar consumption, or wave cleanup.
+A one-case debug run may bypass the isolated temp-copy path in some legacy
+harness styles. Use a rolling run with preserved workdirs when validating port
+isolation, sidecar consumption, or cleanup.
 
 ## Post-Run Hygiene
 
-After serial and wave runs, check:
+After serial and rolling runs, check:
 
 - generated targets consumed forwarded ports
 - expected `.moosx` and `.bhvx` sidecars exist only in the intended workdirs
 - no mission-owned MOOSDB, pShare, app, or viewer processes remain
 - logs do not contain unexpected warnings that the mission grade masks
-- no other harness batch is using an overlapping port range
+- no other harness invocation is using an overlapping port range
 - runtime summaries distinguish wall-clock time from MOOS time when reporting
   timing or benchmark results
 
@@ -106,10 +106,10 @@ harness output.
 
 ## Failure Debugging
 
-If a wave-only failure occurs:
+If a rolling-only failure occurs:
 
 1. Preserve workdirs.
 2. Inspect each case's `results.txt`.
 3. Inspect generated `targ_*.moos` ports.
 4. Run the failing case alone on a fresh `--port_base`.
-5. Add a solo-wave exception only when the case is truly timing-sensitive.
+5. Add a solo-slot exception only when the case is truly timing-sensitive.

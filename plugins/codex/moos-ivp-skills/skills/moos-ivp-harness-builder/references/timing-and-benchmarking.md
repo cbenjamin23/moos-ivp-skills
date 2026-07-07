@@ -38,6 +38,11 @@ machine=<short note>
 Keep concise timing summaries in a clearly named location such as
 `time_benchmarking/`. Avoid committing bulky raw launcher logs by default.
 
+For modern harnesses, `--jobs` should be a rolling scheduler: when one active
+case finishes, the next pending case starts immediately. If a benchmark compares
+against a legacy batch-barrier harness, say so explicitly because similar
+correctness results can have different wall-clock behavior.
+
 ## Sleep And Cleanup Tuning
 
 When trimming launch-path sleeps or cleanup waits, validate the active stem and

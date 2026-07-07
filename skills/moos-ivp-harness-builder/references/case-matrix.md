@@ -35,10 +35,11 @@ Keep three surfaces reconciled:
 
 - README case tokens
 - the script's `CASES` or `ALL_CASES` list
-- the script's `get_case_config` mapping
+- the script's case setup mapping, such as `get_case_config` or
+  `apply_case_overlays`
 
 After editing cases, compare all three before running the suite. A case listed
-in the README but missing from `get_case_config` is documentation drift. A case
+in the README but missing from the setup mapping is documentation drift. A case
 in `ALL_CASES` but absent from the README is an undocumented case.
 
 Intentional setup-error or expected-negative cases must be documented just like

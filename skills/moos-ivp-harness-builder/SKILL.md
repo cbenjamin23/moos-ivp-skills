@@ -89,7 +89,8 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
 1. Confirm the stem mission passes as a single eval mission.
    - run the eval mission static checker against the stem
    - `launch.sh` accepts and forwards `--shore_mport`, `--veh_mport`,
-     `--shore_pshare`, `--veh_pshare`, and `--mmod`.
+     `--shore_pshare`, and `--veh_pshare`.
+   - `case=` is used for harness row identity.
    - launchers use `nsplug -x` so `.moosx` and `.bhvx` sidecars are consumed.
    - generated targets prove the forwarded ports and patches actually landed.
 2. Define case tokens, case intent, and the mission-owned evidence each case
@@ -147,11 +148,9 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
 - Aggregated results include `case=` and the mission's original result columns,
   especially `grade=` and useful evidence fields such as `eval=`,
   `warning_count=`, `expected=`, `observed=`, or case-specific scalars.
-- `form=`, `mmod=`, and `mhash=` are optional provenance. `case=` is the
-  harness row key. `mmod=` is the stem mission's own variation label. They may
-  match when each harness case maps one-to-one to a stem variation, but do not
-  force them to match when the harness case represents runner behavior, timing,
-  expected failure machinery, or multiple cases over the same mission variant.
+- `case=` is the harness row key. Harness case setup should be explicit in the
+  case matrix, patch files, fixture files, or stem launch arguments. `form=`,
+  `mhash=`, and mission-owned evidence columns may be preserved as provenance.
 - Ordinary case success is `grade=pass`. Any row with `grade!=pass` should make
   the harness exit nonzero unless the harness is explicitly testing failure
   machinery.

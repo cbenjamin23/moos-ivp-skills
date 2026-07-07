@@ -168,11 +168,10 @@ run_case() {
   fi
 
   local launch_rc=0
-  # Use the case token as MMOD only when each case is one stem variation.
   (
     cd "$workdir" || exit 1
     : > results.txt
-    ./zlaunch.sh --max_time="$MAX_TIME" $NOGUI --mmod="$case_name" \
+    ./zlaunch.sh --max_time="$MAX_TIME" $NOGUI \
       --shore_mport="$shore_mport" --veh_mport="$veh_mport" \
       --shore_pshare="$shore_pshare" --veh_pshare="$veh_pshare" \
       "$TIME_WARP"

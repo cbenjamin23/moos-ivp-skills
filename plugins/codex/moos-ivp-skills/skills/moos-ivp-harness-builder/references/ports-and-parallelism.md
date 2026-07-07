@@ -82,7 +82,6 @@ Minimum forwarded arguments for a one-vehicle stem:
 --veh_mport=<port>
 --shore_pshare=<port>
 --veh_pshare=<port>
---mmod=<stem-variation-label>
 ```
 
 Check `targ_shoreside.moos` and `targ_<vehicle>.moos` inside preserved workdirs

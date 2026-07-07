@@ -24,12 +24,10 @@ Do not add a harness-owned `reason=` to ordinary mission failures. If
 explain what failed. Use `reason=` for runner failures unless the mission itself
 chooses to emit a compact mission-owned reason.
 
-Optional provenance fields such as `form=`, `mmod=`, and `mhash=` are useful but
-not required. `case=` is the harness row key. `mmod=` is the stem mission's own
-variation label, surfaced through `pMissionEval`'s `mission_mod` / `$[MMOD]`.
-They may match when each case is exactly one stem mission variation. They should
-diverge when the harness case names runner behavior, timing, an expected setup
-failure, or multiple checks over the same stem variant.
+`case=` is the harness row key. Harness case setup should be explicit in the
+case matrix, patch files, fixture files, or stem launch arguments. Preserve
+useful mission-owned provenance columns such as `form=`, `mhash=`, and domain
+evidence fields, but keep harness variation visible in the case definition.
 
 The stem mission must decide the grade through `pMissionEval`. A target file
 field such as `grade_hint`, or a shell wrapper that echoes `grade=`, is not a
@@ -131,9 +129,9 @@ but do not treat them as required harness-layout defaults.
 - `pMissionEval` verdict
 - `results.txt`
 - `zlaunch.sh` compatibility with `xlaunch.sh`
-- accepting forwarded ports and `--mmod`
-- forwarding `--shore_mport`, `--veh_mport`, `--shore_pshare`,
-  `--veh_pshare`, and `--mmod` from top-level launchers into sublaunchers
+- accepting forwarded ports
+- forwarding `--shore_mport`, `--veh_mport`, `--shore_pshare`, and
+  `--veh_pshare` from top-level launchers into sublaunchers
 - using `nsplug -x` so harness-created `.moosx` and `.bhvx` sidecars are
   consumed during target generation
 - expected-negative semantics: if a case is supposed to expose a bad condition,

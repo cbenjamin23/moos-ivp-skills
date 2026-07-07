@@ -22,7 +22,7 @@ Also verify the stem contract:
 
 ```bash
 ./zlaunch.sh --just_make --shore_mport=9000 --veh_mport=9001 \
-  --shore_pshare=9015 --veh_pshare=9016 --mmod=contract_check 10
+  --shore_pshare=9015 --veh_pshare=9016 10
 ```
 
 Inspect generated targets for those ports and inspect launchers for `nsplug -x`

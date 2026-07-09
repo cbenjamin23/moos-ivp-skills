@@ -159,6 +159,17 @@ for skill_md in "$repo_root"/skills/*/SKILL.md; do
   fi
   if [ ! -f "$repo_root/skills/$skill_dir/agents/openai.yaml" ]; then
     fail_msg "$skill_dir missing agents/openai.yaml"
+  else
+    openai_yaml="$repo_root/skills/$skill_dir/agents/openai.yaml"
+    if ! grep -Eq '^[[:space:]]+icon_small:[[:space:]]+"?\.\/assets\/moos-ivp-logo\.png"?[[:space:]]*$' "$openai_yaml"; then
+      fail_msg "$skill_dir agents/openai.yaml missing icon_small ./assets/moos-ivp-logo.png"
+    fi
+    if ! grep -Eq '^[[:space:]]+icon_large:[[:space:]]+"?\.\/assets\/moos-ivp-logo\.png"?[[:space:]]*$' "$openai_yaml"; then
+      fail_msg "$skill_dir agents/openai.yaml missing icon_large ./assets/moos-ivp-logo.png"
+    fi
+    if [ ! -f "$repo_root/skills/$skill_dir/assets/moos-ivp-logo.png" ]; then
+      fail_msg "$skill_dir missing assets/moos-ivp-logo.png"
+    fi
   fi
 done
 

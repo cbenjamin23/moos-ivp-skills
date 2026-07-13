@@ -42,8 +42,11 @@ need_file "README.md"
 need_file "zlaunch.sh"
 
 for stem_rel in stem stem_mission mission; do
-  if [ -d "$harness_dir/$stem_rel" ] && [ -x "$eval_checker" ]; then
-    if ! "$eval_checker" "$harness_dir/$stem_rel"; then
+  if [ -d "$harness_dir/$stem_rel" ]; then
+    if [ ! -x "$eval_checker" ]; then
+      echo "FAIL cannot validate stem mission $stem_rel: eval mission checker missing or not executable at $eval_checker"
+      fail=1
+    elif ! "$eval_checker" "$harness_dir/$stem_rel"; then
       echo "FAIL stem mission $stem_rel does not pass eval mission structural checks"
       fail=1
     fi

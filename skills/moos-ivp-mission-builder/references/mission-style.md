@@ -110,6 +110,9 @@ machine-local image path:
 - `Default.tif`, `DefaultB.tif`, or `AerialMIT.tif` only when a local project
   already uses them or the user asks for a different viewer background
 
+If the mission needs a new custom TIFF rather than an existing MOOS-IvP map,
+use the `moos-map-builder` skill; do not create or convert the map manually.
+
 For ordinary operator missions, keep pMarineViewer in its normal process/vehicle
 view at startup. Enable appcasting with `appcast_viewable = true`, but do not
 force `content_mode = appcast` or set a `realmcast_channel` unless the user is

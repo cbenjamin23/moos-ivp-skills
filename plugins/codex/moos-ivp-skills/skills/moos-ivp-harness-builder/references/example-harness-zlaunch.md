@@ -83,7 +83,7 @@ CASE=
 # Customize this matrix plus apply_case_overlays below.
 CASES=(baseline_pass blocked_fail)
 
-declare -A PID_CASE PID_WORKDIR PID_RESULT PID_LOG PID_PORT_BASE
+declare -A PID_CASE PID_RESULT PID_LOG PID_PORT_BASE
 HAVE_LOCK=no
 
 usage() {
@@ -173,22 +173,34 @@ grade_from_line() {
 }
 
 stop_root() {
-  moos_scoped_teardown_stop_root "$1" >/dev/null 2>&1 || true
+  moos_scoped_teardown_stop_root "$1" >/dev/null
 }
 
 cleanup() {
+  local status=$?
   local pid
+  local teardown_ok=yes
+  trap - EXIT INT TERM
+
   for pid in "${!PID_CASE[@]}"; do
     kill "$pid" 2>/dev/null || true
   done
   wait 2>/dev/null || true
-  [ -d "$RUN_ROOT" ] && stop_root "$RUN_ROOT"
-  [ "$KEEP_WORKDIRS" = yes ] || rm -rf "$RUN_ROOT"
+  if [ -d "$RUN_ROOT" ]; then
+    if ! stop_root "$RUN_ROOT"; then
+      echo "$ME: teardown failed; preserving run root: $RUN_ROOT" >&2
+      teardown_ok=no
+      [ "$status" -ne 0 ] || status=1
+    fi
+    if [ "$KEEP_WORKDIRS" != yes ] && [ "$teardown_ok" = yes ]; then
+      rm -rf "$RUN_ROOT"
+    fi
+  fi
   [ "$HAVE_LOCK" = yes ] && rmdir "$LOCK_DIR" 2>/dev/null || true
+  exit "$status"
 }
 
 on_signal() {
-  cleanup
   exit 130
 }
 
@@ -271,14 +283,18 @@ run_case() {
   ) || launch_rc=$?
 
   write_result "$case_name" "$result_file" "$launch_rc" "$workdir"
-  stop_root "$workdir"
+  if ! stop_root "$workdir"; then
+    echo "case=$case_name grade=fail reason=teardown_error" > "$result_file"
+    return 1
+  fi
   [ "$(grade_from_line "$(cat "$result_file")" || true)" = pass ]
 }
 
 start_case() {
   local case_idx="$1"
   local case_name="${SELECTED_CASES[$case_idx]}"
-  local case_dir="$RUN_ROOT/case_$(printf '%03d' "$case_idx")_$case_name"
+  local case_dir
+  case_dir="$RUN_ROOT/case_$(printf '%03d' "$case_idx")_$case_name"
   local workdir="$case_dir/mission"
   local result_file="$case_dir/result.row"
   local log_file="$case_dir/run.log"
@@ -294,7 +310,6 @@ start_case() {
 
   local pid=$!
   PID_CASE[$pid]="$case_name"
-  PID_WORKDIR[$pid]="$workdir"
   PID_RESULT[$pid]="$result_file"
   PID_LOG[$pid]="$log_file"
   PID_PORT_BASE[$pid]="$case_base"
@@ -320,7 +335,7 @@ finish_one() {
   [ "$VERBOSE" = yes ] && printf 'finish pid=%s case=%s rc=%s grade=%s port_base=%s log=%s\n' \
     "$done_pid" "$case_name" "$wait_rc" "${grade:-missing}" "${PID_PORT_BASE[$done_pid]}" "${PID_LOG[$done_pid]}"
 
-  unset 'PID_CASE[$done_pid]' 'PID_WORKDIR[$done_pid]' 'PID_RESULT[$done_pid]' 'PID_LOG[$done_pid]' 'PID_PORT_BASE[$done_pid]'
+  unset 'PID_CASE[$done_pid]' 'PID_RESULT[$done_pid]' 'PID_LOG[$done_pid]' 'PID_PORT_BASE[$done_pid]'
   [ "$grade" = pass ]
 }
 
@@ -350,8 +365,21 @@ while [ "$next" -lt "$total" ] || [ "$active" -gt 0 ]; do
 done
 
 trap - EXIT INT TERM
-stop_root "$RUN_ROOT"
-[ "$KEEP_WORKDIRS" = yes ] || rm -rf "$RUN_ROOT"
+teardown_failure=0
+preserve_run_root=no
+if grep -q 'reason=teardown_error' "$RESULTS_FILE"; then
+  preserve_run_root=yes
+fi
+if ! stop_root "$RUN_ROOT"; then
+  echo "$ME: final teardown failed; preserving run root: $RUN_ROOT" >&2
+  teardown_failure=1
+  preserve_run_root=yes
+fi
+if [ "$KEEP_WORKDIRS" != yes ] && [ "$preserve_run_root" != yes ]; then
+  rm -rf "$RUN_ROOT"
+elif [ "$preserve_run_root" = yes ]; then
+  echo "$ME: preserved run root: $RUN_ROOT" >&2
+fi
 rmdir "$LOCK_DIR" 2>/dev/null || true
 HAVE_LOCK=no
 
@@ -360,10 +388,10 @@ if [ "$result_rows" -ne "$total" ]; then
   exit 1
 fi
 
-echo "results=$RESULTS_FILE failures=$failures total=$total jobs=$JOBS bash=$BASH_VERSION"
+echo "results=$RESULTS_FILE failures=$failures teardown_failure=$teardown_failure total=$total jobs=$JOBS bash=$BASH_VERSION"
 # All selected cases have written rows by this point. Return nonzero only as
 # the final CI verdict when one or more rows did not report grade=pass.
-[ "$failures" -eq 0 ]
+[ "$failures" -eq 0 ] && [ "$teardown_failure" -eq 0 ]
 ```
 
 The stem mission should make `grade=pass` mean "this case behaved as intended."
@@ -371,8 +399,8 @@ For an expected-negative case, patch `pMissionEval` so the expected negative
 evidence produces `grade=pass`; do not make the harness compare
 `expected=fail actual=fail`.
 
-Setup errors, including unknown cases, missing patch files, launch script
-failures, and missing `grade=`, should emit `case=<case> grade=fail
+Setup and runner errors, including unknown cases, missing patch files, launch
+script failures, missing `grade=`, and teardown failures, should emit `case=<case> grade=fail
 reason=<runner_reason>`. The harness should finish all selected cases, publish
 one row per selected case, and only then return a nonzero CI verdict if any row
 did not report `grade=pass`.
@@ -380,4 +408,6 @@ did not report `grade=pass`.
 Generated harness repositories should include the helper asset at
 `<project-root>/scripts/moos_scoped_teardown.sh`. Source it once near startup,
 call `moos_scoped_teardown_stop_root` through a small wrapper, and use that
-wrapper after each case plus in the exit cleanup trap.
+wrapper after each case plus in the exit cleanup trap. Keep stderr visible,
+propagate teardown failure, and preserve the run root when cleanup cannot be
+verified.

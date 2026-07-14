@@ -12,10 +12,12 @@
 # The helper only targets known MOOS apps whose current working directory is
 # the supplied root or a descendant of that root.
 
-MOOS_SCOPED_TEARDOWN_GRACE_INT="${MOOS_SCOPED_TEARDOWN_GRACE_INT:-8}"
-MOOS_SCOPED_TEARDOWN_GRACE_TERM="${MOOS_SCOPED_TEARDOWN_GRACE_TERM:-8}"
+MOOS_SCOPED_TEARDOWN_GRACE_INT_SECONDS="${MOOS_SCOPED_TEARDOWN_GRACE_INT_SECONDS:-3}"
+MOOS_SCOPED_TEARDOWN_GRACE_TERM_SECONDS="${MOOS_SCOPED_TEARDOWN_GRACE_TERM_SECONDS:-3}"
+MOOS_SCOPED_TEARDOWN_GRACE_KILL_SECONDS="${MOOS_SCOPED_TEARDOWN_GRACE_KILL_SECONDS:-1}"
 MOOS_SCOPED_TEARDOWN_SLEEP="${MOOS_SCOPED_TEARDOWN_SLEEP:-0.125}"
 MOOS_SCOPED_TEARDOWN_QUIET="${MOOS_SCOPED_TEARDOWN_QUIET:-yes}"
+MOOS_SCOPED_TEARDOWN_EXTRA_APPS="${MOOS_SCOPED_TEARDOWN_EXTRA_APPS:-}"
 
 moos_scoped_teardown_log() {
     if [ "$MOOS_SCOPED_TEARDOWN_QUIET" != "yes" ]; then
@@ -77,6 +79,8 @@ moos_scoped_teardown_pids_for_root_procfs() {
     local argv0
 
     [ -d /proc ] || return 1
+    [ -L "/proc/$$/cwd" ] || return 1
+    readlink "/proc/$$/cwd" >/dev/null 2>&1 || return 1
 
     root=$(cd "$root" 2>/dev/null && pwd -P)
     [ "$root" != "" ] || return 1
@@ -112,6 +116,7 @@ moos_scoped_teardown_pids_for_root_procfs() {
 moos_scoped_teardown_pids_for_root_lsof() {
     local root="$1"
     local apps
+    local listing
 
     command -v lsof >/dev/null 2>&1 || return 1
 
@@ -120,7 +125,9 @@ moos_scoped_teardown_pids_for_root_lsof() {
 
     apps=$(moos_scoped_teardown_apps_for_root "$root" | tr '\n' ' ')
 
-    lsof -n -P -w +D "$root" -Fnpc 2>/dev/null | \
+    listing=$(lsof -n -P -w -d cwd -Fnpc 2>/dev/null) || return 1
+
+    printf '%s\n' "$listing" | \
         awk -v root="$root" -v apps=" $apps " '
             /^p/ {
                 pid = substr($0, 2)
@@ -152,23 +159,41 @@ moos_scoped_teardown_pids_for_root() {
 
     moos_scoped_teardown_pids_for_root_procfs "$root" && return 0
     moos_scoped_teardown_pids_for_root_lsof "$root" && return 0
-    return 0
+    return 1
+}
+
+moos_scoped_teardown_pids_for_root_checked() {
+    local root="$1"
+
+    if ! moos_scoped_teardown_pids_for_root "$root"; then
+        echo "moos_scoped_teardown: unable to inspect scoped processes under $root" >&2
+        return 1
+    fi
 }
 
 moos_scoped_teardown_wait_clear() {
     local root="$1"
-    local attempts="$2"
+    local grace_seconds="$2"
     local pids
-    local attempt
+    local deadline
 
-    attempt=0
-    while [ "$attempt" -lt "$attempts" ]; do
-        pids=$(moos_scoped_teardown_pids_for_root "$root")
+    case "$grace_seconds" in
+        ""|*[!0-9]*)
+            echo "moos_scoped_teardown: invalid grace period: $grace_seconds" >&2
+            return 2
+            ;;
+    esac
+
+    deadline=$((SECONDS + grace_seconds))
+    while :; do
+        pids=$(moos_scoped_teardown_pids_for_root_checked "$root") || return 2
         if [ "$pids" = "" ]; then
             return 0
         fi
+        if [ "$SECONDS" -ge "$deadline" ]; then
+            break
+        fi
         sleep "$MOOS_SCOPED_TEARDOWN_SLEEP"
-        attempt=$((attempt + 1))
     done
 
     return 1
@@ -187,35 +212,48 @@ moos_scoped_teardown_signal_pids() {
 moos_scoped_teardown_stop_root() {
     local root="$1"
     local pids
+    local wait_status
 
     if [ "$root" = "" ] || [ ! -d "$root" ]; then
         return 0
     fi
 
-    pids=$(moos_scoped_teardown_pids_for_root "$root")
+    pids=$(moos_scoped_teardown_pids_for_root_checked "$root") || return 1
     if [ "$pids" = "" ]; then
         return 0
     fi
 
     moos_scoped_teardown_log "INT $root: $pids"
     moos_scoped_teardown_signal_pids INT "$pids"
-    moos_scoped_teardown_wait_clear "$root" "$MOOS_SCOPED_TEARDOWN_GRACE_INT" && return 0
+    moos_scoped_teardown_wait_clear "$root" "$MOOS_SCOPED_TEARDOWN_GRACE_INT_SECONDS" && return 0
+    wait_status=$?
+    if [ "$wait_status" -eq 2 ]; then
+        return 1
+    fi
 
-    pids=$(moos_scoped_teardown_pids_for_root "$root")
+    pids=$(moos_scoped_teardown_pids_for_root_checked "$root") || return 1
     if [ "$pids" != "" ]; then
         moos_scoped_teardown_log "TERM $root: $pids"
         moos_scoped_teardown_signal_pids TERM "$pids"
-        moos_scoped_teardown_wait_clear "$root" "$MOOS_SCOPED_TEARDOWN_GRACE_TERM" && return 0
+        moos_scoped_teardown_wait_clear "$root" "$MOOS_SCOPED_TEARDOWN_GRACE_TERM_SECONDS" && return 0
+        wait_status=$?
+        if [ "$wait_status" -eq 2 ]; then
+            return 1
+        fi
     fi
 
-    pids=$(moos_scoped_teardown_pids_for_root "$root")
+    pids=$(moos_scoped_teardown_pids_for_root_checked "$root") || return 1
     if [ "$pids" != "" ]; then
         moos_scoped_teardown_log "KILL $root: $pids"
         moos_scoped_teardown_signal_pids KILL "$pids"
-        moos_scoped_teardown_wait_clear "$root" 4 && return 0
+        moos_scoped_teardown_wait_clear "$root" "$MOOS_SCOPED_TEARDOWN_GRACE_KILL_SECONDS" && return 0
+        wait_status=$?
+        if [ "$wait_status" -eq 2 ]; then
+            return 1
+        fi
     fi
 
-    pids=$(moos_scoped_teardown_pids_for_root "$root")
+    pids=$(moos_scoped_teardown_pids_for_root_checked "$root") || return 1
     if [ "$pids" != "" ]; then
         echo "moos_scoped_teardown: warning: leftover scoped PIDs under $root: $pids" >&2
         return 1

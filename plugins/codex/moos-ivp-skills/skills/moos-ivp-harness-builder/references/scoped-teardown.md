@@ -19,6 +19,7 @@ REPO_DIR="$(cd "$HARNESS_DIR/../../.." && pwd)"
 TEARDOWN_HELPER="$REPO_DIR/scripts/moos_scoped_teardown.sh"
 
 if [ -f "$TEARDOWN_HELPER" ]; then
+  # shellcheck source=/dev/null
   . "$TEARDOWN_HELPER"
 else
   echo "$ME: Missing teardown helper: $TEARDOWN_HELPER"
@@ -27,16 +28,25 @@ fi
 
 stop_mission_apps() {
   local mission_root="$1"
-  moos_scoped_teardown_stop_root "$mission_root" >/dev/null 2>&1 || true
+  moos_scoped_teardown_stop_root "$mission_root" >/dev/null
 }
 
 cleanup() {
+  local status=$?
+  local teardown_ok=yes
+  trap - EXIT
+
   if [ -n "${RUN_ROOT:-}" ] && [ -d "$RUN_ROOT" ]; then
-    stop_mission_apps "$RUN_ROOT"
-    if [ "$KEEP_WORKDIRS" != "yes" ]; then
+    if ! stop_mission_apps "$RUN_ROOT"; then
+      echo "$ME: teardown failed; preserving run root: $RUN_ROOT" >&2
+      teardown_ok=no
+      [ "$status" -ne 0 ] || status=1
+    fi
+    if [ "$KEEP_WORKDIRS" != "yes" ] && [ "$teardown_ok" = "yes" ]; then
       rm -rf "$RUN_ROOT"
     fi
   fi
+  exit "$status"
 }
 
 trap cleanup EXIT
@@ -44,6 +54,11 @@ trap cleanup EXIT
 
 Keep every helper call scoped to the temp root, case directory, or stem mission
 directory owned by the harness.
+
+Do not hide helper stderr or discard its status. A cleanup trap should preserve
+an existing failure or signal status, turn an otherwise successful run into a
+failure when teardown cannot be verified, and keep the run root when teardown
+fails.
 
 When a helper exposes shell functions, source it and call the root-scoped
 function rather than invoking a broad cleanup command:

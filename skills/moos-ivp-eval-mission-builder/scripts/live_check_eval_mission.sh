@@ -93,13 +93,21 @@ port_pids() {
 
 # shellcheck disable=SC2329
 cleanup_leftovers() {
+  local status=$?
   local pids
+  local teardown_ok="yes"
+  trap - EXIT
+
   if [ "${WORKDIR:-}" != "" ] && [ -d "$WORKDIR" ] && [ -f "$TEARDOWN_HELPER" ]; then
     # xlaunch.sh may only signal its direct children; ANTLER-launched apps can
     # reparent. Use the same root-scoped helper recommended for harnesses.
     # shellcheck disable=SC1090
     . "$TEARDOWN_HELPER"
-    moos_scoped_teardown_stop_root "$WORKDIR" >/dev/null 2>&1 || true
+    if ! moos_scoped_teardown_stop_root "$WORKDIR" >/dev/null; then
+      echo "FAIL scoped teardown failed; preserving workdir: $WORKDIR" >&2
+      teardown_ok="no"
+      [ "$status" -ne 0 ] || status=1
+    fi
   fi
   pids="$(port_pids)"
   if [ "$pids" != "" ]; then
@@ -112,9 +120,12 @@ cleanup_leftovers() {
     # shellcheck disable=SC2086
     kill -9 $pids 2>/dev/null || true
   fi
-  if [ "$KEEP_WORKDIR" != "yes" ] && [ "${TMP_ROOT:-}" != "" ] && [ -d "$TMP_ROOT" ]; then
+  if [ "$KEEP_WORKDIR" != "yes" ] && [ "$teardown_ok" = "yes" ] && [ "${TMP_ROOT:-}" != "" ] && [ -d "$TMP_ROOT" ]; then
     rm -rf "$TMP_ROOT"
+  elif [ "$teardown_ok" != "yes" ] && [ "${WORKDIR:-}" != "" ]; then
+    echo "temp workdir preserved after teardown failure: $WORKDIR" >&2
   fi
+  exit "$status"
 }
 
 fail() {
@@ -233,7 +244,7 @@ else
     echo "result: $RESULT_LINE"
   fi
   if [ "$KEEP_WORKDIR" != "yes" ]; then
-    echo "temp workdir will be removed after cleanup"
+    echo "temp workdir will be removed if cleanup succeeds"
   else
     echo "temp workdir preserved: $WORKDIR"
   fi

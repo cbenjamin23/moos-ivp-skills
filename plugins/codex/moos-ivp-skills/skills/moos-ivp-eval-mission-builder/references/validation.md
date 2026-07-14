@@ -73,6 +73,8 @@ row, reports `BHV_WARNING` evidence as advisory output, checks for leftover
 listeners on the scoped ports, and then cleans up any scoped leftovers it finds.
 A failure from this helper means either the mission is not clean or the cleanup
 contract needs to be made explicit before distribution.
+If scoped teardown itself fails, the helper exits nonzero, leaves the diagnostic
+on stderr, and preserves its temp workdir for inspection.
 
 ## GUI Sanity
 

@@ -118,6 +118,8 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
 - Run `scripts/live_check_eval_mission.sh <mission-dir> --port_base=<free-base>`
   for bundled-example or high-trust validation when MOOS-IvP runtime tools are
   available.
+- Treat live-check teardown failure as a test failure, show the teardown error,
+  and preserve the temporary workdir for diagnosis.
 
 ## Validation Checklist
 

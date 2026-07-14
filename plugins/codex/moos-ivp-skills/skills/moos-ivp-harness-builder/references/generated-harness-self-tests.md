@@ -101,7 +101,7 @@ case=<token> grade=<pass|fail> eval=<true|false> <mission evidence fields...>
 Recommended runner-failure fields:
 
 ```text
-case=<token> grade=fail reason=<launch_error|missing_result|prepare_error|missing_result_file>
+case=<token> grade=fail reason=<launch_error|missing_result|prepare_error|missing_result_file|teardown_error>
 ```
 
 `grade=pass` means the case passed. An expected-negative case should still
@@ -134,6 +134,10 @@ Avoid naive cleanup such as `lsof +D "$RUN_ROOT" -t | xargs kill`. It may match
 the invoking shell or audit commands whose current directory is inside the run
 root. Prefer recorded MOOS app PIDs, a root-scoped repository teardown helper,
 or filtering to known MOOS process names before signaling.
+
+Also force the helper to return nonzero in a launcher self-test. Confirm the
+error remains visible, an otherwise successful run exits nonzero, and the run
+root is preserved instead of deleted.
 
 ## Concurrent Invocation Check
 

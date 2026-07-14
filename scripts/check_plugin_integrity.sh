@@ -247,6 +247,15 @@ if [ -f "$eval_teardown" ] && [ -f "$harness_asset" ]; then
   fi
 fi
 
+teardown_test="$repo_root/scripts/test_moos_scoped_teardown.sh"
+if [ ! -f "$teardown_test" ]; then
+  fail_msg "missing teardown helper behavioral test"
+elif bash "$teardown_test"; then
+  note "PASS teardown helper behavioral tests"
+else
+  fail_msg "teardown helper behavioral tests failed"
+fi
+
 if [ "$fail" -eq 0 ]; then
   note "PASS plugin integrity checks ($skill_count skills)"
 fi

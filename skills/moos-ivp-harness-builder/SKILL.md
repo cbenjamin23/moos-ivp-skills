@@ -52,7 +52,8 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
   machinery such as `pMissionEval`, `uMayFinish`, or CLI return semantics.
 - Harness code should synthesize its own `grade=fail` rows only for runner
   failures, such as `reason=launch_error`, `reason=missing_result`,
-  `reason=prepare_error`, or `reason=missing_result_file`.
+  `reason=prepare_error`, `reason=missing_result_file`, or
+  `reason=teardown_error`.
 - Do not add a harness-owned `reason=` for ordinary `pMissionEval` failures.
   Preserve the mission evidence columns that explain the failure. A mission may
   report its own compact `reason=`, but the harness should not reinterpret it.
@@ -183,4 +184,6 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
 - No harness path relies on global `ktm`, `pkill`, or `killall`.
 - Harness cleanup uses a root-scoped teardown helper or an equivalent recorded
   PID cleanup path; generated harnesses should not invent broad process cleanup.
+- A teardown failure is visible, makes an otherwise successful run fail, and
+  preserves the affected run root for inspection.
 - Logs do not contain unexpected warnings hidden by case aggregation.

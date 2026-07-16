@@ -41,9 +41,16 @@ infrastructure ceiling.
 Multiple `lead_condition` lines in the same aspect are valid, but they are
 ANDed: all must be true before pass/fail conditions are evaluated. If a
 `lead_condition` appears after pass/fail conditions, it starts the next ordered
-aspect. Do not encode boolean OR directly in the config, such as `A or B`; if
-evaluation truly needs "event A or event B" semantics, publish a helper boolean
-from `uTimerScript` or a mission-owned app and use that as the lead.
+aspect. A single condition may use textual `or`, but each operand must be
+parenthesized:
+
+```text
+lead_condition = (EVENT_A = true) or (EVENT_B = true)
+```
+
+Do not use `||`; it is not a supported `LogicCondition` operator. For more
+complex mission-owned state, a helper boolean may still be clearer than a
+deeply nested expression.
 
 ```text
 ProcessConfig = pMissionEval

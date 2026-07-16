@@ -97,9 +97,8 @@ need_meta_grep 'report_file[[:space:]]*=[[:space:]]*results.txt' "results.txt re
 need_meta_grep 'report_column[[:space:]]*=.*grade=' "grade report column"
 need_meta_grep 'lead_condition[[:space:]]*=' "lead condition"
 need_meta_grep 'pass_condition[[:space:]]*=' "pass condition"
-if meta_has 'lead_condition[[:space:]]*=.*[[:space:]][Oo][Rr][[:space:]]' ||
-   meta_has 'lead_condition[[:space:]]*=.*\|\|'; then
-  echo "FAIL compound OR lead_condition detected; publish a helper boolean such as EVAL_WINDOW_DONE and use that as the pMissionEval lead"
+if meta_has 'lead_condition[[:space:]]*=.*\|\|'; then
+  echo "FAIL unsupported || in lead_condition; use textual or with parenthesized operands, such as (EVENT_A = true) or (EVENT_B = true)"
   fail=1
 fi
 if meta_has 'report_column[[:space:]]*=.*mhash='; then

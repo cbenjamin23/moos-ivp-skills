@@ -55,9 +55,9 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
 - Multiple `lead_condition` lines in the same aspect are allowed, but they are
   ANDed: all must be true before pass/fail conditions are evaluated. A
   `lead_condition` after pass/fail conditions starts the next ordered aspect.
-  Do not write boolean OR directly in `lead_condition`; publish a helper
-  boolean from `uTimerScript` or a mission-owned app only when evaluation truly
-  needs "event A or event B" semantics.
+  A single `lead_condition` may use textual `or` when each operand is
+  parenthesized, for example `(EVENT_A = true) or (EVENT_B = true)`. Do not use
+  `||`; it is not a supported `LogicCondition` operator.
 - Treat `BHV_ERROR_SEEN=false` as a normal safety/integrity pass condition.
   Treat `BHV_WARNING` as advisory development evidence by default: inspect and
   investigate it with appcasts or `.alog` tools, but do not add a sticky

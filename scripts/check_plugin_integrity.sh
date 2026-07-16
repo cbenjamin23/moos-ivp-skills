@@ -256,6 +256,15 @@ else
   fail_msg "teardown helper behavioral tests failed"
 fi
 
+eval_checker_test="$repo_root/scripts/test_static_check_eval_mission.sh"
+if [ ! -f "$eval_checker_test" ]; then
+  fail_msg "missing eval mission static checker test"
+elif bash "$eval_checker_test"; then
+  note "PASS eval mission static checker tests"
+else
+  fail_msg "eval mission static checker tests failed"
+fi
+
 if [ "$fail" -eq 0 ]; then
   note "PASS plugin integrity checks ($skill_count skills)"
 fi

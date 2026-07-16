@@ -93,9 +93,6 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
   launchers, and calling `moos_scoped_teardown_stop_root` on the harness-owned
   run root or case directory. Do not use global `ktm`, `pkill`, or machine-wide
   cleanup as the normal path.
-- If a case is timing-sensitive only when run in parallel, document it as a
-  solo-slot case instead of disabling all parallelism.
-
 ## Workflow
 
 1. Confirm the stem mission passes as a single eval mission.

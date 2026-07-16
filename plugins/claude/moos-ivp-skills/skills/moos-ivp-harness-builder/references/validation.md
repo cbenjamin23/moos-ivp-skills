@@ -112,4 +112,3 @@ If a rolling-only failure occurs:
 2. Inspect each case's `results.txt`.
 3. Inspect generated `targ_*.moos` ports.
 4. Run the failing case alone on a fresh `--port_base`.
-5. Add a solo-slot exception only when the case is truly timing-sensitive.

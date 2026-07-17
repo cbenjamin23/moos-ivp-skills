@@ -25,9 +25,8 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
 - Add only the evaluation plumbing needed for one scenario:
   optional `pAutoPoke`, optional `uTimerScript`, `pMissionEval`,
   `results.txt`, and a thin `zlaunch.sh`.
-- Keep `launch.sh` human-facing. It may accept `--xlaunched`, `--nogui`,
-  `--mmod`, and port overrides, but it should not contain case loops or result
-  aggregation.
+- Keep `launch.sh` human-facing. It may accept `--xlaunched`, `--nogui`, and
+  port overrides, but it should not contain case loops or result aggregation.
 - Keep `zlaunch.sh` thin: parse automation arguments, truncate `results.txt`,
   call shared `xlaunch.sh`, validate that `results.txt` contains `grade=`, then
   apply project-local scoped cleanup.
@@ -65,9 +64,12 @@ matrices, patch sweeps, parallel runs, or expected-vs-actual aggregation, use
   scenario is explicitly warning-intolerant and the warning signal is known to be
   stable rather than transient/retracted.
 - Keep `results.txt` scalar and parseable. The only hard schema requirement is
-  `grade=<pass|fail>`; fields such as `form=`, `mmod=`, `eval=`, `timeout=`,
-  domain facts, and `mhash=` are recommended evidence, not a mandatory metric
-  set.
+  `grade=<pass|fail>`; fields such as `form=`, `eval=`, `timeout=`, domain
+  facts, and `mhash=` are recommended evidence, not a mandatory metric set.
+- `mission_mod` is optional mission-owned provenance. Use it only when one
+  mission folder intentionally supports multiple named standalone modes. Omit
+  it from single-scenario eval missions, and do not use it to represent harness
+  cases.
 - If a vehicle-local variable is graded shoreside, bridge it explicitly through
   the vehicle broker and shoreside broker.
 - For GUI-capable eval missions, keep normal operator buttons available. Do not

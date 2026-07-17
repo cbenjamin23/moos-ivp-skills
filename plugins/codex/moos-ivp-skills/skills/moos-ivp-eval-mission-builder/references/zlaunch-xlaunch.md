@@ -17,7 +17,6 @@ MAX_TIME=90
 NOGUI="--nogui"
 JUST_MAKE=""
 VERBOSE=""
-MMOD=""
 
 for ARGI; do
   if [ "${ARGI}" = "--gui" ]; then
@@ -28,8 +27,6 @@ for ARGI; do
     JUST_MAKE="--just_make"
   elif [ "${ARGI:0:11}" = "--max_time=" ]; then
     MAX_TIME="${ARGI#--max_time=*}"
-  elif [ "${ARGI:0:7}" = "--mmod=" ]; then
-    MMOD="${ARGI#--mmod=*}"
   elif [ "${ARGI//[^0-9]/}" = "$ARGI" -a "$TIME_WARP" = 10 ]; then
     TIME_WARP=$ARGI
   else
@@ -40,7 +37,7 @@ done
 
 : > results.txt
 xlaunch.sh --max_time=$MAX_TIME $NOGUI $JUST_MAKE $VERBOSE \
-  ${MMOD:+--mmod=$MMOD} $TIME_WARP
+  $TIME_WARP
 status=$?
 
 if [ "${JUST_MAKE}" = "" ]; then

@@ -35,6 +35,9 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
 - Keep case intent documented in the harness README under `Cases` or
   `Current Matrix`.
 - Use exact case tokens in documentation and in `zlaunch.sh`.
+- `case=` is the harness-owned variation identity. Harnesses must not set,
+  derive, require, or interpret `mmod`; any `mmod=` field produced by the
+  mission is opaque mission-owned provenance.
 - Keep case setup explicit. A shell `case` block mapping case name to patch
   files, fixture files, stem launch arguments, and intent is easier to audit
   than filename inference.

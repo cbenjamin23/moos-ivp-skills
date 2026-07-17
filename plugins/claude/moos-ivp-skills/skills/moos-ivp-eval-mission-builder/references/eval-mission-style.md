@@ -77,7 +77,7 @@ generated `targ_shoreside.moos` contains the expected apps.
 Keep `results.txt` easy for both humans and harnesses to parse:
 
 ```text
-grade=pass form=waypoint_eval mmod=single_point eval=true wpt_done=true mhash=abcd1234
+grade=pass form=waypoint_eval eval=true wpt_done=true mhash=abcd1234
 ```
 
 Use stable column names. Avoid long structured payloads unless no simple helper
@@ -85,9 +85,9 @@ variable can represent the result.
 
 The contract is flexible: `grade=<pass|fail>` is required, and the remaining
 fields should be the metrics that explain this mission's verdict. Recommended
-fields like `form`, `mmod`, `eval`, `timeout`, and `mhash` are useful defaults,
-not a reason to omit better domain metrics such as `cpa`, `collision`,
-`node_count`, `heading_error`, `payload_ok`, or `process_count`.
+fields like `form`, `eval`, `timeout`, and `mhash` are useful defaults, not a
+reason to omit better domain metrics such as `cpa`, `collision`, `node_count`,
+`heading_error`, `payload_ok`, or `process_count`.
 
 Only `pMissionEval` should write the final grade row. Do not make `zlaunch.sh`
 derive `grade=` from a generated target, a patch marker, `grade_hint`, or a

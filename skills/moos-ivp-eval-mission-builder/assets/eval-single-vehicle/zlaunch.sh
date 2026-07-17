@@ -31,7 +31,6 @@ MAX_TIME=60
 NOGUI="--nogui"
 VERBOSE=""
 JUST_MAKE=""
-MMOD=""
 FORWARD_ARGS=()
 
 #------------------------------------------------------------
@@ -47,7 +46,6 @@ for ARGI; do
     echo "  --nogui, -ng           Headless launch          "
     echo "  --gui                  Launch with pMarineViewer"
     echo "  --max_time=<secs>      Max time for xlaunch     "
-    echo "  --mmod=<name>          Mission variation label  "
     echo "  --shore_mport=<port>   Shoreside MOOSDB port    "
     echo "  --veh_mport=<port>     Vehicle MOOSDB port      "
     echo "  --shore_pshare=<port>  Shoreside pShare port    "
@@ -65,8 +63,6 @@ for ARGI; do
     NOGUI=""
   elif [ "${ARGI:0:11}" = "--max_time=" ]; then
     MAX_TIME="${ARGI#--max_time=*}"
-  elif [ "${ARGI:0:7}" = "--mmod=" ]; then
-    MMOD="${ARGI#--mmod=*}"
   elif [ "${ARGI:0:14}" = "--shore_mport=" ]; then
     FORWARD_ARGS+=("${ARGI}")
   elif [ "${ARGI:0:12}" = "--veh_mport=" ]; then
@@ -86,7 +82,7 @@ done
 #------------------------------------------------------------
 : > results.txt
 xlaunch.sh --max_time="$MAX_TIME" $NOGUI $JUST_MAKE $VERBOSE \
-  ${MMOD:+--mmod=$MMOD} "${FORWARD_ARGS[@]}" "$TIME_WARP"
+  "${FORWARD_ARGS[@]}" "$TIME_WARP"
 status=$?
 
 if [ "${JUST_MAKE}" = "" ]; then

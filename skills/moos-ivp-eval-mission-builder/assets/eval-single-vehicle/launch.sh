@@ -29,7 +29,6 @@ START_POS="x=0,y=0,heading=0"
 VDEST_POS="25,-12"
 STOCK_SPD="1.4"
 MAX_SPD="2.0"
-MMOD="single_point_arrival"
 
 SHORE_MPORT="9000"
 VEH_MPORT="9001"
@@ -59,7 +58,6 @@ for ARGI; do
     echo "  --vdest=<x,y>          Evaluated waypoint        "
     echo "  --stock_spd=<m/s>      Behavior speed           "
     echo "  --max_spd=<m/s>        Helm/sim max speed        "
-    echo "  --mmod=<name>          Mission variation label   "
     echo "                                                  "
     echo "  --shore_mport=<9000>   Shoreside MOOSDB port    "
     echo "  --veh_mport=<9001>     Vehicle MOOSDB port      "
@@ -92,8 +90,6 @@ for ARGI; do
     STOCK_SPD="${ARGI#--stock_spd=*}"
   elif [ "${ARGI:0:10}" = "--max_spd=" ]; then
     MAX_SPD="${ARGI#--max_spd=*}"
-  elif [ "${ARGI:0:7}" = "--mmod=" ]; then
-    MMOD="${ARGI#--mmod=*}"
   elif [ "${ARGI:0:14}" = "--shore_mport=" ]; then
     SHORE_MPORT="${ARGI#--shore_mport=*}"
   elif [ "${ARGI:0:12}" = "--veh_mport=" ]; then
@@ -127,7 +123,6 @@ if [ "${VERBOSE}" = "yes" ]; then
   echo "VDEST_POS =      [${VDEST_POS}]"
   echo "STOCK_SPD =      [${STOCK_SPD}]"
   echo "MAX_SPD =        [${MAX_SPD}]"
-  echo "MMOD =           [${MMOD}]"
   echo "SHORE_MPORT =    [${SHORE_MPORT}]"
   echo "VEH_MPORT =      [${VEH_MPORT}]"
   echo "SHORE_PSHARE =   [${SHORE_PSHARE}]"
@@ -162,7 +157,7 @@ vecho "Launching vehicle with args: ${VARGS[*]}"
 #  Part 7: Launch the shoreside community
 #------------------------------------------------------------
 SARGS=(--auto "$TIME_WARP" --mport="$SHORE_MPORT" --pshare="$SHORE_PSHARE")
-SARGS+=(--vnames="$VNAME" --mmod="$MMOD")
+SARGS+=(--vnames="$VNAME")
 [ "$JUST_MAKE" = "yes" ] && SARGS+=(--just_make)
 [ "$VERBOSE" = "yes" ] && SARGS+=(--verbose)
 [ "$NOGUI" = "yes" ] && SARGS+=(--nogui)

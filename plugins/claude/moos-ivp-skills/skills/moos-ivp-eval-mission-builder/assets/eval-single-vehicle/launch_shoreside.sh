@@ -26,7 +26,6 @@ IP_ADDR="localhost"
 MOOS_PORT="9000"
 PSHARE_PORT="9200"
 VNAMES="abe"
-MMOD="single_point_arrival"
 
 #------------------------------------------------------------
 #  Part 3: Check for and handle command-line arguments
@@ -45,7 +44,6 @@ for ARGI; do
     echo "  --mport=<9000>         Shoreside MOOSDB port    "
     echo "  --pshare=<9200>        Shoreside pShare port    "
     echo "  --vnames=<abe>         Colon-separated vehicles "
-    echo "  --mmod=<name>          Mission variation label  "
     exit 0
   elif [ "${ARGI//[^0-9]/}" = "$ARGI" -a "$TIME_WARP" = 1 ]; then
     TIME_WARP=$ARGI
@@ -67,8 +65,6 @@ for ARGI; do
     PSHARE_PORT="${ARGI#--pshare=*}"
   elif [ "${ARGI:0:9}" = "--vnames=" ]; then
     VNAMES="${ARGI#--vnames=*}"
-  elif [ "${ARGI:0:7}" = "--mmod=" ]; then
-    MMOD="${ARGI#--mmod=*}"
   else
     echo "$ME: Bad Arg:[$ARGI]. Exit Code 1."
     exit 1
@@ -91,7 +87,6 @@ if [ "${VERBOSE}" = "yes" ]; then
   echo "MOOS_PORT =     [${MOOS_PORT}]"
   echo "PSHARE_PORT =   [${PSHARE_PORT}]"
   echo "VNAMES =        [${VNAMES}]"
-  echo "MMOD =          [${MMOD}]"
 fi
 
 #------------------------------------------------------------
@@ -104,7 +99,7 @@ fi
 
 nsplug meta_shoreside.moos targ_shoreside.moos $NSFLAGS WARP=$TIME_WARP \
   IP_ADDR=$IP_ADDR MOOS_PORT=$MOOS_PORT PSHARE_PORT=$PSHARE_PORT \
-  LAUNCH_GUI=$LAUNCH_GUI VNAMES=$VNAMES MMOD=$MMOD
+  LAUNCH_GUI=$LAUNCH_GUI VNAMES=$VNAMES
 
 if [ "${JUST_MAKE}" = "yes" ]; then
   echo "$ME: Targ files made; exiting without launch."

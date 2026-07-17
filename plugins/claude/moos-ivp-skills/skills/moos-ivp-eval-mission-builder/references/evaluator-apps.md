@@ -71,12 +71,10 @@ ProcessConfig = pMissionEval
   fail_flag   = SAY_MOOS = fail
 
   mission_form = waypoint_eval
-  mission_mod  = $(MMOD:=single_point_arrival)
 
   report_file   = results.txt
   report_column = grade=$[GRADE]
   report_column = form=$[MISSION_FORM]
-  report_column = mmod=$[MMOD]
   report_column = eval=$[WPT_DONE]
   report_column = wpt_done=$[WPT_DONE]
   report_column = bhv_error=$[BHV_ERROR_SEEN]
@@ -141,8 +139,13 @@ scenario is explicitly warning-intolerant and the warning signal has been
 verified as stable evidence.
 
 Use `prereport_column` for stable prefix fields that should appear before the
-verdict, such as `form=` and `mmod=` in app-level evals. Use `report_column` for
-the verdict and measured facts that are part of the result evidence.
+verdict, such as `form=` in app-level evals. Use `report_column` for the verdict
+and measured facts that are part of the result evidence.
+
+`mission_mod` is optional mission-owned provenance. Use it only when one
+mission folder intentionally supports multiple named standalone modes. Omit it
+from single-scenario eval missions, and do not use it to represent harness
+cases.
 
 If the report contains `mhash=$[MHASH_SHORT]`, make sure `pMissionHash` is
 launched in the headless generated target being tested. Do not run

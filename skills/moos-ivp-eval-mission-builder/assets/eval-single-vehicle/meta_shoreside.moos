@@ -127,12 +127,10 @@ ProcessConfig = pMissionEval
   fail_flag   = SAY_MOOS = fail
 
   mission_form = eval_single_vehicle
-  mission_mod  = $(MMOD:=single_point_arrival)
 
   report_file   = results.txt
   report_column = grade=$[GRADE]
   report_column = form=$[MISSION_FORM]
-  report_column = mmod=$[MMOD]
   report_column = eval=$[WPT_DONE]
   report_column = wpt_done=$[WPT_DONE]
   report_column = wpt_hit=$[WPT_HIT]

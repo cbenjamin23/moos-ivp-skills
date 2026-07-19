@@ -31,21 +31,36 @@ stop_mission_apps() {
   moos_scoped_teardown_stop_root "$mission_root" >/dev/null
 }
 
-cleanup() {
-  local status=$?
-  local teardown_ok=yes
-  trap - EXIT
+CLEANED=no
+CLEANING=no
+CLEANUP_FAILED=no
+
+cleanup_runtime() {
+  local root_stopped=yes
+  [ "$CLEANED" = no ] || return 0
+  [ "$CLEANING" = no ] || return 0
+  CLEANING=yes
+  trap '' INT TERM PIPE
 
   if [ -n "${RUN_ROOT:-}" ] && [ -d "$RUN_ROOT" ]; then
     if ! stop_mission_apps "$RUN_ROOT"; then
       echo "$ME: teardown failed; preserving run root: $RUN_ROOT" >&2
-      teardown_ok=no
-      [ "$status" -ne 0 ] || status=1
+      root_stopped=no
+      CLEANUP_FAILED=yes
     fi
-    if [ "$KEEP_WORKDIRS" != "yes" ] && [ "$teardown_ok" = "yes" ]; then
+    if [ "$KEEP_WORKDIRS" != "yes" ] && [ "$root_stopped" = "yes" ] &&
+       [ "$CLEANUP_FAILED" = "no" ]; then
       rm -rf "$RUN_ROOT"
     fi
   fi
+  CLEANED=yes
+  CLEANING=no
+}
+
+cleanup() {
+  local status=$?
+  cleanup_runtime
+  [ "$CLEANUP_FAILED" = "no" ] || [ "$status" -ne 0 ] || status=1
   exit "$status"
 }
 
@@ -59,6 +74,11 @@ Do not hide helper stderr or discard its status. A cleanup trap should preserve
 an existing failure or signal status, turn an otherwise successful run into a
 failure when teardown cannot be verified, and keep the run root when teardown
 fails.
+
+If `cleanup_runtime` is also called explicitly before the final verdict, use
+both the `CLEANING` re-entry guard and `CLEANED` idempotence guard shown above.
+Once cleanup begins, ignore further `INT`, `TERM`, and `PIPE` signals so
+repeated interrupts cannot stop teardown or run-root removal.
 
 When a helper exposes shell functions, source it and call the root-scoped
 function rather than invoking a broad cleanup command:

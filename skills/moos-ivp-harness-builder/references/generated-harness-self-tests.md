@@ -139,6 +139,11 @@ Also force the helper to return nonzero in a launcher self-test. Confirm the
 error remains visible, an otherwise successful run exits nonzero, and the run
 root is preserved instead of deleted.
 
+Run a slow live case, send Ctrl-C, then send Ctrl-C again while cleanup is
+active. Require exit 130 with no scoped MOOS processes, selected-port
+listeners, or invocation run root left behind. Do not require or recommend a
+harness-wide filesystem lock for this test.
+
 ## Concurrent Invocation Check
 
 Do not assume only one copy of a harness will run in a working directory. If a
@@ -146,7 +151,8 @@ harness writes top-level `results.txt` while another invocation is active, the
 two runs can race. Either document that concurrent invocations of the same
 harness directory are unsupported, or write aggregate output under the
 harness-owned run root and copy it to the top-level result only after the run is
-complete.
+complete. Callers remain responsible for non-overlapping port ranges; unique
+run roots do not prevent user-selected port collisions.
 
 ## Copyable Port Audit
 

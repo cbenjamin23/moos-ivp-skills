@@ -65,8 +65,8 @@ REPO_DIR=$(cd "$HARNESS_DIR/../../.." && pwd)
 MISSION_DIR="$REPO_DIR/missions/<family>_missions/<stem_mission>"
 TEARDOWN_HELPER="$REPO_DIR/scripts/moos_scoped_teardown.sh"
 RESULTS_FILE="$HARNESS_DIR/results.txt"
-RUN_ROOT="$HARNESS_DIR/.harness_runs"
-LOCK_DIR="$HARNESS_DIR/.harness_runs.lock"
+RUNS_DIR="$HARNESS_DIR/.harness_runs"
+RUN_ROOT=""
 
 TIME_WARP=10
 MAX_TIME=90
@@ -79,12 +79,14 @@ VERBOSE=
 JUST_MAKE=no
 DISPLAY_ARGS=(--nogui)
 CASE=
+CLEANED=no
+CLEANING=no
+CLEANUP_FAILED=no
 
 # Customize this matrix plus apply_case_overlays below.
 CASES=(baseline_pass blocked_fail)
 
 declare -A PID_CASE PID_RESULT PID_LOG PID_PORT_BASE
-HAVE_LOCK=no
 
 usage() {
   local case_name
@@ -176,36 +178,40 @@ stop_root() {
   moos_scoped_teardown_stop_root "$1" >/dev/null
 }
 
-cleanup() {
-  local status=$?
+cleanup_runtime() {
   local pid
-  local teardown_ok=yes
-  trap - EXIT INT TERM
+  local root_stopped=yes
+  [ "$CLEANED" = no ] || return 0
+  [ "$CLEANING" = no ] || return 0
+  CLEANING=yes
+  trap '' INT TERM PIPE
 
   for pid in "${!PID_CASE[@]}"; do
     kill "$pid" 2>/dev/null || true
   done
   wait 2>/dev/null || true
-  if [ -d "$RUN_ROOT" ]; then
+  if [ -n "$RUN_ROOT" ] && [ -d "$RUN_ROOT" ]; then
     if ! stop_root "$RUN_ROOT"; then
       echo "$ME: teardown failed; preserving run root: $RUN_ROOT" >&2
-      teardown_ok=no
-      [ "$status" -ne 0 ] || status=1
+      root_stopped=no
+      CLEANUP_FAILED=yes
     fi
-    if [ "$KEEP_WORKDIRS" != yes ] && [ "$teardown_ok" = yes ]; then
+    if [ "$KEEP_WORKDIRS" != yes ] && [ "$root_stopped" = yes ] &&
+       [ "$CLEANUP_FAILED" = no ]; then
       rm -rf "$RUN_ROOT"
     fi
   fi
-  [ "$HAVE_LOCK" = yes ] && rmdir "$LOCK_DIR" 2>/dev/null || true
-  exit "$status"
+  rmdir "$RUNS_DIR" 2>/dev/null || true
+  CLEANED=yes
+  CLEANING=no
 }
 
 on_signal() {
   exit 130
 }
 
-trap cleanup EXIT
-trap on_signal INT TERM
+trap cleanup_runtime EXIT
+trap on_signal INT TERM PIPE
 
 apply_case_overlays() {
   local case_name="$1"
@@ -340,10 +346,9 @@ finish_one() {
 }
 
 select_cases
-mkdir "$LOCK_DIR" 2>/dev/null || die "another harness run appears active for $HARNESS_DIR"
-HAVE_LOCK=yes
-rm -rf "$RUN_ROOT"
-mkdir -p "$RUN_ROOT"
+mkdir -p "$RUNS_DIR" || die "unable to create run directory: $RUNS_DIR"
+RUN_ROOT="$RUNS_DIR/run_$(date +%Y%m%dT%H%M%S)_$$"
+mkdir -p "$RUN_ROOT" || die "unable to create run root: $RUN_ROOT"
 : > "$RESULTS_FILE"
 
 active=0
@@ -364,24 +369,15 @@ while [ "$next" -lt "$total" ] || [ "$active" -gt 0 ]; do
   fi
 done
 
-trap - EXIT INT TERM
 teardown_failure=0
-preserve_run_root=no
 if grep -q 'reason=teardown_error' "$RESULTS_FILE"; then
-  preserve_run_root=yes
+  CLEANUP_FAILED=yes
 fi
-if ! stop_root "$RUN_ROOT"; then
-  echo "$ME: final teardown failed; preserving run root: $RUN_ROOT" >&2
+cleanup_runtime
+if [ "$CLEANUP_FAILED" = yes ]; then
   teardown_failure=1
-  preserve_run_root=yes
 fi
-if [ "$KEEP_WORKDIRS" != yes ] && [ "$preserve_run_root" != yes ]; then
-  rm -rf "$RUN_ROOT"
-elif [ "$preserve_run_root" = yes ]; then
-  echo "$ME: preserved run root: $RUN_ROOT" >&2
-fi
-rmdir "$LOCK_DIR" 2>/dev/null || true
-HAVE_LOCK=no
+trap - EXIT INT TERM PIPE
 
 if [ "$result_rows" -ne "$total" ]; then
   echo "$ME: expected $total result rows but wrote $result_rows" >&2
@@ -411,3 +407,7 @@ call `moos_scoped_teardown_stop_root` through a small wrapper, and use that
 wrapper after each case plus in the exit cleanup trap. Keep stderr visible,
 propagate teardown failure, and preserve the run root when cleanup cannot be
 verified.
+
+This skeleton does not lock the harness directory. Callers must choose
+non-overlapping port ranges, and concurrent invocations of the same harness
+directory are unsupported while they share top-level `results.txt`.

@@ -53,6 +53,20 @@ skills/                  Canonical, agent-neutral skill folders.
 plugins/codex/...        Codex plugin adapter.
 plugins/claude/...       Claude Code plugin adapter.
 INSTALL.md               Install commands and MOOS-IvP path setup.
-docs/                    Maintainer distribution notes.
+docs/                    User and maintainer documentation.
 scripts/                 Maintainer sync, validation, and release helpers.
 ```
+
+## Customize a Skill
+
+You can keep the plugin installed while providing your own local version of a
+skill. Give the local skill the same unqualified name, such as
+`moos-app-builder`, and explicitly describe it as the preferred local
+replacement.
+Unqualified references and automatic selection will then favor the local
+workflow, while the original plugin skill remains available through its
+plugin-qualified name.
+
+See [Customizing Skills](docs/customizing-skills.md) for locations, examples,
+explicit invocation syntax, update considerations, and the differences between
+Codex and Claude Code.

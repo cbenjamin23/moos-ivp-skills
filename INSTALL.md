@@ -53,6 +53,13 @@ plugins/claude/moos-ivp-skills/
 Those adapters contain the plugin manifests and copied `skills/` folders.
 Root-level docs and scripts stay in the repository for maintainers.
 
+## Customize an Installed Skill
+
+You can keep the plugin installed and add a preferred local version of an
+individual skill. See [Customizing Skills](docs/customizing-skills.md) for the
+recommended layout, naming, description, and invocation patterns for Codex and
+Claude Code.
+
 ## MOOS-IvP Path
 
 Some skills need a local MOOS-IvP checkout for headers, libraries, examples, and

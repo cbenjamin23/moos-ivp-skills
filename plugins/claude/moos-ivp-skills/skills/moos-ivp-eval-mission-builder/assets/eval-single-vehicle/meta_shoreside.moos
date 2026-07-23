@@ -3,7 +3,7 @@
 // NAME: MOOS-IvP Skills
 //-------------------------------------------------
 
-ServerHost = $(IP_ADDR)
+ServerHost = localhost
 ServerPort = $(MOOS_PORT)
 Community  = shoreside
 
@@ -86,6 +86,8 @@ ProcessConfig = pHostInfo
 {
   AppTick   = 1
   CommsTick = 1
+
+  default_hostip_force = $(IP_ADDR=localhost)
 }
 
 //----------------------------------------------------

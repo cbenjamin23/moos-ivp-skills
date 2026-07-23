@@ -24,6 +24,27 @@ Run with GUI:
 ./launch.sh 5
 ```
 
+## Split-Host Launch
+
+`launch.sh` uses local networking defaults. To put shoreside and the vehicle on
+different computers, invoke the two sublaunchers directly. Replace the example
+addresses with addresses reachable between the computers.
+
+On the shoreside computer:
+
+```bash
+./launch_shoreside.sh --ip=192.0.2.10 5
+```
+
+On the vehicle computer:
+
+```bash
+./launch_vehicle.sh --ip=192.0.2.20 --shore=192.0.2.10 5
+```
+
+`--ip` selects the address advertised by that community. The vehicle's
+`--shore` value selects the shoreside destination used by `uFldNodeBroker`.
+
 ## Files
 
 - `launch.sh` launches the full mission.
@@ -38,4 +59,3 @@ Run with GUI:
 In `pMarineViewer`, press `DEPLOY` to start the survey. Press `RETURN` to send
 the vehicle home or use the left-click return-point context action when the GUI
 is available.
-

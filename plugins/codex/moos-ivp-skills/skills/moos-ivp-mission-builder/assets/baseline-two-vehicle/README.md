@@ -30,6 +30,39 @@ Run with GUI:
 ./launch.sh 5
 ```
 
+## Split-Host Launch
+
+`launch.sh` uses local networking defaults. For a distributed mission, invoke
+the sublaunchers directly and replace these example addresses with addresses
+reachable between the computers.
+
+On the shoreside computer:
+
+```bash
+./launch_shoreside.sh --ip=192.0.2.10 --vnames=alpha:bravo 5
+```
+
+On the `alpha` computer:
+
+```bash
+./launch_vehicle.sh --ip=192.0.2.20 --shore=192.0.2.10 \
+  --vname=alpha --mport=9001 --pshare=9201 \
+  --start_pos="x=0,y=0,heading=0" --vdest=80,-40 \
+  --survey_poly="0,0:80,0:80,-80:0,-80" 5
+```
+
+On the `bravo` computer:
+
+```bash
+./launch_vehicle.sh --ip=192.0.2.30 --shore=192.0.2.10 \
+  --vname=bravo --color=red --mport=9002 --pshare=9202 \
+  --start_pos="x=0,y=-100,heading=0" --vdest=80,-140 \
+  --survey_poly="0,-100:80,-100:80,-180:0,-180" 5
+```
+
+`--ip` selects the address advertised by each community. Each vehicle's
+`--shore` value selects the shoreside destination used by `uFldNodeBroker`.
+
 ## Files
 
 - `launch.sh` launches the full mission.

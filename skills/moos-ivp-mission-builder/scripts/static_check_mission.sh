@@ -53,10 +53,14 @@ need_grep 'NSFLAGS=.*-x|nsplug .* -x|nsplug .*--strict.*-x' launch_shoreside.sh 
 if [ "$HAS_VEHICLE" = "yes" ]; then
   need_grep 'ProcessConfig *= *pHelmIvP' meta_vehicle.moos "expected pHelmIvP block"
   need_grep 'behaviors *= *targ_.*\.bhv' meta_vehicle.moos "expected generated behavior file"
+  need_grep '^ServerHost[[:space:]]*=[[:space:]]*localhost[[:space:]]*$' meta_vehicle.moos "expected local MOOSDB connection"
+  need_grep 'default_hostip_force[[:space:]]*=[[:space:]]*\$\(IP_ADDR=localhost\)' meta_vehicle.moos "expected --ip to force the advertised pHostInfo address"
   need_grep 'input *= *route *= *[^ :]+:\$\(PSHARE_PORT\)' meta_vehicle.moos "expected vehicle pShare to use PSHARE_PORT"
   need_grep 'Behavior *= *BHV_' meta_vehicle.bhv "expected at least one behavior block"
 fi
 need_grep 'ProcessConfig *= *pMarineViewer' meta_shoreside.moos "expected pMarineViewer block"
+need_grep '^ServerHost[[:space:]]*=[[:space:]]*localhost[[:space:]]*$' meta_shoreside.moos "expected local MOOSDB connection"
+need_grep 'default_hostip_force[[:space:]]*=[[:space:]]*\$\(IP_ADDR=localhost\)' meta_shoreside.moos "expected --ip to force the advertised pHostInfo address"
 need_grep 'input *= *route *= *[^ :]+:\$\(PSHARE_PORT\)' meta_shoreside.moos "expected shoreside pShare to use PSHARE_PORT"
 
 if grep -R --include='*.sh' -Eq '\\b(ktm|pkill)\\b' "$MISSION_DIR"; then

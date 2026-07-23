@@ -28,6 +28,37 @@ shoreside community unless `--just_make` is set.
 
 `clean.sh` removes generated files and logs only. It should not kill processes.
 
+## Network Identity
+
+Keep the MOOSDB connection local in vehicle and shoreside meta files:
+
+```text
+ServerHost = localhost
+```
+
+Both sublaunchers should accept `--ip=<address>`, default it to `localhost`,
+pass it to `nsplug` as `IP_ADDR`, and use it as the explicitly advertised
+identity:
+
+```text
+ProcessConfig = pHostInfo
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  default_hostip_force = $(IP_ADDR=localhost)
+}
+```
+
+These settings have distinct jobs: `ServerHost` tells local apps where to find
+their local MOOSDB, while `default_hostip_force` tells other communities which
+address represents this host. Do not wire `--ip` into `ServerHost`.
+
+The vehicle sublauncher should also accept `--shore=<address>` separately and
+pass it as `SHORE_IP` for the `uFldNodeBroker` route. Keep top-level
+`launch.sh` on local defaults; document direct sublauncher commands for
+split-host operation.
+
 ## Copying Launchers
 
 The bundled launchers are style templates, not loose pseudocode. Copy the

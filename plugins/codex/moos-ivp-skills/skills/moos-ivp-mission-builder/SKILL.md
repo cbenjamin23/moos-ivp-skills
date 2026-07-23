@@ -39,6 +39,9 @@ use `moos-ivp-docs`. For post-mission analysis, use `moos-alog-analysis`.
   `--shore_mport`, `--shore_pshare`, `--veh_mport`, and `--veh_pshare` for a
   one-vehicle mission. These make the mission easy to run beside other local
   MOOS work and easy to validate on non-default ports.
+- Keep `ServerHost = localhost`; map each sublauncher's `--ip` value to
+  `pHostInfo.default_hostip_force`, and map vehicle `--shore` separately to the
+  shoreside broker route.
 - Use `nsplug --strict --force -x` in launchers so `.moosx` / `.bhvx` sidecars
   are honored when an operator or local repo uses sidecar overrides.
 - Launchable mission examples should include `ProcessConfig = ANTLER` with the
@@ -103,6 +106,9 @@ use `moos-ivp-docs`. For post-mission analysis, use `moos-alog-analysis`.
 - Use `scripts/check_generated_ports.sh <mission-dir> --port_base=<base>` to
   verify that non-default port overrides are reflected in generated targets.
   Add `--keep-targets` when you need to inspect the generated files afterward.
+- Use `scripts/check_generated_networking.sh <mission-dir>` to verify that
+  sublauncher `--ip` values control advertised `pHostInfo` identity, vehicle
+  `--shore` controls the broker route, and MOOSDB connections remain local.
 
 ## Validation Checklist
 
@@ -111,6 +117,8 @@ use `moos-ivp-docs`. For post-mission analysis, use `moos-alog-analysis`.
 - `./launch.sh --just_make --nogui <warp>` succeeds.
 - Non-default port target generation succeeds, for example with
   `scripts/check_generated_ports.sh`.
+- Custom-address target generation succeeds with
+  `scripts/check_generated_networking.sh`.
 - Generated targets include the intended ports, community names, apps, behavior
   file name, and `MOOSTimeWarp`.
 - The top-level launcher opens at most one `uMAC` session.

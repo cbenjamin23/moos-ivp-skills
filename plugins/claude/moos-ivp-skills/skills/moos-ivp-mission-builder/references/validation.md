@@ -33,6 +33,21 @@ A printed `PASS` line and exit code `0` mean the non-default ports were
 verified. Regenerate targets with `./launch.sh --just_make ...` or pass
 `--keep-targets` if you need to inspect them afterward.
 
+## Generated Networking Check
+
+Run:
+
+```bash
+scripts/check_generated_networking.sh <mission-dir>
+```
+
+This invokes the shoreside and vehicle sublaunchers with distinct test
+addresses and non-default ports. It confirms that both communities keep
+`ServerHost = localhost`, that `--ip` becomes
+`pHostInfo.default_hostip_force`, that pShare listens on the requested local
+port, and that vehicle `--shore` becomes the `uFldNodeBroker` shoreside route.
+The check runs in a temporary copy and does not alter the mission directory.
+
 ## Target Generation
 
 From the mission directory:
@@ -90,22 +105,23 @@ inspect the generated target or result file it was supposed to validate.
 For high-confidence mission validation, use this sequence:
 
 1. Run the static checker.
-2. Run `./launch.sh --just_make --nogui <warp>`.
-3. Inspect generated targets for ports, communities, app blocks, behavior file
+2. Run the generated port and networking checks.
+3. Run `./launch.sh --just_make --nogui <warp>`.
+4. Inspect generated targets for ports, communities, app blocks, behavior file
    names, pShare routes, GUI suppression, and helm behavior blocks.
-4. Review launcher `--help` text after renaming vehicles, apps, ports, or
+5. Review launcher `--help` text after renaming vehicles, apps, ports, or
    default locations. Stale copied help output is a real usability bug even if
    target generation still works.
-5. Launch on non-default ports with `--xlaunched --nogui`.
-6. Use `uQueryDB` against every community to confirm MOOSDB uptime, expected
+6. Launch on non-default ports with `--xlaunched --nogui`.
+7. Use `uQueryDB` against every community to confirm MOOSDB uptime, expected
    clients, helm state, and key variables such as `NAV_X`, `NAV_Y`, and
    `IVPHELM_STATE`.
-7. If the mission needs deploy/motion validation, apply the operator pokes or
+8. If the mission needs deploy/motion validation, apply the operator pokes or
    GUI-equivalent pokes and confirm the mission-specific state transition or
    movement.
-8. Stop the mission and verify no listeners/processes remain on the mission's
+9. Stop the mission and verify no listeners/processes remain on the mission's
    ports.
-9. Use `moos-alog-analysis` on the generated `.alog` files to verify the
+10. Use `moos-alog-analysis` on the generated `.alog` files to verify the
    mission ran as expected in post-processing.
 
 The `.alog` pass should be mission-specific, but normally checks:
@@ -125,6 +141,8 @@ mission actually logged.
 ## Common Failures
 
 - top-level port arguments are parsed but not forwarded
+- `--ip` changes `ServerHost` instead of the address advertised by `pHostInfo`
+- vehicle `--shore` is parsed but not forwarded to the broker route
 - pShare overrides are accepted but generated `pShare` blocks still listen on
   default ports
 - sublaunchers open their own `uMAC` because `--auto` was not passed

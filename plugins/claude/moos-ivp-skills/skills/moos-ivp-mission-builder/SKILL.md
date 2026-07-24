@@ -26,6 +26,10 @@ use `moos-ivp-docs`. For post-mission analysis, use `moos-alog-analysis`.
   mission-specific parameters, app runs, and forwarded arguments as needed, but
   preserve the launcher structure unless the existing project has a stronger
   local convention.
+- Before adding custom mission plumbing or functionality, determine whether
+  existing apps, behaviors, or parameters already achieve the requested effect
+  by checking local examples and docs/source; add new functionality only when
+  none fits.
 - Keep `launch.sh`, `launch_vehicle.sh`, `launch_shoreside.sh`, and `clean.sh`
   convention-bound. Preserve their `Part N` structure and help summaries.
 - Keep `launch.sh` as the human-facing mission-level launcher.
@@ -42,8 +46,9 @@ use `moos-ivp-docs`. For post-mission analysis, use `moos-alog-analysis`.
 - Keep `ServerHost = localhost`; map each sublauncher's `--ip` value to
   `pHostInfo.default_hostip_force`, and map vehicle `--shore` separately to the
   shoreside broker route.
-- Use `nsplug --strict --force -x` in launchers so `.moosx` / `.bhvx` sidecars
-  are honored when an operator or local repo uses sidecar overrides.
+- Use `nsplug --strict --force -x` for both direct and `--auto` sublauncher
+  generation so unresolved macros fail consistently and `.moosx` / `.bhvx`
+  sidecars remain supported.
 - Launchable mission examples should include `ProcessConfig = ANTLER` with the
   `Run = ...` roster. A standalone `ProcessConfig = <AppName>` block is
   appropriate only for intentional snippets or app help text.

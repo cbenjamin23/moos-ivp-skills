@@ -90,9 +90,6 @@ fi
 #  Part 5: Create the shoreside .moos file
 #------------------------------------------------------------
 NSFLAGS="--strict --force -x"
-if [ "${AUTO_LAUNCHED}" = "no" ]; then
-  NSFLAGS="--interactive --force -x"
-fi
 
 nsplug meta_shoreside.moos targ_shoreside.moos $NSFLAGS WARP=$TIME_WARP \
   IP_ADDR=$IP_ADDR MOOS_PORT=$MOOS_PORT PSHARE_PORT=$PSHARE_PORT \

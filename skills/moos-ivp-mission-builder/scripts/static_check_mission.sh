@@ -21,6 +21,16 @@ need_grep() {
   fi
 }
 
+reject_grep() {
+  local pattern="$1"
+  local file="$2"
+  local message="$3"
+  if [ -f "$MISSION_DIR/$file" ] && grep -Eq -- "$pattern" "$MISSION_DIR/$file"; then
+    echo "$file: $message"
+    STATUS=1
+  fi
+}
+
 need_file launch.sh
 need_file clean.sh
 need_file launch_shoreside.sh
@@ -46,10 +56,12 @@ need_grep '--shore_mport' launch.sh "expected shoreside MOOSDB port override"
 if [ "$HAS_VEHICLE" = "yes" ]; then
   need_grep '--veh_mport|--[[:alnum:]_]+_mport' launch.sh "expected vehicle MOOSDB port override"
   need_grep 'nsplug ' launch_vehicle.sh "expected nsplug target generation"
-  need_grep 'NSFLAGS=.*-x|nsplug .* -x|nsplug .*--strict.*-x' launch_vehicle.sh "expected nsplug -x sidecar support"
+  need_grep 'NSFLAGS=.*--strict.*--force.*-x|nsplug .*--strict.*--force.*-x' launch_vehicle.sh "expected strict nsplug generation with force and sidecar support"
+  reject_grep '--interactive' launch_vehicle.sh "expected strict nsplug generation for direct and automated launches"
 fi
 need_grep 'nsplug ' launch_shoreside.sh "expected nsplug target generation"
-need_grep 'NSFLAGS=.*-x|nsplug .* -x|nsplug .*--strict.*-x' launch_shoreside.sh "expected nsplug -x sidecar support"
+need_grep 'NSFLAGS=.*--strict.*--force.*-x|nsplug .*--strict.*--force.*-x' launch_shoreside.sh "expected strict nsplug generation with force and sidecar support"
+reject_grep '--interactive' launch_shoreside.sh "expected strict nsplug generation for direct and automated launches"
 if [ "$HAS_VEHICLE" = "yes" ]; then
   need_grep 'ProcessConfig *= *pHelmIvP' meta_vehicle.moos "expected pHelmIvP block"
   need_grep 'behaviors *= *targ_.*\.bhv' meta_vehicle.moos "expected generated behavior file"

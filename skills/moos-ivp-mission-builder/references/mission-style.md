@@ -110,7 +110,8 @@ The vehicle uses `SHORE_PSHARE` separately in broker routing such as
 
 ## nsplug
 
-Use strict generation:
+Use strict generation for both direct/manual and `--auto` sublauncher
+invocations:
 
 ```bash
 nsplug meta_vehicle.moos targ_$VNAME.moos --strict --force -x ...

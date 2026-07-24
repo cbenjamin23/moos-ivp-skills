@@ -117,9 +117,6 @@ fi
 #  Part 5: Create the vehicle .moos and .bhv files
 #------------------------------------------------------------
 NSFLAGS="--strict --force -x"
-if [ "${AUTO_LAUNCHED}" = "no" ]; then
-  NSFLAGS="--interactive --force -x"
-fi
 
 nsplug meta_vehicle.moos targ_$VNAME.moos $NSFLAGS WARP=$TIME_WARP \
   IP_ADDR=$IP_ADDR MOOS_PORT=$MOOS_PORT PSHARE_PORT=$PSHARE_PORT \
@@ -155,4 +152,3 @@ fi
 uMAC targ_$VNAME.moos
 trap "" SIGINT
 kill -- -$$
-

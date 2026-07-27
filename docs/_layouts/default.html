@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ page.title | default: site.title }}{% unless page.title == site.title %} · {{ site.title }}{% endunless %}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <meta name="theme-color" content="#0e3c65">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to article</a>
+
+    <header class="page-hero" role="banner">
+      {% if page.url == "/" %}
+        <div class="page-hero__timelines" aria-hidden="true"></div>
+      {% endif %}
+      <div class="page-hero__inner">
+        <div class="page-hero__copy">
+          <h1 class="page-hero__title">
+            {% if page.url == "/" %}
+              Agentic Coding <span class="page-hero__nowrap">× MOOS-IvP</span>
+            {% else %}
+              {{ page.title | default: site.title }}
+            {% endif %}
+          </h1>
+          {% if page.description %}
+            <p class="page-hero__subtitle">{{ page.description }}</p>
+          {% endif %}
+          <div class="page-hero__actions">
+            <a class="hero-button hero-button--primary" href="https://github.com/cbenjamin23/moos-ivp-skills">View on GitHub</a>
+            <a class="hero-button" href="https://oceanai.mit.edu/moos-dawg/pmwiki/pmwiki.php?n=Talk.19-CBenjGenAI">MOOS-DAWG talk page</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    {% if page.url == "/" %}
+      <div class="mobile-nav">
+        <details class="mobile-nav__details">
+          <summary>Table of contents</summary>
+          {% include article-nav.html %}
+        </details>
+      </div>
+    {% endif %}
+
+    <div class="{% if page.url == '/' %}article-layout{% else %}simple-layout{% endif %}">
+      {% if page.url == "/" %}
+        <aside class="article-sidebar" aria-label="Article navigation">
+          <p class="article-sidebar__title">Table of contents</p>
+          {% include article-nav.html %}
+        </aside>
+      {% endif %}
+
+      <main id="main-content" class="main-content" role="main">
+        {{ content }}
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <span>MOOS-IvP Skills</span>
+        <a href="https://github.com/cbenjamin23/moos-ivp-skills">Source and installation</a>
+      </div>
+    </footer>
+
+    <script src="{{ '/assets/js/article.js?v=' | append: site.github.build_revision | relative_url }}" defer></script>
+  </body>
+</html>

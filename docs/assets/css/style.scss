@@ -32,7 +32,7 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--surface);
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 17px;
   line-height: 1.72;
 }
@@ -117,17 +117,8 @@ a:hover {
 
 .page-hero__copy {
   width: 100%;
-  padding: 2.2rem 2.5rem 2.35rem;
+  padding: 1rem 1.5rem 1.25rem;
   text-align: center;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.055));
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 1.7rem;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.24),
-    0 24px 70px rgba(0, 28, 54, 0.22);
-  -webkit-backdrop-filter: blur(24px) saturate(130%);
-  backdrop-filter: blur(24px) saturate(130%);
 }
 
 .page-hero__title {
@@ -270,6 +261,11 @@ a:hover {
   font-weight: 700;
 }
 
+.article-nav__group > a {
+  color: var(--ink-strong);
+  font-weight: 700;
+}
+
 .article-nav__group ol {
   margin: 0.15rem 0 0.5rem 0.65rem;
 }
@@ -398,6 +394,24 @@ a:hover {
   padding: 0;
   color: inherit;
   background: transparent;
+}
+
+.skill-tree {
+  margin: 1.4rem 0 2rem;
+}
+
+.skill-tree pre {
+  margin: 0;
+  padding: 1.35rem 1.5rem;
+  color: #123e5d;
+  background:
+    radial-gradient(circle at 95% 0%, rgba(76, 174, 157, 0.18), transparent 38%),
+    linear-gradient(135deg, rgba(231, 243, 250, 0.94), rgba(237, 248, 245, 0.98));
+  border: 1px solid rgba(82, 139, 171, 0.28);
+  border-radius: 0.8rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 14px 36px rgba(19, 64, 91, 0.08);
 }
 
 .main-content hr {
@@ -660,13 +674,13 @@ a:hover {
 .commit-chart .axis-label,
 .commit-chart .date-label {
   fill: #5f7486;
-  font-family: "Inter", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 11px;
 }
 
 .commit-chart .peak-label {
   fill: #172b3c;
-  font-family: "Inter", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 12px;
   font-weight: 700;
 }
@@ -721,8 +735,7 @@ a:hover {
   }
 
   .page-hero__copy {
-    padding: 1.8rem 1.25rem 2rem;
-    border-radius: 1.35rem;
+    padding: 0.75rem 0.5rem 1rem;
   }
 
   .page-hero__title {

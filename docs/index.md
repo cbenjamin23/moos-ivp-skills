@@ -68,6 +68,8 @@ existing log file, among other tasks.
 On disk, each skill is packaged as a folder built around a primary `SKILL.md`
 file. A typical package looks like this:
 
+<div class="skill-tree" markdown="1">
+
 ```text
 skill-name/
 ├── SKILL.md
@@ -75,11 +77,8 @@ skill-name/
 ├── scripts/      # optional
 └── assets/       # optional
 ```
-<figure class="article-figure article-figure--compact">
-  <img src="{{ '/assets/images/skill-package.svg' | relative_url }}" alt="A skill folder containing SKILL.md and optional references, scripts, and assets subfolders">
-  <figcaption>A skill is a small, self-contained engineering playbook rather than a single reusable prompt.</figcaption>
-</figure>
 
+</div>
 
 The name and description in `SKILL.md` help the agent recognize when the
 workflow applies. The body records the decisions, sequence, boundaries, and
@@ -146,6 +145,12 @@ an individual workflow can be customized. A separate section explains how the
 skills are developed and validated through isolated testing and feedback from
 real projects. The article closes by examining several of those projects in
 practice.
+
+## Individual skills
+
+The plugin currently contains ten specialized workflows. Select a skill to
+expand its full description, including its workflow, validation approach,
+supporting files, and relationships with the rest of the system.
 
 <section class="skill-card" markdown="1">
 

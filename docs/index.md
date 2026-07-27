@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "Agentic Coding and MOOS-IvP, Introducing the moos-ivp-skills plugin for MOOS-DAWG 2026"
-description: "A practical introduction to reusable agent workflows for MOOS-IvP development"
+title: "Agentic Coding and MOOS-IvP"
+description: "Introducing the moos-ivp-skills plugin for MOOS-DAWG 2026"
 ---
 
 [Project repository: `cbenjamin23/moos-ivp-skills`](https://github.com/cbenjamin23/moos-ivp-skills)

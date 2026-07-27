@@ -4,6 +4,9 @@ article: true
 permalink: /moos_dawg_2026/
 title: "Agentic Coding and MOOS-IvP, Introducing the moos-ivp-skills plugin for MOOS-DAWG 2026"
 description: "Introducing the moos-ivp-skills plugin for MOOS-DAWG 2026"
+social_title: "Agentic Coding × MOOS-IvP"
+social_image: "/assets/images/moos-dawg-2026-social.png"
+social_image_alt: "Agentic Coding × MOOS-IvP, introducing the moos-ivp-skills plugin for MOOS-DAWG 2026"
 ---
 
 > **A note for readers:** MOOS-IvP is an open-source collection of C++ modules

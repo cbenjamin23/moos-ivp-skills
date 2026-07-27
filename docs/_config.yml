@@ -1,5 +1,7 @@
 title: MOOS-IvP Skills
 description: Agentic Coding and MOOS-IvP for MOOS-DAWG 2026
+url: https://cbenjamin23.github.io
+baseurl: /moos-ivp-skills
 theme: jekyll-theme-cayman
 lang: en-US
 show_downloads: false

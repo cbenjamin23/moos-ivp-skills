@@ -1788,7 +1788,8 @@ These charts show how the plugin developed over the summer. Feedback from
 sandboxed evaluations and projects triggered waves of revisions, and the
 updated skills then returned to testing and use.
 
-Commit totals provide context, not a measure of productivity or quality.
+Commit totals are solely meant to provide context about the feedback/revision
+cycle.
 
 <figure class="article-figure">
   <div id="commit-activity-chart" class="commit-chart">

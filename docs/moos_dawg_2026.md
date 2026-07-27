@@ -2052,14 +2052,7 @@ The Hellenic Naval Academy setting was documented by
 and a [video from the Hellenic Naval
 Academy visit](https://www.youtube.com/watch?v=6wGeJvj-vOQ&t=455s).
 
-### 8. Blue-boat turn-radius characterization
-
-This ongoing project is characterizing the turn radius of the MIT Blue Boat design
-under different payloads so that its controllers can be modeled more
-accurately. The skills are being used to shorten the mission-design cycle as
-new field configurations are tested.
-
-### 9. Headless mission debugging in `missions-auto`
+### 8. Headless mission debugging in `missions-auto`
 
 [`missions-auto`](https://github.com/moos-ivp/missions-auto) is a collection of
 MOOS-IvP missions designed to run headlessly and under automation. Because the
@@ -2079,7 +2072,7 @@ between real-world use and the plugin's development visible.
   <div id="commit-project-chart" class="commit-chart commit-project-chart">
     <svg viewBox="0 0 736 385" role="img" aria-labelledby="commit-project-chart-title commit-project-chart-description">
       <title id="commit-project-chart-title">Project timelines and repository commit activity</title>
-      <desc id="commit-project-chart-description">Nine numbered project timelines aligned with smoothed daily commit activity from May 21 through July 26, 2026. The project order from top to bottom is 1, 4, 6, 7, 3, 5, 2, 8, and 9.</desc>
+      <desc id="commit-project-chart-description">Eight numbered project timelines aligned with smoothed daily commit activity from May 21 through July 26, 2026. The project order from top to bottom is 1, 4, 6, 7, 3, 5, 2, and 8.</desc>
     </svg>
   </div>
 </figure>

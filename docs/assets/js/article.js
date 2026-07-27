@@ -440,8 +440,7 @@
     { number: 3, start: "2026-06-18", end: "2026-07-18" },
     { number: 5, start: "2026-06-18", end: "2026-07-26" },
     { number: 2, start: "2026-06-25", end: "2026-07-01" },
-    { number: 8, start: "2026-07-15", end: "2026-07-26" },
-    { number: 9, start: "2026-07-21", end: "2026-07-26" }
+    { number: 8, start: "2026-07-21", end: "2026-07-26" }
   ];
 
   const addProject = (tag, attributes, text) => {

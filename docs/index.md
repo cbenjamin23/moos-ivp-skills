@@ -4,8 +4,6 @@ title: "Agentic Coding and MOOS-IvP"
 description: "Introducing the moos-ivp-skills plugin for MOOS-DAWG 2026"
 ---
 
-[Project repository: `cbenjamin23/moos-ivp-skills`](https://github.com/cbenjamin23/moos-ivp-skills)
-
 [MOOS-DAWG 2026 talk: Agentic Coding and MOOS-IvP](https://oceanai.mit.edu/moos-dawg/pmwiki/pmwiki.php?n=Talk.19-CBenjGenAI)
 
 > **A note for readers:** MOOS-IvP is an open-source collection of C++ modules

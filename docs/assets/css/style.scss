@@ -133,9 +133,8 @@ a:hover {
 
 .hero-timeline__origin {
   z-index: 2;
-  display: flex;
-  align-items: center;
-  transform: translateY(-50%);
+  width: 100%;
+  height: 0;
 }
 
 .hero-timeline__start,
@@ -148,12 +147,18 @@ a:hover {
 }
 
 .hero-timeline__start {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 0.28rem;
   height: 0.28rem;
+  transform: translate(-50%, -50%);
 }
 
 .hero-timeline__label {
-  margin-left: 0.4rem;
+  position: absolute;
+  bottom: 0.38rem;
+  left: 0.32rem;
   color: rgba(255, 255, 255, 0.42);
   font-size: 0.58rem;
   font-weight: 500;

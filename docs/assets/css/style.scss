@@ -202,7 +202,7 @@ a:hover {
 }
 
 .article-sidebar {
-  --article-sidebar-sticky-top: clamp(7rem, 15vh, 11rem);
+  --article-sidebar-sticky-top: clamp(7rem, 15vh, 9.5rem);
   grid-column: 1;
   position: sticky;
   top: var(--article-sidebar-sticky-top);

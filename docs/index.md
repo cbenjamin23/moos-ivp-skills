@@ -156,13 +156,6 @@ supporting files, and relationships with the rest of the system.
 
 ## Mission Builder
 
-Mission Builder builds or repairs the ordinary mission layer for one
-standalone MOOS-IvP scenario. It produces a complete mission folder with
-launchers, vehicle and shoreside communities, helm behavior configuration,
-networking, target-generation support, viewer setup, cleanup, and operator
-documentation. The completed mission should remain readable and runnable on
-its own.
-
 <details class="skill-profile" markdown="1">
 <summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
 
@@ -172,6 +165,13 @@ Canonical source: `skills/moos-ivp-mission-builder/`
 
 ### Definition
 {: #mission-builder-definition }
+
+Mission Builder builds or repairs the ordinary mission layer for one
+standalone MOOS-IvP scenario. It produces a complete mission folder with
+launchers, vehicle and shoreside communities, helm behavior configuration,
+networking, target-generation support, viewer setup, cleanup, and operator
+documentation. The completed mission should remain readable and runnable on
+its own.
 
 The expected result is more than a valid collection of `.moos` and `.bhv`
 files. The mission should have a clear human-facing entry point, correctly
@@ -409,11 +409,6 @@ This tests split-host plumbing without changing the working mission.
 
 ## MOOS-IvP Docs
 
-MOOS-IvP Docs answers questions about upstream MOOS-IvP semantics using the
-live MIT manual PDFs and, when needed, a local `moos-ivp` source tree. It covers
-applications, utilities, IvP behaviors, configuration parameters, terminology,
-and architectural concepts.
-
 <details class="skill-profile" markdown="1">
 <summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
 
@@ -423,6 +418,11 @@ Canonical source: `skills/moos-ivp-docs/`
 
 ### Definition
 {: #moos-ivp-docs-definition }
+
+MOOS-IvP Docs answers questions about upstream MOOS-IvP semantics using the
+live MIT manual PDFs and, when needed, a local `moos-ivp` source tree. It covers
+applications, utilities, IvP behaviors, configuration parameters, terminology,
+and architectural concepts.
 
 A successful result identifies the evidence used, cites the relevant PDF or
 local source lines, and states whether the answer describes upstream
@@ -522,13 +522,6 @@ interpret evidence.
 
 ## App Builder
 
-App Builder creates or modifies user-owned MOOS applications that build
-against a local MOOS-IvP checkout. For a new application, it produces the
-AppCasting C++ source, app-local and project-level CMake wiring, accurate
-`--help`, `--example`, and `--interface` output, and an application-specific
-`ProcessConfig` example. It keeps the application outside the upstream
-MOOS-IvP source tree unless the user explicitly requests a core patch.
-
 <details class="skill-profile" markdown="1">
 <summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
 
@@ -538,6 +531,13 @@ Canonical source: `skills/moos-app-builder/`
 
 ### Definition
 {: #app-builder-definition }
+
+App Builder creates or modifies user-owned MOOS applications that build
+against a local MOOS-IvP checkout. For a new application, it produces the
+AppCasting C++ source, app-local and project-level CMake wiring, accurate
+`--help`, `--example`, and `--interface` output, and an application-specific
+`ProcessConfig` example. It keeps the application outside the upstream
+MOOS-IvP source tree unless the user explicitly requests a core patch.
 
 A completed application should build within the user’s repository, expose a
 clear MOOS mail and configuration interface, follow the surrounding project’s
@@ -661,13 +661,6 @@ mission-specific protocols indiscriminately.
 
 ## Behavior Builder
 
-Behavior Builder creates or modifies custom IvP helm behaviors outside the
-core MOOS-IvP source tree. It produces a `BHV_<Name>` C++ implementation, a
-dynamically loadable `libBHV_<Name>` shared library, build wiring, behavior
-parameters, and an example `.bhv` configuration. The library exports
-`createBehavior` and is made discoverable to `pHelmIvP` through the user’s
-behavior-library path or an explicit mission-local setting.
-
 <details class="skill-profile" markdown="1">
 <summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
 
@@ -677,6 +670,13 @@ Canonical source: `skills/ivp-behavior-builder/`
 
 ### Definition
 {: #behavior-builder-definition }
+
+Behavior Builder creates or modifies custom IvP helm behaviors outside the
+core MOOS-IvP source tree. It produces a `BHV_<Name>` C++ implementation, a
+dynamically loadable `libBHV_<Name>` shared library, build wiring, behavior
+parameters, and an example `.bhv` configuration. The library exports
+`createBehavior` and is made discoverable to `pHelmIvP` through the user’s
+behavior-library path or an explicit mission-local setting.
 
 A completed behavior should accept standard IvP behavior parameters, validate
 its own configuration, declare every information-buffer input it reads, handle
@@ -807,12 +807,6 @@ dynamic-library semantics.
 
 ## Eval Mission Builder
 
-Eval Mission Builder converts one ordinary MOOS-IvP mission into a
-self-evaluating mission for one scenario. The result still supports a normal
-GUI launch, but it can also start headlessly, evaluate mission-owned pass/fail
-conditions, write a scalar `results.txt` row containing
-`grade=<pass|fail>`, and exit without manual interaction.
-
 <details class="skill-profile" markdown="1">
 <summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
 
@@ -822,6 +816,12 @@ Canonical source: `skills/moos-ivp-eval-mission-builder/`
 
 ### Definition
 {: #eval-mission-builder-definition }
+
+Eval Mission Builder converts one ordinary MOOS-IvP mission into a
+self-evaluating mission for one scenario. The result still supports a normal
+GUI launch, but it can also start headlessly, evaluate mission-owned pass/fail
+conditions, write a scalar `results.txt` row containing
+`grade=<pass|fail>`, and exit without manual interaction.
 
 The evaluation layer consists of explicit state initialization, a small
 mission-level grading signal, `pMissionEval` configuration, a thin
@@ -1016,12 +1016,6 @@ and preserves the workspace if teardown itself fails.
 
 ## Harness Builder
 
-Harness Builder creates or repairs a multi-case test harness around one or more
-self-evaluating stem missions. The harness selects cases, prepares isolated
-mission copies, applies patches or fixtures, allocates ports, schedules serial
-or rolling parallel runs, publishes one normalized result row per case, and
-preserves work directories when debugging is requested.
-
 <details class="skill-profile" markdown="1">
 <summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
 
@@ -1031,6 +1025,12 @@ Canonical source: `skills/moos-ivp-harness-builder/`
 
 ### Definition
 {: #harness-builder-definition }
+
+Harness Builder creates or repairs a multi-case test harness around one or more
+self-evaluating stem missions. The harness selects cases, prepares isolated
+mission copies, applies patches or fixtures, allocates ports, schedules serial
+or rolling parallel runs, publishes one normalized result row per case, and
+preserves work directories when debugging is requested.
 
 The expected output includes a documented case matrix, a harness-level
 `zlaunch.sh`, aggregated `results.txt`, any explicit patch or fixture files,
@@ -1222,11 +1222,6 @@ under a conventional harness subdirectory.
 
 ## ALog Analysis
 
-ALog Analysis examines existing MOOS `.alog` files to reconstruct mission
-events, investigate anomalies, inspect helm modes and behaviors, or extract
-numeric and geometric evidence. It uses the installed `aloggrep`, `aloghelm`,
-and `alogscan` utilities plus a bundled compact variable-discovery wrapper.
-
 <details class="skill-profile" markdown="1">
 <summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
 
@@ -1236,6 +1231,11 @@ Canonical source: `skills/moos-alog-analysis/`
 
 ### Definition
 {: #alog-analysis-definition }
+
+ALog Analysis examines existing MOOS `.alog` files to reconstruct mission
+events, investigate anomalies, inspect helm modes and behaviors, or extract
+numeric and geometric evidence. It uses the installed `aloggrep`, `aloghelm`,
+and `alogscan` utilities plus a bundled compact variable-discovery wrapper.
 
 A completed analysis states the commands used and supports each conclusion
 with timestamped output. It stays focused on the variables and time windows
@@ -1329,11 +1329,6 @@ evidence files.
 
 ## Map Builder
 
-Map Builder creates and verifies MOOS-IvP TIFF background maps by operating the
-installed `moos-map` application. A normal build produces a named directory
-containing the cropped `.tif`, its MOOS `.info` georeferencing file, and an
-optional `.moos` snippet for `pMarineViewer`.
-
 <details class="skill-profile" markdown="1">
 <summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
 
@@ -1343,6 +1338,11 @@ Canonical source: `skills/moos-map-builder/`
 
 ### Definition
 {: #map-builder-definition }
+
+Map Builder creates and verifies MOOS-IvP TIFF background maps by operating the
+installed `moos-map` application. A normal build produces a named directory
+containing the cropped `.tif`, its MOOS `.info` georeferencing file, and an
+optional `.moos` snippet for `pMarineViewer`.
 
 A completed map reports the output paths, TIFF dimensions and size, imagery
 source, zoom, bounds, origin, and any verification warnings. New CLI builds are
@@ -1427,12 +1427,6 @@ Package: [https://pypi.org/project/moos-map/](https://pypi.org/project/moos-map/
 
 ## Repo Builder
 
-Repo Builder bootstraps a new external MOOS-IvP development repository from
-`moos-ivp/moos-ivp-extend`. It validates the local MOOS-IvP dependency,
-customizes the template for the user’s project, detaches the upstream Git
-history, initializes an independent repository, writes a repo-local environment
-file, and validates the baseline application and behavior build.
-
 <details class="skill-profile" markdown="1">
 <summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
 
@@ -1442,6 +1436,12 @@ Canonical source: `skills/moos-ivp-repo-builder/`
 
 ### Definition
 {: #repo-builder-definition }
+
+Repo Builder bootstraps a new external MOOS-IvP development repository from
+`moos-ivp/moos-ivp-extend`. It validates the local MOOS-IvP dependency,
+customizes the template for the user’s project, detaches the upstream Git
+history, initializes an independent repository, writes a repo-local environment
+file, and validates the baseline application and behavior build.
 
 The result is a user-owned project with stable source, mission, binary, script,
 and behavior-library locations. Normal `./build.sh` runs can find the selected
@@ -1554,12 +1554,6 @@ Template: [https://github.com/moos-ivp/moos-ivp-extend](https://github.com/moos-
 
 ## Installer
 
-Installer locates, clones, builds, and validates the upstream
-`moos-ivp/moos-ivp` repository. It selects the checkout’s platform-specific
-setup instructions, obtains approval before dependency or profile changes,
-creates `<moos-ivp-root>/env.sh`, and runs a bundled validator against the
-finished installation.
-
 <details class="skill-profile" markdown="1">
 <summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
 
@@ -1569,6 +1563,12 @@ Canonical source: `skills/moos-ivp-installer/`
 
 ### Definition
 {: #installer-definition }
+
+Installer locates, clones, builds, and validates the upstream
+`moos-ivp/moos-ivp` repository. It selects the checkout’s platform-specific
+setup instructions, obtains approval before dependency or profile changes,
+creates `<moos-ivp-root>/env.sh`, and runs a bundled validator against the
+finished installation.
 
 A completed installation has the expected `ivp/src` tree, executable MOOS and
 IvP build scripts, a built `pAntler`, working application and behavior

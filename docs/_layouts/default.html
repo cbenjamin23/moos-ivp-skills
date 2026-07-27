@@ -18,6 +18,9 @@
     <a class="skip-link" href="#main-content">Skip to article</a>
 
     <header class="page-hero" role="banner">
+      {% if page.url == "/" %}
+        <div class="page-hero__timelines" aria-hidden="true"></div>
+      {% endif %}
       <div class="page-hero__inner">
         <div class="page-hero__copy">
           <h1 class="page-hero__title">

@@ -1,4 +1,54 @@
 (() => {
+  const timelineLayer = document.querySelector(".page-hero__timelines");
+  if (timelineLayer && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const timelines = [
+      { name: "Mission Builder", top: "9%", left: "3%", length: 300, angle: 7, delay: 0, revisions: [11, 18, 32, 49, 68, 90, 96] },
+      { name: "MOOS-IvP Docs", top: "15%", left: "68%", length: 260, angle: -11, delay: 2.2, revisions: [17, 41] },
+      { name: "App Builder", top: "73%", left: "5%", length: 270, angle: -8, delay: 4.4, revisions: [12, 17, 42] },
+      { name: "Behavior Builder", top: "84%", left: "70%", length: 260, angle: 9, delay: 6.6, revisions: [18, 42] },
+      { name: "Eval Mission Builder", top: "46%", left: "1%", length: 240, angle: 15, delay: 8.8, revisions: [12, 32, 49, 81, 84, 86, 94, 97] },
+      { name: "Harness Builder", top: "58%", left: "76%", length: 250, angle: -14, delay: 11, revisions: [12, 17, 32, 49, 72, 81, 86, 90] },
+      { name: "ALog Analysis", top: "5%", left: "47%", length: 210, angle: -5, delay: 13.2, revisions: [49] },
+      { name: "Repo Builder", top: "91%", left: "30%", length: 300, angle: 2, delay: 15.4, revisions: [9, 22, 38, 42] },
+      { name: "Installer", top: "34%", left: "82%", length: 190, angle: -20, delay: 17.6, revisions: [] },
+      { name: "Map Builder", top: "78%", left: "83%", length: 190, angle: 12, delay: 19.8, revisions: [] }
+    ];
+
+    timelines.forEach((entry) => {
+      const timeline = document.createElement("span");
+      timeline.className = "hero-timeline";
+      timeline.style.setProperty("--timeline-top", entry.top);
+      timeline.style.setProperty("--timeline-left", entry.left);
+      timeline.style.setProperty("--timeline-length", `${entry.length}px`);
+      timeline.style.setProperty("--timeline-angle", `${entry.angle}deg`);
+      timeline.style.setProperty("--timeline-delay", `${entry.delay}s`);
+
+      const origin = document.createElement("span");
+      origin.className = "hero-timeline__origin";
+
+      const start = document.createElement("span");
+      start.className = "hero-timeline__start";
+
+      const label = document.createElement("span");
+      label.className = "hero-timeline__label";
+      label.textContent = entry.name;
+
+      const rail = document.createElement("span");
+      rail.className = "hero-timeline__rail";
+
+      entry.revisions.forEach((position) => {
+        const revision = document.createElement("span");
+        revision.className = "hero-timeline__revision";
+        revision.style.left = `${position}%`;
+        rail.appendChild(revision);
+      });
+
+      origin.append(start, label);
+      timeline.append(origin, rail);
+      timelineLayer.appendChild(timeline);
+    });
+  }
+
   const skillProfiles = Array.from(document.querySelectorAll(".skill-profile"));
   const mobileNav = document.querySelector(".mobile-nav__details");
   const navLinks = Array.from(document.querySelectorAll(".article-nav a[href^='#']"));

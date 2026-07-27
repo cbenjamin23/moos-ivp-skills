@@ -103,9 +103,122 @@ a:hover {
   background: #61c799;
 }
 
+.page-hero__timelines {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-timeline {
+  position: absolute;
+  top: var(--timeline-top);
+  left: var(--timeline-left);
+  width: var(--timeline-length);
+  height: 1.5rem;
+  opacity: 0;
+  transform: rotate(var(--timeline-angle)) scale(1);
+  transform-origin: left center;
+  animation: hero-timeline-cycle 22s linear infinite;
+  animation-delay: var(--timeline-delay);
+}
+
+.hero-timeline__origin,
+.hero-timeline__rail {
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.hero-timeline__origin {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  transform: translateY(-50%);
+}
+
+.hero-timeline__start,
+.hero-timeline__revision {
+  display: block;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.44);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.16);
+}
+
+.hero-timeline__start {
+  width: 0.28rem;
+  height: 0.28rem;
+}
+
+.hero-timeline__label {
+  margin-left: 0.4rem;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.hero-timeline__rail {
+  width: 100%;
+  height: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  clip-path: inset(0 100% 0 0);
+  transform: translateY(-1px);
+  animation: hero-timeline-reveal 22s linear infinite;
+  animation-delay: var(--timeline-delay);
+}
+
+.hero-timeline__revision {
+  position: absolute;
+  top: -0.14rem;
+  width: 0.22rem;
+  height: 0.22rem;
+  transform: translateX(-50%);
+}
+
+@keyframes hero-timeline-cycle {
+  0%,
+  2% {
+    opacity: 0;
+    transform: rotate(var(--timeline-angle)) scale(1);
+  }
+
+  6%,
+  34% {
+    opacity: 0.72;
+    transform: rotate(var(--timeline-angle)) scale(1);
+  }
+
+  50% {
+    opacity: 0;
+    transform: rotate(var(--timeline-angle)) scale(0.82);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(var(--timeline-angle)) scale(0.82);
+  }
+}
+
+@keyframes hero-timeline-reveal {
+  0%,
+  6% {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  34%,
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 .page-hero__inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -812,6 +925,18 @@ a:hover {
 
   .main-content {
     max-width: none;
+  }
+}
+
+@media (max-width: 820px), (prefers-reduced-motion: reduce) {
+  .page-hero__timelines {
+    display: none;
+  }
+}
+
+@media print {
+  .page-hero__timelines {
+    display: none;
   }
 }
 

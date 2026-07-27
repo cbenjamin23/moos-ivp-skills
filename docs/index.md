@@ -4,8 +4,6 @@ title: "Agentic Coding and MOOS-IvP"
 description: "Introducing the moos-ivp-skills plugin for MOOS-DAWG 2026"
 ---
 
-[MOOS-DAWG 2026 talk: Agentic Coding and MOOS-IvP](https://oceanai.mit.edu/moos-dawg/pmwiki/pmwiki.php?n=Talk.19-CBenjGenAI)
-
 > **A note for readers:** MOOS-IvP is an open-source collection of C++ modules
 > for building autonomy systems on robotic platforms, particularly autonomous
 > marine vehicles. This article assumes familiarity with MOOS communities,
@@ -77,6 +75,11 @@ skill-name/
 ├── scripts/      # optional
 └── assets/       # optional
 ```
+<figure class="article-figure article-figure--compact">
+  <img src="{{ '/assets/images/skill-package.svg' | relative_url }}" alt="A skill folder containing SKILL.md and optional references, scripts, and assets subfolders">
+  <figcaption>A skill is a small, self-contained engineering playbook rather than a single reusable prompt.</figcaption>
+</figure>
+
 
 The name and description in `SKILL.md` help the agent recognize when the
 workflow applies. The body records the decisions, sequence, boundaries, and
@@ -126,6 +129,11 @@ The graph is not intended to turn every task into one giant workflow. Its
 purpose is to keep responsibilities clear while still allowing a larger job to
 move naturally between specialized capabilities.
 
+<figure class="article-figure">
+  <img src="{{ '/assets/images/skill-network.png' | relative_url }}" alt="Architecture diagram showing ten MOOS-IvP skills and the direct handoffs between them">
+  <figcaption>The ten current skills remain independently useful, while the arrows identify deliberate transfers of work or evidence.</figcaption>
+</figure>
+
 All ten skills are distributed as one plugin for installation. That makes the
 full system available together, while still allowing the agent to load only
 the guidance relevant to the current task.
@@ -141,11 +149,15 @@ practice.
 
 ---
 
+<div class="article-tools" aria-label="Skill profile controls">
+  <span class="article-tools__label">Skill profiles</span>
+  <button type="button" class="article-tool" data-skill-action="expand">Expand all</button>
+  <button type="button" class="article-tool" data-skill-action="collapse">Collapse all</button>
+</div>
+
+<section class="skill-card" markdown="1">
+
 ## Mission Builder
-
-Canonical source: `skills/moos-ivp-mission-builder/`
-
-### Definition
 
 Mission Builder builds or repairs the ordinary mission layer for one
 standalone MOOS-IvP scenario. It produces a complete mission folder with
@@ -154,6 +166,16 @@ networking, target-generation support, viewer setup, cleanup, and operator
 documentation. The completed mission should remain readable and runnable on
 its own.
 
+<details class="skill-profile" open markdown="1">
+<summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
+
+<div class="skill-profile__body" markdown="1">
+
+Canonical source: `skills/moos-ivp-mission-builder/`
+
+### Definition
+{: #mission-builder-definition }
+
 The expected result is more than a valid collection of `.moos` and `.bhv`
 files. The mission should have a clear human-facing entry point, correctly
 separated community responsibilities, reproducible generated targets,
@@ -161,6 +183,7 @@ appropriate graphical and headless modes, conservative cleanup, and a
 validation path that matches the claims being made about the mission.
 
 ### Workflow
+{: #mission-builder-workflow }
 
 The skill begins by resolving the mission architecture: the number of
 vehicles, simulation or hardware operation, the community layout, graphical
@@ -177,6 +200,7 @@ cleanup are treated as part of the completed mission rather than follow-up
 work.
 
 ### Baselines
+{: #mission-builder-baselines }
 
 Mission Builder bundles complete single- and two-vehicle baseline missions and
 adapts the closest one rather than rebuilding the launcher system. These
@@ -185,6 +209,7 @@ and GUI/headless behavior, leaving the agent to make only mission-specific
 changes.
 
 ### Launchers
+{: #mission-builder-launchers }
 
 The launchers in both bundled baselines establish the same hierarchy. The
 top-level `launch.sh` is the operator-facing entry point and owns the single
@@ -193,6 +218,7 @@ start one community; top-level calls pass `--auto` so sublaunchers do not open
 competing sessions or block automated runs.
 
 ### Validation
+{: #mission-builder-validation }
 
 Validation is layered. Structural checks verify the mission layout;
 generated-target checks confirm that arguments such as ports and addresses
@@ -201,6 +227,7 @@ configuration, behaviors, and communication. A successful `--just_make` proves
 target generation, not runtime correctness.
 
 ### Networking
+{: #mission-builder-networking }
 
 Caller-controlled MOOSDB and pShare ports are forwarded through every launcher
 layer so missions can run concurrently and validation can use fresh ports. The
@@ -219,6 +246,7 @@ to the wrong interface; host identity and the shoreside route are separate
 settings.
 
 ### Configuration
+{: #mission-builder-configuration }
 
 The skill uses strict, forced `nsplug` generation and supports companion
 overlay files, sometimes called sidecars. Files such as `.moosx` and `.bhvx`
@@ -229,6 +257,7 @@ Direct configuration is preferred for small missions, with plug files used
 only for real shared duplication.
 
 ### Documentation and cleanup
+{: #mission-builder-documentation-and-cleanup }
 
 The README records the scenario, important files, run commands, and operator
 actions. `clean.sh` removes generated files and logs without global process
@@ -236,6 +265,7 @@ kills. Grading, case matrices, batch execution, and result aggregation remain
 outside the ordinary mission layer.
 
 ### Common faults
+{: #mission-builder-common-faults }
 
 - `--just_make` confirms target generation but cannot expose every runtime
   failure.
@@ -250,8 +280,10 @@ outside the ordinary mission layer.
   unrelated missions.
 
 ### Assets
+{: #mission-builder-assets }
 
 #### `assets/baseline-single-vehicle/`
+{: #mission-builder-assets-baseline-single-vehicle }
 
 A portable one-vehicle mission scaffold with one vehicle community and one
 shoreside community. It includes:
@@ -275,6 +307,7 @@ process/load monitoring, shoreside viewer, and common operator controls needed
 for an ordinary single-vehicle starting point.
 
 #### `assets/baseline-two-vehicle/`
+{: #mission-builder-assets-baseline-two-vehicle }
 
 A portable two-vehicle scaffold with vehicle communities `alpha` and `bravo`
 plus a shoreside community. It demonstrates:
@@ -290,24 +323,29 @@ It is extended through its arrays and naming pattern rather than by duplicating
 launchers.
 
 ### References
+{: #mission-builder-references }
 
 #### `references/mission-style.md`
+{: #mission-builder-references-mission-style-md }
 
 The primary reference for mission files, launcher roles, target generation,
 networking, `uMAC` ownership, `nsplug`, application rosters, cleanup,
 formatting, and README requirements.
 
 #### `references/baseline-single-vehicle.md`
+{: #mission-builder-references-baseline-single-vehicle-md }
 
 Explains the single-vehicle asset, default communities, application stack,
 viewer and behavior setup, and custom component integration.
 
 #### `references/baseline-two-vehicle.md`
+{: #mission-builder-references-baseline-two-vehicle-md }
 
 Explains the reusable two-vehicle launcher, port sequence, vehicle arrays,
 shoreside name forwarding, generated targets, and vehicle expansion.
 
 #### `references/validation.md`
+{: #mission-builder-references-validation-md }
 
 Defines the validation ladder:
 
@@ -321,14 +359,17 @@ Defines the validation ladder:
 It states what each level proves and what remains untested.
 
 ### Scripts
+{: #mission-builder-scripts }
 
 #### `scripts/static_check_mission.sh`
+{: #mission-builder-scripts-static-check-mission-sh }
 
 Checks the mission's expected files, launcher options, `nsplug` conventions,
 core configuration blocks, and cleanup safety. It does not prove argument
 forwarding or runtime behavior.
 
 #### `scripts/check_generated_ports.sh`
+{: #mission-builder-scripts-check-generated-ports-sh }
 
 Generates targets on non-default ports and verifies every vehicle and
 shoreside result, catching options dropped between parsing and `nsplug`. It
@@ -336,6 +377,7 @@ discovers named vehicle-port options from `launch.sh --help` and can preserve
 targets for inspection.
 
 #### `scripts/check_generated_networking.sh`
+{: #mission-builder-scripts-check-generated-networking-sh }
 
 Copies the mission to a temporary workspace, generates targets with distinct
 test addresses and ports, and confirms that:
@@ -348,6 +390,7 @@ test addresses and ports, and confirms that:
 This tests split-host plumbing without changing the working mission.
 
 ### Related skills
+{: #mission-builder-related-skills }
 
 - **MOOS-IvP Docs:** Mission Builder uses it to verify an unclear application,
   behavior, or parameter before writing configuration.
@@ -362,16 +405,29 @@ This tests split-host plumbing without changing the working mission.
 
 ---
 
+</div>
+</details>
+
+</section>
+
+<section class="skill-card" markdown="1">
+
 ## MOOS-IvP Docs
-
-Canonical source: `skills/moos-ivp-docs/`
-
-### Definition
 
 MOOS-IvP Docs answers questions about upstream MOOS-IvP semantics using the
 live MIT manual PDFs and, when needed, a local `moos-ivp` source tree. It covers
 applications, utilities, IvP behaviors, configuration parameters, terminology,
 and architectural concepts.
+
+<details class="skill-profile" markdown="1">
+<summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
+
+<div class="skill-profile__body" markdown="1">
+
+Canonical source: `skills/moos-ivp-docs/`
+
+### Definition
+{: #moos-ivp-docs-definition }
 
 A successful result identifies the evidence used, cites the relevant PDF or
 local source lines, and states whether the answer describes upstream
@@ -380,6 +436,7 @@ answer preserves the distinction and explains which source governs the
 specific claim.
 
 ### Workflow
+{: #moos-ivp-docs-workflow }
 
 The skill first classifies the question as application/utility, behavior,
 conceptual/architectural, or tutorial/operator-oriented. For an upstream
@@ -395,6 +452,7 @@ the relevant application or behavior implementation, and cites the parser,
 setter, validation, or decision path that supports the answer.
 
 ### Authority
+{: #moos-ivp-docs-authority }
 
 MIT PDFs are authoritative for documented upstream semantics; local `ivp/src`
 is authoritative for checkout-specific behavior. Versioned implementations
@@ -402,6 +460,7 @@ without a matching manual are therefore answered from source, with the nearest
 manual presented only as upstream context.
 
 ### PDF selection
+{: #moos-ivp-docs-pdf-selection }
 
 The skill consults the live index rather than relying on a hardcoded manual
 map. It uses filename families such as `app_*`, `bhv_*`, `chap_*`,
@@ -410,6 +469,7 @@ contains the requested term. This prevents a plausible-sounding chapter title
 from being mistaken for evidence.
 
 ### Source fallback
+{: #moos-ivp-docs-source-fallback }
 
 Repository discovery follows a bounded order: an explicit user path,
 `MOOS_IVP_ROOT`, the active workspace, nearby parent or sibling directories,
@@ -418,6 +478,7 @@ accepted only if it contains `ivp/src` and recognizable application or
 behavior directories.
 
 ### Citations and conflicts
+{: #moos-ivp-docs-citations-and-conflicts }
 
 PDF answers cite the document URL and stable line spans, using a labeled
 text-extraction artifact when the PDF interface cannot supply line anchors.
@@ -425,6 +486,7 @@ Source answers cite local files and lines. Documentation and implementation
 claims remain separate when their behavior differs.
 
 ### Common faults
+{: #moos-ivp-docs-common-faults }
 
 - A manual filename is only a candidate; the requested term must be verified
   inside the PDF.
@@ -437,8 +499,10 @@ claims remain separate when their behavior differs.
   the skill stops rather than answering from memory.
 
 ### References
+{: #moos-ivp-docs-references }
 
 #### `references/doc-selection.md`
+{: #moos-ivp-docs-references-doc-selection-md }
 
 Defines the live-index workflow, filename families, limited alias corrections,
 PDF verification rules, repository discovery order, source-inspection targets,
@@ -447,6 +511,7 @@ used when the short instructions in `SKILL.md` are not enough to select or
 interpret evidence.
 
 ### Related skills
+{: #moos-ivp-docs-related-skills }
 
 - **Mission, App, and Behavior Builders:** They use this skill when they need
   to confirm how an upstream component or parameter actually works.
@@ -455,11 +520,14 @@ interpret evidence.
 
 ---
 
+</div>
+</details>
+
+</section>
+
+<section class="skill-card" markdown="1">
+
 ## App Builder
-
-Canonical source: `skills/moos-app-builder/`
-
-### Definition
 
 App Builder creates or modifies user-owned MOOS applications that build
 against a local MOOS-IvP checkout. For a new application, it produces the
@@ -467,6 +535,16 @@ AppCasting C++ source, app-local and project-level CMake wiring, accurate
 `--help`, `--example`, and `--interface` output, and an application-specific
 `ProcessConfig` example. It keeps the application outside the upstream
 MOOS-IvP source tree unless the user explicitly requests a core patch.
+
+<details class="skill-profile" markdown="1">
+<summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
+
+<div class="skill-profile__body" markdown="1">
+
+Canonical source: `skills/moos-app-builder/`
+
+### Definition
+{: #app-builder-definition }
 
 A completed application should build within the user’s repository, expose a
 clear MOOS mail and configuration interface, follow the surrounding project’s
@@ -476,6 +554,7 @@ runnable example was requested, the result also includes the launcher or
 `ProcessConfig` block is documentation, not a runnable mission.
 
 ### Workflow
+{: #app-builder-workflow }
 
 The skill first resolves and validates a local MOOS-IvP checkout because the
 upstream generator, headers, libraries, and example applications are working
@@ -492,6 +571,7 @@ target, exercises its self-documentation flags, and uses a normal `pAntler`
 launch when runtime configuration or process discovery needs evidence.
 
 ### Structure
+{: #app-builder-structure }
 
 `OnNewMail()` validates incoming messages and records state through focused
 handlers; `Iterate()` owns recurring work and logic that combines or derives
@@ -501,6 +581,7 @@ list. This separation makes timing, stale-data behavior, and publications
 easier to reason about.
 
 ### Build and dependencies
+{: #app-builder-build-and-dependencies }
 
 The upstream generator creates an app-local `CMakeLists.txt` but does not add
 the application to the parent project. App Builder performs that missing build
@@ -509,6 +590,7 @@ used, preferring existing geometry, contact, logic, parsing, and AppCasting
 helpers over new local substitutes.
 
 ### Self-documentation
+{: #app-builder-self-documentation }
 
 The generated `_Info.cpp` is treated as part of the implementation.
 `showSynopsis()`, the example configuration, and the subscription/publication
@@ -516,6 +598,7 @@ interface must match the final code. Source metadata boxes are also rewritten
 for the user’s project rather than retaining upstream or generator defaults.
 
 ### Validation
+{: #app-builder-validation }
 
 A successful build plus `--help`, `--example`, and `--interface` establishes
 that the executable starts and its self-documentation is connected. Runtime
@@ -524,6 +607,7 @@ because direct app-by-path execution can change the MOOS process name and fail
 to select `ProcessConfig = <AppName>`.
 
 ### Common faults
+{: #app-builder-common-faults }
 
 - `GenMOOSApp_AppCasting` creates the app directory but does not update the
   parent `src/CMakeLists.txt`.
@@ -539,8 +623,10 @@ to select `ProcessConfig = <AppName>`.
   repository intentionally tracks them.
 
 ### References
+{: #app-builder-references }
 
 #### `references/app-build.md`
+{: #app-builder-references-app-build-md }
 
 Defines generator invocation, parent CMake integration, a minimal external
 project skeleton, MOOS-IvP library selection, binary discovery, sample
@@ -548,12 +634,14 @@ project skeleton, MOOS-IvP library selection, binary discovery, sample
 project wiring is missing or unfamiliar.
 
 #### `references/app-patterns.md`
+{: #app-builder-references-app-patterns-md }
 
 Provides the canonical AppCasting method layout and concrete patterns for
 typed mail handlers, startup configuration, `Iterate()` state derivation,
 subscriptions, and diagnostic AppCast reports.
 
 #### `references/app-examples.md`
+{: #app-builder-references-app-examples-md }
 
 Routes the agent to representative applications in the resolved checkout:
 `uFldGenericSensor` for configuration, mail, and geometry/contact patterns;
@@ -562,6 +650,7 @@ reporting. It also warns against copying upstream metadata, dependencies, or
 mission-specific protocols indiscriminately.
 
 ### Related skills
+{: #app-builder-related-skills }
 
 - **Repo Builder:** It can create the user-owned project where the new
   application will live and build.
@@ -572,11 +661,14 @@ mission-specific protocols indiscriminately.
 
 ---
 
+</div>
+</details>
+
+</section>
+
+<section class="skill-card" markdown="1">
+
 ## Behavior Builder
-
-Canonical source: `skills/ivp-behavior-builder/`
-
-### Definition
 
 Behavior Builder creates or modifies custom IvP helm behaviors outside the
 core MOOS-IvP source tree. It produces a `BHV_<Name>` C++ implementation, a
@@ -585,6 +677,16 @@ parameters, and an example `.bhv` configuration. The library exports
 `createBehavior` and is made discoverable to `pHelmIvP` through the user’s
 behavior-library path or an explicit mission-local setting.
 
+<details class="skill-profile" markdown="1">
+<summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
+
+<div class="skill-profile__body" markdown="1">
+
+Canonical source: `skills/ivp-behavior-builder/`
+
+### Definition
+{: #behavior-builder-definition }
+
 A completed behavior should accept standard IvP behavior parameters, validate
 its own configuration, declare every information-buffer input it reads, handle
 missing state explicitly, and either post its intended outputs or return a
@@ -592,6 +694,7 @@ correctly weighted IvP function. The result stays in the user repository unless
 the task explicitly calls for a core MOOS-IvP modification.
 
 ### Workflow
+{: #behavior-builder-workflow }
 
 The skill resolves a local MOOS-IvP checkout for the generator, headers,
 libraries, and representative behaviors. Before generating code, it chooses
@@ -607,6 +710,7 @@ symbol inspection, to a normal helm load with the selected library path
 isolated when appropriate.
 
 ### Lifecycle and configuration
+{: #behavior-builder-lifecycle-and-configuration }
 
 The constructor sets defaults, narrows the decision domain, and declares
 information-buffer variables. `setParam()` delegates to
@@ -617,6 +721,7 @@ errors for invalid conditions, and returns either a weighted objective
 function or `0`.
 
 ### IvP functions
+{: #behavior-builder-ivp-functions }
 
 ZAICs are the default for a single decision variable; course objectives use
 wrapped values and angle-aware arithmetic. AOF plus Reflector is reserved for
@@ -625,6 +730,7 @@ samples the AOF and can add substantial runtime cost. Every returned IvP
 function receives `m_priority_wt`.
 
 ### Build and loading
+{: #behavior-builder-build-and-loading }
 
 Each behavior normally builds as its own shared library and exports
 `createBehavior`. Persistent user projects expose the project `lib/` through
@@ -633,6 +739,7 @@ self-contained or non-interactive missions, or projects already using that
 convention.
 
 ### Validation
+{: #behavior-builder-validation }
 
 Compilation confirms the source and link dependencies, while `nm` confirms the
 dynamic factory symbol. Runtime success requires explicit helm evidence such
@@ -641,6 +748,7 @@ mission is preferred because `pHelmIvP` needs a live MOOSDB before behavior
 loading is exercised.
 
 ### Common faults
+{: #behavior-builder-common-faults }
 
 - `GenBehavior` appends to existing `BHV_<Name>.h/.cpp` files, so running it in
   a dirty destination can duplicate or corrupt the source.
@@ -656,8 +764,10 @@ loading is exercised.
   using `PATH` or `--alias=pHelmIvP` preserves the intended `ProcessConfig`.
 
 ### References
+{: #behavior-builder-references }
 
 #### `references/behavior-build.md`
+{: #behavior-builder-references-behavior-build-md }
 
 Defines safe generator use, minimal external-project CMake, behavior-library
 dependencies, platform-specific shared-library naming, `IVP_BEHAVIOR_DIRS`,
@@ -665,6 +775,7 @@ mission-local loading, factory-symbol inspection, and a valid runtime loader
 test.
 
 #### `references/behavior-patterns.md`
+{: #behavior-builder-references-behavior-patterns-md }
 
 Provides concrete patterns for constructors, standard and custom parameters,
 post-configuration validation, information-buffer reads, posting-only and
@@ -672,12 +783,14 @@ objective-producing `onRunState()` implementations, and optional lifecycle
 hooks.
 
 #### `references/ivp-function-patterns.md`
+{: #behavior-builder-references-ivp-function-patterns-md }
 
 Explains when to use ZAIC, Coupler, or AOF/Reflector; includes speed and wrapped
 course examples; and documents priority weighting, domain selection,
 angle-handling, missing-data, and reflector-performance pitfalls.
 
 #### `references/behavior-examples.md`
+{: #behavior-builder-references-behavior-examples-md }
 
 Routes inspection to representative upstream behaviors: constant-speed and
 heading examples for simple ZAICs, waypoint and timer for stateful behavior,
@@ -685,6 +798,7 @@ trail and `IvPContactBehavior` for contacts, and the helm loader source for
 dynamic-library semantics.
 
 ### Related skills
+{: #behavior-builder-related-skills }
 
 - **Repo Builder:** It can create the project and behavior-library directory
   where the new shared library will be built.
@@ -695,17 +809,30 @@ dynamic-library semantics.
 
 ---
 
+</div>
+</details>
+
+</section>
+
+<section class="skill-card" markdown="1">
+
 ## Eval Mission Builder
-
-Canonical source: `skills/moos-ivp-eval-mission-builder/`
-
-### Definition
 
 Eval Mission Builder converts one ordinary MOOS-IvP mission into a
 self-evaluating mission for one scenario. The result still supports a normal
 GUI launch, but it can also start headlessly, evaluate mission-owned pass/fail
 conditions, write a scalar `results.txt` row containing
 `grade=<pass|fail>`, and exit without manual interaction.
+
+<details class="skill-profile" markdown="1">
+<summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
+
+<div class="skill-profile__body" markdown="1">
+
+Canonical source: `skills/moos-ivp-eval-mission-builder/`
+
+### Definition
+{: #eval-mission-builder-definition }
 
 The evaluation layer consists of explicit state initialization, a small
 mission-level grading signal, `pMissionEval` configuration, a thin
@@ -715,6 +842,7 @@ row; launch wrappers only prepare, run, confirm that a grade exists, and clean
 up.
 
 ### Workflow
+{: #eval-mission-builder-workflow }
 
 The skill starts with an ordinary mission that already generates targets and
 launches successfully. It identifies the smallest signal that proves the
@@ -730,6 +858,7 @@ generation, a complete headless run, the final grade row, warning evidence,
 scoped ports, and leftover processes.
 
 ### Verdict and results
+{: #eval-mission-builder-verdict-and-results }
 
 `pMissionEval` alone writes `results.txt`. The required schema is only
 `grade=<pass|fail>`; additional scalar fields should explain the verdict with
@@ -738,6 +867,7 @@ mission hash. Shell code must not reconstruct a grade from targets, patch
 markers, or hints.
 
 ### Completion and timeouts
+{: #eval-mission-builder-completion-and-timeouts }
 
 Event-driven evaluation is preferred: the mission grades itself when its own
 completion event occurs. `xlaunch.sh --max_time` and `uMayFinish` provide an
@@ -746,6 +876,7 @@ when failure to complete by a deadline is itself a valid mission-owned failing
 outcome.
 
 ### Grading
+{: #eval-mission-builder-grading }
 
 Evaluation should remain at the level of the claim being tested. Application
 logic is graded from controlled app outputs; moving or encounter behavior is
@@ -753,6 +884,7 @@ graded from stable mission outcomes. Structured payloads are normally reduced
 to a helper boolean or scalar before reaching `pMissionEval`.
 
 ### Automation
+{: #eval-mission-builder-automation }
 
 Mission-local `zlaunch.sh` truncates the old result, forwards arguments to
 shared `xlaunch.sh`, verifies that a grade was produced, and invokes the
@@ -760,6 +892,7 @@ project’s copied `moos_scoped_teardown.sh`. It does not own case loops,
 parallelism, aggregation, or broad process termination.
 
 ### Validation
+{: #eval-mission-builder-validation }
 
 Static checks verify the evaluation contract, generated targets confirm the
 actual evaluator apps, bridges, ports, and GUI/headless guards, and a live
@@ -768,6 +901,7 @@ mission-owned `grade=fail` from launch failure and treats incomplete teardown
 as a test failure.
 
 ### Common faults
+{: #eval-mission-builder-common-faults }
 
 - Multiple consecutive `lead_condition` lines are ANDed; textual `or` requires
   parenthesized operands, and `||` is unsupported.
@@ -784,8 +918,10 @@ as a test failure.
 - Missing `grade=` is infrastructure failure, not an inferred failing verdict.
 
 ### Assets
+{: #eval-mission-builder-assets }
 
 #### `assets/eval-single-vehicle/`
+{: #eval-mission-builder-assets-eval-single-vehicle }
 
 A complete single-machine example in which simulated vehicle `abe`
 auto-deploys, completes one finite waypoint behavior, and is graded from
@@ -811,6 +947,7 @@ auto-deploys, completes one finite waypoint behavior, and is graded from
   operator controls.
 
 #### `assets/moos_scoped_teardown.sh`
+{: #eval-mission-builder-assets-moos-scoped-teardown-sh }
 
 A project-copyable cleanup helper that discovers known MOOS processes whose
 working directories fall under one run root. It uses `/proc` or `lsof`, derives
@@ -818,42 +955,51 @@ additional app names from mission files, and escalates from `INT` to `TERM` to
 `KILL` only within that scope.
 
 ### References
+{: #eval-mission-builder-references }
 
 #### `references/eval-mission-style.md`
+{: #eval-mission-builder-references-eval-mission-style-md }
 
 Defines the three supported launch modes, mission-versus-harness boundary,
 recommended files, launcher and cleanup conventions, and scalar result shape.
 
 #### `references/evaluator-apps.md`
+{: #eval-mission-builder-references-evaluator-apps-md }
 
 Explains initialization with `pAutoPoke` or `uTimerScript`, `pMissionEval`
 leads and ordered aspects, report columns, warning policy, mission-hash
 selection, and vehicle-to-shoreside bridging.
 
 #### `references/scenario-and-grading.md`
+{: #eval-mission-builder-references-scenario-and-grading-md }
 
 Guides selection of app-level versus moving/integration evidence, obstacle and
 contact models, and normalization of structured values before grading.
 
 #### `references/zlaunch-xlaunch.md`
+{: #eval-mission-builder-references-zlaunch-xlaunch-md }
 
 Defines the thin wrapper pattern, division of responsibility with
 `xlaunch.sh`, missing-grade handling, and safe project-local teardown.
 
 #### `references/validation.md`
+{: #eval-mission-builder-references-validation-md }
 
 Defines static, generated-target, live headless, and GUI validation, including
 what to inspect in `results.txt`, logs, port state, and cleanup.
 
 ### Scripts
+{: #eval-mission-builder-scripts }
 
 #### `scripts/static_check_eval_mission.sh`
+{: #eval-mission-builder-scripts-static-check-eval-mission-sh }
 
 Checks required files, initialization, evaluator conditions and result fields,
 supported logical syntax, mission-hash conflicts, grade ownership, `zlaunch`
 features, and prohibited global cleanup.
 
 #### `scripts/live_check_eval_mission.sh`
+{: #eval-mission-builder-scripts-live-check-eval-mission-sh }
 
 Copies a mission to a temporary workspace, installs the bundled teardown
 helper, allocates explicit MOOSDB and pShare ports, runs `zlaunch.sh`, verifies
@@ -861,6 +1007,7 @@ the expected grade, reports behavior warnings, detects listeners left behind,
 and preserves the workspace if teardown itself fails.
 
 ### Related skills
+{: #eval-mission-builder-related-skills }
 
 - **Mission Builder:** It first produces the ordinary mission that a person can
   launch and inspect; Eval Mission Builder adds the grading layer afterward.
@@ -873,17 +1020,30 @@ and preserves the workspace if teardown itself fails.
 
 ---
 
+</div>
+</details>
+
+</section>
+
+<section class="skill-card" markdown="1">
+
 ## Harness Builder
-
-Canonical source: `skills/moos-ivp-harness-builder/`
-
-### Definition
 
 Harness Builder creates or repairs a multi-case test harness around one or more
 self-evaluating stem missions. The harness selects cases, prepares isolated
 mission copies, applies patches or fixtures, allocates ports, schedules serial
 or rolling parallel runs, publishes one normalized result row per case, and
 preserves work directories when debugging is requested.
+
+<details class="skill-profile" markdown="1">
+<summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
+
+<div class="skill-profile__body" markdown="1">
+
+Canonical source: `skills/moos-ivp-harness-builder/`
+
+### Definition
+{: #harness-builder-definition }
 
 The expected output includes a documented case matrix, a harness-level
 `zlaunch.sh`, aggregated `results.txt`, any explicit patch or fixture files,
@@ -894,6 +1054,7 @@ result collection, or teardown prevents the mission from reporting its own
 verdict.
 
 ### Workflow
+{: #harness-builder-workflow }
 
 The skill begins by validating the stem as a complete Eval Mission: it must run
 headlessly, write `grade=`, accept forwarded ports, and generate targets with
@@ -908,6 +1069,7 @@ is verified, and the suite exits nonzero only after every selected case has had
 the opportunity to produce a row.
 
 ### Ownership
+{: #harness-builder-ownership }
 
 The stem mission owns startup, `pMissionEval`, and the verdict. The harness owns
 variation and execution. Expected-negative cases therefore configure the stem
@@ -915,6 +1077,7 @@ to return `grade=pass` when the expected adverse evidence is observed; the
 harness does not compare `expected=fail` with `actual=fail`.
 
 ### Cases and patches
+{: #harness-builder-cases-and-patches }
 
 Case setup is explicit rather than inferred from filenames. Small `.moos` and
 `.bhv` variations use `nspatch` to create companion `.moosx` and `.bhvx`
@@ -923,6 +1086,7 @@ configuration-block replacement is preferred for repeated keys such as
 `event`, `bridge`, or `report_column`, where line patches can over-match.
 
 ### Ports and parallelism
+{: #harness-builder-ports-and-parallelism }
 
 Each case receives a separate MOOSDB/pShare port block and a separate working
 copy. New parallel harnesses use Bash 5.1+ `wait -p ... -n` scheduling so a new
@@ -930,6 +1094,7 @@ case starts whenever any active case finishes, rather than waiting for a
 batch-wide barrier.
 
 ### Results and failures
+{: #harness-builder-results-and-failures }
 
 Ordinary case rows preserve the stem’s grade and evidence. Harness-owned
 failure reasons are limited to runner failures such as `prepare_error`,
@@ -937,6 +1102,7 @@ failure reasons are limited to runner failures such as `prepare_error`,
 selection that produces no rows is itself a harness failure.
 
 ### Cleanup and debugging
+{: #harness-builder-cleanup-and-debugging }
 
 Every case and exit path uses the copied root-scoped teardown helper. Teardown
 errors remain visible, turn an otherwise successful run into failure, and
@@ -944,6 +1110,7 @@ preserve the run root. `--keep_workdirs` retains the generated targets,
 overlay files, logs, and per-case results needed to audit isolation.
 
 ### Common faults
+{: #harness-builder-common-faults }
 
 - With `PORT_STRIDE=30` and a midpoint pShare offset, one block supports at
   most 14 vehicles before MOOSDB and pShare ranges overlap.
@@ -961,8 +1128,10 @@ overlay files, logs, and per-case results needed to audit isolation.
   run roots differ; their port ranges can also collide.
 
 ### Assets
+{: #harness-builder-assets }
 
 #### `assets/moos_scoped_teardown.sh`
+{: #harness-builder-assets-moos-scoped-teardown-sh }
 
 The same project-copyable helper used by Eval Mission Builder. Harnesses source
 it and stop only known MOOS applications whose working directories fall under
@@ -970,30 +1139,36 @@ the case or run root, with checked signal escalation and portable `/proc` or
 `lsof` discovery.
 
 ### References
+{: #harness-builder-references }
 
 #### `references/harness-style.md`
+{: #harness-builder-references-harness-style-md }
 
 Defines the stem/harness ownership split, directly presentable result rows,
 recommended repository layouts, expected-negative semantics, and the
 difference between app-level and integration harnesses.
 
 #### `references/case-matrix.md`
+{: #harness-builder-references-case-matrix-md }
 
 Defines concise case documentation and the drift check among README tokens,
 the script’s case list, and the case-setup mapping.
 
 #### `references/nspatch-workflow.md`
+{: #harness-builder-references-nspatch-workflow-md }
 
 Defines patch-input and overlay-file naming, explicit `nspatch` targets, safe
 full-block replacement, overlay ordering, and per-case patch mapping.
 
 #### `references/ports-and-parallelism.md`
+{: #harness-builder-references-ports-and-parallelism-md }
 
 Defines port-block arithmetic, community capacity, forwarded stem arguments,
 rolling scheduling, Bash requirements, and the isolation checks that a
 single-case run cannot provide.
 
 #### `references/generated-harness-self-tests.md`
+{: #harness-builder-references-generated-harness-self-tests-md }
 
 Provides adversarial tests for matrix drift, unknown cases, missing patches,
 serial/parallel parity, port collisions, zero-result runs, overlay leakage,
@@ -1001,32 +1176,38 @@ teardown containment, repeated interrupts, concurrent invocation, and
 copyable port audits.
 
 #### `references/validation.md`
+{: #harness-builder-references-validation-md }
 
 Defines the progression from stem validation, to one case, serial execution,
 small rolling runs, preserved-workdir inspection, listener checks, and
 post-run failure diagnosis.
 
 #### `references/timing-and-benchmarking.md`
+{: #harness-builder-references-timing-and-benchmarking-md }
 
 Separates wall-clock performance from mission correctness and provides a small
 repeatable jobs/warp benchmark shape plus guidance for timeout slack and
 cleanup tuning.
 
 #### `references/scoped-teardown.md`
+{: #harness-builder-references-scoped-teardown-md }
 
 Defines how generated projects install and source the teardown helper, preserve
 signal and error status, make cleanup idempotent, and avoid unsafe process
 discovery.
 
 #### `references/example-harness-zlaunch.md`
+{: #harness-builder-references-example-harness-zlaunch-md }
 
 Provides a complete modern launcher skeleton with Bash re-execution, argument
 handling, explicit case overlays, isolated workdirs and ports, rolling
 PID-to-case scheduling, normalized results, and checked teardown.
 
 ### Scripts
+{: #harness-builder-scripts }
 
 #### `scripts/static_check_harness.sh`
+{: #harness-builder-scripts-static-check-harness-sh }
 
 Checks case documentation and CLI support, real background execution, rolling
 wait logic, Bash version guards, explicit case mapping, result-row formats,
@@ -1035,6 +1216,7 @@ cleanup. It also delegates to the Eval Mission checker when a stem is embedded
 under a conventional harness subdirectory.
 
 ### Related skills
+{: #harness-builder-related-skills }
 
 - **Mission Builder:** It creates the runnable scenario beneath the harness.
 - **Eval Mission Builder:** It turns that scenario into the self-grading stem
@@ -1046,16 +1228,29 @@ under a conventional harness subdirectory.
 
 ---
 
+</div>
+</details>
+
+</section>
+
+<section class="skill-card" markdown="1">
+
 ## ALog Analysis
-
-Canonical source: `skills/moos-alog-analysis/`
-
-### Definition
 
 ALog Analysis examines existing MOOS `.alog` files to reconstruct mission
 events, investigate anomalies, inspect helm modes and behaviors, or extract
 numeric and geometric evidence. It uses the installed `aloggrep`, `aloghelm`,
 and `alogscan` utilities plus a bundled compact variable-discovery wrapper.
+
+<details class="skill-profile" markdown="1">
+<summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
+
+<div class="skill-profile__body" markdown="1">
+
+Canonical source: `skills/moos-alog-analysis/`
+
+### Definition
+{: #alog-analysis-definition }
 
 A completed analysis states the commands used and supports each conclusion
 with timestamped output. It stays focused on the variables and time windows
@@ -1064,6 +1259,7 @@ requires them, and performs additional shell or numeric analysis after the
 relevant evidence has been extracted.
 
 ### Workflow
+{: #alog-analysis-workflow }
 
 The workflow depends on how much is already known. A named variable or small
 variable set goes directly to targeted `aloggrep` queries. Mission phases,
@@ -1078,12 +1274,14 @@ custom computation rather than expecting a single `alog*` command to infer the
 answer.
 
 ### Evidence
+{: #alog-analysis-evidence }
 
 Only original `.alog` files are treated as source evidence. Viewer-generated
 `*_alvtmp/`, `.klog`, and similar derived artifacts are ignored because they
 may reflect transformation or caching rather than the original posting stream.
 
 ### Tool selection
+{: #alog-analysis-tool-selection }
 
 `aloggrep` is the default once variables are known; `aloghelm` supplies
 behavior and mode context; `alogvars.sh` is the default discovery path; raw
@@ -1091,6 +1289,7 @@ behavior and mode context; `alogvars.sh` is the default discovery path; raw
 metadata. Reduced `.alog` output is produced only when explicitly useful.
 
 ### Common faults
+{: #alog-analysis-common-faults }
 
 - Broad raw-log reads are usually slower and less precise than several narrow
   `aloggrep` queries.
@@ -1107,8 +1306,10 @@ metadata. Reduced `.alog` output is produced only when explicitly useful.
   cannot.
 
 ### References
+{: #alog-analysis-references }
 
 #### `references/alog-tool-guide.md`
+{: #alog-analysis-references-alog-tool-guide-md }
 
 Provides targeted examples for quick-look, first/final, prefix, structured
 payload, source-attribution, and reduced-log `aloggrep` use; modes, behaviors,
@@ -1116,8 +1317,10 @@ and lifecycle reporting with `aloghelm`; and compact versus full variable
 discovery.
 
 ### Scripts
+{: #alog-analysis-scripts }
 
 #### `scripts/alogvars.sh`
+{: #alog-analysis-scripts-alogvars-sh }
 
 Wraps `alogscan --sort=vars --nocolors`, removes progress noise, optionally
 filters variable names by one or more prefixes, and supports a
@@ -1125,6 +1328,7 @@ filters variable names by one or more prefixes, and supports a
 evidence files.
 
 ### Related skills
+{: #alog-analysis-related-skills }
 
 - **Mission, Eval Mission, and Harness Builders:** They create the runs whose
   logs this skill later reconstructs or diagnoses.
@@ -1133,16 +1337,29 @@ evidence files.
 
 ---
 
+</div>
+</details>
+
+</section>
+
+<section class="skill-card" markdown="1">
+
 ## Map Builder
-
-Canonical source: `skills/moos-map-builder/`
-
-### Definition
 
 Map Builder creates and verifies MOOS-IvP TIFF background maps by operating the
 installed `moos-map` application. A normal build produces a named directory
 containing the cropped `.tif`, its MOOS `.info` georeferencing file, and an
 optional `.moos` snippet for `pMarineViewer`.
+
+<details class="skill-profile" markdown="1">
+<summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
+
+<div class="skill-profile__body" markdown="1">
+
+Canonical source: `skills/moos-map-builder/`
+
+### Definition
+{: #map-builder-definition }
 
 A completed map reports the output paths, TIFF dimensions and size, imagery
 source, zoom, bounds, origin, and any verification warnings. New CLI builds are
@@ -1150,6 +1367,7 @@ complete only when their returned verification object reports `ok`; GUI-built
 or existing maps receive a separate `moos-map verify` check.
 
 ### Workflow
+{: #map-builder-workflow }
 
 The skill first chooses the interaction route. The GUI supports visual
 browsing and selection of two diagonal corners. The CLI supports known WGS84
@@ -1165,6 +1383,7 @@ plan and verification results, and reports the finished bundle. Existing
 explicitly wants the same mission origin.
 
 ### Implementation
+{: #map-builder-implementation }
 
 The skill contains no map-generation code. Both routes use the public
 `moos-map` executable discovered on `PATH`, ensuring that the GUI and CLI share
@@ -1172,6 +1391,7 @@ the same imagery sources, crop logic, cache, bundle format, and verification
 checks.
 
 ### Defaults and integration
+{: #map-builder-defaults-and-integration }
 
 Default CLI builds use Esri World Imagery, zoom 17, a centered origin,
 `~/moos-maps`, cached tiles, safe replacement, and an included `.moos`
@@ -1181,6 +1401,7 @@ discoverable map directory; creating a map alone does not authorize edits to
 mission files.
 
 ### Common faults
+{: #map-builder-common-faults }
 
 - Launching the GUI proves only that the interface is available, not that a
   map was built.
@@ -1197,8 +1418,10 @@ mission files.
 - Imagery-source availability does not itself grant export rights.
 
 ### Application
+{: #map-builder-application }
 
 #### `moos-map`
+{: #map-builder-moos-map }
 
 Provides `ui`, `plan`, `build`, `verify`, and `sources`. The skill checks the
 installed command and version, inspects command help when capabilities differ,
@@ -1207,23 +1430,37 @@ and asks before installing or upgrading the isolated `pipx` application.
 Package: [https://pypi.org/project/moos-map/](https://pypi.org/project/moos-map/)
 
 ### Related skills
+{: #map-builder-related-skills }
 
 - **Mission Builder:** It adds the verified map’s TIFF path and generated
   viewer settings to a mission when integration is requested.
 
 ---
 
+</div>
+</details>
+
+</section>
+
+<section class="skill-card" markdown="1">
+
 ## Repo Builder
-
-Canonical source: `skills/moos-ivp-repo-builder/`
-
-### Definition
 
 Repo Builder bootstraps a new external MOOS-IvP development repository from
 `moos-ivp/moos-ivp-extend`. It validates the local MOOS-IvP dependency,
 customizes the template for the user’s project, detaches the upstream Git
 history, initializes an independent repository, writes a repo-local environment
 file, and validates the baseline application and behavior build.
+
+<details class="skill-profile" markdown="1">
+<summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
+
+<div class="skill-profile__body" markdown="1">
+
+Canonical source: `skills/moos-ivp-repo-builder/`
+
+### Definition
+{: #repo-builder-definition }
 
 The result is a user-owned project with stable source, mission, binary, script,
 and behavior-library locations. Normal `./build.sh` runs can find the selected
@@ -1232,6 +1469,7 @@ MOOS-IvP checkout without depending on a permanently exported
 and `lib/` available to MOOS launchers and `pHelmIvP`.
 
 ### Workflow
+{: #repo-builder-workflow }
 
 Before creating files, the skill resolves and validates a MOOS-IvP checkout,
 then confirms the target path, repository name, project display author,
@@ -1248,6 +1486,7 @@ first commit only when Git identity is already available or explicitly
 provided.
 
 ### Template history
+{: #repo-builder-template-history }
 
 Earlier `moos-ivp-extend` copies in the `moos-ivp` and `pavlab` organizations
 had drifted. Designing Repo Builder required comparing those variants and
@@ -1256,6 +1495,7 @@ settling on one universal template: the current
 organization-specific differences by accident.
 
 ### Dependencies
+{: #repo-builder-dependencies }
 
 The template’s default relative searches are insufficient when the extension
 repository is not a sibling of `moos-ivp`. Repo Builder adds the resolved
@@ -1264,6 +1504,7 @@ MOOSCore build location to `CMAKE_PREFIX_PATH` and the checkout to the
 normal builds.
 
 ### Environment
+{: #repo-builder-environment }
 
 The generated `env.sh` adds absolute project `bin/` and `scripts/` paths to
 `PATH` and `lib/` to `IVP_BEHAVIOR_DIRS` without duplicating entries on repeated
@@ -1271,6 +1512,7 @@ sourcing. Persistent shell integration remains optional and consists only of a
 clearly marked profile block that sources this file.
 
 ### Git and identity
+{: #repo-builder-git-and-identity }
 
 The project display author used in README/CMake text is separate from Git
 commit identity. The skill does not rewrite upstream example authorship,
@@ -1278,6 +1520,7 @@ invent a committer email, attach a remote, create automation, or push a
 repository unless those actions are requested.
 
 ### Validation
+{: #repo-builder-validation }
 
 The baseline build is run independently of shell-profile side effects. With
 examples retained, success includes the generated `pXRelayTest` executable and
@@ -1286,6 +1529,7 @@ validation separately confirms that sourcing `env.sh` exposes the project
 paths.
 
 ### Common faults
+{: #repo-builder-common-faults }
 
 - A repository can build in one configured shell yet fail later if CMake relies
   only on an exported `MOOS_IVP_ROOT`.
@@ -1301,8 +1545,10 @@ paths.
   commit by default.
 
 ### Template
+{: #repo-builder-template }
 
 #### `moos-ivp/moos-ivp-extend`
+{: #repo-builder-moos-ivp-moos-ivp-extend }
 
 Provides the canonical build skeleton, example application, behavior library,
 and missions that make the initial build verifiable. Repo Builder customizes a
@@ -1311,6 +1557,7 @@ clone rather than maintaining a second template copy inside the skill.
 Template: [https://github.com/moos-ivp/moos-ivp-extend](https://github.com/moos-ivp/moos-ivp-extend)
 
 ### Related skills
+{: #repo-builder-related-skills }
 
 - **App and Behavior Builders:** Once the repository is ready, they add
   user-owned software to it.
@@ -1319,17 +1566,30 @@ Template: [https://github.com/moos-ivp/moos-ivp-extend](https://github.com/moos-
 
 ---
 
+</div>
+</details>
+
+</section>
+
+<section class="skill-card" markdown="1">
+
 ## Installer
-
-Canonical source: `skills/moos-ivp-installer/`
-
-### Definition
 
 Installer locates, clones, builds, and validates the upstream
 `moos-ivp/moos-ivp` repository. It selects the checkout’s platform-specific
 setup instructions, obtains approval before dependency or profile changes,
 creates `<moos-ivp-root>/env.sh`, and runs a bundled validator against the
 finished installation.
+
+<details class="skill-profile" markdown="1">
+<summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
+
+<div class="skill-profile__body" markdown="1">
+
+Canonical source: `skills/moos-ivp-installer/`
+
+### Definition
+{: #installer-definition }
 
 A completed installation has the expected `ivp/src` tree, executable MOOS and
 IvP build scripts, a built `pAntler`, working application and behavior
@@ -1338,6 +1598,7 @@ checkout’s `bin/` and `scripts/` directories. This is the dependency layer use
 by the repository, application, behavior, and mission workflows.
 
 ### Workflow
+{: #installer-workflow }
 
 The skill performs non-destructive discovery before cloning. It checks an
 explicit path, the current environment, and common checkout locations, then
@@ -1353,12 +1614,14 @@ writes and tests `env.sh`, then optionally adds a managed source block to the
 confirmed shell profile.
 
 ### Upstream instructions
+{: #installer-upstream-instructions }
 
 The checkout’s current platform README owns dependencies and build commands.
 This keeps the skill aligned with changes in upstream MOOS-IvP instead of
 maintaining a parallel installation recipe.
 
 ### Environment
+{: #installer-environment }
 
 Core `env.sh` sets `MOOS_IVP_ROOT` and idempotently adds the core `bin/` and
 `scripts/` directories to `PATH`. It deliberately does not set
@@ -1366,6 +1629,7 @@ Core `env.sh` sets `MOOS_IVP_ROOT` and idempotently adds the core `bin/` and
 paths.
 
 ### Validation
+{: #installer-validation }
 
 Early discovery checks only that a checkout has the expected source, build
 scripts, and generators. Final validation additionally requires the platform
@@ -1374,6 +1638,7 @@ READMEs, built `pAntler`, `env.sh`, successful sourcing, the correct
 `GenMOOSApp_AppCasting`, and `GenBehavior`.
 
 ### Common faults
+{: #installer-common-faults }
 
 - Finding a source checkout does not prove the MOOS-IvP binaries have been
   built.
@@ -1389,8 +1654,10 @@ READMEs, built `pAntler`, `env.sh`, successful sourcing, the correct
   profile is a separate, consent-gated action.
 
 ### Source
+{: #installer-source }
 
 #### `moos-ivp/moos-ivp`
+{: #installer-moos-ivp-moos-ivp }
 
 Provides the upstream source, platform setup READMEs, build scripts, binaries,
 headers, libraries, and code generators. The skill does not bundle or fork the
@@ -1399,8 +1666,10 @@ MOOS-IvP distribution.
 Repository: [https://github.com/moos-ivp/moos-ivp](https://github.com/moos-ivp/moos-ivp)
 
 ### Scripts
+{: #installer-scripts }
 
 #### `scripts/validate_moos_ivp_install.sh`
+{: #installer-scripts-validate-moos-ivp-install-sh }
 
 Normalizes the checkout path and checks the source tree, platform READMEs,
 build scripts, `pAntler`, both generators, and `env.sh`. It then sources the
@@ -1408,6 +1677,7 @@ environment in a clean Bash process and verifies both path contents and actual
 command discovery, returning concise `fail - ...` diagnostics.
 
 ### Related skills
+{: #installer-related-skills }
 
 - **Repo Builder:** It uses the validated checkout as the dependency for a new
   user-owned extension project.
@@ -1417,6 +1687,11 @@ command discovery, returning concise `fail - ...` diagnostics.
   generate and run missions.
 
 ---
+
+</div>
+</details>
+
+</section>
 
 ## Designing the system
 
@@ -1466,7 +1741,8 @@ For Codex, a repository-specific replacement normally lives at
 skill description because that metadata is considered before the full
 instructions are loaded. The local copy survives plugin updates, so its owner
 should occasionally compare it with the current bundled skill. Full
-instructions are in `docs/customizing-skills.md`.
+instructions are in [Customizing
+Skills](https://github.com/cbenjamin23/moos-ivp-skills/blob/main/docs/customizing-skills.md).
 
 ---
 
@@ -1521,11 +1797,43 @@ enabled; they are also part of how the guidance has been tested.
 
 ---
 
+### Development activity
+
+The repository's early development has come in several concentrated waves as
+the individual skills, their support material, and their validation workflows
+were assembled and revised.
+
+<figure class="article-figure">
+  <div id="commit-activity-chart" class="commit-chart">
+    <p class="commit-chart__summary">92 commits across 22 active days · May 21–July 26, 2026 · default branch</p>
+    <svg viewBox="0 0 736 285" role="img" aria-labelledby="commit-chart-title commit-chart-description">
+      <title id="commit-chart-title">Commit activity over time</title>
+      <desc id="commit-chart-description">Gaussian-smoothed daily commit activity on the default branch from May 21 through July 26, 2026. Hovering the chart reports the unsmoothed count for each day.</desc>
+    </svg>
+  </div>
+  <figcaption>Daily commits on the default branch, shown as a smoothed trend to emphasize sustained periods of development.</figcaption>
+</figure>
+
 ## Skills in practice
 
 The following projects have already been enabled or accelerated by the skills.
 They have also served as real-world tests, providing feedback that informed
 later revisions to the guidance.
+
+<div class="project-visuals">
+  <figure>
+    <a href="https://cbenjamin23.github.io/moos-ivp-cicd/index.html">
+      <img src="{{ '/assets/images/project-cicd.png' | relative_url }}" alt="The MOOS-IvP CI/CD project site showing its mission-harness pipeline">
+    </a>
+    <figcaption>The CI/CD project applies the evaluation and harness workflows at repository scale.</figcaption>
+  </figure>
+  <figure>
+    <a href="https://github.com/moos-ivp/vscode-moos-ivp-editor">
+      <img src="{{ '/assets/images/project-vscode-hover.png' | relative_url }}" alt="The MOOS-IvP VS Code extension showing documentation for a behavior parameter">
+    </a>
+    <figcaption>The VS Code extension turns documentation-backed MOOS-IvP knowledge into editor assistance.</figcaption>
+  </figure>
+</div>
 
 ### 1. CI/CD pipeline
 

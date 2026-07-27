@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 410" role="img" aria-labelledby="title desc">
+  <title id="title">Anatomy of a packaged skill</title>
+  <desc id="desc">A skill folder contains a primary SKILL.md file and optional references, scripts, and assets folders.</desc>
+  <defs>
+    <linearGradient id="folder" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#154871"/>
+      <stop offset="1" stop-color="#2b658e"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0e3c65" flood-opacity=".16"/>
+    </filter>
+  </defs>
+  <rect width="920" height="410" rx="24" fill="#f4f8fb"/>
+  <g filter="url(#shadow)">
+    <path d="M70 98h220l38 44h522v214H70z" fill="url(#folder)"/>
+    <path d="M70 98h220l38 44H70z" fill="#3d7399"/>
+  </g>
+  <text x="104" y="129" fill="#fff" font-family="Inter,Arial,sans-serif" font-size="27" font-weight="700">skill-name/</text>
+
+  <g font-family="Inter,Arial,sans-serif">
+    <rect x="110" y="180" width="236" height="126" rx="14" fill="#fff"/>
+    <text x="138" y="226" fill="#0e3c65" font-size="24" font-weight="700">SKILL.md</text>
+    <text x="138" y="259" fill="#5f7486" font-size="17">Trigger + core workflow</text>
+    <text x="138" y="284" fill="#5f7486" font-size="17">decisions and validation</text>
+
+    <rect x="377" y="180" width="134" height="126" rx="14" fill="#eaf2f8"/>
+    <text x="397" y="226" fill="#154871" font-size="20" font-weight="700">references/</text>
+    <text x="397" y="260" fill="#5f7486" font-size="15">Context</text>
+    <text x="397" y="283" fill="#5f7486" font-size="15">Examples</text>
+
+    <rect x="532" y="180" width="126" height="126" rx="14" fill="#eaf2f8"/>
+    <text x="554" y="226" fill="#154871" font-size="20" font-weight="700">scripts/</text>
+    <text x="554" y="260" fill="#5f7486" font-size="15">Checks</text>
+    <text x="554" y="283" fill="#5f7486" font-size="15">Operations</text>
+
+    <rect x="679" y="180" width="130" height="126" rx="14" fill="#eaf2f8"/>
+    <text x="699" y="226" fill="#154871" font-size="20" font-weight="700">assets/</text>
+    <text x="699" y="260" fill="#5f7486" font-size="15">Templates</text>
+    <text x="699" y="283" fill="#5f7486" font-size="15">Baselines</text>
+  </g>
+  <text x="460" y="382" text-anchor="middle" fill="#5f7486" font-family="Inter,Arial,sans-serif" font-size="16">One procedural entry point, with reusable support material beside it</text>
+</svg>

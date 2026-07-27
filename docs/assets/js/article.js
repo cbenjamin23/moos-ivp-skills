@@ -28,7 +28,7 @@
       { name: "MOOS-IvP Docs", top: "15%", left: "68%", length: 260, angle: -11, delay: 2.2, revisions: [17, 41] },
       { name: "App Builder", top: "73%", left: "11%", length: 270, angle: -8, delay: 4.4, revisions: [12, 17, 42] },
       { name: "Behavior Builder", top: "84%", left: "70%", length: 260, angle: 9, delay: 6.6, revisions: [18, 42] },
-      { name: "Eval Mission Builder", top: "46%", left: "15%", length: 240, angle: 15, delay: 8.8, revisions: [12, 32, 49, 81, 84, 86, 94, 97] },
+      { name: "Eval Mission Builder", top: "42%", left: "8%", length: 345, angle: 15, delay: 8.8, revisions: [12, 32, 49, 81, 84, 86, 94, 97] },
       { name: "Harness Builder", top: "58%", left: "76%", length: 250, angle: -14, delay: 11, revisions: [12, 17, 32, 49, 72, 81, 86, 90] },
       { name: "ALog Analysis", top: "5%", left: "47%", length: 210, angle: -5, delay: 13.2, revisions: [49] },
       { name: "Repo Builder", top: "91%", left: "30%", length: 300, angle: 2, delay: 15.4, revisions: [9, 22, 38, 42] },

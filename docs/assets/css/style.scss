@@ -202,10 +202,11 @@ a:hover {
 }
 
 .article-sidebar {
+  --article-sidebar-sticky-top: clamp(7rem, 15vh, 11rem);
   grid-column: 1;
   position: sticky;
-  top: 1.5rem;
-  max-height: calc(100vh - 3rem);
+  top: var(--article-sidebar-sticky-top);
+  max-height: calc(100vh - var(--article-sidebar-sticky-top) - 1.5rem);
   padding-right: 1rem;
   overflow-y: auto;
 }

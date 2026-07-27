@@ -18,13 +18,13 @@
     <a class="skip-link" href="#main-content">Skip to article</a>
 
     <header class="page-hero" role="banner">
-      {% if page.url == "/" %}
+      {% if page.article %}
         <div class="page-hero__timelines" aria-hidden="true"></div>
       {% endif %}
       <div class="page-hero__inner">
         <div class="page-hero__copy">
           <h1 class="page-hero__title">
-            {% if page.url == "/" %}
+            {% if page.article %}
               Agentic Coding <span class="page-hero__nowrap">× MOOS-IvP</span>
             {% else %}
               {{ page.title | default: site.title }}
@@ -41,7 +41,7 @@
       </div>
     </header>
 
-    {% if page.url == "/" %}
+    {% if page.article %}
       <div class="mobile-nav">
         <details class="mobile-nav__details">
           <summary>Table of contents</summary>
@@ -50,8 +50,8 @@
       </div>
     {% endif %}
 
-    <div class="{% if page.url == '/' %}article-layout{% else %}simple-layout{% endif %}">
-      {% if page.url == "/" %}
+    <div class="{% if page.article %}article-layout{% else %}simple-layout{% endif %}">
+      {% if page.article %}
         <aside class="article-sidebar" aria-label="Article navigation">
           <p class="article-sidebar__title">Table of contents</p>
           {% include article-nav.html %}

@@ -1941,7 +1941,7 @@ high-quality examples.
 The skills have been used across the repository to diagnose and improve a
 large number of those missions.
 
-## Project activity over time
+### Project activity over time
 
 The numbered lines match the project descriptions above and show when each was
 actively using the skills. The commit curve beneath them makes the overlap

@@ -1784,14 +1784,11 @@ revised guidance returned to testing and project use.
 
 ### Development activity
 
-These charts show the plugin's general development flow over the summer. The
-commit waves mark periods of concentrated work, while the skill timelines show
-where those revisions landed. Together, they trace a positive cycle: sandboxed
-evaluations and project use exposed gaps, those findings became changes to the
-skills, and the revised guidance went back into use.
+These charts show how the plugin developed over the summer. Feedback from
+sandboxed evaluations and projects triggered waves of revisions, and the
+updated skills then returned to testing and use.
 
-The commit totals provide context for that process; they are not presented as a
-measure of productivity or quality.
+Commit totals provide context, not a measure of productivity or quality.
 
 <figure class="article-figure">
   <div id="commit-activity-chart" class="commit-chart">
@@ -1805,10 +1802,9 @@ measure of productivity or quality.
 
 #### How the skills evolved
 
-Each lane follows one skill through the summer. The large marker shows when it
-entered the plugin, and the smaller markers show later revisions to its
-guidance or supporting material. Branding-only and icon-only changes are
-excluded so the chart focuses on revisions that affected how the skill works.
+Each row represents one skill. Large markers show when it entered the plugin,
+and smaller markers show later revisions. Only changes that affected how a
+skill worked are included.
 
 <figure class="article-figure">
   <div class="commit-chart skill-evolution-chart">

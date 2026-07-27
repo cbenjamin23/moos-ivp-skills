@@ -1778,13 +1778,20 @@ feedback reveals problems that an isolated test may never reach.
 
 That feedback has been an important part of revising the skills. The projects
 in the next section are therefore not just examples of what the plugin has
-enabled; they are also part of how the guidance has been tested.
+enabled; they are also part of how the guidance has been tested. The activity
+below shows the other half of that process: feedback led to revisions, and the
+revised guidance returned to testing and project use.
 
 ### Development activity
 
-The repository's early development has come in several concentrated waves as
-the individual skills, their support material, and their validation workflows
-were assembled and revised.
+These charts show the plugin's general development flow over the summer. The
+commit waves mark periods of concentrated work, while the skill timelines show
+where those revisions landed. Together, they trace a positive cycle: sandboxed
+evaluations and project use exposed gaps, those findings became changes to the
+skills, and the revised guidance went back into use.
+
+The commit totals provide context for that process; they are not presented as a
+measure of productivity or quality.
 
 <figure class="article-figure">
   <div id="commit-activity-chart" class="commit-chart">
@@ -1798,9 +1805,10 @@ were assembled and revised.
 
 #### How the skills evolved
 
-Large markers show when each skill entered the plugin. Smaller markers show
-later revisions to its guidance or supporting material; branding-only and
-icon-only changes are excluded.
+Each lane follows one skill through the summer. The large marker shows when it
+entered the plugin, and the smaller markers show later revisions to its
+guidance or supporting material. Branding-only and icon-only changes are
+excluded so the chart focuses on revisions that affected how the skill works.
 
 <figure class="article-figure">
   <div class="commit-chart skill-evolution-chart">

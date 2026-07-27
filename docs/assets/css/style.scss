@@ -172,7 +172,7 @@ a:hover {
   width: 100%;
   height: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-  clip-path: inset(0 100% 0 0);
+  clip-path: inset(-0.5rem 100% -0.5rem 0);
   transform: translateY(-1px);
   animation: hero-timeline-reveal 22s linear infinite;
   animation-delay: var(--timeline-delay);
@@ -213,12 +213,12 @@ a:hover {
 @keyframes hero-timeline-reveal {
   0%,
   6% {
-    clip-path: inset(0 100% 0 0);
+    clip-path: inset(-0.5rem 100% -0.5rem 0);
   }
 
   34%,
   100% {
-    clip-path: inset(0 0 0 0);
+    clip-path: inset(-0.5rem 0 -0.5rem 0);
   }
 }
 

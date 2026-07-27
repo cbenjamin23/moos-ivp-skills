@@ -1784,7 +1784,6 @@ were assembled and revised.
       <desc id="commit-chart-description">Gaussian-smoothed daily commit activity on the default branch from May 21 through July 26, 2026. Hovering the chart reports the unsmoothed count for each day.</desc>
     </svg>
   </div>
-  <figcaption>Daily commits on the default branch.</figcaption>
 </figure>
 
 ## Skills in practice

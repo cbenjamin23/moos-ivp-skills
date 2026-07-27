@@ -19,15 +19,7 @@
 
     <header class="page-hero" role="banner">
       <div class="page-hero__inner">
-        <img
-          class="page-hero__logo"
-          src="{{ '/assets/images/moos-ivp-logo.png' | relative_url }}"
-          alt="MOOS-IvP Skills logo"
-          width="156"
-          height="156"
-        >
         <div class="page-hero__copy">
-          <p class="page-hero__eyebrow">MOOS-DAWG 2026</p>
           <h1 class="page-hero__title">
             {% if page.url == "/" %}
               Agentic Coding and <span class="page-hero__nowrap">MOOS-IvP</span>
@@ -49,7 +41,7 @@
     {% if page.url == "/" %}
       <div class="mobile-nav">
         <details class="mobile-nav__details">
-          <summary>On this page</summary>
+          <summary>Table of contents</summary>
           {% include article-nav.html %}
         </details>
       </div>
@@ -58,7 +50,7 @@
     <div class="{% if page.url == '/' %}article-layout{% else %}simple-layout{% endif %}">
       {% if page.url == "/" %}
         <aside class="article-sidebar" aria-label="Article navigation">
-          <p class="article-sidebar__title">On this page</p>
+          <p class="article-sidebar__title">Table of contents</p>
           {% include article-nav.html %}
         </aside>
       {% endif %}

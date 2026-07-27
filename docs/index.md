@@ -147,14 +147,6 @@ skills are developed and validated through isolated testing and feedback from
 real projects. The article closes by examining several of those projects in
 practice.
 
----
-
-<div class="article-tools" aria-label="Skill profile controls">
-  <span class="article-tools__label">Skill profiles</span>
-  <button type="button" class="article-tool" data-skill-action="expand">Expand all</button>
-  <button type="button" class="article-tool" data-skill-action="collapse">Collapse all</button>
-</div>
-
 <section class="skill-card" markdown="1">
 
 ## Mission Builder
@@ -166,7 +158,7 @@ networking, target-generation support, viewer setup, cleanup, and operator
 documentation. The completed mission should remain readable and runnable on
 its own.
 
-<details class="skill-profile" open markdown="1">
+<details class="skill-profile" markdown="1">
 <summary><span class="skill-profile__action">Full profile</span><span class="skill-profile__hint">Workflow, validation, support files, and related skills</span></summary>
 
 <div class="skill-profile__body" markdown="1">
@@ -403,8 +395,6 @@ This tests split-host plumbing without changing the working mission.
 - **ALog Analysis:** It reconstructs what happened when a live run behaves
   unexpectedly.
 
----
-
 </div>
 </details>
 
@@ -517,8 +507,6 @@ interpret evidence.
   to confirm how an upstream component or parameter actually works.
 - **ALog Analysis:** It establishes what happened during a run; MOOS-IvP Docs
   helps explain what the recorded applications, behaviors, and variables mean.
-
----
 
 </div>
 </details>
@@ -658,8 +646,6 @@ mission-specific protocols indiscriminately.
   supplies the surrounding vehicle or shoreside configuration.
 - **MOOS-IvP Docs:** It verifies uncertain upstream APIs or configuration
   parameters before the implementation is finalized.
-
----
 
 </div>
 </details>
@@ -806,8 +792,6 @@ dynamic-library semantics.
   launchers, and the rest of the runnable scenario.
 - **MOOS-IvP Docs:** It confirms unclear base-class features or upstream
   behavior parameters from documentation and source.
-
----
 
 </div>
 </details>
@@ -1018,8 +1002,6 @@ and preserves the workspace if teardown itself fails.
 - **MOOS-IvP Docs:** It clarifies evaluator, application, or behavior semantics
   when the evaluation configuration is uncertain.
 
----
-
 </div>
 </details>
 
@@ -1226,8 +1208,6 @@ under a conventional harness subdirectory.
 - **MOOS-IvP Docs:** It clarifies application, behavior, patch, or evaluator
   semantics that affect a case.
 
----
-
 </div>
 </details>
 
@@ -1335,8 +1315,6 @@ evidence files.
 - **MOOS-IvP Docs:** It supplies upstream context when a recorded variable or
   state transition is unclear.
 
----
-
 </div>
 </details>
 
@@ -1434,8 +1412,6 @@ Package: [https://pypi.org/project/moos-map/](https://pypi.org/project/moos-map/
 
 - **Mission Builder:** It adds the verified map’s TIFF path and generated
   viewer settings to a mission when integration is requested.
-
----
 
 </div>
 </details>
@@ -1564,8 +1540,6 @@ Template: [https://github.com/moos-ivp/moos-ivp-extend](https://github.com/moos-
 - **Mission Builder:** It creates scenarios that launch those applications and
   load those behavior libraries.
 
----
-
 </div>
 </details>
 
@@ -1686,8 +1660,6 @@ command discovery, returning concise `fail - ...` diagnostics.
 - **Mission Builder:** It relies on the resulting executables and utilities to
   generate and run missions.
 
----
-
 </div>
 </details>
 
@@ -1744,8 +1716,6 @@ should occasionally compare it with the current bundled skill. Full
 instructions are in [Customizing
 Skills](https://github.com/cbenjamin23/moos-ivp-skills/blob/main/docs/customizing-skills.md).
 
----
-
 ## Developing and validating skills
 
 The skills began as guidance distilled from practical MOOS-IvP work. That
@@ -1794,8 +1764,6 @@ feedback reveals problems that an isolated test may never reach.
 That feedback has been an important part of revising the skills. The projects
 in the next section are therefore not just examples of what the plugin has
 enabled; they are also part of how the guidance has been tested.
-
----
 
 ### Development activity
 

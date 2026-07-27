@@ -4,6 +4,38 @@
   const navLinks = Array.from(document.querySelectorAll(".article-nav a[href^='#']"));
   const supportHeadings = new Set(["Assets", "References", "Scripts", "Common faults"]);
 
+  const syncSkillCard = (profile) => {
+    const card = profile.closest(".skill-card");
+    const toggle = card?.querySelector(".skill-card__toggle");
+    if (!card || !toggle) return;
+    card.classList.toggle("is-open", profile.open);
+    toggle.setAttribute("aria-expanded", String(profile.open));
+  };
+
+  skillProfiles.forEach((profile) => {
+    const card = profile.closest(".skill-card");
+    const heading = card?.querySelector(":scope > h2");
+    if (!card || !heading) return;
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "skill-card__toggle";
+    toggle.textContent = heading.textContent;
+    toggle.id = heading.id;
+    toggle.setAttribute("aria-controls", `${heading.id}-profile`);
+    profile.id = `${heading.id}-profile`;
+    heading.replaceWith(toggle);
+    card.classList.add("skill-card--enhanced");
+
+    toggle.addEventListener("click", () => {
+      profile.open = !profile.open;
+      syncSkillCard(profile);
+    });
+
+    profile.addEventListener("toggle", () => syncSkillCard(profile));
+    syncSkillCard(profile);
+  });
+
   document.querySelectorAll(".skill-profile__body h3").forEach((heading) => {
     if (supportHeadings.has(heading.textContent.trim())) {
       heading.classList.add("skill-support-heading");
@@ -13,6 +45,7 @@
   const setAllSkills = (open) => {
     skillProfiles.forEach((profile) => {
       profile.open = open;
+      syncSkillCard(profile);
     });
   };
 
@@ -50,7 +83,10 @@
       : target.closest(".skill-profile")
         || target.closest(".skill-card")?.querySelector(".skill-profile");
 
-    if (profile) profile.open = true;
+    if (profile) {
+      profile.open = true;
+      syncSkillCard(profile);
+    }
 
     const positionTarget = () => window.requestAnimationFrame(() => {
       window.requestAnimationFrame(() => {
@@ -72,7 +108,10 @@
       const target = document.querySelector(link.getAttribute("href"));
       const profile = target?.querySelector(".skill-profile")
         || target?.closest(".skill-card")?.querySelector(".skill-profile");
-      if (profile) profile.open = true;
+      if (profile) {
+        profile.open = true;
+        syncSkillCard(profile);
+      }
       if (mobileNav) mobileNav.open = false;
     });
   });

@@ -692,6 +692,58 @@ a:hover {
   font-weight: 700;
 }
 
+.skill-evolution-chart {
+  overflow-x: auto;
+  padding-top: 0.55rem;
+}
+
+.skill-evolution-chart svg {
+  min-width: 650px;
+}
+
+.skill-evolution-chart .skill-evolution-guides line {
+  stroke: #cdd9e2;
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.skill-evolution-chart .skill-evolution-lanes line {
+  stroke: rgba(43, 101, 142, 0.3);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.skill-evolution-chart .skill-introduction {
+  fill: #154871;
+}
+
+.skill-evolution-chart .skill-revision {
+  fill: #8eabc1;
+  stroke: #154871;
+  stroke-width: 0.7;
+  vector-effect: non-scaling-stroke;
+}
+
+.skill-evolution-chart .skill-evolution-key text,
+.skill-evolution-chart .skill-evolution-lanes text,
+.skill-evolution-chart .skill-evolution-dates text {
+  fill: #5f7486;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+}
+
+.skill-evolution-chart .skill-evolution-lanes text {
+  fill: #172b3c;
+  font-weight: 700;
+}
+
+.skill-evolution-chart .skill-evolution-axis {
+  stroke: #cdd9e2;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
 .commit-project-chart {
   padding: 0.65rem 0.75rem 0.35rem;
 }

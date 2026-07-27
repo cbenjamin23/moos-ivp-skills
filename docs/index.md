@@ -1791,6 +1791,124 @@ were assembled and revised.
   </div>
 </figure>
 
+#### How the skills evolved
+
+Large markers show when each skill entered the plugin. Smaller markers show
+later revisions to its guidance or supporting material; branding-only and
+icon-only changes are excluded.
+
+<figure class="article-figure">
+  <div class="commit-chart skill-evolution-chart">
+    <svg viewBox="0 0 736 365" role="img" aria-labelledby="skill-evolution-title skill-evolution-description">
+      <title id="skill-evolution-title">Introduction and revision history for the ten MOOS-IvP skills</title>
+      <desc id="skill-evolution-description">Ten aligned lanes begin on each skill's introduction date. Large circles mark introductions and smaller circles mark later revisions to guidance or supporting material.</desc>
+
+      <g class="skill-evolution-key">
+        <circle cx="546" cy="25" r="4.5" class="skill-introduction"></circle>
+        <text x="556" y="29">introduced</text>
+        <circle cx="625" cy="25" r="2.6" class="skill-revision"></circle>
+        <text x="635" y="29">revised</text>
+      </g>
+
+      <g class="skill-evolution-guides">
+        <line x1="170" x2="170" y1="41" y2="319"></line>
+        <line x1="261" x2="261" y1="41" y2="319"></line>
+        <line x1="376.82" x2="376.82" y1="41" y2="319"></line>
+        <line x1="509.18" x2="509.18" y1="41" y2="319"></line>
+        <line x1="625" x2="625" y1="41" y2="319"></line>
+      </g>
+
+      <g class="skill-evolution-lanes">
+        <text x="18" y="58">Mission Builder</text>
+        <line x1="170" x2="716" y1="54" y2="54"></line>
+        <circle cx="170" cy="54" r="4.5" class="skill-introduction"></circle>
+        <circle cx="194.82" cy="54" r="2.6" class="skill-revision"></circle>
+        <circle cx="211.36" cy="54" r="2.6" class="skill-revision"></circle>
+        <circle cx="244.45" cy="54" r="2.6" class="skill-revision"></circle>
+        <circle cx="294.09" cy="54" r="2.6" class="skill-revision"></circle>
+        <circle cx="393.36" cy="54" r="2.6" class="skill-revision"></circle>
+        <circle cx="608.45" cy="54" r="2.6" class="skill-revision"></circle>
+        <circle cx="691.18" cy="54" r="2.6" class="skill-revision"></circle>
+        <circle cx="699.45" cy="54" r="2.6" class="skill-revision"></circle>
+
+        <text x="18" y="85">MOOS-IvP Docs</text>
+        <line x1="170" x2="716" y1="81" y2="81"></line>
+        <circle cx="170" cy="81" r="4.5" class="skill-introduction"></circle>
+        <circle cx="203.09" cy="81" r="2.6" class="skill-revision"></circle>
+        <circle cx="294.09" cy="81" r="2.6" class="skill-revision"></circle>
+
+        <text x="18" y="112">App Builder</text>
+        <line x1="170" x2="716" y1="108" y2="108"></line>
+        <circle cx="170" cy="108" r="4.5" class="skill-introduction"></circle>
+        <circle cx="194.82" cy="108" r="2.6" class="skill-revision"></circle>
+        <circle cx="203.09" cy="108" r="2.6" class="skill-revision"></circle>
+        <circle cx="294.09" cy="108" r="2.6" class="skill-revision"></circle>
+
+        <text x="18" y="139">Behavior Builder</text>
+        <line x1="170" x2="716" y1="135" y2="135"></line>
+        <circle cx="170" cy="135" r="4.5" class="skill-introduction"></circle>
+        <circle cx="211.36" cy="135" r="2.6" class="skill-revision"></circle>
+        <circle cx="294.09" cy="135" r="2.6" class="skill-revision"></circle>
+
+        <text x="18" y="166">Eval Mission Builder</text>
+        <line x1="170" x2="716" y1="162" y2="162"></line>
+        <circle cx="170" cy="162" r="4.5" class="skill-introduction"></circle>
+        <circle cx="194.82" cy="162" r="2.6" class="skill-revision"></circle>
+        <circle cx="244.45" cy="162" r="2.6" class="skill-revision"></circle>
+        <circle cx="294.09" cy="162" r="2.6" class="skill-revision"></circle>
+        <circle cx="608.45" cy="162" r="2.6" class="skill-revision"></circle>
+        <circle cx="625" cy="162" r="2.6" class="skill-revision"></circle>
+        <circle cx="633.27" cy="162" r="2.6" class="skill-revision"></circle>
+        <circle cx="691.18" cy="162" r="2.6" class="skill-revision"></circle>
+        <circle cx="699.45" cy="162" r="2.6" class="skill-revision"></circle>
+
+        <text x="18" y="193">Harness Builder</text>
+        <line x1="170" x2="716" y1="189" y2="189"></line>
+        <circle cx="170" cy="189" r="4.5" class="skill-introduction"></circle>
+        <circle cx="194.82" cy="189" r="2.6" class="skill-revision"></circle>
+        <circle cx="203.09" cy="189" r="2.6" class="skill-revision"></circle>
+        <circle cx="244.45" cy="189" r="2.6" class="skill-revision"></circle>
+        <circle cx="294.09" cy="189" r="2.6" class="skill-revision"></circle>
+        <circle cx="558.82" cy="189" r="2.6" class="skill-revision"></circle>
+        <circle cx="608.45" cy="189" r="2.6" class="skill-revision"></circle>
+        <circle cx="633.27" cy="189" r="2.6" class="skill-revision"></circle>
+        <circle cx="658.09" cy="189" r="2.6" class="skill-revision"></circle>
+
+        <text x="18" y="220">ALog Analysis</text>
+        <line x1="170" x2="716" y1="216" y2="216"></line>
+        <circle cx="170" cy="216" r="4.5" class="skill-introduction"></circle>
+        <circle cx="294.09" cy="216" r="2.6" class="skill-revision"></circle>
+
+        <text x="18" y="247">Repo Builder</text>
+        <line x1="244.45" x2="716" y1="243" y2="243"></line>
+        <circle cx="244.45" cy="243" r="4.5" class="skill-introduction"></circle>
+        <circle cx="294.09" cy="243" r="2.6" class="skill-revision"></circle>
+        <circle cx="376.82" cy="243" r="2.6" class="skill-revision"></circle>
+        <circle cx="401.64" cy="243" r="2.6" class="skill-revision"></circle>
+        <circle cx="418.18" cy="243" r="2.6" class="skill-revision"></circle>
+
+        <text x="18" y="274">Installer</text>
+        <line x1="418.18" x2="716" y1="270" y2="270"></line>
+        <circle cx="418.18" cy="270" r="4.5" class="skill-introduction"></circle>
+
+        <text x="18" y="301">Map Builder</text>
+        <line x1="608.45" x2="716" y1="297" y2="297"></line>
+        <circle cx="608.45" cy="297" r="4.5" class="skill-introduction"></circle>
+      </g>
+
+      <line x1="170" x2="716" y1="319" y2="319" class="skill-evolution-axis"></line>
+      <g class="skill-evolution-dates">
+        <text x="170" y="344" text-anchor="start">May 21</text>
+        <text x="261" y="344" text-anchor="middle">Jun 1</text>
+        <text x="376.82" y="344" text-anchor="middle">Jun 15</text>
+        <text x="509.18" y="344" text-anchor="middle">Jul 1</text>
+        <text x="625" y="344" text-anchor="middle">Jul 15</text>
+        <text x="716" y="344" text-anchor="end">Jul 26</text>
+      </g>
+    </svg>
+  </div>
+</figure>
+
 ## Skills in practice
 
 The following projects have already been enabled or accelerated by the skills.

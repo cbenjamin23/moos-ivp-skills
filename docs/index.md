@@ -1802,9 +1802,9 @@ later revisions to the guidance.
   </figure>
   <figure>
     <a href="https://github.com/moos-ivp/vscode-moos-ivp-editor">
-      <img src="{{ '/assets/images/project-vscode-hover.png' | relative_url }}" alt="The MOOS-IvP VS Code extension showing documentation for a behavior parameter">
+      <img src="{{ '/assets/images/project-vscode-formatting.png' | relative_url }}" alt="The MOOS-IvP VS Code extension formatting mission configuration while preserving comments">
     </a>
-    <figcaption>The VS Code extension turns documentation-backed MOOS-IvP knowledge into editor assistance.</figcaption>
+    <figcaption>The VS Code extension brings MOOS-IvP-aware formatting, definitions, and diagnostics into the editor.</figcaption>
   </figure>
 </div>
 

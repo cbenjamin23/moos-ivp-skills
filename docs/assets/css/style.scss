@@ -614,9 +614,14 @@ a:hover {
 .commit-chart {
   margin: 2.25rem 0 3rem;
   padding: 1.1rem 1rem 0.5rem;
-  background: var(--surface-soft);
-  border: 1px solid var(--line);
-  border-radius: 0.6rem;
+  background:
+    radial-gradient(circle at 95% 0%, rgba(76, 174, 157, 0.18), transparent 38%),
+    linear-gradient(135deg, rgba(231, 243, 250, 0.94), rgba(237, 248, 245, 0.98));
+  border: 1px solid rgba(82, 139, 171, 0.28);
+  border-radius: 0.8rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 14px 36px rgba(19, 64, 91, 0.08);
 }
 
 .commit-chart__summary {

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Agentic Coding and MOOS-IvP"
+title: "Agentic Coding and MOOS-IvP, Introducing the moos-ivp-skills plugin for MOOS-DAWG 2026"
 description: "Introducing the moos-ivp-skills plugin for MOOS-DAWG 2026"
 ---
 

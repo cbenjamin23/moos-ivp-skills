@@ -122,14 +122,15 @@ a:hover {
 }
 
 .page-hero__title {
-  max-width: 900px;
+  max-width: none;
   margin: 0;
   margin-inline: auto;
   color: #fff;
-  font-size: clamp(2.6rem, 5.4vw, 4.75rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 1.04;
+  white-space: nowrap;
 }
 
 .page-hero__nowrap {
@@ -778,6 +779,7 @@ a:hover {
 
   .page-hero__title {
     font-size: clamp(2rem, 8vw, 3.1rem);
+    white-space: normal;
   }
 
   .page-hero__subtitle {

@@ -1418,6 +1418,11 @@ Package: [https://pypi.org/project/moos-map/](https://pypi.org/project/moos-map/
 - **Mission Builder:** It adds the verified map’s TIFF path and generated
   viewer settings to a mission when integration is requested.
 
+<figure class="article-figure">
+  <img src="{{ '/assets/images/map-builder-gui.webp' | relative_url }}" width="1800" height="981" loading="lazy" alt="The moos-map graphical interface showing an aerial map, a selected crop region, imagery and zoom controls, output options, and a build summary">
+  <figcaption>The <code>moos-map</code> GUI supports visual crop selection, output review, and TIFF bundle creation in one workflow.</figcaption>
+</figure>
+
 </div>
 </details>
 
@@ -1935,6 +1940,15 @@ high-quality examples.
 
 The skills have been used across the repository to diagnose and improve a
 large number of those missions.
+
+<figure class="article-figure">
+  <div id="commit-project-chart" class="commit-chart commit-project-chart">
+    <svg viewBox="0 0 736 385" role="img" aria-labelledby="commit-project-chart-title commit-project-chart-description">
+      <title id="commit-project-chart-title">Project timelines and repository commit activity</title>
+      <desc id="commit-project-chart-description">Nine numbered project timelines aligned with smoothed daily commit activity from May 21 through July 26, 2026. The project order from top to bottom is 1, 4, 6, 7, 3, 5, 2, 8, and 9.</desc>
+    </svg>
+  </div>
+</figure>
 
 ## Conclusion
 

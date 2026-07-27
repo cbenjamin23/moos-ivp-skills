@@ -690,6 +690,38 @@ a:hover {
   font-weight: 700;
 }
 
+.commit-project-chart {
+  padding: 0.65rem 0.75rem 0.35rem;
+}
+
+.commit-project-chart .project-span {
+  fill: #2b658e;
+  opacity: 0.86;
+}
+
+.commit-project-chart .project-number-badge {
+  fill: #c8dce9;
+}
+
+.commit-project-chart .project-number-label {
+  fill: #172b3c;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.commit-project-chart .project-key,
+.commit-project-chart .project-label {
+  fill: #5f7486;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 10px;
+}
+
+.commit-project-chart .project-label {
+  fill: #172b3c;
+  font-weight: 700;
+}
+
 .site-footer {
   color: #cfdeea;
   background: #0b2c49;

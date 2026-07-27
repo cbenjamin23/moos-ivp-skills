@@ -276,7 +276,7 @@
   }
 
   const firstCurve = wavePath.indexOf(" C");
-  const areaPath = `M ${points[0].x} ${baseline} L ${points[0].x} ${points[0].y}${wavePath.slice(firstCurve)} L ${points.at(-1).x} ${baseline} Z`;
+  const areaPath = `M ${points[0].x} ${baseline} L ${points[0].x} ${points[0].y}${wavePath.slice(firstCurve)} L ${points[points.length - 1].x} ${baseline} Z`;
   add("path", { d: areaPath, class: "commit-area" });
   add("path", { d: wavePath, class: "commit-wave" });
   add("line", {
@@ -339,4 +339,180 @@
     "text-anchor": "middle",
     class: "peak-label"
   }, `${peak.smoothedCount.toFixed(1)} commits/day`);
+
+  const projectChartRoot = document.getElementById("commit-project-chart");
+  if (!projectChartRoot) return;
+
+  const projectSvg = projectChartRoot.querySelector("svg");
+  const projectWidth = 736;
+  const projectLeft = 48;
+  const projectRight = 716;
+  const projectPlotWidth = projectRight - projectLeft;
+  const spanTop = 61;
+  const spanGap = 15;
+  const projectWaveTop = 204;
+  const projectWaveBottom = 328;
+  const projectTicks = [
+    ["2026-05-21", "May 21"],
+    ["2026-06-01", "Jun 1"],
+    ["2026-06-15", "Jun 15"],
+    ["2026-07-01", "Jul 1"],
+    ["2026-07-15", "Jul 15"],
+    ["2026-07-26", "Jul 26"]
+  ];
+  const projects = [
+    { number: 1, start: "2026-05-21", end: "2026-07-26" },
+    { number: 4, start: "2026-05-21", end: "2026-07-26" },
+    { number: 6, start: "2026-06-08", end: "2026-06-30" },
+    { number: 7, start: "2026-06-15", end: "2026-06-30" },
+    { number: 3, start: "2026-06-18", end: "2026-07-18" },
+    { number: 5, start: "2026-06-18", end: "2026-07-26" },
+    { number: 2, start: "2026-06-25", end: "2026-07-01" },
+    { number: 8, start: "2026-07-15", end: "2026-07-26" },
+    { number: 9, start: "2026-07-21", end: "2026-07-26" }
+  ];
+
+  const addProject = (tag, attributes, text) => {
+    const element = document.createElementNS(namespace, tag);
+    Object.entries(attributes || {}).forEach(([key, value]) => {
+      element.setAttribute(key, value);
+    });
+    if (text !== undefined) element.textContent = text;
+    projectSvg.appendChild(element);
+    return element;
+  };
+
+  const projectX = (date) => {
+    const index = data.findIndex((entry) => entry.date === date);
+    return projectLeft + (index / (data.length - 1)) * projectPlotWidth;
+  };
+  const projectY = (value) => (
+    projectWaveBottom
+      - (value / maxValue) * (projectWaveBottom - projectWaveTop)
+  );
+
+  addProject("text", {
+    x: projectLeft,
+    y: 28,
+    class: "project-label"
+  }, "Project activity");
+  addProject("text", {
+    x: projectLeft + 105,
+    y: 28,
+    class: "project-key"
+  }, "Numbers correspond to the projects in “Skills in practice”");
+
+  projectTicks.forEach(([date, label], index) => {
+    const x = projectX(date);
+    if (index > 0 && index < projectTicks.length - 1) {
+      addProject("line", {
+        x1: x,
+        x2: x,
+        y1: spanTop - 10,
+        y2: projectWaveBottom,
+        class: "month-line"
+      });
+    }
+    addProject("text", {
+      x,
+      y: 359,
+      "text-anchor": index === 0
+        ? "start"
+        : index === projectTicks.length - 1
+          ? "end"
+          : "middle",
+      class: "date-label"
+    }, label);
+  });
+
+  projects.forEach((project, index) => {
+    const y = spanTop + index * spanGap;
+    const startX = projectX(project.start);
+    const endX = projectX(project.end);
+    const span = addProject("rect", {
+      x: startX,
+      y: y - 1.5,
+      width: Math.max(4, endX - startX),
+      height: 3,
+      rx: 1.5,
+      class: "project-span"
+    });
+    const spanTitle = document.createElementNS(namespace, "title");
+    spanTitle.textContent = `Project ${project.number}: ${project.start} through ${project.end}`;
+    span.appendChild(spanTitle);
+    addProject("circle", {
+      cx: startX,
+      cy: y,
+      r: 5.5,
+      class: "project-number-badge"
+    });
+    addProject("text", {
+      x: startX,
+      y: y + 3,
+      "text-anchor": "middle",
+      class: "project-number-label"
+    }, String(project.number));
+  });
+
+  [0, 2, 4, 6].forEach((value) => {
+    const yy = projectY(value);
+    addProject("line", {
+      x1: projectLeft,
+      x2: projectRight,
+      y1: yy,
+      y2: yy,
+      class: value === 0 ? "axis-line" : "grid-line"
+    });
+    addProject("text", {
+      x: projectLeft - 9,
+      y: yy + 4,
+      "text-anchor": "end",
+      class: "axis-label"
+    }, String(value));
+  });
+
+  const projectPoints = smoothed.map((entry, index) => ({
+    x: projectLeft + (index / (smoothed.length - 1)) * projectPlotWidth,
+    y: projectY(entry.smoothedCount)
+  }));
+  const clampProjectY = (value) => (
+    Math.max(projectWaveTop, Math.min(projectWaveBottom, value))
+  );
+  let projectWavePath = `M ${projectPoints[0].x} ${projectPoints[0].y}`;
+
+  for (let index = 0; index < projectPoints.length - 1; index += 1) {
+    const previous = projectPoints[Math.max(0, index - 1)];
+    const current = projectPoints[index];
+    const next = projectPoints[index + 1];
+    const following = projectPoints[Math.min(projectPoints.length - 1, index + 2)];
+    const controlOneX = current.x + (next.x - previous.x) / 6;
+    const controlOneY = clampProjectY(
+      current.y + (next.y - previous.y) / 6
+    );
+    const controlTwoX = next.x - (following.x - current.x) / 6;
+    const controlTwoY = clampProjectY(
+      next.y - (following.y - current.y) / 6
+    );
+    projectWavePath += ` C ${controlOneX} ${controlOneY}, ${controlTwoX} ${controlTwoY}, ${next.x} ${next.y}`;
+  }
+
+  const projectFirstCurve = projectWavePath.indexOf(" C");
+  const projectAreaPath = (
+    `M ${projectPoints[0].x} ${projectWaveBottom}`
+    + ` L ${projectPoints[0].x} ${projectPoints[0].y}`
+    + projectWavePath.slice(projectFirstCurve)
+    + ` L ${projectPoints[projectPoints.length - 1].x} ${projectWaveBottom} Z`
+  );
+  addProject("path", { d: projectAreaPath, class: "commit-area" });
+  addProject("path", { d: projectWavePath, class: "commit-wave" });
+
+  const projectPeakIndex = smoothed.findIndex(
+    (entry) => entry.date === peak.date
+  );
+  addProject("text", {
+    x: projectPoints[projectPeakIndex].x,
+    y: projectPoints[projectPeakIndex].y - 8,
+    "text-anchor": "middle",
+    class: "peak-label"
+  }, `${peak.smoothedCount.toFixed(1)}/day`);
 })();

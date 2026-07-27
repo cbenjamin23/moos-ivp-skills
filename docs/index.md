@@ -137,7 +137,7 @@ All ten skills are distributed as one plugin for installation. That makes the
 full system available together, while still allowing the agent to load only
 the guidance relevant to the current task.
 
-## What follows
+### What follows
 
 The remainder of this article examines the ten skills individually, then
 returns to two system-level questions: how work is divided between them and how

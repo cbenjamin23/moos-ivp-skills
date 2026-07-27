@@ -1941,6 +1941,12 @@ high-quality examples.
 The skills have been used across the repository to diagnose and improve a
 large number of those missions.
 
+## Project activity over time
+
+The numbered lines match the project descriptions above and show when each was
+actively using the skills. The commit curve beneath them makes the overlap
+between real-world use and the plugin's development visible.
+
 <figure class="article-figure">
   <div id="commit-project-chart" class="commit-chart commit-project-chart">
     <svg viewBox="0 0 736 385" role="img" aria-labelledby="commit-project-chart-title commit-project-chart-description">

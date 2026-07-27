@@ -1,4 +1,26 @@
 (() => {
+  const navigationEntry = window.performance
+    ?.getEntriesByType?.("navigation")
+    ?.[0];
+  const isPageReload = navigationEntry
+    ? navigationEntry.type === "reload"
+    : window.performance?.navigation?.type === 1;
+
+  if (isPageReload) {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    const resetReloadPosition = () => window.scrollTo(0, 0);
+    resetReloadPosition();
+    window.addEventListener("load", () => {
+      resetReloadPosition();
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(resetReloadPosition);
+      });
+    }, { once: true });
+  }
+
   const timelineLayer = document.querySelector(".page-hero__timelines");
   if (timelineLayer && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const timelines = [
@@ -117,7 +139,7 @@
   });
 
   const openHashTarget = () => {
-    if (!window.location.hash) return;
+    if (isPageReload || !window.location.hash) return;
 
     let target;
     try {

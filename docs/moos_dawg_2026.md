@@ -1428,6 +1428,93 @@ Package: [https://pypi.org/project/moos-map/](https://pypi.org/project/moos-map/
   <figcaption>The <code>moos-map</code> GUI supports visual crop selection, output review, and TIFF bundle creation in one workflow.</figcaption>
 </figure>
 
+### Acknowledgements and evolution
+{: #map-builder-acknowledgements }
+
+MOOS Map grew out of earlier map-building work in the MOOS-IvP community. We
+are grateful to:
+
+- **HeroCC/AnaxiMap:** [HeroCC/AnaxiMap](https://github.com/HeroCC/AnaxiMap)
+  demonstrated a practical tile-download and stitching workflow that inspired
+  MOOS Map's map acquisition pipeline.
+- **Raymond Turrisi:** His map-building prototype helped shape the practical
+  workflow and direction of this project.
+
+AnaxiMap already provided coordinate-driven XYZ tile acquisition and stitching,
+source selection, downloaded-tile reuse, and initial `.info` generation. Ray's
+prototype already provided browser map navigation, two-click region selection,
+adjustable bounds and origin, location search, live export estimates, imagery
+selection, and TIFF export. MOOS Map independently implemented and extended
+those foundations with:
+
+- **Exact Geographic Cropping:** Resamples the fractional source-tile window so
+  the TIFF and its recorded bounds match the requested coordinates instead of
+  retaining whole-tile margins.
+
+- **pMarineViewer Metadata:** Produces the strict six-key `.info` format expected
+  by current `pMarineViewer`, including the mission datum. Ray's prototype does
+  not generate `.info`; AnaxiMap's file includes additional active keys that
+  current `pMarineViewer` rejects.
+
+- **Complete Map Bundles:** Places matching `.tif`, `.info`, and optional
+  copy-ready `.moos` files together in a named output directory.
+
+- **MOOS Geodesy Validation:** Detects UTM-zone crossings, incompatible
+  map/origin zones, invalid geographic bounds, and placement conditions that
+  current MOOS geodesy cannot represent reliably.
+
+- **Shared CLI and GUI Core:** Uses the same source registry, crop calculations,
+  cache, output writers, and validation from both interfaces, rather than
+  maintaining separate build implementations.
+
+- **Reproducible Planning:** Extends AnaxiMap's dry run and Ray's live estimates
+  with exact output dimensions, tile and pixel counts, resolution, ground size,
+  selected bounds, mission origin, and modeled `pMarineViewer` placement.
+
+- **Post-Build Verification:** Reopens completed TIFF and `.info` files and
+  verifies their dimensions, names, bounds, datum, syntax, and bundle
+  consistency before reporting success.
+
+- **Reliable Tile Acquisition:** Downloads concurrently, retries throttling and
+  transient server errors, validates returned image data and dimensions, and
+  rejects incomplete builds.
+
+- **Source-Isolated Caching:** Stores reusable tiles in provider-specific
+  namespaces, preventing imagery from different services at the same
+  coordinates from colliding.
+
+- **Offline MBTiles Support:** Builds maps directly from local MBTiles archives
+  without contacting a hosted tile provider.
+
+- **Source Policy Controls:** Records attribution and provider metadata,
+  distinguishes preview-only sources, and requires explicit acknowledgement
+  before exporting from a custom XYZ service.
+
+- **Bounded Builds:** Enforces configurable tile-count, pixel-count,
+  response-size, coordinate, and zoom limits before expensive or unsafe work
+  begins.
+
+- **Transaction-Safe Output:** Builds and verifies files in staging, replaces
+  existing bundles atomically, and restores prior files if installation or
+  verification fails.
+
+- **Automation Interfaces:** Provides `sources`, `plan`, `build`, and `verify`
+  commands with machine-readable JSON output for repeatable scripts and agent
+  workflows.
+
+- **Improved Place Search:** Extends Ray's single-result, submit-only Nominatim
+  search with autocomplete, multiple ranked results, duplicate removal,
+  keyboard navigation, result-specific viewport fitting, server-side Photon
+  requests, caching, and structured error handling.
+
+- **Automated Tests:** Covers geometry, acquisition, caching, source policy,
+  bundle generation, `.info` parsing, CLI behavior, web endpoints, geocoding,
+  and failure recovery.
+
+- **Viewer Validation:** Documents a direct comparison with the shipped MIT
+  `pMarineViewer` map using matched local and geographic vehicle positions to
+  validate TIFF alignment, datum handling, and mission placement.
+
 </div>
 </details>
 

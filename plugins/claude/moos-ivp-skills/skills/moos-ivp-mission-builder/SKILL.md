@@ -40,8 +40,8 @@ required claim cannot be established through bounded live evidence.
   sublaunchers so they do not open nested `uMAC` sessions.
 - Use `--just_make` as the first validation path. It proves target generation,
   not runtime app validity.
-- During live validation, keep `pAntler` in the foreground unless the task
-  explicitly requires persistent or concurrent execution. Use the shortest
+- During live validation, preserve the canonical launcher structure and keep
+  the top-level `launch.sh`/`uMAC` session in the foreground. Use the shortest
   timeout that proves the claim, capped at 30 seconds unless a stated
   task-specific reason requires longer. After it stops, verify scoped processes
   and selected ports are clear.

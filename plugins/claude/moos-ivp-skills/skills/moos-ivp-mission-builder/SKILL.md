@@ -15,7 +15,8 @@ Optimize for the quality of that single mission, not for batch execution.
 For custom app config surfaces, use `moos-app-builder`. For custom behavior
 config surfaces, use `ivp-behavior-builder`. For upstream app or behavior
 parameters not already clear from the chosen baseline or local repo convention,
-use `moos-ivp-docs`. For post-mission analysis, use `moos-alog-analysis`.
+use `moos-ivp-docs`. Use `moos-alog-analysis` for existing logs or when a
+required claim cannot be established through bounded live evidence.
 
 ## Core Rules
 
@@ -39,6 +40,11 @@ use `moos-ivp-docs`. For post-mission analysis, use `moos-alog-analysis`.
   sublaunchers so they do not open nested `uMAC` sessions.
 - Use `--just_make` as the first validation path. It proves target generation,
   not runtime app validity.
+- During live validation, keep `pAntler` in the foreground unless the task
+  explicitly requires persistent or concurrent execution. Use the shortest
+  timeout that proves the claim, capped at 30 seconds unless a stated
+  task-specific reason requires longer. After it stops, verify scoped processes
+  and selected ports are clear.
 - Include caller-controlled port overrides when adding or repairing launchers:
   `--shore_mport`, `--shore_pshare`, `--veh_mport`, and `--veh_pshare` for a
   one-vehicle mission. These make the mission easy to run beside other local

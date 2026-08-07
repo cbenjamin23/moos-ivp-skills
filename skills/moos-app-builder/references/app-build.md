@@ -51,8 +51,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
 add_subdirectory(src)
 ```
 
-If `MOOS_IVP_ROOT` is not exported in the shell, either substitute the resolved
-absolute checkout path in the cache default or configure with:
+Keep project source portable: do not write the resolved checkout path into
+committed CMake files. Supply `MOOS_IVP_ROOT` at configuration time; an
+absolute path may remain in the untracked build cache:
 
 ```bash
 cmake -S . -B build -DMOOS_IVP_ROOT=/path/to/moos-ivp

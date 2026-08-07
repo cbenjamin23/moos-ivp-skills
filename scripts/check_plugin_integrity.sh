@@ -265,6 +265,24 @@ else
   fail_msg "eval mission static checker tests failed"
 fi
 
+portable_paths_test="$repo_root/scripts/test_check_portable_paths.sh"
+if [ ! -f "$portable_paths_test" ]; then
+  fail_msg "missing portable-path checker test"
+elif bash "$portable_paths_test"; then
+  note "PASS portable-path checker tests"
+else
+  fail_msg "portable-path checker tests failed"
+fi
+
+mission_portability_test="$repo_root/scripts/test_static_check_mission_portability.sh"
+if [ ! -f "$mission_portability_test" ]; then
+  fail_msg "missing mission portability checker test"
+elif bash "$mission_portability_test"; then
+  note "PASS mission portability checker tests"
+else
+  fail_msg "mission portability checker tests failed"
+fi
+
 if [ "$fail" -eq 0 ]; then
   note "PASS plugin integrity checks ($skill_count skills)"
 fi

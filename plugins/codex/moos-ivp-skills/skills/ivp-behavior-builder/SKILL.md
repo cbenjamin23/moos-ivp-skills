@@ -41,6 +41,11 @@ If no valid checkout is found and the task requires behavior source generation, 
 - Preserve the generator-style metadata comment box at the top of source files and update `NAME`, `ORGN`, `FILE`, and `DATE` to match the user project.
 - Use short comments before non-obvious behavior logic; do not add comments that merely restate simple code.
 - Reuse existing MOOS-IvP behavior, IvP build, geometry, contact, and utility libraries before writing custom parsers, objective-function machinery, or geometry math.
+- During live validation, keep `pAntler` in the foreground unless the task
+  explicitly requires persistent or concurrent execution. Use the shortest
+  timeout that proves the claim, capped at 30 seconds unless a stated
+  task-specific reason requires longer. After it stops, verify scoped processes
+  and selected ports are clear.
 - Do not commit or present build directories/binaries as source changes unless the user's project already tracks generated artifacts.
 
 ## Workflow
@@ -98,7 +103,9 @@ If no valid checkout is found and the task requires behavior source generation, 
 - Standard behavior params still work.
 - Required custom params are validated.
 - `addInfoVars()` covers every info-buffer variable read by the behavior.
-- `onRunState()` handles missing or stale info-buffer values explicitly.
+- `onRunState()` handles unavailable inputs safely; do not invent a freshness
+  limit—use a configurable limit only when required by the user or an existing
+  interface or mission contract.
 - Returned IPF has `m_priority_wt` applied.
 - Mission `.bhv` block uses behavior type `BHV_<Name>` and a unique `name`.
 - Behavior library path is available to `pHelmIvP`.

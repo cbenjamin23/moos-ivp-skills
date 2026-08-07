@@ -40,6 +40,11 @@ If no valid checkout is found and the task requires app source generation, build
 - Build and run `--help`, `--example`, and `--interface` as binary smoke checks
   before finishing when feasible. These prove the app starts and its
   self-documentation is wired; they do not prove mission runtime config.
+- During live validation, keep `pAntler` in the foreground unless the task
+  explicitly requires persistent or concurrent execution. Use the shortest
+  timeout that proves the claim, capped at 30 seconds unless a stated
+  task-specific reason requires longer. After it stops, verify scoped processes
+  and selected ports are clear.
 - Do not commit or present build directories/binaries as source changes unless the user's project already tracks generated artifacts.
 
 ## Workflow
@@ -64,9 +69,10 @@ If no valid checkout is found and the task requires app source generation, build
    - `showSynopsis()`
    - `showExampleConfigAndExit()`
    - `showInterfaceAndExit()`
-6. Add or update mission config only if the task needs a runnable mission. Use
-   `moos-ivp-mission-builder` for broader launcher, ANTLER, vehicle, or
-   shoreside mission work.
+6. Use the smallest live environment that proves the app's runtime claims. A
+   focused app can use a single-community `pAntler` configuration; add
+   `moos-ivp-mission-builder` only when the task owns broader mission topology,
+   routing, launchers, or controls—not merely for live app validation.
    - Use `ProcessConfig = <AppName>` with realistic `AppTick` and `CommsTick`.
    - If only source was requested, an example `ProcessConfig` in `_Info.cpp` is
      enough. If a runnable sample mission was requested, include the
@@ -104,3 +110,7 @@ If no valid checkout is found and the task requires app source generation, build
   crash when supported.
 - Runtime config, when relevant, is verified through `pAntler` with
   `ProcessConfig = <AppName>`, not by direct app-by-path execution alone.
+- For clean-host or relocatable claims, run
+  `<skill-dir>/scripts/check_portable_paths.sh <project-dir>`, resolving
+  `<skill-dir>` as the directory containing this `SKILL.md`, and include a
+  clean build with a caller-supplied non-default `MOOS_IVP_ROOT`.

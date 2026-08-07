@@ -79,4 +79,15 @@ if grep -R --include='*.sh' -Eq '\\b(ktm|pkill)\\b' "$MISSION_DIR"; then
   echo "warning: launcher contains ktm or pkill; ordinary mission cleanup should avoid global process kills"
 fi
 
+if grep -R --include='*.sh' -Eq '(^|[[:space:]])setsid([[:space:]]|$)' "$MISSION_DIR" &&
+   ! grep -R --include='*.sh' -Eq 'command[[:space:]]+-v[[:space:]]+setsid|type[[:space:]]+-P[[:space:]]+setsid' "$MISSION_DIR"; then
+  echo "warning: launcher uses setsid without an availability check; provide a portable fallback or document a Linux-only runtime"
+fi
+
+if [ -f "$MISSION_DIR/stop.sh" ] &&
+   grep -Eq '/proc/' "$MISSION_DIR/stop.sh" &&
+   ! grep -Eq 'lsof|Darwin|uname' "$MISSION_DIR/stop.sh"; then
+  echo "warning: stop.sh uses /proc without an obvious non-Linux fallback; use scoped PID records or lsof when portability is claimed"
+fi
+
 exit "$STATUS"

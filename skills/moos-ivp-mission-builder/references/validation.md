@@ -71,15 +71,11 @@ Target generation is necessary but not sufficient. It checks wrapper wiring and
 ## Runtime Check
 
 Run live validation only when requested or when the change affects runtime
-behavior:
-
-```bash
-./launch.sh --xlaunched --nogui 5
-```
-
-Prefer `--xlaunched` for automated validation so the shell remains available
-for `uQueryDB`, listener checks, and teardown. Use interactive `uMAC` validation
-only when the operator workflow itself is being checked.
+behavior. For automated validation, run the top-level launcher with `--nogui`
+in the foreground of a bounded execution session, and run `uQueryDB` or
+listener probes from a separate session. Omit `--nogui` only when viewer or
+operator interaction is part of the claim. Use `--xlaunched` only when an owned
+wrapper provides equivalent timeout and scoped teardown.
 
 Verify expected MOOSDB listeners, deploy manually if needed, then stop cleanly.
 Do not report a runtime mission as clean if target generation worked but live
@@ -112,7 +108,8 @@ For high-confidence mission validation, use this sequence:
 5. Review launcher `--help` text after renaming vehicles, apps, ports, or
    default locations. Stale copied help output is a real usability bug even if
    target generation still works.
-6. Launch on non-default ports with `--xlaunched --nogui`.
+6. Launch on non-default ports using the bounded foreground or owned concurrent
+   method described above.
 7. Use `uQueryDB` against every community to confirm MOOSDB uptime, expected
    clients, helm state, and key variables such as `NAV_X`, `NAV_Y`, and
    `IVPHELM_STATE`.
@@ -121,8 +118,8 @@ For high-confidence mission validation, use this sequence:
    movement.
 9. Stop the mission and verify no listeners/processes remain on the mission's
    ports.
-10. Use `moos-alog-analysis` on the generated `.alog` files to verify the
-   mission ran as expected in post-processing.
+10. If a required claim remains uncertain or depends on retained history, use
+    `moos-alog-analysis` on the generated `.alog` files.
 
 The `.alog` pass should be mission-specific, but normally checks:
 

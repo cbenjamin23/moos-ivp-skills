@@ -1,6 +1,6 @@
 ---
 name: moos-alog-analysis
-description: "Analyze existing MOOS .alog files to reconstruct missions, debug incidents, inspect helm context, or extract timestamped evidence with aloggrep, aloghelm, alogscan, and compact variable discovery."
+description: "Analyze existing MOOS .alog files for post-run, log-backed questions such as mission reconstruction, variable history, helm-state context, or timestamped incident evidence."
 ---
 
 # MOOS ALog Analysis

@@ -56,7 +56,8 @@ done
 need_grep 'Cases|Current Matrix' "README.md" "case matrix documentation"
 need_grep '--case' "zlaunch.sh" "--case support"
 if [ -f "$harness_dir/zlaunch.sh" ] && ! search_file '--jobs' "$harness_dir/zlaunch.sh"; then
-  echo "WARN zlaunch.sh omits --jobs; serial-only harnesses may omit it, but generated test harnesses should usually implement rolling execution"
+  echo "FAIL zlaunch.sh omits required --jobs rolling execution support"
+  fail=1
 fi
 if [ -f "$harness_dir/zlaunch.sh" ] && search_file '--jobs' "$harness_dir/zlaunch.sh"; then
   if ! search_file '[[:space:]]&([[:space:]]|$)|background' "$harness_dir/zlaunch.sh"; then
@@ -68,7 +69,8 @@ if [ -f "$harness_dir/zlaunch.sh" ] && search_file '--jobs' "$harness_dir/zlaunc
   elif search_file 'wait[[:space:]]+-n' "$harness_dir/zlaunch.sh"; then
     echo "WARN zlaunch.sh uses wait -n without wait -p; rolling scheduling works, but PID-to-case bookkeeping is less direct"
   elif search_file '(^|[^[:alnum:]_])wait([^[:alnum:]_]|$)' "$harness_dir/zlaunch.sh"; then
-    echo "WARN zlaunch.sh appears to use legacy batch-barrier waits; new generated harnesses should prefer rolling wait -p -n scheduling"
+    echo "FAIL zlaunch.sh appears to use legacy batch-barrier waits; new generated harnesses must use rolling scheduling"
+    fail=1
   else
     echo "FAIL zlaunch.sh accepts --jobs but does not show obvious wait-based completion handling"
     fail=1
@@ -98,7 +100,8 @@ if [ -f "$harness_dir/zlaunch.sh" ] &&
   fi
 fi
 if [ -f "$harness_dir/zlaunch.sh" ] && ! search_file 'no cases selected|no selected cases|selected_count|case_count|CASE_COUNT|result_count|RESULT_COUNT|rows_written|result_rows' "$harness_dir/zlaunch.sh"; then
-  echo "WARN zlaunch.sh does not show an obvious zero-selected/zero-result guard; selected runs should exit nonzero if no case rows are produced"
+  echo "FAIL zlaunch.sh does not show an obvious zero-selected/zero-result guard; selected runs must exit nonzero if no case rows are produced"
+  fail=1
 fi
 need_grep 'mktemp|cp -R' "zlaunch.sh" "temp mission copy pattern"
 need_grep 'PORT_STRIDE|case_base|port_base' "zlaunch.sh" "port block isolation"

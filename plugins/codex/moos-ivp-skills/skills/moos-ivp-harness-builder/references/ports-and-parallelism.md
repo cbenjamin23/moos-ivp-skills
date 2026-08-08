@@ -55,8 +55,8 @@ collide with ordinary missions in the `9000` range.
 
 ## Rolling Execution
 
-New generated harnesses should use work-conserving rolling execution when they
-expose `--jobs`:
+New generated harnesses must expose `--jobs`, default it to `1`, and use
+work-conserving rolling execution when it is greater than `1`:
 
 1. Start up to `--jobs=N` cases.
 2. Wait for the next active case to finish with `wait -p <pidvar> -n`.
@@ -66,8 +66,8 @@ expose `--jobs`:
 This requires Bash 5.1+ for `wait -p` and reliable PID-to-case bookkeeping. Add
 an explicit version guard near the top of generated `zlaunch.sh`, with a clear
 message for macOS users who are still on Apple `/bin/bash` 3.2. Batch-barrier
-waves are acceptable as a legacy fallback when a project intentionally targets
-Bash 3.2, but they are not the preferred default for new generated harnesses.
+waves may be preserved for legacy compatibility when a project intentionally
+targets Bash 3.2, but they do not satisfy the new generated harness contract.
 
 Do not reuse slot ports by default. Unique case blocks give clearer diagnostics
 and reduce risk from lingering MOOSDB or pShare clients.

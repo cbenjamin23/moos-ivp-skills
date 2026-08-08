@@ -265,6 +265,15 @@ else
   fail_msg "eval mission static checker tests failed"
 fi
 
+harness_checker_test="$repo_root/scripts/test_static_check_harness.sh"
+if [ ! -f "$harness_checker_test" ]; then
+  fail_msg "missing harness static checker test"
+elif bash "$harness_checker_test"; then
+  note "PASS harness static checker tests"
+else
+  fail_msg "harness static checker tests failed"
+fi
+
 portable_paths_test="$repo_root/scripts/test_check_portable_paths.sh"
 if [ ! -f "$portable_paths_test" ]; then
   fail_msg "missing portable-path checker test"

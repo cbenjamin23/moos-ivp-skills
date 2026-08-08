@@ -1,6 +1,6 @@
 ---
 name: moos-ivp-harness-builder
-description: "Build or repair multi-case MOOS-IvP test harnesses around self-evaluating stem missions: case matrices, per-case mission copies, result aggregation, serial or rolling parallel execution, port isolation, scoped teardown, and nspatch variants. Use moos-ivp-eval-mission-builder for stem missions."
+description: "Build or repair multi-case MOOS-IvP test harnesses around self-evaluating stem missions: case matrices, per-case mission copies, result aggregation, serial and rolling parallel execution, port isolation, scoped teardown, and nspatch variants. Use moos-ivp-eval-mission-builder for stem missions."
 ---
 
 # MOOS-IvP Harness Builder
@@ -67,11 +67,12 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
   test; moving/integration harnesses may grade arrival, encounter outcome,
   collision state, or other mission outcomes.
 - Expose `--case`, `--port_base`, `--keep_workdirs`, `--gui`, `--nogui`, and
-  `--max_time` when the harness can support them. Expose `--jobs` only when it
-  runs real backgrounded cases. For new generated harnesses, prefer Bash 5.1+
-  rolling scheduling with `wait -p <pidvar> -n`, so the next pending case starts
-  as soon as any active case finishes. Batch-barrier waves are a legacy fallback
-  pattern, not the preferred default.
+  `--max_time` when the harness can support them. New generated harnesses must
+  expose `--jobs`, default it to `1`, and run real backgrounded cases when it is
+  greater than `1`. Prefer Bash 5.1+ rolling scheduling with
+  `wait -p <pidvar> -n`, so the next pending case starts as soon as any active
+  case finishes. Batch-barrier waves are a legacy compatibility pattern and do
+  not satisfy the new generated harness contract.
 - Modern generated harnesses may require Bash 5.1+ for reliable rolling
   scheduling and PID-to-case bookkeeping. Use `#!/usr/bin/env bash`, add an
   early Bash version guard with a clear macOS/Homebrew message, and optionally
@@ -153,10 +154,10 @@ For post-run `.alog` evidence, use `moos-alog-analysis`.
   tokens and prose intent.
 - `./zlaunch.sh --case=<case> --max_time=<secs>` works for at least one nominal
   case and one expected-negative case if the suite has both.
-- If `--jobs` is exposed, `./zlaunch.sh --jobs=1 --port_base=<base>` works, and
-  a rolling run with `--jobs=2` or higher uses distinct temp directories and
-  distinct port blocks. New generated harnesses should start the next pending
-  case whenever an active case finishes, not wait for an entire batch barrier.
+- `./zlaunch.sh --jobs=1 --port_base=<base>` works, and a rolling run with
+  `--jobs=2` or higher uses distinct temp directories and distinct port blocks.
+  New generated harnesses should start the next pending case whenever an active
+  case finishes, not wait for an entire batch barrier.
 - Aggregated results include `case=` and the mission's original result columns,
   especially `grade=` and useful evidence fields such as `eval=`,
   `warning_count=`, `expected=`, `observed=`, or case-specific scalars.

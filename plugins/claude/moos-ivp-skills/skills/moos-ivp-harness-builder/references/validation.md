@@ -49,9 +49,8 @@ Confirm the harness output includes:
 ./zlaunch.sh --port_base=9000
 ```
 
-Serial mode should not depend on default ports. If the harness exposes
-`--jobs`, also run a single-slot check such as `--jobs=1` and at least one
-rolling run such as `--jobs=2`; serial-only harnesses should omit `--jobs`.
+Serial mode should not depend on default ports. Run a single-slot check such as
+`--jobs=1` and at least one rolling run such as `--jobs=2`.
 
 Before trusting results, reconcile README case tokens with the script's
 `CASES` / `ALL_CASES` list and `get_case_config`.

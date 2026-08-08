@@ -80,8 +80,24 @@ meta_has() {
 
 need_file "README.md"
 need_file "launch.sh"
+need_file "launch_shoreside.sh"
 need_file "zlaunch.sh"
 need_file "meta_shoreside.moos"
+
+has_vehicle="no"
+if [ -f "$mission_dir/launch_vehicle.sh" ] ||
+   [ -f "$mission_dir/meta_vehicle.moos" ] ||
+   [ -f "$mission_dir/meta_vehicle.bhv" ]; then
+  has_vehicle="yes"
+fi
+
+if [ "$has_vehicle" = "yes" ]; then
+  need_file "launch_vehicle.sh"
+fi
+if [ ! -f "$mission_dir/launch_shoreside.sh" ] ||
+   { [ "$has_vehicle" = "yes" ] && [ ! -f "$mission_dir/launch_vehicle.sh" ]; }; then
+  echo "HINT ordinary mission launcher structure is incomplete; use the moos-ivp-mission-builder workflow before adding eval plumbing"
+fi
 
 if ! meta_has 'ProcessConfig[[:space:]]*=[[:space:]]*pAutoPoke'; then
   if meta_has 'ProcessConfig[[:space:]]*=[[:space:]]*uTimerScript'; then

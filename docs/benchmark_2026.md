@@ -318,8 +318,10 @@ skill. All 220 skills runs show access to their required skills, and 216 show
 access to the full set including prescribed companions. Luna and Terra each
 miss that full set in two runs. Sol and Astra access it in every run.
 
-A recorded file access does not prove a complete read or effective use. It does
-show that skill discovery was rarely the obstacle in this benchmark.
+An access record means that the agent opened or otherwise accessed a relevant
+skill file during the run. It does not prove that the agent read the guidance
+in full or used it effectively. Since all 220 skills runs accessed their
+required skills, finding the right skill was rarely the obstacle here.
 
 The study also records live validation: commands that attempt to launch
 the software or mission, going beyond reading source files or compiling code.

@@ -54,7 +54,7 @@ result is an explanation or list of events supported by the logs. Completion
 rate is the percentage of attempts that satisfy the whole request.
 
 Conformance refers to the type of criteria that, if omitted, would make an
-experienced MOOS-IvP developer pause and say "Something isn't right here". A
+experienced MOOS-IvP developer pause and say "something isn't right here". A
 result can therefore be complete while losing conformance points: it does what
 the request asks but misses an important project practice. Reviewers assess
 criteria such as whether

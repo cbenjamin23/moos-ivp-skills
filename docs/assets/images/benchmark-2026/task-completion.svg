@@ -1835,22 +1835,22 @@ L 402.84 434.389381
     </g>
    </g>
    <g id="line2d_42">
-    <path d="M 315.36 473.384071 
-L 286.2 473.384071 
+    <path d="M 295.92 473.384071 
+L 247.32 473.384071 
 " clip-path="url(#pb08eb72f1c)" style="fill: none; stroke: #849eaf; stroke-width: 1.6; stroke-linecap: square"/>
    </g>
    <g id="line2d_43">
-    <path d="M 315.36 473.384071 
+    <path d="M 295.92 473.384071 
 " style="fill: none; stroke: #b2c3d2; stroke-width: 1.5; stroke-linecap: square"/>
     <g>
-     <use xlink:href="#m43b5a4f65b" x="315.36" y="473.384071" style="fill: #b2c3d2; stroke: #5f7486; stroke-width: 0.6"/>
+     <use xlink:href="#m43b5a4f65b" x="295.92" y="473.384071" style="fill: #b2c3d2; stroke: #5f7486; stroke-width: 0.6"/>
     </g>
    </g>
    <g id="line2d_44">
-    <path d="M 286.2 473.384071 
+    <path d="M 247.32 473.384071 
 " style="fill: none; stroke: #154871; stroke-width: 1.5; stroke-linecap: square"/>
     <g>
-     <use xlink:href="#m0d7b316d8d" x="286.2" y="473.384071" style="fill: #154871; stroke: #5f7486; stroke-width: 0.6; stroke-linejoin: miter"/>
+     <use xlink:href="#m0d7b316d8d" x="247.32" y="473.384071" style="fill: #154871; stroke: #5f7486; stroke-width: 0.6; stroke-linejoin: miter"/>
     </g>
    </g>
    <g id="line2d_45">
@@ -2049,21 +2049,21 @@ L 432 551.373451
     </g>
    </g>
    <g id="text_31">
-    <!-- 8/20 -->
-    <g style="fill: #526b7e" transform="translate(303.414688 465.384071) scale(0.1 -0.1)">
-     <use xlink:href="#PlusJakartaSans-Regular-34b"/>
-     <use xlink:href="#PlusJakartaSans-Regular-3a5" transform="translate(62.796875 0)"/>
-     <use xlink:href="#PlusJakartaSans-Regular-345" transform="translate(105.703125 0)"/>
-     <use xlink:href="#PlusJakartaSans-Regular-343" transform="translate(165.703125 0)"/>
+    <!-- 6/20 -->
+    <g style="fill: #526b7e" transform="translate(284.129375 465.384071) scale(0.1 -0.1)">
+     <use xlink:href="#PlusJakartaSans-Regular-349"/>
+     <use xlink:href="#PlusJakartaSans-Regular-3a5" transform="translate(59.703125 0)"/>
+     <use xlink:href="#PlusJakartaSans-Regular-345" transform="translate(102.609375 0)"/>
+     <use xlink:href="#PlusJakartaSans-Regular-343" transform="translate(162.609375 0)"/>
     </g>
    </g>
    <g id="text_32">
-    <!-- 5/20 -->
-    <g style="fill: #154871" transform="translate(274.314844 487.384071) scale(0.1 -0.1)">
-     <use xlink:href="#PlusJakartaSans-Regular-348"/>
-     <use xlink:href="#PlusJakartaSans-Regular-3a5" transform="translate(61.59375 0)"/>
-     <use xlink:href="#PlusJakartaSans-Regular-345" transform="translate(104.5 0)"/>
-     <use xlink:href="#PlusJakartaSans-Regular-343" transform="translate(164.5 0)"/>
+    <!-- 1/20 -->
+    <g style="fill: #154871" transform="translate(236.659844 487.384071) scale(0.1 -0.1)">
+     <use xlink:href="#PlusJakartaSans-Regular-344"/>
+     <use xlink:href="#PlusJakartaSans-Regular-3a5" transform="translate(37.09375 0)"/>
+     <use xlink:href="#PlusJakartaSans-Regular-345" transform="translate(80 0)"/>
+     <use xlink:href="#PlusJakartaSans-Regular-343" transform="translate(140 0)"/>
     </g>
    </g>
    <g id="text_33">

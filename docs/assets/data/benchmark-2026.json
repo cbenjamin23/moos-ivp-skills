@@ -97,7 +97,7 @@
     },
     "luna-high": {
       "baseline": {
-        "complete": 21,
+        "complete": 20,
         "conformance": 0.4960762702988408,
         "conformance_half_credit": 0.6661690727709536,
         "conformance_labels": {
@@ -164,7 +164,7 @@
     },
     "terra-high": {
       "baseline": {
-        "complete": 20,
+        "complete": 19,
         "conformance": 0.49601458137821774,
         "conformance_half_credit": 0.6616605633423815,
         "conformance_labels": {
@@ -180,7 +180,7 @@
         "runs": 55
       },
       "skills": {
-        "complete": 40,
+        "complete": 36,
         "conformance": 0.8156311292704255,
         "conformance_half_credit": 0.8993240110058291,
         "conformance_labels": {
@@ -441,7 +441,7 @@
     },
     "task-09": {
       "baseline": {
-        "complete": 8,
+        "complete": 6,
         "conformance": 0.33798558347944674,
         "conformance_half_credit": 0.5189974186635495,
         "conformance_labels": {
@@ -456,7 +456,7 @@
         "runs": 20
       },
       "skills": {
-        "complete": 5,
+        "complete": 1,
         "conformance": 0.849347158218126,
         "conformance_half_credit": 0.9125832053251408,
         "conformance_labels": {
@@ -939,7 +939,7 @@
     },
     "task-09/luna-high": {
       "baseline": {
-        "complete": 2,
+        "complete": 1,
         "conformance": 0.26873563218390806,
         "runs": 5
       },
@@ -963,12 +963,12 @@
     },
     "task-09/terra-high": {
       "baseline": {
-        "complete": 1,
+        "complete": 0,
         "conformance": 0.31,
         "runs": 5
       },
       "skills": {
-        "complete": 4,
+        "complete": 0,
         "conformance": 0.8290322580645161,
         "runs": 5
       }
@@ -1141,6 +1141,8 @@
   ],
   "notes": [
     "Accepted post-hoc Task 11 interpretation; earlier stages retained.",
+    "Deeper Task 9 runtime review covers all four models under the unchanged rubric, with no new participant runs.",
+    "The pre_task09_coverage stage preserves the previously published grades; six submissions lose completion credit.",
     "Conformance is mean per-run met / resolved applicable criteria, no partial credit.",
     "Costs are frozen standard API-equivalent estimates, not invoices or current prices.",
     "One Astra skills run lacks a usage receipt; its cost is unknown, not zero.",
@@ -1149,7 +1151,7 @@
   ],
   "overall": {
     "baseline": {
-      "complete": 133,
+      "complete": 131,
       "conformance": 0.5617035813166598,
       "conformance_half_credit": 0.7120607489622154,
       "conformance_labels": {
@@ -1165,7 +1167,7 @@
       "runs": 220
     },
     "skills": {
-      "complete": 170,
+      "complete": 166,
       "conformance": 0.8572279350116594,
       "conformance_half_credit": 0.9202161614995192,
       "conformance_labels": {
@@ -1280,14 +1282,14 @@
         "skills": 30
       },
       "Evaluation/harness": {
-        "baseline": 20,
-        "difference": 0.050000000000000044,
+        "baseline": 18,
+        "difference": 0.0,
         "newcombe_interval_95": [
-          -0.16194585597233252,
-          0.25576496975291796
+          -0.20844535984909965,
+          0.20844535984909965
         ],
         "runs_per_condition": 40,
-        "skills": 22
+        "skills": 18
       },
       "Missions": {
         "baseline": 27,
@@ -1312,11 +1314,11 @@
         "skills": 50
       },
       "luna-high": {
-        "baseline": 21,
-        "difference": 0.21818181818181814,
+        "baseline": 20,
+        "difference": 0.23636363636363633,
         "newcombe_interval_95": [
-          0.031532700625677756,
-          0.3846938264824736
+          0.04968167523860323,
+          0.40125329466423454
         ],
         "runs_per_condition": 55,
         "skills": 33
@@ -1332,46 +1334,46 @@
         "skills": 47
       },
       "terra-high": {
-        "baseline": 20,
-        "difference": 0.36363636363636365,
+        "baseline": 19,
+        "difference": 0.3090909090909091,
         "newcombe_interval_95": [
-          0.1785560659686387,
-          0.5154768909001981
+          0.12240564035635176,
+          0.4672388055740939
         ],
         "runs_per_condition": 55,
-        "skills": 40
+        "skills": 36
       }
     },
     "leave_one_family_out": {
       "ALog analysis": {
-        "baseline": 102,
-        "difference": 0.18333333333333335,
+        "baseline": 100,
+        "difference": 0.17222222222222217,
         "newcombe_interval_95": [
-          0.08553765333771035,
-          0.27634271737912147
-        ],
-        "runs_per_condition": 180,
-        "skills": 135
-      },
-      "Applications": {
-        "baseline": 95,
-        "difference": 0.19999999999999996,
-        "newcombe_interval_95": [
-          0.10038145890209696,
-          0.29414418615229554
+          0.07325508878529291,
+          0.26656093322931396
         ],
         "runs_per_condition": 180,
         "skills": 131
       },
-      "Behaviors": {
-        "baseline": 116,
-        "difference": 0.1333333333333333,
+      "Applications": {
+        "baseline": 93,
+        "difference": 0.18888888888888888,
         "newcombe_interval_95": [
-          0.03969645320839664,
-          0.2238997841572356
+          0.08832518687142084,
+          0.2841743138229985
         ],
         "runs_per_condition": 180,
-        "skills": 140
+        "skills": 127
+      },
+      "Behaviors": {
+        "baseline": 114,
+        "difference": 0.12222222222222223,
+        "newcombe_interval_95": [
+          0.0270296688164942,
+          0.21445410854615704
+        ],
+        "runs_per_condition": 180,
+        "skills": 136
       },
       "Evaluation/harness": {
         "baseline": 113,
@@ -1384,53 +1386,53 @@
         "skills": 148
       },
       "Missions": {
-        "baseline": 106,
-        "difference": 0.125,
+        "baseline": 104,
+        "difference": 0.11249999999999993,
         "newcombe_interval_95": [
-          0.027108437258220083,
-          0.21981061606363844
+          0.01264104742563367,
+          0.20939747194759406
         ],
         "runs_per_condition": 160,
-        "skills": 126
+        "skills": 122
       }
     },
     "leave_one_model_out": {
       "astra-high": {
-        "baseline": 81,
-        "difference": 0.2363636363636364,
+        "baseline": 79,
+        "difference": 0.22424242424242424,
         "newcombe_interval_95": [
-          0.13157625981191812,
-          0.3339568627917969
+          0.11849803972355372,
+          0.32303554446674
         ],
         "runs_per_condition": 165,
-        "skills": 120
+        "skills": 116
       },
       "luna-high": {
-        "baseline": 112,
-        "difference": 0.1515151515151515,
+        "baseline": 111,
+        "difference": 0.1333333333333333,
         "newcombe_interval_95": [
-          0.05879527406467146,
-          0.24111419197313783
+          0.03860818265254376,
+          0.22506491117557695
         ],
         "runs_per_condition": 165,
-        "skills": 137
+        "skills": 133
       },
       "sol-high": {
-        "baseline": 93,
-        "difference": 0.18181818181818188,
+        "baseline": 91,
+        "difference": 0.16969696969696968,
         "newcombe_interval_95": [
-          0.07935122876804115,
-          0.2790794236752653
+          0.06595479707795852,
+          0.2684328553315422
         ],
         "runs_per_condition": 165,
-        "skills": 123
+        "skills": 119
       },
       "terra-high": {
-        "baseline": 113,
-        "difference": 0.10303030303030303,
+        "baseline": 112,
+        "difference": 0.10909090909090902,
         "newcombe_interval_95": [
-          0.007867361504788964,
-          0.19583294876529453
+          0.013590262278928511,
+          0.20206221321906725
         ],
         "runs_per_condition": 165,
         "skills": 130
@@ -1438,84 +1440,84 @@
     },
     "leave_one_task_out": {
       "task-01": {
-        "baseline": 114,
-        "difference": 0.18000000000000005,
+        "baseline": 112,
+        "difference": 0.16999999999999993,
         "newcombe_interval_95": [
-          0.08735612279075211,
-          0.26841852660393095
+          0.07633262521616836,
+          0.25956835639597686
+        ],
+        "runs_per_condition": 200,
+        "skills": 146
+      },
+      "task-02": {
+        "baseline": 112,
+        "difference": 0.17499999999999993,
+        "newcombe_interval_95": [
+          0.08151308850089575,
+          0.2642857045551533
+        ],
+        "runs_per_condition": 200,
+        "skills": 147
+      },
+      "task-03": {
+        "baseline": 124,
+        "difference": 0.14500000000000002,
+        "newcombe_interval_95": [
+          0.054612298975640725,
+          0.23221258752546092
+        ],
+        "runs_per_condition": 200,
+        "skills": 153
+      },
+      "task-04": {
+        "baseline": 121,
+        "difference": 0.14,
+        "newcombe_interval_95": [
+          0.0482250852537701,
+          0.22857597365145887
+        ],
+        "runs_per_condition": 200,
+        "skills": 149
+      },
+      "task-05": {
+        "baseline": 124,
+        "difference": 0.14500000000000002,
+        "newcombe_interval_95": [
+          0.054612298975640725,
+          0.23221258752546092
+        ],
+        "runs_per_condition": 200,
+        "skills": 153
+      },
+      "task-06": {
+        "baseline": 120,
+        "difference": 0.15000000000000002,
+        "newcombe_interval_95": [
+          0.05826033912752318,
+          0.23831523713483937
         ],
         "runs_per_condition": 200,
         "skills": 150
       },
-      "task-02": {
-        "baseline": 114,
-        "difference": 0.18500000000000005,
+      "task-07": {
+        "baseline": 122,
+        "difference": 0.14500000000000002,
         "newcombe_interval_95": [
-          0.09256321388012026,
-          0.2731168683209404
+          0.053810118791605646,
+          0.23293408321251252
         ],
         "runs_per_condition": 200,
         "skills": 151
       },
-      "task-03": {
-        "baseline": 126,
-        "difference": 0.15500000000000003,
-        "newcombe_interval_95": [
-          0.06596776551314698,
-          0.2407880366430269
-        ],
-        "runs_per_condition": 200,
-        "skills": 157
-      },
-      "task-04": {
-        "baseline": 123,
+      "task-08": {
+        "baseline": 119,
         "difference": 0.15000000000000002,
         "newcombe_interval_95": [
-          0.05942900994514033,
-          0.23726674629600203
+          0.05789557236408606,
+          0.23864340150141644
         ],
         "runs_per_condition": 200,
-        "skills": 153
-      },
-      "task-05": {
-        "baseline": 126,
-        "difference": 0.15500000000000003,
-        "newcombe_interval_95": [
-          0.06596776551314698,
-          0.2407880366430269
-        ],
-        "runs_per_condition": 200,
-        "skills": 157
-      },
-      "task-06": {
-        "baseline": 122,
-        "difference": 0.16000000000000003,
-        "newcombe_interval_95": [
-          0.06948132083036894,
-          0.2469985020873749
-        ],
-        "runs_per_condition": 200,
-        "skills": 154
-      },
-      "task-07": {
-        "baseline": 124,
-        "difference": 0.15500000000000003,
-        "newcombe_interval_95": [
-          0.06508280029178183,
-          0.24157373014812528
-        ],
-        "runs_per_condition": 200,
-        "skills": 155
-      },
-      "task-08": {
-        "baseline": 121,
-        "difference": 0.16000000000000003,
-        "newcombe_interval_95": [
-          0.0690770112054457,
-          0.24735784741889227
-        ],
-        "runs_per_condition": 200,
-        "skills": 153
+        "skills": 149
       },
       "task-09": {
         "baseline": 125,
@@ -1528,94 +1530,99 @@
         "skills": 165
       },
       "task-10": {
-        "baseline": 120,
-        "difference": 0.17500000000000004,
+        "baseline": 118,
+        "difference": 0.16500000000000004,
         "newcombe_interval_95": [
-          0.0843751385892619,
-          0.2617573417422998
+          0.07314812335180364,
+          0.2530699179699208
         ],
         "runs_per_condition": 200,
-        "skills": 155
+        "skills": 151
       },
       "task-11": {
-        "baseline": 115,
-        "difference": 0.17500000000000004,
+        "baseline": 113,
+        "difference": 0.16500000000000004,
         "newcombe_interval_95": [
-          0.08249481781499625,
-          0.2634150400169036
+          0.07146066615886103,
+          0.25457562056034866
         ],
         "runs_per_condition": 200,
-        "skills": 150
+        "skills": 146
       }
     },
     "matched_repetition_counts": {
-      "baseline_only": 13,
-      "both_complete": 120,
-      "neither_complete": 37,
-      "skills_only": 50
+      "baseline_only": 12,
+      "both_complete": 119,
+      "neither_complete": 42,
+      "skills_only": 47
     },
     "overall": {
-      "baseline": 133,
-      "difference": 0.1681818181818182,
+      "baseline": 131,
+      "difference": 0.15909090909090906,
       "newcombe_interval_95": [
-        0.08185226126932242,
-        0.25113439405078963
+        0.07168792243550826,
+        0.2431899999531461
       ],
       "runs_per_condition": 220,
-      "skills": 170
+      "skills": 166
     },
     "stratified_bootstrap": {
-      "estimate": 0.16801704545454546,
+      "estimate": 0.159005,
       "interval_95": [
-        0.11363636363636363,
-        0.22272727272727272
+        0.10909090909090909,
+        0.21363636363636362
       ],
       "replicates": 20000,
       "scope": "Nonparametric resampling within each fixed task/model/condition stratum; this interval describes repeated runs in this benchmark, not uncertainty over unseen tasks.",
       "seed": 20260814
     }
   },
-  "schema_version": 2,
+  "schema_version": 3,
   "source_layout": "consolidated",
   "source_repository": "cbenjamin23/moos-ivp-skills-benchmark-private",
-  "source_revision": "b471d1bb5324953f3b0151c725a70a9b2b51bc7a",
+  "source_revision": "100f4a93b2eec9acc93a3fbcefa6c1be71891083",
   "source_sha256": {
     "benchmark/PLAN.md": "ee1e96030d9a73c51673186231c9f36fe072b62c69e5f6c53dc4a33381346a38",
     "benchmark/archive/ASTRA_EXTENSION.md": "4f61492cfcafe78a0019f332ee486008d73dbd18c839a5dfe48230cf46e45830",
+    "benchmark/archive/evaluation-task09-coverage-v1/ACCEPTANCE_NOTES.md": "4b1c2ae366191ee25cff05ceca6f3f4d3607121c4296cdc5124a45b1647619f1",
+    "benchmark/archive/evaluation-task09-coverage-v1/FINAL_DECISIONS.json": "a65463a8538a019c5869053a98a43743ccd045026f590badd672446b3455aa16",
+    "benchmark/archive/evaluation-task09-coverage-v1/PROBE_CONTRACT.md": "1f772376b3a5e3e485b61ce5762d37b4741e75d35d8fbef6c4bd842b0796464a",
+    "benchmark/archive/evaluation-task09-coverage-v1/README.md": "6ea8479906bcee953b465b8951e17b0292fc3e12c39422f7b521fb9e701cee19",
+    "benchmark/archive/evaluation-task09-coverage-v1/SUMMARY.json": "a5554a40c0bad117105906eed13fcd1d70b6b496dceb991acd100b31dc621593",
     "benchmark/archive/evaluation-task11-v2/TASK.md": "82b4c6e69cb63aa0af37a9b7fb5cfb6786009f89132d33e690afb686ccfcc29a",
     "benchmark/archive/evaluation/protocol/CONFORMANCE.md": "e24f54f12c6b3e8737b7c8c127f276a6108e15760ed76c24a9e2cc2a3dd6834f",
     "benchmark/archive/reviews/2026-09-06-astra-adversarial/TASK09_CONTACT_VERIFICATION.md": "9ee620fd011b9b918c1ce3f095c32119d9dc719ae07cfa2f892873d3cd19449d",
     "benchmark/archive/reviews/README.md": "dab8d233a1913111cdfaba57eff9dadb8dbd8dd4643629141c35ec8b42adcc47",
     "benchmark/config/tasks.json": "f38b3c4eb0b942119d6e64ec9dd0dc0da150c8062588e80eefea5657cc19762f",
     "benchmark/evaluation/PROCESS.md": "5284eb821a0c85f402f13e842a8445d1ba1afb153650e6ff152a4a2d2ae5097d",
-    "benchmark/evaluation/PROTOCOL.md": "4842b8739e90e772b129ced64172b7a519487f162cfe6717dbe55260fd68c2c6",
-    "benchmark/evaluation/RESULTS.md": "1f2c8562ae2324370e5ec8e7383296a4053b0e90f569a473bf2227a45744389b",
-    "benchmark/evaluation/ROBUSTNESS.md": "bcb31c0c16a5780bf50f1fb93f7b5a2979a6375899b40af97513555c72712b3b",
-    "benchmark/evaluation/data/aggregate.json": "396744fbe9ce01bd2dfc853a3d49c8144010515fd90ea6c8736056c202dc2876",
+    "benchmark/evaluation/PROTOCOL.md": "10f6d665b83143f7dab9216bc938ffa79f2f11b0f6f280351c93ad66b307e932",
+    "benchmark/evaluation/RESULTS.md": "b241b7969ee672fd4b98a6f9ea344c043b52b43b860fce3c95216c512af07ffb",
+    "benchmark/evaluation/ROBUSTNESS.md": "8fc43214746779e18a73114833061e169af6afb39ba672ec1ac398451ae0707b",
+    "benchmark/evaluation/data/aggregate.json": "284c311e1ac054971def8e330e8194b649edac6c301b19975f6af601da1db192",
     "benchmark/evaluation/data/process.json": "389d17d6a481e899dcfb1d507f76d680c3965f5188dd59bf8d03e8a422241517",
-    "benchmark/evaluation/data/robustness.json": "6827fd332fd7eead9ebad67d473667e4686c55ee8ab215f25a06a68d8c711150"
+    "benchmark/evaluation/data/robustness.json": "3d56a8d2ae8310a4d12cd433752b1bb99b0b6de77888afebb6562bda9be881a4"
   },
   "stages": {
     "audited": {
       "bootstrap": {
-        "estimate": 0.16801704545454546,
+        "estimate": 0.159005,
         "interval_95": [
-          0.11363636363636363,
-          0.22272727272727272
+          0.10909090909090909,
+          0.21363636363636362
         ],
         "replicates": 20000,
         "scope": "Nonparametric resampling within each fixed task/model/condition stratum; this interval describes repeated runs in this benchmark, not uncertainty over unseen tasks.",
         "seed": 20260814
       },
       "overall": {
-        "baseline": 133,
-        "difference": 0.1681818181818182,
+        "baseline": 131,
+        "difference": 0.15909090909090906,
         "newcombe_interval_95": [
-          0.08185226126932242,
-          0.25113439405078963
+          0.07168792243550826,
+          0.2431899999531461
         ],
         "runs_per_condition": 220,
-        "skills": 170
+        "skills": 166
       }
     },
     "original": {
@@ -1638,6 +1645,28 @@
         ],
         "runs_per_condition": 220,
         "skills": 156
+      }
+    },
+    "pre_task09_coverage": {
+      "bootstrap": {
+        "estimate": 0.16801704545454546,
+        "interval_95": [
+          0.11363636363636363,
+          0.22272727272727272
+        ],
+        "replicates": 20000,
+        "scope": "Nonparametric resampling within each fixed task/model/condition stratum; this interval describes repeated runs in this benchmark, not uncertainty over unseen tasks.",
+        "seed": 20260814
+      },
+      "overall": {
+        "baseline": 133,
+        "difference": 0.1681818181818182,
+        "newcombe_interval_95": [
+          0.08185226126932242,
+          0.25113439405078963
+        ],
+        "runs_per_condition": 220,
+        "skills": 170
       }
     },
     "prior_audited": {
@@ -1684,6 +1713,29 @@
         "skills": 150
       }
     }
+  },
+  "task09_audit": {
+    "additional_reviewed_submissions": 20,
+    "completion_losses": {
+      "astra-high": {
+        "baseline": 0,
+        "skills": 0
+      },
+      "luna-high": {
+        "baseline": 1,
+        "skills": 0
+      },
+      "sol-high": {
+        "baseline": 0,
+        "skills": 0
+      },
+      "terra-high": {
+        "baseline": 1,
+        "skills": 4
+      }
+    },
+    "previous_stage": "pre_task09_coverage",
+    "reviewed_submissions": 40
   },
   "task_names": [
     "BatteryWatch app",
@@ -1744,5 +1796,5 @@
       "prompt": "Analyze the mission log files to determine why Henry appears to make excessive tight maneuvers near waypoints compared with Gilda."
     }
   ],
-  "verified_input_hashes": 1911
+  "verified_input_hashes": 2172
 }

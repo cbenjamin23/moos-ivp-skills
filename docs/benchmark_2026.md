@@ -7,7 +7,7 @@ hero_variant: benchmark
 description: "Coding agents with and without the MOOS-IvP Skills plugin."
 social_title: "Benchmarking MOOS-IvP Skills"
 social_image: "/assets/images/benchmark-2026/social.png"
-social_image_alt: "440 runs: completion rises from 60.5% to 77.3%, and mean conformance from 56.2% to 85.7%, with skills."
+social_image_alt: "440 runs: completion rises from 59.5% to 75.5%, and mean conformance from 56.2% to 85.7%, with skills."
 companion_url: /moos_dawg_2026/
 companion_label: Read the MOOS-DAWG introduction
 article_nav:
@@ -136,20 +136,20 @@ selected skill.
 ## Results by model
 {: #completion-and-conformance-together }
 
-Across all four models, agents with skills completed 170 of 220 attempts
-(77.3%), compared with 133 of 220 (60.5%) without the plugin. Mean engineering
+Across all four models, agents with skills completed 166 of 220 attempts
+(75.5%), compared with 131 of 220 (59.5%) without the plugin. Mean engineering
 conformance rose from 56.2% to 85.7%.
 
 Completion improves for Luna, Terra, and Sol. Average engineering conformance
 improves for all four models, including Astra, whose baseline already completes
 almost every task.
 
-{% include benchmark-figure.html file="model-completion" title="Completion and conformance by model" alt="Completion baseline/skills out of 55: Luna 21/33, Terra 20/40, Sol 40/47, Astra 52/50. Conformance baseline/skills: Luna 49.6/79.3%, Terra 49.6/81.6%, Sol 60.3/89.8%, Astra 65.1/92.2%." caption="Figure 1. Two separate measures of the delivered work. Skills raise average conformance in every model, while completion gains are largest where the baseline has more room to improve." %}
+{% include benchmark-figure.html file="model-completion" title="Completion and conformance by model" alt="Completion baseline/skills out of 55: Luna 20/33, Terra 19/36, Sol 40/47, Astra 52/50. Conformance baseline/skills: Luna 49.6/79.3%, Terra 49.6/81.6%, Sol 60.3/89.8%, Astra 65.1/92.2%." caption="Figure 1. Two separate measures of the delivered work. Skills raise average conformance in every model, while completion gains are largest where the baseline has more room to improve." %}
 
-Terra makes the largest observed completion gain, moving from 20 to 40 complete
-runs out of 55. Across all four models, the skills advantage is 16.8 percentage
-points: 77.3% minus 60.5%. This is an absolute difference between rates, rather
-than a relative percentage increase.
+Terra makes the largest observed completion gain, moving from 19 to 36 complete
+runs out of 55. Across all four models, skills produce 35 additional complete
+attempts, a 15.9 percentage-point increase in completion. This is an absolute
+difference between rates, rather than a relative percentage increase.
 
 Astra's baseline completes 52 of 55 attempts, compared with 50 with skills.
 Its overall baseline advantage is concentrated in the harness task. Skills do
@@ -159,8 +159,8 @@ would miss.
 
 | Model | Completion (baseline → skills) | Completion change | Conformance (baseline → skills) | Conformance change |
 |---|---:|---:|---:|---:|
-| Luna | 38.2% → 60.0% | +21.8% | 49.6% → 79.3% | +29.7% |
-| Terra | 36.4% → 72.7% | +36.4% | 49.6% → 81.6% | +32.0% |
+| Luna | 36.4% → 60.0% | +23.6% | 49.6% → 79.3% | +29.7% |
+| Terra | 34.5% → 65.5% | +30.9% | 49.6% → 81.6% | +32.0% |
 | Sol | 72.7% → 85.5% | +12.7% | 60.3% → 89.8% | +29.5% |
 | Astra | 94.5% → 90.9% | −3.6% | 65.1% → 92.2% | +27.1% |
 
@@ -234,7 +234,7 @@ interpretation is that the package is especially useful where the agent must
 coordinate several MOOS-IvP components and conventions. This study does not
 isolate which instructions account for the difference.
 
-{% include benchmark-figure.html file="task-completion" title="Completion and conformance by task" alt="Connected baseline and skills points for eleven tasks. Completion counts out of 20: 19/20, 19/19, 7/13, 10/17, 7/13, 11/16, 9/15, 12/17, 8/5, 13/15, 18/20. Mean conformance baseline/skills: 53.0/89.2%, 74.8/89.5%, 78.0/93.6%, 74.6/95.6%, 46.9/90.7%, 45.8/92.1%, 60.9/93.1%, 51.5/91.7%, 33.8/84.9%, 53.2/73.9%, 45.4/48.5%." caption="Figure 3. Circles show baseline. Diamonds show skills. Completion improves on nine tasks, ties on Task 2, and falls on Task 9. Mean conformance improves on all eleven when the four models are pooled. Counts use 20 attempts per condition. The separate conformance panel reports percentages, not pass counts." %}
+{% include benchmark-figure.html file="task-completion" title="Completion and conformance by task" alt="Connected baseline and skills points for eleven tasks. Completion counts out of 20: 19/20, 19/19, 7/13, 10/17, 7/13, 11/16, 9/15, 12/17, 6/1, 13/15, 18/20. Mean conformance baseline/skills: 53.0/89.2%, 74.8/89.5%, 78.0/93.6%, 74.6/95.6%, 46.9/90.7%, 45.8/92.1%, 60.9/93.1%, 51.5/91.7%, 33.8/84.9%, 53.2/73.9%, 45.4/48.5%." caption="Figure 3. Circles show baseline. Diamonds show skills. Completion improves on nine tasks, ties on Task 2, and falls on Task 9. Mean conformance improves on all eleven when the four models are pooled. Counts use 20 attempts per condition. The separate conformance panel reports percentages, not pass counts." %}
 
 The conformance panel shows why a completion-only task ranking would be
 incomplete. The contact-waypoint app ties at 19/20 complete while mean
@@ -267,23 +267,22 @@ task-by-model view shows how differently each model arrives at it.
 
 ### Differences between models and repeated attempts
 
-{% include benchmark-figure.html file="task-model-completion" title="Completion for each task and model" alt="An eleven-row matrix of completion counts out of five, with adjacent baseline and skills columns for Luna, Terra, Sol, and Astra. The harness row is Luna 2/0, Terra 1/4, Sol 0/0, and Astra 5/1." caption="Figure 4. Each cell shows the number complete out of five attempts. Adjacent baseline and skills columns show where the models improve, tie, or regress." %}
+{% include benchmark-figure.html file="task-model-completion" title="Completion for each task and model" alt="An eleven-row matrix of completion counts out of five, with adjacent baseline and skills columns for Luna, Terra, Sol, and Astra. The harness row is Luna 1/0, Terra 0/0, Sol 0/0, and Astra 5/1." caption="Figure 4. Each cell shows the number complete out of five attempts. Adjacent baseline and skills columns show where the models improve, tie, or regress." %}
 
 Across the 44 task–model combinations, skills produce more complete attempts
-in 22, the same number in 19, and fewer in three. Luna moves from 0/5 to 4/5
+in 21, the same number in 20, and fewer in three. Luna moves from 0/5 to 4/5
 on both the standalone intercept behavior and the mission that includes it.
 Terra moves from 0/5 to 4/5 on the mission with the contact-waypoint app.
 These gains are visible within individual task–model comparisons as well as
 in the pooled totals.
 
-The harness is particularly uneven: Terra improves from 1/5 to 4/5, while
-Luna falls from 2/5 to 0/5 and Astra from 5/5 to 1/5. Sol completes none in
-either condition. A single aggregate bar cannot show those differences. The
+After runtime review of all forty harness submissions, Luna completes 1/5
+baseline attempts and 0/5 with skills. Terra and Sol complete none in either
+condition. Astra completes 5/5 baseline attempts and 1/5 with skills. The
 other declining combination is Luna's tight-loop enumeration, from 1/5 to
-0/5. The later runtime audit examined Sol and Astra's harnesses more deeply,
-so that review-depth difference also matters when comparing this row.
+0/5.
 
-{% include benchmark-figure.html file="repeated-completion" title="Distribution of completion across repeated attempts" alt="Numbers of task-model combinations with 0, 1, 2, 3, 4, and 5 completions out of five: baseline 9, 3, 5, 3, 9, 15. Skills 3, 3, 2, 4, 9, 23. Each row sums to 44 combinations." caption="Figure 5. Each segment counts task–model combinations with that many complete attempts. Perfect five-attempt completion occurs in 23 of 44 combinations with skills, versus 15 without. Combinations with no complete attempt fall from nine to three. These are observed repeat counts, not estimated probabilities of future success." %}
+{% include benchmark-figure.html file="repeated-completion" title="Distribution of completion across repeated attempts" alt="Numbers of task-model combinations with 0, 1, 2, 3, 4, and 5 completions out of five: baseline 10, 3, 4, 3, 9, 15. Skills 4, 3, 2, 4, 8, 23. Each row sums to 44 combinations." caption="Figure 5. Each segment counts task–model combinations with that many complete attempts. Perfect five-attempt completion occurs in 23 of 44 combinations with skills, versus 15 without. Combinations with no complete attempt fall from ten to four. These are observed repeat counts, not estimated probabilities of future success." %}
 
 The repeated attempts distinguish an occasional success from a result that
 holds across all five tries. Sol completes every attempt on eight of eleven
@@ -367,9 +366,11 @@ conformance improvement or estimate total project savings.
 ## Failures and next steps
 {: #what-to-improve-next }
 
-Task 9 identifies a specific weakness in the harness workflow. After the
-later execution checks corrected its grades, baseline completes 8/20 runs and
-skills completes 5/20, despite substantially higher conformance with skills.
+Task 9 identifies a specific weakness in the harness workflow. Baseline
+completes 6/20 runs and skills completes 1/20, despite substantially higher
+conformance with skills. A post-hoc runtime audit now covers all forty
+submissions under the original rubric. The additional Luna/Terra review
+removed completion credit from six submissions.
 
 The task requires a harness whose pass/fail verdict agrees with whether the
 vehicle hits the obstacle. There are two different judgments here: a
@@ -383,14 +384,18 @@ vehicle position strictly inside the generated obstacle, independently verified
 against the polygon geometry, while the result row reports `grade=pass`,
 `hit=false`, and `collisions=0`. The harness therefore reported success despite
 evidence of obstacle contact: a false pass. This finding does
-not establish the exact internal detector or transport cause. The deeper
-Task 9 review covered Sol and Astra. Luna and Terra retain their earlier review
-depth, which limits comparisons across the entire task.
+not establish the exact internal detector or transport cause.
+
+The Luna/Terra audit also found harnesses reporting success after collision
+monitoring failed or an obstacle file could not be copied into a test case.
+These corrections concern harness reliability. They are not evidence that
+skills generally worsen vehicle behavior.
 
 For the skills, this points to a potentially fixable shortcoming: strengthen
 the workflow for testing the mission's own evaluator. Require evidence
 connecting the verdict to the mission event, deliberately include a case known
-to fail, and preserve the observation needed to diagnose an inconsistent grade.
+to fail, and verify that missing monitoring or failed setup cannot produce a
+pass. Preserve the observations needed to diagnose an inconsistent grade.
 These are proposed changes. This benchmark has not yet tested a package
 that includes them.
 
@@ -408,30 +413,29 @@ revised skill package.
 {: #a-result-that-survives-the-sensitivity-checks }
 
 Sensitivity checks ask whether the overall conclusion changes when grades are
-revised or part of the task set is removed. Across the four retained grading
+revised or part of the task set is removed. Across the five retained grading
 stages of the same 440 attempts, the completion advantage ranges from +15.0
-to +17.7 percentage points. The final accepted result is +16.8 points.
+to +17.7 percentage points. The final accepted result is +15.9 points.
 
 The lines in Figure 8 show uncertainty from variation between repeated
 attempts. A bootstrap estimates that variation by repeatedly drawing from
 the observed attempts, allowing an attempt to be drawn more than once, and
 recalculating the completion difference. The middle 95% of those estimates
-spans +11.4 to +22.3 points for the final revision. The range stays above
+spans +10.9 to +21.4 points for the final revision. The range stays above
 zero, supporting an overall skills advantage within this study.
 
-{% include benchmark-figure.html file="grading-sensitivity" title="Completion difference across grading revisions" alt="Skills-minus-baseline completion differences and bootstrap 95% intervals: original +17.7 points (12.3 to 23.2), earlier correction +17.3 (11.8 to 22.7), runtime corrections +15.0 (9.5 to 20.5), accepted revision +16.8 (11.4 to 22.3)." caption="Figure 8. Points show the completion difference. Lines show its 95% bootstrap interval. Each row uses the same 440 attempts at a different grading stage. Only attempts within the same tasks and models are resampled, so the intervals do not predict performance on unseen tasks." %}
+{% include benchmark-figure.html file="grading-sensitivity" title="Completion difference across grading revisions" alt="Skills-minus-baseline completion differences and bootstrap 95% intervals: original +17.7 points (12.3 to 23.2), earlier correction +17.3 (11.8 to 22.7), runtime corrections +15.0 (9.5 to 20.5), Task 11 revision +16.8 (11.4 to 22.3), full Task 9 audit +15.9 (10.9 to 21.4)." caption="Figure 8. Points show the completion difference. Lines show its 95% bootstrap interval. Each row uses the same 440 attempts at a different grading stage. Only attempts within the same tasks and models are resampled, so the intervals do not predict performance on unseen tasks." %}
 
 Removing any one task leaves a completion
-difference between +15.0 and +20.0 points. Removing any one model leaves a
-difference between +10.3 and +23.6 points. Removing any one task family also
+difference between +14.0 and +20.0 points. Removing any one model leaves a
+difference between +10.9 and +22.4 points. Removing any one task family also
 leaves the overall direction positive.
 
 The overall advantage therefore persists without any one task or model.
 Its scope still matters: the plugin's developer selected the tasks, conformance
 follows the skills' practices, and model-based reviewers can make mistakes.
-Later audits examined some tasks more deeply than others. These checks show
-how stable the result is within the study. A broader task set and independent
-replication would test how far it generalizes.
+These checks show how stable the result is within the study. A broader task set
+and independent replication would test how far it generalizes.
 
 <details class="benchmark-details" markdown="1">
 <summary>How the work was graded, and what changed in the accepted revision</summary>
@@ -471,7 +475,8 @@ attempts can be inspected.
 | Original | 117/220 | 156/220 | +17.7% |
 | Earlier correction | 119/220 | 157/220 | +17.3% |
 | Runtime corrections, strict Task 11 | 117/220 | 150/220 | +15.0% |
-| Accepted revision, including Task 11 | 133/220 | 170/220 | +16.8% |
+| Task 11 revision, before full Task 9 audit | 133/220 | 170/220 | +16.8% |
+| Full Task 9 audit (current) | 131/220 | 166/220 | +15.9% |
 
 The largest change concerns Task 11. Its post-hoc revision, made after
 the original answers had been graded, accepts a useful, checkable diagnosis
@@ -490,13 +495,17 @@ complete under the original strict grading to 38/40 in the accepted
 report. With almost every answer complete, the revised result does little to
 distinguish models. The table above retains the earlier results.
 
-The runtime review examined forty Astra submissions on Tasks 3, 5, 6, and 9,
-plus all ten Sol Task 9 submissions. It found meaningful failures, including
-false harness verdicts, while other questioned results survived examination.
-No new participant attempts were added. Conformance, resource measurements,
-and recorded agent-activity classifications were unchanged by the final
-runtime and Task 11 revision. This review history documents corrections. It
-does not measure how consistently a fresh set of independent reviewers would
+Runtime review now covers all forty Task 9 submissions, plus thirty Astra
+submissions on Tasks 3, 5, and 6. The added Luna/Terra audit changed functional
+grades in eleven submissions, with six losing completion credit: one
+Luna baseline, one Terra baseline, and four Terra skills. Task 9 completion
+fell from 8/20 to 6/20 in baseline and from 5/20 to 1/20 with skills.
+
+The rubric and participant runs are unchanged. Original grades and the
+previously published results remain preserved. The latest audit leaves
+conformance, Task 11, Sol/Astra grades, participant timing and costs, and
+recorded agent activity unchanged. This review history documents corrections.
+It does not measure how consistently a fresh set of independent reviewers would
 agree on every result.
 
 </details>

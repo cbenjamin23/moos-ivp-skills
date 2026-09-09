@@ -838,25 +838,25 @@ z
    </g>
    <g id="patch_3">
     <path d="M 115.2 183.040278 
-L 230.072727 183.040278 
-L 230.072727 209.309635 
+L 242.836364 183.040278 
+L 242.836364 209.309635 
 L 115.2 209.309635 
 z
 " clip-path="url(#p54ed628bd6)" style="fill: #eaf2f8; stroke: #f4f8fb; stroke-linejoin: miter"/>
    </g>
    <g id="patch_4">
-    <path d="M 230.072727 183.040278 
-L 268.363636 183.040278 
-L 268.363636 209.309635 
-L 230.072727 209.309635 
+    <path d="M 242.836364 183.040278 
+L 281.127273 183.040278 
+L 281.127273 209.309635 
+L 242.836364 209.309635 
 z
 " clip-path="url(#p54ed628bd6)" style="fill: #cddce6; stroke: #f4f8fb; stroke-linejoin: miter"/>
    </g>
    <g id="patch_5">
-    <path d="M 268.363636 183.040278 
+    <path d="M 281.127273 183.040278 
 L 332.181818 183.040278 
 L 332.181818 209.309635 
-L 268.363636 209.309635 
+L 281.127273 209.309635 
 z
 " clip-path="url(#p54ed628bd6)" style="fill: #a9c4d4; stroke: #f4f8fb; stroke-linejoin: miter"/>
    </g>
@@ -886,41 +886,41 @@ z
    </g>
    <g id="patch_9">
     <path d="M 115.2 245.586365 
-L 153.490909 245.586365 
-L 153.490909 271.855722 
+L 166.254545 245.586365 
+L 166.254545 271.855722 
 L 115.2 271.855722 
 z
 " clip-path="url(#p54ed628bd6)" style="fill: #eaf2f8; stroke: #f4f8fb; stroke-linejoin: miter"/>
    </g>
    <g id="patch_10">
-    <path d="M 153.490909 245.586365 
-L 191.781818 245.586365 
-L 191.781818 271.855722 
-L 153.490909 271.855722 
+    <path d="M 166.254545 245.586365 
+L 204.545455 245.586365 
+L 204.545455 271.855722 
+L 166.254545 271.855722 
 z
 " clip-path="url(#p54ed628bd6)" style="fill: #cddce6; stroke: #f4f8fb; stroke-linejoin: miter"/>
    </g>
    <g id="patch_11">
-    <path d="M 191.781818 245.586365 
-L 217.309091 245.586365 
-L 217.309091 271.855722 
-L 191.781818 271.855722 
+    <path d="M 204.545455 245.586365 
+L 230.072727 245.586365 
+L 230.072727 271.855722 
+L 204.545455 271.855722 
 z
 " clip-path="url(#p54ed628bd6)" style="fill: #a9c4d4; stroke: #f4f8fb; stroke-linejoin: miter"/>
    </g>
    <g id="patch_12">
-    <path d="M 217.309091 245.586365 
-L 268.363636 245.586365 
-L 268.363636 271.855722 
-L 217.309091 271.855722 
+    <path d="M 230.072727 245.586365 
+L 281.127273 245.586365 
+L 281.127273 271.855722 
+L 230.072727 271.855722 
 z
 " clip-path="url(#p54ed628bd6)" style="fill: #75a2b9; stroke: #f4f8fb; stroke-linejoin: miter"/>
    </g>
    <g id="patch_13">
-    <path d="M 268.363636 245.586365 
+    <path d="M 281.127273 245.586365 
 L 383.236364 245.586365 
 L 383.236364 271.855722 
-L 268.363636 271.855722 
+L 281.127273 271.855722 
 z
 " clip-path="url(#p54ed628bd6)" style="fill: #427c9b; stroke: #f4f8fb; stroke-linejoin: miter"/>
    </g>
@@ -933,8 +933,33 @@ z
 " clip-path="url(#p54ed628bd6)" style="fill: #154871; stroke: #f4f8fb; stroke-linejoin: miter"/>
    </g>
    <g id="text_9">
+    <!-- 10 -->
+    <g style="fill: #172b3c" transform="translate(172.951854 200.662957) scale(0.11 -0.11)">
+     <use xlink:href="#PlusJakartaSans-Regular-344"/>
+     <use xlink:href="#PlusJakartaSans-Regular-343" transform="translate(37.09375 0)"/>
+    </g>
+   </g>
+   <g id="text_10">
+    <!-- 3 -->
+    <g style="fill: #172b3c" transform="translate(258.631974 200.662957) scale(0.11 -0.11)">
+     <use xlink:href="#PlusJakartaSans-Regular-346"/>
+    </g>
+   </g>
+   <g id="text_11">
+    <!-- 4 -->
+    <g style="fill: #172b3c" transform="translate(303.189545 200.662957) scale(0.11 -0.11)">
+     <use xlink:href="#PlusJakartaSans-Regular-347"/>
+    </g>
+   </g>
+   <g id="text_12">
+    <!-- 3 -->
+    <g style="fill: #172b3c" transform="translate(347.977429 200.662957) scale(0.11 -0.11)">
+     <use xlink:href="#PlusJakartaSans-Regular-346"/>
+    </g>
+   </g>
+   <g id="text_13">
     <!-- 9 -->
-    <g style="fill: #172b3c" transform="translate(169.352692 200.662957) scale(0.11 -0.11)">
+    <g style="fill: #ffffff" transform="translate(424.625419 200.662957) scale(0.11 -0.11)">
      <defs>
       <path id="PlusJakartaSans-Regular-34c" d="M 928 0 
 L 2586 2170 
@@ -976,15 +1001,9 @@ z
      <use xlink:href="#PlusJakartaSans-Regular-34c"/>
     </g>
    </g>
-   <g id="text_10">
-    <!-- 3 -->
-    <g style="fill: #172b3c" transform="translate(245.868338 200.662957) scale(0.11 -0.11)">
-     <use xlink:href="#PlusJakartaSans-Regular-346"/>
-    </g>
-   </g>
-   <g id="text_11">
-    <!-- 5 -->
-    <g style="fill: #172b3c" transform="translate(296.885071 200.662957) scale(0.11 -0.11)">
+   <g id="text_14">
+    <!-- 15 -->
+    <g style="fill: #ffffff" transform="translate(575.644915 200.662957) scale(0.11 -0.11)">
      <defs>
       <path id="PlusJakartaSans-Regular-348" d="M 1933 -77 
 Q 1562 -77 1245 51 
@@ -1020,56 +1039,93 @@ Q 2394 -77 1933 -77
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#PlusJakartaSans-Regular-348"/>
-    </g>
-   </g>
-   <g id="text_12">
-    <!-- 3 -->
-    <g style="fill: #172b3c" transform="translate(347.977429 200.662957) scale(0.11 -0.11)">
-     <use xlink:href="#PlusJakartaSans-Regular-346"/>
-    </g>
-   </g>
-   <g id="text_13">
-    <!-- 9 -->
-    <g style="fill: #ffffff" transform="translate(424.625419 200.662957) scale(0.11 -0.11)">
-     <use xlink:href="#PlusJakartaSans-Regular-34c"/>
-    </g>
-   </g>
-   <g id="text_14">
-    <!-- 15 -->
-    <g style="fill: #ffffff" transform="translate(575.644915 200.662957) scale(0.11 -0.11)">
      <use xlink:href="#PlusJakartaSans-Regular-344"/>
      <use xlink:href="#PlusJakartaSans-Regular-348" transform="translate(37.09375 0)"/>
     </g>
    </g>
    <g id="text_15">
-    <!-- 3 -->
-    <g style="fill: #172b3c" transform="translate(130.995611 263.209043) scale(0.11 -0.11)">
-     <use xlink:href="#PlusJakartaSans-Regular-346"/>
+    <!-- 4 -->
+    <g style="fill: #172b3c" transform="translate(137.262273 263.209043) scale(0.11 -0.11)">
+     <use xlink:href="#PlusJakartaSans-Regular-347"/>
     </g>
    </g>
    <g id="text_16">
     <!-- 3 -->
-    <g style="fill: #172b3c" transform="translate(169.28652 263.209043) scale(0.11 -0.11)">
+    <g style="fill: #172b3c" transform="translate(182.050156 263.209043) scale(0.11 -0.11)">
      <use xlink:href="#PlusJakartaSans-Regular-346"/>
     </g>
    </g>
    <g id="text_17">
     <!-- 2 -->
-    <g style="fill: #172b3c" transform="translate(201.245455 263.209043) scale(0.11 -0.11)">
+    <g style="fill: #172b3c" transform="translate(214.009091 263.209043) scale(0.11 -0.11)">
      <use xlink:href="#PlusJakartaSans-Regular-345"/>
     </g>
    </g>
    <g id="text_18">
     <!-- 4 -->
-    <g style="fill: #172b3c" transform="translate(239.371364 263.209043) scale(0.11 -0.11)">
+    <g style="fill: #172b3c" transform="translate(252.135 263.209043) scale(0.11 -0.11)">
      <use xlink:href="#PlusJakartaSans-Regular-347"/>
     </g>
    </g>
    <g id="text_19">
-    <!-- 9 -->
-    <g style="fill: #ffffff" transform="translate(322.516328 263.209043) scale(0.11 -0.11)">
-     <use xlink:href="#PlusJakartaSans-Regular-34c"/>
+    <!-- 8 -->
+    <g style="fill: #ffffff" transform="translate(328.72799 263.209043) scale(0.11 -0.11)">
+     <defs>
+      <path id="PlusJakartaSans-Regular-34b" d="M 2010 -77 
+Q 1549 -77 1187 112 
+Q 826 301 618 630 
+Q 410 960 410 1376 
+Q 410 1830 669 2188 
+Q 928 2547 1370 2688 
+L 1370 2554 
+Q 1030 2701 844 2992 
+Q 659 3283 659 3616 
+Q 659 3968 838 4243 
+Q 1018 4518 1322 4681 
+Q 1626 4845 2010 4845 
+Q 2400 4845 2701 4688 
+Q 3002 4531 3178 4252 
+Q 3354 3974 3354 3616 
+Q 3354 3258 3162 2979 
+Q 2970 2701 2656 2554 
+L 2650 2688 
+Q 3091 2547 3350 2188 
+Q 3610 1830 3610 1376 
+Q 3610 960 3402 630 
+Q 3194 301 2832 112 
+Q 2470 -77 2010 -77 
+z
+M 2010 371 
+Q 2336 371 2579 496 
+Q 2822 621 2960 848 
+Q 3098 1075 3098 1376 
+Q 3098 1677 2960 1904 
+Q 2822 2131 2579 2256 
+Q 2336 2381 2010 2381 
+Q 1683 2381 1436 2256 
+Q 1190 2131 1056 1904 
+Q 922 1677 922 1376 
+Q 922 1075 1056 848 
+Q 1190 621 1436 496 
+Q 1683 371 2010 371 
+z
+M 2010 2829 
+Q 2246 2829 2432 2928 
+Q 2618 3027 2730 3203 
+Q 2842 3379 2842 3616 
+Q 2842 3853 2730 4025 
+Q 2618 4198 2432 4297 
+Q 2246 4397 2010 4397 
+Q 1773 4397 1584 4297 
+Q 1395 4198 1283 4025 
+Q 1171 3853 1171 3616 
+Q 1171 3379 1283 3203 
+Q 1395 3027 1584 2928 
+Q 1773 2829 2010 2829 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#PlusJakartaSans-Regular-34b"/>
     </g>
    </g>
    <g id="text_20">

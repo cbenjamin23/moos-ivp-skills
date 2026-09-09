@@ -11,27 +11,38 @@ companion_label: Read the benchmark
 
 ## The source snapshot
 
-The article uses the accepted 440-run analysis (the `evaluation-440-v2.0` revision) from
+The article uses the accepted 440-run analysis in `benchmark/evaluation/` from
 `cbenjamin23/moos-ivp-skills-benchmark-private`, at commit
-`b471d1bb5324953f3b0151c725a70a9b2b51bc7a`. The benchmark repository is private.
+`100f4a93b2eec9acc93a3fbcefa6c1be71891083`. The benchmark repository is private.
 The article includes an allowlisted export of numeric summaries, the eleven
 task prompts, and source identifiers. Participant transcripts and reviewer
 workspaces remain private.
 
 The [chart-data JSON]({{ '/assets/data/benchmark-2026.json' | relative_url }})
-contains model, task, and task-by-model summaries, along with the four grading
+contains model, task, and task-by-model summaries, along with the five grading
 stages, uncertainty and leave-out analyses, observed process counts, exact
-task prompts, and source hashes. Schema version 2 adds `task_prompts`, containing only each
-task's identifier and original prompt text from `benchmark/config/tasks.json`.
-The generator also writes the article's prompt include from this data, so
-the expandable task definitions and JSON use the same source wording.
+task prompts, and source hashes. The `task_prompts` field contains each task's
+identifier and original prompt text from `benchmark/config/tasks.json`, matching
+the verbatim prompts displayed in the article's table.
+Schema version 3 adds the Task 9 audit's coverage and completion-loss counts
+and preserves the previous published result as `pre_task09_coverage`.
 Model, task, and overall summaries also include `conformance_half_credit`,
 the mean score when partially met criteria receive half credit. This makes the
 article's alternative-scoring comparison available in the download.
 The exporter verifies the complete 440-record matrix, recomputes completion
-counts from functional labels, and verifies all 1,911 input hashes recorded by
+counts from functional labels, and verifies all 2,172 input hashes recorded by
 the source aggregate. Git objects are read at the pinned commit, so a later
 folder reorganization or uncommitted work cannot silently change this article.
+
+The post-hoc Task 9 runtime audit now covers all forty submissions under the
+unchanged rubric. The additional twenty Luna/Terra reviews removed completion
+credit from two baseline and four skills submissions. The headline is now
+131/220 baseline and 166/220 skills, a 15.9 percentage-point difference.
+The corrections concern harness reliability, including false success when
+monitoring or setup fails. They do not establish that skills generally worsen
+vehicle behavior. No participant runs were added. Original grades, Task 11,
+Sol/Astra grades, conformance, timing, costs, and agent-activity coding remain
+unchanged.
 
 ## Definitions
 
@@ -72,8 +83,8 @@ developer-selected task set. Cross-model comparisons are descriptive.
 
 The repository consolidation places current reports in `benchmark/evaluation/`,
 machine data in `benchmark/evaluation/data/`, and earlier evidence in
-`benchmark/archive/`. Its 440 run records and reported metrics match the
-previous layout. The pinned commit uses these current paths.
+`benchmark/archive/`. The pinned commit includes the completed Task 9 audit
+and retains earlier grading stages alongside the current results.
 
 The public numeric export can redraw the figures. Independent reproduction of
 the judgments requires the private evidence and evaluation environment.
@@ -89,6 +100,8 @@ the judgments requires the private evidence and evaluation environment.
 | Review, blinding, grader changes, metrics | `benchmark/evaluation/PROTOCOL.md` |
 | Conformance scope, examples, and judgment labels | `benchmark/archive/evaluation/protocol/CONFORMANCE.md` |
 | False-PASS example and geometry check | `benchmark/archive/reviews/2026-09-06-astra-adversarial/TASK09_CONTACT_VERIFICATION.md` |
+| All-model Task 9 audit coverage and corrections | `benchmark/archive/evaluation-task09-coverage-v1/README.md`, `ACCEPTANCE_NOTES.md`, `FINAL_DECISIONS.json`, and `SUMMARY.json` |
+| Unchanged Task 9 runtime probe contract | `benchmark/archive/evaluation-task09-coverage-v1/PROBE_CONTRACT.md` |
 | Accepted Task 11 interpretation | `benchmark/archive/evaluation-task11-v2/TASK.md` |
 | Final acceptance and archived decisions | `benchmark/archive/reviews/README.md` |
 
@@ -101,7 +114,7 @@ qualifications separately.
 The repeated-completion figure counts the 44 entries in `by_task_model` by
 their `complete` value (0–5), separately for baseline and skills. A segment
 counts task–model combinations, not individual attempts. The article's
-22 improved, 19 tied, and three declining combinations compare those counts
+21 improved, 20 tied, and three declining combinations compare those counts
 within each entry. These are descriptive comparisons of five-attempt samples.
 Task-level conformance pools all four models with equal weight per run,
 including incomplete attempts.

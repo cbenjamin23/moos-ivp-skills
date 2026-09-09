@@ -18,7 +18,7 @@ DATA = ROOT / "docs/assets/data/benchmark-2026.json"
 FIGURES = ROOT / "docs/assets/images/benchmark-2026"
 MODELS = ["luna-high", "terra-high", "sol-high", "astra-high"]
 CONDITIONS = ["baseline", "skills"]
-STAGES = ["original", "prior_audited", "runtime_only", "audited"]
+STAGES = ["original", "prior_audited", "runtime_only", "pre_task09_coverage", "audited"]
 TASKS = [
     "BatteryWatch app", "Contact-waypoint app", "Contact-intercept behavior",
     "Heading-sector behavior", "Patrol and shadow mission", "Mission + application",
@@ -82,6 +82,9 @@ def export_data(repo, source_ref):
             "benchmark/evaluation-task11-v2/TASK.md",
             "benchmark/reviews/2026-09-06-astra-adversarial/TASK09_CONTACT_VERIFICATION.md",
         ]]
+        source_names += [f"benchmark/archive/evaluation-task09-coverage-v1/{name}"
+                         for name in ["README.md", "ACCEPTANCE_NOTES.md", "PROBE_CONTRACT.md",
+                                      "FINAL_DECISIONS.json", "SUMMARY.json"]]
         source_hashes = {name: hashlib.sha256(read(name)).hexdigest() for name in source_names}
         git.stdin.close()
     records = aggregate["records"]
@@ -115,8 +118,20 @@ def export_data(repo, source_ref):
         }
 
     audited = aggregate["versions"]["audited"]
+    completion_losses = {m: {c: 0 for c in CONDITIONS} for m in MODELS}
+    for record in records:
+        before, after = record["pre_task09_coverage"], record["audited"]
+        require(before["conformance"] == after["conformance"],
+                "Task 9 coverage audit must preserve conformance")
+        if before["functionality"] != after["functionality"]:
+            require(record["task"] == 9 and record["model_id"] in ["luna-high", "terra-high"],
+                    "Coverage corrections must only affect Luna/Terra Task 9")
+        was_complete = all(v == "met" for v in before["functionality"].values())
+        is_complete = all(v == "met" for v in after["functionality"].values())
+        require(not is_complete or was_complete, "Unexpected completion upgrade in coverage audit")
+        completion_losses[record["model_id"]][record["condition"]] += int(was_complete and not is_complete)
     data = {
-        "schema_version": 2,
+        "schema_version": 3,
         "source_revision": revision,
         "source_repository": "cbenjamin23/moos-ivp-skills-benchmark-private",
         "evaluation": "evaluation-440-v2.0",
@@ -126,6 +141,12 @@ def export_data(repo, source_ref):
         "models": MODELS,
         "task_names": TASKS,
         "task_prompts": [{"id": t["id"], "prompt": t["prompt"]} for t in tasks],
+        "task09_audit": {
+            "reviewed_submissions": aggregate["revision"]["task09_total_runtime_review_runs"],
+            "additional_reviewed_submissions": aggregate["revision"]["task09_coverage_review_runs"],
+            "completion_losses": completion_losses,
+            "previous_stage": "pre_task09_coverage",
+        },
         "overall": summary(audited["overall"]),
         "by_model": {m: summary(audited["by_model"][m]) for m in MODELS},
         "by_task": {t: summary(g) for t, g in audited["by_task"].items()},
@@ -163,6 +184,8 @@ def export_data(repo, source_ref):
         } for c in CONDITIONS} for m in MODELS},
         "notes": [
             "Accepted post-hoc Task 11 interpretation; earlier stages retained.",
+            "Deeper Task 9 runtime review covers all four models under the unchanged rubric, with no new participant runs.",
+            "The pre_task09_coverage stage preserves the previously published grades; six submissions lose completion credit.",
             "Conformance is mean per-run met / resolved applicable criteria, no partial credit.",
             "Costs are frozen standard API-equivalent estimates, not invoices or current prices.",
             "One Astra skills run lacks a usage receipt; its cost is unknown, not zero.",
@@ -399,8 +422,8 @@ def render(data):
         save(fig,"participant-efficiency")
 
         fig=canvas("Completion differences across grading revisions",
-                   "Skills minus baseline completion · points = difference · lines = 95% bootstrap intervals",5.6)
-        ax=axis(fig,[.31,.19,.60,.55],26,False)
+                   "Skills minus baseline completion · points = difference · lines = 95% bootstrap intervals",6.4)
+        ax=axis(fig,[.31,.17,.60,.59],26,False)
         ax.set_xticks([0,5,10,15,20,25],["0%","+5%","+10%","+15%","+20%","+25%"])
         ax.axvline(0,color=muted,linewidth=1)
         for i,s in enumerate(STAGES):
@@ -409,8 +432,9 @@ def render(data):
             ax.plot([lo,hi],[i,i],color="#2b658e",linewidth=2)
             ax.plot(x,i,"o",color=colors["skills"],markersize=8)
             ax.text(x,i-.20,f"+{x:.1f}%",ha="center",fontsize=11)
-        ax.set_yticks(range(4),["Original grading", "Earlier correction", "Runtime corrections", "Final revision"])
-        ax.set_ylim(3.55,-.6)
+        ax.set_yticks(range(len(STAGES)),["Original grading", "Earlier correction", "Runtime corrections",
+                                        "Task 11 revision", "Full Task 9 audit"])
+        ax.set_ylim(len(STAGES)-.45,-.6)
         fig.text(.04,.10,"Difference between rates · resampled attempts within the same tasks and models",fontsize=9,color=muted)
         save(fig,"grading-sensitivity")
 
@@ -449,7 +473,7 @@ def render(data):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--benchmark-repo",type=Path,help="Verify and export from this private source checkout")
-    parser.add_argument("--source-ref",default="b471d1bb5324953f3b0151c725a70a9b2b51bc7a",
+    parser.add_argument("--source-ref",default="100f4a93b2eec9acc93a3fbcefa6c1be71891083",
                         help="Committed benchmark snapshot; working-tree changes are ignored")
     parser.add_argument("--data-only",action="store_true",help="Skip plotting (standard library only)")
     args=parser.parse_args()

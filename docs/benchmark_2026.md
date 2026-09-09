@@ -255,9 +255,9 @@ and 16 of 20 with skills.
 Task 6 adds contact-report routing, active waypoint updates, vehicle motion,
 and collision avoidance around the app. Task 2 and Task 6 were separate
 benchmark tasks with separate fresh runs. Task 6 did not continue from a Task 2
-implementation, so this is not a controlled estimate of integration cost. It
-does show that near-perfect results on the standalone application do not settle
-the mission question.
+implementation, so it does not measure how much extra work it takes to combine
+the app with a mission. It does show that near-perfect results on the standalone
+application do not settle the mission question.
 
 Task 5 adds another perspective. It asks for patrol, release, timed shadowing,
 return, and hold controls across two vehicles. Sol completes two of five

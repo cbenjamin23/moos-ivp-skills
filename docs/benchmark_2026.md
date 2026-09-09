@@ -327,6 +327,10 @@ behavior, or mission in the benchmark simulation and check it in execution,
 rather than inferring from the source and build that it should satisfy the
 request. A recorded launch attempt need not succeed.
 
+For an app task, live validation can put the app in a temporary mission or test
+harness. That scaffold exercises the app without changing the requested
+deliverable.
+
 {% include benchmark-figure.html file="observed-validation" title="Observed live validation by model" alt="Runs with recorded live validation, baseline then skills, out of 55: Luna 23 and 35. Terra 24 and 38. Sol 30 and 44. Astra 20 and 27." caption="Figure 6. More skills attempts include recorded execution checks in every model. These are observations of agent activity. They do not establish that testing caused the completion differences or that every check was adequate." %}
 
 Skills runs also record more live validation in every model. This is consistent

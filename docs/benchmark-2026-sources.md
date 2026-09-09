@@ -52,7 +52,7 @@ unchanged.
 | Conformance judgments | Each applicable skill-derived architecture, implementation, operation, or analysis criterion retains its own judgment. The same criteria apply in both conditions. These judgments are separate from functional completeness. |
 | Headline conformance | Mean across runs of `met / (met + partially_met + not_met)`. Partially met criteria receive no credit. Not-applicable and unresolved criteria are excluded, with their counts retained in the data. All runs in this snapshot have scored conformance criteria. |
 | Elapsed time | Median participant wall-clock minutes across complete and incomplete runs. |
-| Cost | Median recorded standard API-equivalent USD estimate using the frozen rate table. It is not an invoice or a current price. One Astra skills receipt is unavailable. |
+| Cost | Median recorded standard API-equivalent USD estimate using API rates as of August 10, 2026 for Luna, Terra, and Sol, and September 4, 2026 for Astra. It is not an invoice or a current price. One Astra skills receipt is unavailable. |
 | Model intervals | Descriptive Newcombe/Wilson intervals for the completion difference. |
 | Overall bootstrap | 20,000 resamples within each fixed task/model/condition stratum, seed 20260814. Conditions are resampled separately. Matched pairs are not jointly resampled. |
 | Routing | Observed access to the required skills, or the full set including prescribed companions. Access does not prove effective use. |

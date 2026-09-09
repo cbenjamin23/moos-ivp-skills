@@ -346,18 +346,16 @@ With skills, median elapsed time is about seven to eleven minutes, an
 increase of roughly 0.7–2 minutes depending on the model. These figures include
 complete and incomplete attempts.
 
-Cost is estimated from recorded token usage using the study's fixed historical
-API rates. It is an
-API-equivalent estimate, not a subscription charge or invoice. The rates
-are held fixed so later price changes do not alter the comparison.
+Cost is estimated from recorded token usage using API rates as of August 10,
+2026 for Luna, Terra, and Sol, and September 4, 2026 for Astra. It is an
+API-equivalent estimate, not a subscription charge or invoice. Those rates stay
+fixed so later price changes do not alter the comparison.
 
 {% include benchmark-figure.html file="participant-efficiency" title="Participant time and estimated cost" alt="Median minutes baseline/skills: Luna 8.86/9.93, Terra 6.35/7.05, Sol 8.38/9.54, Astra 9.20/11.15. Median estimated USD: 0.149/0.141, 0.597/0.791, 2.352/2.367, 1.864/2.468." caption="Figure 7. Median elapsed time and estimated model-use cost per attempt. Both include available measurements from complete and incomplete runs. Grading and later audit work are excluded." %}
 
 Cost moves differently from elapsed time. Luna's median estimate decreases
 slightly, from $0.149 to $0.141. Terra's increases from $0.597 to $0.791. Sol's
 is nearly unchanged at $2.352 and $2.367, while Astra's rises from $1.864 to $2.468.
-These estimates use the recorded historical rates.
-
 One Astra skills run on Task 9 ended without a token-usage record. Its cost is
 unknown and is excluded from the cost median, leaving 54 observations for that
 group. The run remains in completion and elapsed-time analyses.

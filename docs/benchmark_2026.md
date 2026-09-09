@@ -310,8 +310,9 @@ grading-history section explains the revision to Task 11.
 ## Skill use and validation
 {: #what-the-agents-actually-did }
 
-Each task has one or more required skills. For example, integrating a component
-into a mission requires both component-building and mission-building guidance.
+Each task has one or more required skills. For example, Task 6 integrates the
+`pContactWaypoint` app into a two-vehicle mission, so it requires both
+app-building and mission-building guidance.
 The evaluation and harness tasks additionally prescribe a companion mission
 skill. All 220 skills runs show access to their required skills, and 216 show
 access to the full set including prescribed companions. Luna and Terra each
@@ -328,7 +329,7 @@ deployment of a physical vehicle. A recorded launch attempt need not succeed.
 {% include benchmark-figure.html file="observed-validation" title="Observed live validation by model" alt="Runs with recorded live validation, baseline then skills, out of 55: Luna 23 and 35. Terra 24 and 38. Sol 30 and 44. Astra 20 and 27." caption="Figure 6. More skills attempts include recorded execution checks in every model. These are observations of agent activity. They do not establish that testing caused the completion differences or that every check was adequate." %}
 
 Skills runs also record more live validation in every model. This is consistent
-with workflows that ask the agent to exercise the component or mission it has
+with workflows that ask the agent to exercise the app or mission it has
 built. The counts are observational: they cannot establish how much of the
 completion improvement came from testing. They also span analysis tasks that
 require no new mission. The harness example below shows why the adequacy of a

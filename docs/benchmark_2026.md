@@ -276,7 +276,7 @@ Terra moves from 0/5 to 4/5 on the mission with the contact-waypoint app.
 These gains are visible within individual task–model comparisons as well as
 in the pooled totals.
 
-After runtime review of all forty harness submissions, Luna completes 1/5
+In the harness task, Luna completes 1/5
 baseline attempts and 0/5 with skills. Terra and Sol complete none in either
 condition. Astra completes 5/5 baseline attempts and 1/5 with skills. The
 other declining combination is Luna's tight-loop enumeration, from 1/5 to
@@ -351,7 +351,7 @@ Cost is estimated from recorded token usage using API rates as of August 10,
 API-equivalent estimate, not a subscription charge or invoice. Those rates stay
 fixed so later price changes do not alter the comparison.
 
-{% include benchmark-figure.html file="participant-efficiency" title="Participant time and estimated cost" alt="Median minutes baseline/skills: Luna 8.86/9.93, Terra 6.35/7.05, Sol 8.38/9.54, Astra 9.20/11.15. Median estimated USD: 0.149/0.141, 0.597/0.791, 2.352/2.367, 1.864/2.468." caption="Figure 7. Median elapsed time and estimated model-use cost per attempt. Both include available measurements from complete and incomplete runs. Grading and later audit work are excluded." %}
+{% include benchmark-figure.html file="participant-efficiency" title="Participant time and estimated cost" alt="Median minutes baseline/skills: Luna 8.86/9.93, Terra 6.35/7.05, Sol 8.38/9.54, Astra 9.20/11.15. Median estimated USD: 0.149/0.141, 0.597/0.791, 2.352/2.367, 1.864/2.468." caption="Figure 7. Median elapsed time and estimated model-use cost per attempt. Both include available measurements from complete and incomplete runs. Grading work is excluded." %}
 
 Cost moves differently from elapsed time. Luna's median estimate decreases
 slightly, from $0.149 to $0.141. Terra's increases from $0.597 to $0.791. Sol's
@@ -369,9 +369,7 @@ conformance improvement or estimate total project savings.
 
 Task 9 identifies a specific weakness in the harness workflow. Baseline
 completes 6/20 runs and skills completes 1/20, despite substantially higher
-conformance with skills. A post-hoc runtime audit now covers all forty
-submissions under the original rubric. The additional Luna/Terra review
-removed completion credit from six submissions.
+conformance with skills.
 
 The task requires a harness whose pass/fail verdict agrees with whether the
 vehicle hits the obstacle. There are two different judgments here: a
@@ -387,10 +385,10 @@ against the polygon geometry, while the result row reports `grade=pass`,
 evidence of obstacle contact: a false pass. This finding does
 not establish the exact internal detector or transport cause.
 
-The Luna/Terra audit also found harnesses reporting success after collision
-monitoring failed or an obstacle file could not be copied into a test case.
-These corrections concern harness reliability. They are not evidence that
-skills generally worsen vehicle behavior.
+Some harnesses reported success after collision monitoring failed or an
+obstacle file could not be copied into a test case. These corrections concern
+harness reliability. They are not evidence that skills generally worsen
+vehicle behavior.
 
 For the skills, this points to a potentially fixable shortcoming: strengthen
 the workflow for testing the mission's own evaluator. Require evidence

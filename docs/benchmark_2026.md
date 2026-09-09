@@ -333,8 +333,7 @@ Skills runs also record more live validation in every model. This is consistent
 with workflows that ask the agent to exercise the app or mission it has
 built. The counts are observational: they cannot establish how much of the
 completion improvement came from testing. They also span analysis tasks that
-require no new mission. The harness example below shows why the adequacy of a
-check still matters after a run has been recorded.
+require no new mission.
 
 ## Time and cost
 {: #time-and-cost-of-the-work }

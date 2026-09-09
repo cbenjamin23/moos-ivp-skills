@@ -127,15 +127,18 @@
     });
   });
 
+  const printDetails = [...skillProfiles, ...document.querySelectorAll(".benchmark-details")];
   let printOpenState = [];
   window.addEventListener("beforeprint", () => {
-    printOpenState = skillProfiles.map((profile) => profile.open);
-    setAllSkills(true);
+    printOpenState = printDetails.map((profile) => profile.open);
+    printDetails.forEach((profile) => { profile.open = true; });
+    skillProfiles.forEach(syncSkillCard);
   });
   window.addEventListener("afterprint", () => {
-    skillProfiles.forEach((profile, index) => {
+    printDetails.forEach((profile, index) => {
       profile.open = printOpenState[index] ?? profile.open;
     });
+    skillProfiles.forEach(syncSkillCard);
   });
 
   const openHashTarget = () => {

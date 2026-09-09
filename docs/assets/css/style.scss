@@ -701,6 +701,139 @@ a:hover {
   text-align: center;
 }
 
+/* A study-specific masthead, with the release article's type and palette. */
+.page-hero--benchmark::before,
+.page-hero--benchmark::after {
+  content: none;
+}
+
+.page-hero--benchmark .page-hero__inner {
+  min-height: 0;
+  padding-block: 3.25rem;
+}
+
+.page-hero--benchmark .page-hero__copy {
+  text-align: left;
+}
+
+.page-hero--benchmark .page-hero__title {
+  max-width: 16ch;
+  margin-inline: 0;
+  white-space: normal;
+  line-height: 1.1;
+}
+
+.page-hero--benchmark .page-hero__subtitle {
+  max-width: 640px;
+  margin-inline: 0;
+}
+
+.page-hero--benchmark .page-hero__actions {
+  justify-content: flex-start;
+}
+
+/* Benchmark figures share the release article's palette and reading column. */
+.benchmark-chart {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+  background: var(--surface-soft);
+}
+
+.benchmark-chart img {
+  min-width: 660px;
+  border: 0;
+  border-radius: 0;
+}
+
+.benchmark-definitions {
+  margin: 1.35rem 0 1.8rem;
+}
+
+.benchmark-definitions > div {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 9rem) minmax(0, 1fr);
+  gap: 0.8rem;
+  padding: 0.55rem 0;
+}
+
+.benchmark-definitions > div + div {
+  border-top: 1px solid rgba(117, 145, 163, 0.28);
+}
+
+.benchmark-definitions dt {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.benchmark-definitions dd {
+  margin: 0;
+}
+
+.benchmark-figure__downloads {
+  display: block;
+  margin-top: 0.4rem;
+}
+
+.benchmark-details {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+}
+
+.benchmark-details > summary {
+  color: var(--navy);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.benchmark-task-table td {
+  vertical-align: top;
+}
+
+@media screen and (max-width: 640px) {
+  .benchmark-task-table thead {
+    display: none;
+  }
+
+  .benchmark-task-table tbody,
+  .benchmark-task-table tr,
+  .benchmark-task-table td {
+    display: block;
+    width: auto;
+  }
+
+  .benchmark-task-table tr {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .benchmark-task-table td {
+    padding: 0.25rem 0.65rem;
+    border: 0;
+  }
+
+  .benchmark-task-table td:first-child {
+    color: var(--navy);
+  }
+
+  .benchmark-definitions > div {
+    display: block;
+  }
+
+  .benchmark-definitions dt {
+    margin-bottom: 0.2rem;
+  }
+}
+
+@media print {
+  .benchmark-chart { overflow: visible; }
+  .benchmark-chart img { min-width: 0; }
+  .benchmark-figure,
+  .benchmark-details:has(.benchmark-figure) { break-inside: avoid-page; }
+}
+
 .project-visuals {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1042,13 +1175,15 @@ a:hover {
     border-bottom: 2px solid #000;
   }
 
-  .page-hero__inner {
+  .page-hero__inner,
+  .page-hero--benchmark .page-hero__inner {
     display: block;
     min-height: 0;
     padding: 1rem 0;
   }
 
   .page-hero__logo,
+  .skip-link,
   .page-hero__actions,
   .article-sidebar,
   .mobile-nav,
@@ -1059,7 +1194,8 @@ a:hover {
 
   .page-hero__eyebrow,
   .page-hero__title,
-  .page-hero__subtitle {
+  .page-hero__subtitle,
+  .page-hero--benchmark .page-hero__subtitle {
     color: #000;
   }
 

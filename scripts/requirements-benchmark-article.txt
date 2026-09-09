@@ -1,0 +1,4 @@
+# Optional figure-generation environment; numeric export uses the standard library.
+matplotlib==3.11.1
+numpy==2.5.2
+fonttools==4.64.0

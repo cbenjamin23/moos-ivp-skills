@@ -1,4 +1,11 @@
 <nav class="article-nav">
+  {% if page.article_nav %}
+  <ol>
+    {% for section in page.article_nav %}
+    <li><a href="#{{ section.id }}">{{ section.title }}</a></li>
+    {% endfor %}
+  </ol>
+  {% else %}
   <ol>
     <li><a href="#accuracy-and-scale">Accuracy and scale</a></li>
     <li><a href="#what-a-skill-contains">What a skill contains</a></li>
@@ -23,4 +30,5 @@
     <li><a href="#skills-in-practice">Skills in practice</a></li>
     <li><a href="#conclusion">Conclusion</a></li>
   </ol>
+  {% endif %}
 </nav>

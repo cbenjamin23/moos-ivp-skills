@@ -32,19 +32,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    {% assign preview_revision = site.time | date: '%s' %}
+    {% assign asset_revision = site.github.build_revision | default: preview_revision %}
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: asset_revision | relative_url }}">
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to article</a>
 
-    <header class="page-hero" role="banner">
-      {% if page.article %}
+    <header class="page-hero{% if page.hero_variant == 'benchmark' %} page-hero--benchmark{% endif %}" role="banner">
+      {% if page.article and page.hero_variant != 'benchmark' %}
         <div class="page-hero__timelines" aria-hidden="true"></div>
       {% endif %}
       <div class="page-hero__inner">
         <div class="page-hero__copy">
           <h1 class="page-hero__title">
-            {% if page.article %}
+            {% if page.hero_variant == 'benchmark' %}
+              {{ page.title | replace: 'MOOS-IvP Skills', '<span class="page-hero__nowrap">MOOS-IvP Skills</span>' }}
+            {% elsif page.article %}
               Agentic Coding <span class="page-hero__nowrap">× MOOS-IvP</span>
             {% else %}
               {{ page.title | default: site.title }}
@@ -54,8 +58,16 @@
             <p class="page-hero__subtitle">{{ page.description }}</p>
           {% endif %}
           <div class="page-hero__actions">
+            {% if page.hero_variant == 'benchmark' %}
+            <a class="hero-button hero-button--primary" href="#from-workflows-to-evidence">How the benchmark works</a>
+            {% else %}
             <a class="hero-button hero-button--primary" href="https://github.com/cbenjamin23/moos-ivp-skills">View on GitHub</a>
+            {% endif %}
+            {% if page.companion_url %}
+            <a class="hero-button" href="{{ page.companion_url | relative_url }}">{{ page.companion_label }}</a>
+            {% else %}
             <a class="hero-button" href="https://oceanai.mit.edu/moos-dawg/pmwiki/pmwiki.php?n=Talk.19-CBenjGenAI">MOOS-DAWG talk page</a>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -90,6 +102,6 @@
       </div>
     </footer>
 
-    <script src="{{ '/assets/js/article.js?v=' | append: site.github.build_revision | relative_url }}" defer></script>
+    <script src="{{ '/assets/js/article.js?v=' | append: asset_revision | relative_url }}" defer></script>
   </body>
 </html>

@@ -1,0 +1,17 @@
+{% assign figure_height = 540 %}
+{% case include.file %}
+  {% when 'model-completion' %}{% assign figure_height = 570 %}
+  {% when 'task-completion' %}{% assign figure_height = 900 %}
+  {% when 'task-model-completion' %}{% assign figure_height = 820 %}
+  {% when 'participant-efficiency' %}{% assign figure_height = 810 %}
+  {% when 'grading-sensitivity' %}{% assign figure_height = 560 %}
+{% endcase %}
+{% assign benchmark_asset_revision = site.time | date: '%s' %}
+<figure class="article-figure benchmark-figure" id="figure-{{ include.file }}">
+  <div class="benchmark-chart" role="region" aria-label="{{ include.title | escape }}; scroll horizontally on small screens" tabindex="0">
+    <img src="{{ '/assets/images/benchmark-2026/' | append: include.file | append: '.svg' | relative_url }}?v={{ benchmark_asset_revision }}" alt="{{ include.alt | escape }}" width="1000" height="{{ figure_height }}" loading="lazy" decoding="async">
+  </div>
+  <figcaption>{{ include.caption }}
+    <span class="benchmark-figure__downloads">Download <a href="{{ '/assets/images/benchmark-2026/' | append: include.file | append: '.svg' | relative_url }}?v={{ benchmark_asset_revision }}">SVG</a> · <a href="{{ '/assets/images/benchmark-2026/' | append: include.file | append: '.png' | relative_url }}?v={{ benchmark_asset_revision }}">PNG</a> · <a href="{{ '/assets/data/benchmark-2026.json' | relative_url }}">chart data</a></span>
+  </figcaption>
+</figure>

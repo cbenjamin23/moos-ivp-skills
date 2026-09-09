@@ -15,3 +15,6 @@ test-runs/
 
 # Local MOOS skill config belongs outside the repo; see config/example-config.toml.
 config/local-config.toml
+
+# Local presentation copy and long-form skill notes.
+/SKILL_LONG_FORM_DESCRIPTIONS.md

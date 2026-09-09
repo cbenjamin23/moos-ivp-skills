@@ -1,0 +1,1748 @@
+{
+  "application_case_criteria": {
+    "baseline": {
+      "app.appcasting-diagnostics": {
+        "insufficient_evidence": 0,
+        "met": 1,
+        "not_applicable": 0,
+        "not_met": 4,
+        "partially_met": 0
+      },
+      "app.iterate-ownership": {
+        "insufficient_evidence": 0,
+        "met": 0,
+        "not_applicable": 0,
+        "not_met": 0,
+        "partially_met": 5
+      },
+      "app.mail-registration": {
+        "insufficient_evidence": 0,
+        "met": 3,
+        "not_applicable": 0,
+        "not_met": 0,
+        "partially_met": 2
+      },
+      "app.startup-configuration": {
+        "insufficient_evidence": 0,
+        "met": 1,
+        "not_applicable": 0,
+        "not_met": 0,
+        "partially_met": 4
+      }
+    },
+    "skills": {
+      "app.appcasting-diagnostics": {
+        "insufficient_evidence": 0,
+        "met": 5,
+        "not_applicable": 0,
+        "not_met": 0,
+        "partially_met": 0
+      },
+      "app.iterate-ownership": {
+        "insufficient_evidence": 0,
+        "met": 5,
+        "not_applicable": 0,
+        "not_met": 0,
+        "partially_met": 0
+      },
+      "app.mail-registration": {
+        "insufficient_evidence": 0,
+        "met": 5,
+        "not_applicable": 0,
+        "not_met": 0,
+        "partially_met": 0
+      },
+      "app.startup-configuration": {
+        "insufficient_evidence": 0,
+        "met": 5,
+        "not_applicable": 0,
+        "not_met": 0,
+        "partially_met": 0
+      }
+    }
+  },
+  "by_model": {
+    "astra-high": {
+      "baseline": {
+        "complete": 52,
+        "conformance": 0.6513994067986417,
+        "conformance_half_credit": 0.781082029193102,
+        "conformance_labels": {
+          "insufficient_evidence": 5,
+          "met": 1019,
+          "not_applicable": 75,
+          "not_met": 183,
+          "partially_met": 448
+        },
+        "cost_observed": 55,
+        "median_cost_usd": 1.86377,
+        "median_minutes": 9.200768190983217,
+        "runs": 55
+      },
+      "skills": {
+        "complete": 50,
+        "conformance": 0.9220326669094997,
+        "conformance_half_credit": 0.9529748389982994,
+        "conformance_labels": {
+          "met": 1561,
+          "not_applicable": 47,
+          "not_met": 26,
+          "partially_met": 96
+        },
+        "cost_observed": 54,
+        "median_cost_usd": 2.467595,
+        "median_minutes": 11.14909021943337,
+        "runs": 55
+      }
+    },
+    "luna-high": {
+      "baseline": {
+        "complete": 21,
+        "conformance": 0.4960762702988408,
+        "conformance_half_credit": 0.6661690727709536,
+        "conformance_labels": {
+          "insufficient_evidence": 1,
+          "met": 777,
+          "not_applicable": 98,
+          "not_met": 310,
+          "partially_met": 544
+        },
+        "cost_observed": 55,
+        "median_cost_usd": 0.14934764,
+        "median_minutes": 8.864235575700029,
+        "runs": 55
+      },
+      "skills": {
+        "complete": 33,
+        "conformance": 0.7928059906857561,
+        "conformance_half_credit": 0.8816894640061795,
+        "conformance_labels": {
+          "insufficient_evidence": 1,
+          "met": 1390,
+          "not_applicable": 55,
+          "not_met": 36,
+          "partially_met": 248
+        },
+        "cost_observed": 55,
+        "median_cost_usd": 0.14140488,
+        "median_minutes": 9.934251994549989,
+        "runs": 55
+      }
+    },
+    "sol-high": {
+      "baseline": {
+        "complete": 40,
+        "conformance": 0.6033240667909389,
+        "conformance_half_credit": 0.7393313305424245,
+        "conformance_labels": {
+          "insufficient_evidence": 3,
+          "met": 953,
+          "not_applicable": 84,
+          "not_met": 234,
+          "partially_met": 456
+        },
+        "cost_observed": 55,
+        "median_cost_usd": 2.351787,
+        "median_minutes": 8.382543368749854,
+        "runs": 55
+      },
+      "skills": {
+        "complete": 47,
+        "conformance": 0.8984419531809561,
+        "conformance_half_credit": 0.946876331987769,
+        "conformance_labels": {
+          "met": 1546,
+          "not_applicable": 45,
+          "not_met": 6,
+          "partially_met": 133
+        },
+        "cost_observed": 55,
+        "median_cost_usd": 2.367169,
+        "median_minutes": 9.535482518249985,
+        "runs": 55
+      }
+    },
+    "terra-high": {
+      "baseline": {
+        "complete": 20,
+        "conformance": 0.49601458137821774,
+        "conformance_half_credit": 0.6616605633423815,
+        "conformance_labels": {
+          "insufficient_evidence": 8,
+          "met": 768,
+          "not_applicable": 97,
+          "not_met": 336,
+          "partially_met": 521
+        },
+        "cost_observed": 55,
+        "median_cost_usd": 0.5970708,
+        "median_minutes": 6.35036374558343,
+        "runs": 55
+      },
+      "skills": {
+        "complete": 40,
+        "conformance": 0.8156311292704255,
+        "conformance_half_credit": 0.8993240110058291,
+        "conformance_labels": {
+          "insufficient_evidence": 1,
+          "met": 1430,
+          "not_applicable": 57,
+          "not_met": 24,
+          "partially_met": 218
+        },
+        "cost_observed": 55,
+        "median_cost_usd": 0.7911952,
+        "median_minutes": 7.045605769733356,
+        "runs": 55
+      }
+    }
+  },
+  "by_task": {
+    "task-01": {
+      "baseline": {
+        "complete": 19,
+        "conformance": 0.53,
+        "conformance_half_credit": 0.74125,
+        "conformance_labels": {
+          "met": 212,
+          "not_met": 19,
+          "partially_met": 169
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 0.6968887,
+        "median_minutes": 6.817740416733341,
+        "runs": 20
+      },
+      "skills": {
+        "complete": 20,
+        "conformance": 0.8925,
+        "conformance_half_credit": 0.94625,
+        "conformance_labels": {
+          "met": 357,
+          "partially_met": 43
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 0.9825157,
+        "median_minutes": 8.233174365533333,
+        "runs": 20
+      }
+    },
+    "task-02": {
+      "baseline": {
+        "complete": 19,
+        "conformance": 0.7475,
+        "conformance_half_credit": 0.8675,
+        "conformance_labels": {
+          "met": 299,
+          "not_met": 5,
+          "partially_met": 96
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 1.0503501,
+        "median_minutes": 7.904332587499994,
+        "runs": 20
+      },
+      "skills": {
+        "complete": 19,
+        "conformance": 0.895,
+        "conformance_half_credit": 0.9475,
+        "conformance_labels": {
+          "met": 358,
+          "partially_met": 42
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 1.3412898000000002,
+        "median_minutes": 8.880676094766674,
+        "runs": 20
+      }
+    },
+    "task-03": {
+      "baseline": {
+        "complete": 7,
+        "conformance": 0.78,
+        "conformance_half_credit": 0.887,
+        "conformance_labels": {
+          "met": 390,
+          "not_met": 3,
+          "partially_met": 107
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 0.664543,
+        "median_minutes": 5.657692584200019,
+        "runs": 20
+      },
+      "skills": {
+        "complete": 13,
+        "conformance": 0.936,
+        "conformance_half_credit": 0.965,
+        "conformance_labels": {
+          "met": 468,
+          "not_met": 3,
+          "partially_met": 29
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 0.8404612,
+        "median_minutes": 5.315299316316668,
+        "runs": 20
+      }
+    },
+    "task-04": {
+      "baseline": {
+        "complete": 10,
+        "conformance": 0.746,
+        "conformance_half_credit": 0.863,
+        "conformance_labels": {
+          "met": 373,
+          "not_met": 10,
+          "partially_met": 117
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 0.7353514,
+        "median_minutes": 5.595505027933329,
+        "runs": 20
+      },
+      "skills": {
+        "complete": 17,
+        "conformance": 0.956,
+        "conformance_half_credit": 0.978,
+        "conformance_labels": {
+          "met": 478,
+          "partially_met": 22
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 0.8764593,
+        "median_minutes": 7.246730217175021,
+        "runs": 20
+      }
+    },
+    "task-05": {
+      "baseline": {
+        "complete": 7,
+        "conformance": 0.4685185185185185,
+        "conformance_half_credit": 0.6398148148148148,
+        "conformance_labels": {
+          "met": 253,
+          "not_met": 102,
+          "partially_met": 185
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 2.6053854,
+        "median_minutes": 11.630980223608397,
+        "runs": 20
+      },
+      "skills": {
+        "complete": 13,
+        "conformance": 0.9074074074074074,
+        "conformance_half_credit": 0.950925925925926,
+        "conformance_labels": {
+          "met": 490,
+          "not_met": 3,
+          "partially_met": 47
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 2.7592868,
+        "median_minutes": 15.032788701391716,
+        "runs": 20
+      }
+    },
+    "task-06": {
+      "baseline": {
+        "complete": 11,
+        "conformance": 0.4584615384615385,
+        "conformance_half_credit": 0.6295032051282051,
+        "conformance_labels": {
+          "met": 363,
+          "not_applicable": 10,
+          "not_met": 157,
+          "partially_met": 270
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 1.5822544,
+        "median_minutes": 9.616981880558281,
+        "runs": 20
+      },
+      "skills": {
+        "complete": 16,
+        "conformance": 0.92125,
+        "conformance_half_credit": 0.955625,
+        "conformance_labels": {
+          "met": 737,
+          "not_met": 8,
+          "partially_met": 55
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 2.1181018,
+        "median_minutes": 12.224776068758365,
+        "runs": 20
+      }
+    },
+    "task-07": {
+      "baseline": {
+        "complete": 9,
+        "conformance": 0.6091161616161617,
+        "conformance_half_credit": 0.7353282828282828,
+        "conformance_labels": {
+          "met": 546,
+          "not_applicable": 4,
+          "not_met": 124,
+          "partially_met": 226
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 2.4611359,
+        "median_minutes": 12.328417775683677,
+        "runs": 20
+      },
+      "skills": {
+        "complete": 15,
+        "conformance": 0.9311111111111111,
+        "conformance_half_credit": 0.9627777777777778,
+        "conformance_labels": {
+          "met": 838,
+          "not_met": 5,
+          "partially_met": 57
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 2.2062138,
+        "median_minutes": 12.474510686808207,
+        "runs": 20
+      }
+    },
+    "task-08": {
+      "baseline": {
+        "complete": 12,
+        "conformance": 0.5152976190476191,
+        "conformance_half_credit": 0.6405654761904762,
+        "conformance_labels": {
+          "met": 428,
+          "not_applicable": 72,
+          "not_met": 193,
+          "partially_met": 207
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 2.1941335,
+        "median_minutes": 11.861101614233242,
+        "runs": 20
+      },
+      "skills": {
+        "complete": 17,
+        "conformance": 0.9170454545454545,
+        "conformance_half_credit": 0.953409090909091,
+        "conformance_labels": {
+          "met": 807,
+          "not_applicable": 20,
+          "not_met": 9,
+          "partially_met": 64
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 2.6980948,
+        "median_minutes": 10.988380658333336,
+        "runs": 20
+      }
+    },
+    "task-09": {
+      "baseline": {
+        "complete": 8,
+        "conformance": 0.33798558347944674,
+        "conformance_half_credit": 0.5189974186635495,
+        "conformance_labels": {
+          "met": 402,
+          "not_applicable": 109,
+          "not_met": 358,
+          "partially_met": 431
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 3.311452,
+        "median_minutes": 16.804549546874963,
+        "runs": 20
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.849347158218126,
+        "conformance_half_credit": 0.9125832053251408,
+        "conformance_labels": {
+          "met": 1054,
+          "not_applicable": 59,
+          "not_met": 30,
+          "partially_met": 157
+        },
+        "cost_observed": 19,
+        "median_cost_usd": 2.8393008,
+        "median_minutes": 17.984034043049967,
+        "runs": 20
+      }
+    },
+    "task-10": {
+      "baseline": {
+        "complete": 13,
+        "conformance": 0.5322644022644023,
+        "conformance_half_credit": 0.6676344488844489,
+        "conformance_labels": {
+          "insufficient_evidence": 11,
+          "met": 130,
+          "not_applicable": 85,
+          "not_met": 49,
+          "partially_met": 65
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 0.7606411,
+        "median_minutes": 5.652483732924945,
+        "runs": 20
+      },
+      "skills": {
+        "complete": 15,
+        "conformance": 0.7389652014652015,
+        "conformance_half_credit": 0.8532738095238095,
+        "conformance_labels": {
+          "insufficient_evidence": 1,
+          "met": 200,
+          "not_applicable": 70,
+          "not_met": 9,
+          "partially_met": 60
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 0.8323266,
+        "median_minutes": 5.96465342142504,
+        "runs": 20
+      }
+    },
+    "task-11": {
+      "baseline": {
+        "complete": 18,
+        "conformance": 0.4535955710955711,
+        "conformance_half_credit": 0.642074592074592,
+        "conformance_labels": {
+          "insufficient_evidence": 6,
+          "met": 121,
+          "not_applicable": 74,
+          "not_met": 43,
+          "partially_met": 96
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 0.8515538,
+        "median_minutes": 6.278965530799966,
+        "runs": 20
+      },
+      "skills": {
+        "complete": 20,
+        "conformance": 0.48488095238095236,
+        "conformance_half_credit": 0.697032967032967,
+        "conformance_labels": {
+          "insufficient_evidence": 1,
+          "met": 140,
+          "not_applicable": 55,
+          "not_met": 25,
+          "partially_met": 119
+        },
+        "cost_observed": 20,
+        "median_cost_usd": 0.923056,
+        "median_minutes": 7.416513677174892,
+        "runs": 20
+      }
+    }
+  },
+  "by_task_model": {
+    "task-01/astra-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.44,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.95,
+        "runs": 5
+      }
+    },
+    "task-01/luna-high": {
+      "baseline": {
+        "complete": 4,
+        "conformance": 0.46,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.87,
+        "runs": 5
+      }
+    },
+    "task-01/sol-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.67,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.88,
+        "runs": 5
+      }
+    },
+    "task-01/terra-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.55,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.87,
+        "runs": 5
+      }
+    },
+    "task-02/astra-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.8,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.99,
+        "runs": 5
+      }
+    },
+    "task-02/luna-high": {
+      "baseline": {
+        "complete": 4,
+        "conformance": 0.72,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 4,
+        "conformance": 0.83,
+        "runs": 5
+      }
+    },
+    "task-02/sol-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.79,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.98,
+        "runs": 5
+      }
+    },
+    "task-02/terra-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.68,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.78,
+        "runs": 5
+      }
+    },
+    "task-03/astra-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.904,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.968,
+        "runs": 5
+      }
+    },
+    "task-03/luna-high": {
+      "baseline": {
+        "complete": 0,
+        "conformance": 0.672,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 4,
+        "conformance": 0.9359999999999999,
+        "runs": 5
+      }
+    },
+    "task-03/sol-high": {
+      "baseline": {
+        "complete": 2,
+        "conformance": 0.792,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 3,
+        "conformance": 0.9440000000000001,
+        "runs": 5
+      }
+    },
+    "task-03/terra-high": {
+      "baseline": {
+        "complete": 0,
+        "conformance": 0.752,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 1,
+        "conformance": 0.896,
+        "runs": 5
+      }
+    },
+    "task-04/astra-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.832,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.984,
+        "runs": 5
+      }
+    },
+    "task-04/luna-high": {
+      "baseline": {
+        "complete": 1,
+        "conformance": 0.6799999999999999,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 4,
+        "conformance": 0.952,
+        "runs": 5
+      }
+    },
+    "task-04/sol-high": {
+      "baseline": {
+        "complete": 4,
+        "conformance": 0.768,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.96,
+        "runs": 5
+      }
+    },
+    "task-04/terra-high": {
+      "baseline": {
+        "complete": 0,
+        "conformance": 0.704,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 3,
+        "conformance": 0.9279999999999999,
+        "runs": 5
+      }
+    },
+    "task-05/astra-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.562962962962963,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.9555555555555555,
+        "runs": 5
+      }
+    },
+    "task-05/luna-high": {
+      "baseline": {
+        "complete": 0,
+        "conformance": 0.4444444444444444,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 1,
+        "conformance": 0.8666666666666667,
+        "runs": 5
+      }
+    },
+    "task-05/sol-high": {
+      "baseline": {
+        "complete": 2,
+        "conformance": 0.4666666666666666,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.9259259259259259,
+        "runs": 5
+      }
+    },
+    "task-05/terra-high": {
+      "baseline": {
+        "complete": 0,
+        "conformance": 0.39999999999999997,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 2,
+        "conformance": 0.8814814814814814,
+        "runs": 5
+      }
+    },
+    "task-06/astra-high": {
+      "baseline": {
+        "complete": 4,
+        "conformance": 0.525,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 4,
+        "conformance": 0.955,
+        "runs": 5
+      }
+    },
+    "task-06/luna-high": {
+      "baseline": {
+        "complete": 3,
+        "conformance": 0.39782051282051284,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 3,
+        "conformance": 0.885,
+        "runs": 5
+      }
+    },
+    "task-06/sol-high": {
+      "baseline": {
+        "complete": 4,
+        "conformance": 0.5776923076923077,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.96,
+        "runs": 5
+      }
+    },
+    "task-06/terra-high": {
+      "baseline": {
+        "complete": 0,
+        "conformance": 0.3333333333333333,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 4,
+        "conformance": 0.885,
+        "runs": 5
+      }
+    },
+    "task-07/astra-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.6799999999999999,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.9555555555555556,
+        "runs": 5
+      }
+    },
+    "task-07/luna-high": {
+      "baseline": {
+        "complete": 0,
+        "conformance": 0.5405050505050505,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 4,
+        "conformance": 0.8933333333333333,
+        "runs": 5
+      }
+    },
+    "task-07/sol-high": {
+      "baseline": {
+        "complete": 4,
+        "conformance": 0.6533333333333333,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 4,
+        "conformance": 0.9333333333333333,
+        "runs": 5
+      }
+    },
+    "task-07/terra-high": {
+      "baseline": {
+        "complete": 0,
+        "conformance": 0.5626262626262626,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 2,
+        "conformance": 0.9422222222222222,
+        "runs": 5
+      }
+    },
+    "task-08/astra-high": {
+      "baseline": {
+        "complete": 3,
+        "conformance": 0.5476190476190477,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.9181818181818181,
+        "runs": 5
+      }
+    },
+    "task-08/luna-high": {
+      "baseline": {
+        "complete": 2,
+        "conformance": 0.5042857142857143,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 3,
+        "conformance": 0.8772727272727273,
+        "runs": 5
+      }
+    },
+    "task-08/sol-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.6142857142857143,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.9409090909090909,
+        "runs": 5
+      }
+    },
+    "task-08/terra-high": {
+      "baseline": {
+        "complete": 2,
+        "conformance": 0.395,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 4,
+        "conformance": 0.9318181818181818,
+        "runs": 5
+      }
+    },
+    "task-09/astra-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.4488564192480031,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 1,
+        "conformance": 0.8806451612903226,
+        "runs": 5
+      }
+    },
+    "task-09/luna-high": {
+      "baseline": {
+        "complete": 2,
+        "conformance": 0.26873563218390806,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 0,
+        "conformance": 0.7715821812596007,
+        "runs": 5
+      }
+    },
+    "task-09/sol-high": {
+      "baseline": {
+        "complete": 0,
+        "conformance": 0.3243502824858757,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 0,
+        "conformance": 0.9161290322580645,
+        "runs": 5
+      }
+    },
+    "task-09/terra-high": {
+      "baseline": {
+        "complete": 1,
+        "conformance": 0.31,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 4,
+        "conformance": 0.8290322580645161,
+        "runs": 5
+      }
+    },
+    "task-10/astra-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.6911088911088912,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.8978021978021978,
+        "runs": 5
+      }
+    },
+    "task-10/luna-high": {
+      "baseline": {
+        "complete": 1,
+        "conformance": 0.43391608391608394,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 0,
+        "conformance": 0.5516483516483516,
+        "runs": 5
+      }
+    },
+    "task-10/sol-high": {
+      "baseline": {
+        "complete": 4,
+        "conformance": 0.5461538461538462,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.8692307692307693,
+        "runs": 5
+      }
+    },
+    "task-10/terra-high": {
+      "baseline": {
+        "complete": 3,
+        "conformance": 0.4578787878787879,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.6371794871794871,
+        "runs": 5
+      }
+    },
+    "task-11/astra-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.7338461538461538,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.6876190476190476,
+        "runs": 5
+      }
+    },
+    "task-11/luna-high": {
+      "baseline": {
+        "complete": 4,
+        "conformance": 0.3351315351315351,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.28736263736263734,
+        "runs": 5
+      }
+    },
+    "task-11/sol-high": {
+      "baseline": {
+        "complete": 5,
+        "conformance": 0.4340825840825841,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.5733333333333334,
+        "runs": 5
+      }
+    },
+    "task-11/terra-high": {
+      "baseline": {
+        "complete": 4,
+        "conformance": 0.3113220113220113,
+        "runs": 5
+      },
+      "skills": {
+        "complete": 5,
+        "conformance": 0.3912087912087912,
+        "runs": 5
+      }
+    }
+  },
+  "evaluation": "evaluation-440-v2.0",
+  "mission_case_criteria": {
+    "baseline": {
+      "mission.community-sublaunchers": {
+        "insufficient_evidence": 0,
+        "met": 0,
+        "not_applicable": 0,
+        "not_met": 5,
+        "partially_met": 0
+      },
+      "mission.documentation": {
+        "insufficient_evidence": 0,
+        "met": 0,
+        "not_applicable": 0,
+        "not_met": 0,
+        "partially_met": 5
+      },
+      "mission.operator-visible-stack": {
+        "insufficient_evidence": 0,
+        "met": 1,
+        "not_applicable": 0,
+        "not_met": 0,
+        "partially_met": 4
+      },
+      "mission.port-overrides": {
+        "insufficient_evidence": 0,
+        "met": 1,
+        "not_applicable": 0,
+        "not_met": 4,
+        "partially_met": 0
+      }
+    },
+    "skills": {
+      "mission.community-sublaunchers": {
+        "insufficient_evidence": 0,
+        "met": 5,
+        "not_applicable": 0,
+        "not_met": 0,
+        "partially_met": 0
+      },
+      "mission.documentation": {
+        "insufficient_evidence": 0,
+        "met": 5,
+        "not_applicable": 0,
+        "not_met": 0,
+        "partially_met": 0
+      },
+      "mission.operator-visible-stack": {
+        "insufficient_evidence": 0,
+        "met": 5,
+        "not_applicable": 0,
+        "not_met": 0,
+        "partially_met": 0
+      },
+      "mission.port-overrides": {
+        "insufficient_evidence": 0,
+        "met": 5,
+        "not_applicable": 0,
+        "not_met": 0,
+        "partially_met": 0
+      }
+    }
+  },
+  "models": [
+    "luna-high",
+    "terra-high",
+    "sol-high",
+    "astra-high"
+  ],
+  "notes": [
+    "Accepted post-hoc Task 11 interpretation; earlier stages retained.",
+    "Conformance is mean per-run met / resolved applicable criteria, no partial credit.",
+    "Costs are frozen standard API-equivalent estimates, not invoices or current prices.",
+    "One Astra skills run lacks a usage receipt; its cost is unknown, not zero.",
+    "Astra is a later extension with a different CLI; cross-model comparisons are descriptive.",
+    "Only numeric summaries, task prompts, and source identifiers are exported; no raw transcripts."
+  ],
+  "overall": {
+    "baseline": {
+      "complete": 133,
+      "conformance": 0.5617035813166598,
+      "conformance_half_credit": 0.7120607489622154,
+      "conformance_labels": {
+        "insufficient_evidence": 17,
+        "met": 3517,
+        "not_applicable": 354,
+        "not_met": 1063,
+        "partially_met": 1969
+      },
+      "cost_observed": 220,
+      "median_cost_usd": 1.1246260000000001,
+      "median_minutes": 8.346294528825213,
+      "runs": 220
+    },
+    "skills": {
+      "complete": 170,
+      "conformance": 0.8572279350116594,
+      "conformance_half_credit": 0.9202161614995192,
+      "conformance_labels": {
+        "insufficient_evidence": 2,
+        "met": 5927,
+        "not_applicable": 204,
+        "not_met": 92,
+        "partially_met": 695
+      },
+      "cost_observed": 219,
+      "median_cost_usd": 1.226498,
+      "median_minutes": 9.295018474408122,
+      "runs": 220
+    }
+  },
+  "process": {
+    "astra-high": {
+      "baseline": {
+        "full_route": 0,
+        "live_validation": 20,
+        "primary_route": 0,
+        "runs": 55,
+        "skill_first": 0
+      },
+      "skills": {
+        "full_route": 55,
+        "live_validation": 27,
+        "primary_route": 55,
+        "runs": 55,
+        "skill_first": 39
+      }
+    },
+    "luna-high": {
+      "baseline": {
+        "full_route": 0,
+        "live_validation": 23,
+        "primary_route": 0,
+        "runs": 55,
+        "skill_first": 0
+      },
+      "skills": {
+        "full_route": 53,
+        "live_validation": 35,
+        "primary_route": 55,
+        "runs": 55,
+        "skill_first": 35
+      }
+    },
+    "sol-high": {
+      "baseline": {
+        "full_route": 0,
+        "live_validation": 30,
+        "primary_route": 0,
+        "runs": 55,
+        "skill_first": 0
+      },
+      "skills": {
+        "full_route": 55,
+        "live_validation": 44,
+        "primary_route": 55,
+        "runs": 55,
+        "skill_first": 45
+      }
+    },
+    "terra-high": {
+      "baseline": {
+        "full_route": 0,
+        "live_validation": 24,
+        "primary_route": 0,
+        "runs": 55,
+        "skill_first": 0
+      },
+      "skills": {
+        "full_route": 53,
+        "live_validation": 38,
+        "primary_route": 55,
+        "runs": 55,
+        "skill_first": 44
+      }
+    }
+  },
+  "robustness": {
+    "by_family": {
+      "ALog analysis": {
+        "baseline": 31,
+        "difference": 0.09999999999999998,
+        "newcombe_interval_95": [
+          -0.07000053012791049,
+          0.26572916115625256
+        ],
+        "runs_per_condition": 40,
+        "skills": 35
+      },
+      "Applications": {
+        "baseline": 38,
+        "difference": 0.025000000000000022,
+        "newcombe_interval_95": [
+          -0.08493737428173377,
+          0.14186391536501952
+        ],
+        "runs_per_condition": 40,
+        "skills": 39
+      },
+      "Behaviors": {
+        "baseline": 17,
+        "difference": 0.325,
+        "newcombe_interval_95": [
+          0.10933883275143425,
+          0.5018206718306857
+        ],
+        "runs_per_condition": 40,
+        "skills": 30
+      },
+      "Evaluation/harness": {
+        "baseline": 20,
+        "difference": 0.050000000000000044,
+        "newcombe_interval_95": [
+          -0.16194585597233252,
+          0.25576496975291796
+        ],
+        "runs_per_condition": 40,
+        "skills": 22
+      },
+      "Missions": {
+        "baseline": 27,
+        "difference": 0.28333333333333327,
+        "newcombe_interval_95": [
+          0.10761259523526998,
+          0.4358648808256263
+        ],
+        "runs_per_condition": 60,
+        "skills": 44
+      }
+    },
+    "by_model": {
+      "astra-high": {
+        "baseline": 52,
+        "difference": -0.036363636363636376,
+        "newcombe_interval_95": [
+          -0.14717916026105904,
+          0.07078302661314353
+        ],
+        "runs_per_condition": 55,
+        "skills": 50
+      },
+      "luna-high": {
+        "baseline": 21,
+        "difference": 0.21818181818181814,
+        "newcombe_interval_95": [
+          0.031532700625677756,
+          0.3846938264824736
+        ],
+        "runs_per_condition": 55,
+        "skills": 33
+      },
+      "sol-high": {
+        "baseline": 40,
+        "difference": 0.1272727272727272,
+        "newcombe_interval_95": [
+          -0.025945562948950923,
+          0.2744985373025526
+        ],
+        "runs_per_condition": 55,
+        "skills": 47
+      },
+      "terra-high": {
+        "baseline": 20,
+        "difference": 0.36363636363636365,
+        "newcombe_interval_95": [
+          0.1785560659686387,
+          0.5154768909001981
+        ],
+        "runs_per_condition": 55,
+        "skills": 40
+      }
+    },
+    "leave_one_family_out": {
+      "ALog analysis": {
+        "baseline": 102,
+        "difference": 0.18333333333333335,
+        "newcombe_interval_95": [
+          0.08553765333771035,
+          0.27634271737912147
+        ],
+        "runs_per_condition": 180,
+        "skills": 135
+      },
+      "Applications": {
+        "baseline": 95,
+        "difference": 0.19999999999999996,
+        "newcombe_interval_95": [
+          0.10038145890209696,
+          0.29414418615229554
+        ],
+        "runs_per_condition": 180,
+        "skills": 131
+      },
+      "Behaviors": {
+        "baseline": 116,
+        "difference": 0.1333333333333333,
+        "newcombe_interval_95": [
+          0.03969645320839664,
+          0.2238997841572356
+        ],
+        "runs_per_condition": 180,
+        "skills": 140
+      },
+      "Evaluation/harness": {
+        "baseline": 113,
+        "difference": 0.19444444444444442,
+        "newcombe_interval_95": [
+          0.10269317317400978,
+          0.28199832164362915
+        ],
+        "runs_per_condition": 180,
+        "skills": 148
+      },
+      "Missions": {
+        "baseline": 106,
+        "difference": 0.125,
+        "newcombe_interval_95": [
+          0.027108437258220083,
+          0.21981061606363844
+        ],
+        "runs_per_condition": 160,
+        "skills": 126
+      }
+    },
+    "leave_one_model_out": {
+      "astra-high": {
+        "baseline": 81,
+        "difference": 0.2363636363636364,
+        "newcombe_interval_95": [
+          0.13157625981191812,
+          0.3339568627917969
+        ],
+        "runs_per_condition": 165,
+        "skills": 120
+      },
+      "luna-high": {
+        "baseline": 112,
+        "difference": 0.1515151515151515,
+        "newcombe_interval_95": [
+          0.05879527406467146,
+          0.24111419197313783
+        ],
+        "runs_per_condition": 165,
+        "skills": 137
+      },
+      "sol-high": {
+        "baseline": 93,
+        "difference": 0.18181818181818188,
+        "newcombe_interval_95": [
+          0.07935122876804115,
+          0.2790794236752653
+        ],
+        "runs_per_condition": 165,
+        "skills": 123
+      },
+      "terra-high": {
+        "baseline": 113,
+        "difference": 0.10303030303030303,
+        "newcombe_interval_95": [
+          0.007867361504788964,
+          0.19583294876529453
+        ],
+        "runs_per_condition": 165,
+        "skills": 130
+      }
+    },
+    "leave_one_task_out": {
+      "task-01": {
+        "baseline": 114,
+        "difference": 0.18000000000000005,
+        "newcombe_interval_95": [
+          0.08735612279075211,
+          0.26841852660393095
+        ],
+        "runs_per_condition": 200,
+        "skills": 150
+      },
+      "task-02": {
+        "baseline": 114,
+        "difference": 0.18500000000000005,
+        "newcombe_interval_95": [
+          0.09256321388012026,
+          0.2731168683209404
+        ],
+        "runs_per_condition": 200,
+        "skills": 151
+      },
+      "task-03": {
+        "baseline": 126,
+        "difference": 0.15500000000000003,
+        "newcombe_interval_95": [
+          0.06596776551314698,
+          0.2407880366430269
+        ],
+        "runs_per_condition": 200,
+        "skills": 157
+      },
+      "task-04": {
+        "baseline": 123,
+        "difference": 0.15000000000000002,
+        "newcombe_interval_95": [
+          0.05942900994514033,
+          0.23726674629600203
+        ],
+        "runs_per_condition": 200,
+        "skills": 153
+      },
+      "task-05": {
+        "baseline": 126,
+        "difference": 0.15500000000000003,
+        "newcombe_interval_95": [
+          0.06596776551314698,
+          0.2407880366430269
+        ],
+        "runs_per_condition": 200,
+        "skills": 157
+      },
+      "task-06": {
+        "baseline": 122,
+        "difference": 0.16000000000000003,
+        "newcombe_interval_95": [
+          0.06948132083036894,
+          0.2469985020873749
+        ],
+        "runs_per_condition": 200,
+        "skills": 154
+      },
+      "task-07": {
+        "baseline": 124,
+        "difference": 0.15500000000000003,
+        "newcombe_interval_95": [
+          0.06508280029178183,
+          0.24157373014812528
+        ],
+        "runs_per_condition": 200,
+        "skills": 155
+      },
+      "task-08": {
+        "baseline": 121,
+        "difference": 0.16000000000000003,
+        "newcombe_interval_95": [
+          0.0690770112054457,
+          0.24735784741889227
+        ],
+        "runs_per_condition": 200,
+        "skills": 153
+      },
+      "task-09": {
+        "baseline": 125,
+        "difference": 0.19999999999999996,
+        "newcombe_interval_95": [
+          0.11308730070352176,
+          0.28302869022222527
+        ],
+        "runs_per_condition": 200,
+        "skills": 165
+      },
+      "task-10": {
+        "baseline": 120,
+        "difference": 0.17500000000000004,
+        "newcombe_interval_95": [
+          0.0843751385892619,
+          0.2617573417422998
+        ],
+        "runs_per_condition": 200,
+        "skills": 155
+      },
+      "task-11": {
+        "baseline": 115,
+        "difference": 0.17500000000000004,
+        "newcombe_interval_95": [
+          0.08249481781499625,
+          0.2634150400169036
+        ],
+        "runs_per_condition": 200,
+        "skills": 150
+      }
+    },
+    "matched_repetition_counts": {
+      "baseline_only": 13,
+      "both_complete": 120,
+      "neither_complete": 37,
+      "skills_only": 50
+    },
+    "overall": {
+      "baseline": 133,
+      "difference": 0.1681818181818182,
+      "newcombe_interval_95": [
+        0.08185226126932242,
+        0.25113439405078963
+      ],
+      "runs_per_condition": 220,
+      "skills": 170
+    },
+    "stratified_bootstrap": {
+      "estimate": 0.16801704545454546,
+      "interval_95": [
+        0.11363636363636363,
+        0.22272727272727272
+      ],
+      "replicates": 20000,
+      "scope": "Nonparametric resampling within each fixed task/model/condition stratum; this interval describes repeated runs in this benchmark, not uncertainty over unseen tasks.",
+      "seed": 20260814
+    }
+  },
+  "schema_version": 2,
+  "source_layout": "consolidated",
+  "source_repository": "cbenjamin23/moos-ivp-skills-benchmark-private",
+  "source_revision": "b471d1bb5324953f3b0151c725a70a9b2b51bc7a",
+  "source_sha256": {
+    "benchmark/PLAN.md": "ee1e96030d9a73c51673186231c9f36fe072b62c69e5f6c53dc4a33381346a38",
+    "benchmark/archive/ASTRA_EXTENSION.md": "4f61492cfcafe78a0019f332ee486008d73dbd18c839a5dfe48230cf46e45830",
+    "benchmark/archive/evaluation-task11-v2/TASK.md": "82b4c6e69cb63aa0af37a9b7fb5cfb6786009f89132d33e690afb686ccfcc29a",
+    "benchmark/archive/evaluation/protocol/CONFORMANCE.md": "e24f54f12c6b3e8737b7c8c127f276a6108e15760ed76c24a9e2cc2a3dd6834f",
+    "benchmark/archive/reviews/2026-09-06-astra-adversarial/TASK09_CONTACT_VERIFICATION.md": "9ee620fd011b9b918c1ce3f095c32119d9dc719ae07cfa2f892873d3cd19449d",
+    "benchmark/archive/reviews/README.md": "dab8d233a1913111cdfaba57eff9dadb8dbd8dd4643629141c35ec8b42adcc47",
+    "benchmark/config/tasks.json": "f38b3c4eb0b942119d6e64ec9dd0dc0da150c8062588e80eefea5657cc19762f",
+    "benchmark/evaluation/PROCESS.md": "5284eb821a0c85f402f13e842a8445d1ba1afb153650e6ff152a4a2d2ae5097d",
+    "benchmark/evaluation/PROTOCOL.md": "4842b8739e90e772b129ced64172b7a519487f162cfe6717dbe55260fd68c2c6",
+    "benchmark/evaluation/RESULTS.md": "1f2c8562ae2324370e5ec8e7383296a4053b0e90f569a473bf2227a45744389b",
+    "benchmark/evaluation/ROBUSTNESS.md": "bcb31c0c16a5780bf50f1fb93f7b5a2979a6375899b40af97513555c72712b3b",
+    "benchmark/evaluation/data/aggregate.json": "396744fbe9ce01bd2dfc853a3d49c8144010515fd90ea6c8736056c202dc2876",
+    "benchmark/evaluation/data/process.json": "389d17d6a481e899dcfb1d507f76d680c3965f5188dd59bf8d03e8a422241517",
+    "benchmark/evaluation/data/robustness.json": "6827fd332fd7eead9ebad67d473667e4686c55ee8ab215f25a06a68d8c711150"
+  },
+  "stages": {
+    "audited": {
+      "bootstrap": {
+        "estimate": 0.16801704545454546,
+        "interval_95": [
+          0.11363636363636363,
+          0.22272727272727272
+        ],
+        "replicates": 20000,
+        "scope": "Nonparametric resampling within each fixed task/model/condition stratum; this interval describes repeated runs in this benchmark, not uncertainty over unseen tasks.",
+        "seed": 20260814
+      },
+      "overall": {
+        "baseline": 133,
+        "difference": 0.1681818181818182,
+        "newcombe_interval_95": [
+          0.08185226126932242,
+          0.25113439405078963
+        ],
+        "runs_per_condition": 220,
+        "skills": 170
+      }
+    },
+    "original": {
+      "bootstrap": {
+        "estimate": 0.17701863636363638,
+        "interval_95": [
+          0.12272727272727273,
+          0.2318181818181818
+        ],
+        "replicates": 20000,
+        "scope": "Nonparametric resampling within each fixed task/model/condition stratum; this interval describes repeated runs in this benchmark, not uncertainty over unseen tasks.",
+        "seed": 20260814
+      },
+      "overall": {
+        "baseline": 117,
+        "difference": 0.17727272727272725,
+        "newcombe_interval_95": [
+          0.08674188704017985,
+          0.2637774233973752
+        ],
+        "runs_per_condition": 220,
+        "skills": 156
+      }
+    },
+    "prior_audited": {
+      "bootstrap": {
+        "estimate": 0.1725325,
+        "interval_95": [
+          0.11818181818181818,
+          0.22727272727272727
+        ],
+        "replicates": 20000,
+        "scope": "Nonparametric resampling within each fixed task/model/condition stratum; this interval describes repeated runs in this benchmark, not uncertainty over unseen tasks.",
+        "seed": 20260814
+      },
+      "overall": {
+        "baseline": 119,
+        "difference": 0.17272727272727273,
+        "newcombe_interval_95": [
+          0.08250501332411093,
+          0.2590594088955522
+        ],
+        "runs_per_condition": 220,
+        "skills": 157
+      }
+    },
+    "runtime_only": {
+      "bootstrap": {
+        "estimate": 0.14982886363636364,
+        "interval_95": [
+          0.09545454545454546,
+          0.20454545454545456
+        ],
+        "replicates": 20000,
+        "scope": "Nonparametric resampling within each fixed task/model/condition stratum; this interval describes repeated runs in this benchmark, not uncertainty over unseen tasks.",
+        "seed": 20260814
+      },
+      "overall": {
+        "baseline": 117,
+        "difference": 0.1499999999999999,
+        "newcombe_interval_95": [
+          0.05875299993404684,
+          0.23778521576282835
+        ],
+        "runs_per_condition": 220,
+        "skills": 150
+      }
+    }
+  },
+  "task_names": [
+    "BatteryWatch app",
+    "Contact-waypoint app",
+    "Contact-intercept behavior",
+    "Heading-sector behavior",
+    "Patrol and shadow mission",
+    "Mission + application",
+    "Mission + behavior",
+    "Self-evaluating mission",
+    "Nine-case harness",
+    "Tight-loop enumeration",
+    "Henry/Gilda diagnosis"
+  ],
+  "task_prompts": [
+    {
+      "id": "Task-01",
+      "prompt": "Build a MOOS application named `pBatteryWatch` that monitors `BATTERY_PERCENT` and publishes an `OK`, `LOW`, or `CRITICAL` battery state. Make its thresholds configurable, prevent state flickering near threshold boundaries, and handle invalid readings safely. While the battery is `LOW` or `CRITICAL`, publish periodic alerts until acknowledged through `BATTERY_ACK`; begin alerting again if the condition worsens."
+    },
+    {
+      "id": "Task-02",
+      "prompt": "Build a MOOS application named `pContactWaypoint` that uses a configured contact\u2019s reported position to update the vehicle\u2019s active waypoint so it travels toward that contact. Make the contact identity and waypoint output configurable, update the destination as the contact moves, and handle missing or invalid contact data without publishing an invalid waypoint. Provide clear operator-facing status for the selected contact and current waypoint."
+    },
+    {
+      "id": "Task-03",
+      "prompt": "Build an IvP contact behavior named `BHV_ContactIntercept` that guides the vehicle toward a predicted intercept point ahead of a configured contact. Make the lead distance and activation state configurable, and handle missing or unusable contact data without producing an objective."
+    },
+    {
+      "id": "Task-04",
+      "prompt": "Build an IvP helm behavior named `BHV_HeadingExclusion` that applies a soft penalty to a configurable heading sector while an activation MOOS variable is true. Make the excluded sector, penalty strength, and activation state configurable, and keep the behavior inactive when no sector is configured."
+    },
+    {
+      "id": "Task-05",
+      "prompt": "Build a standalone two-vehicle MOOS-IvP mission for `alpha` and `bravo`. Alpha should patrol a roughly rectangular route for three cycles by default, pausing at the northeast corner. Bravo should begin at its starting position, wait until released by the operator, then shadow Alpha for 20 MOOS seconds before returning directly home. Add operator buttons to deploy and return Alpha individually, deploy and return Bravo individually, and hold either vehicle in place."
+    },
+    {
+      "id": "Task-06",
+      "prompt": "Build a standalone two-vehicle MOOS-IvP mission for `alpha` and `bravo`, and include a MOOS application named `pContactWaypoint`. Alpha should patrol a 280 meter rectangular route while Bravo runs the application and updates its active waypoint from Alpha\u2019s reported position. The vehicles should use collision avoidance."
+    },
+    {
+      "id": "Task-07",
+      "prompt": "Build a standalone two-vehicle MOOS-IvP mission for `alpha` and `bravo`, including an IvP behavior named `BHV_ContactIntercept`. Alpha should patrol a 210 meter triangular route while Bravo uses the behavior to guide toward a predicted intercept point ahead of Alpha. The vehicles should use collision avoidance."
+    },
+    {
+      "id": "Task-08",
+      "prompt": "Build a self-evaluating MOOS-IvP mission in which a vehicle completes a 210 meter triangular route with a perfect octagon obstacle of side length 4 placed in the second leg. Use obstacle avoidance and pass/fail based on whether the vehicle hits the obstacle."
+    },
+    {
+      "id": "Task-09",
+      "prompt": "Build a self-contained MOOS-IvP harness with its own self-evaluating mission in which a vehicle completes a 210 meter triangular route with a perfect octagon obstacle placed in the second leg. Use obstacle avoidance and run all nine combinations of obstacle side length (3, 6, 9) and vehicle speed (2, 4, 6). Report pass/fail for each case based on whether the vehicle hits the obstacle."
+    },
+    {
+      "id": "Task-10",
+      "prompt": "Analyze the mission logs and identify every instance of a tight loop for both vehicles. Report each loop with the vehicle name and start and end timestamps."
+    },
+    {
+      "id": "Task-11",
+      "prompt": "Analyze the mission log files to determine why Henry appears to make excessive tight maneuvers near waypoints compared with Gilda."
+    }
+  ],
+  "verified_input_hashes": 1911
+}

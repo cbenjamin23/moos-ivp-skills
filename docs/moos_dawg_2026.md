@@ -9,6 +9,10 @@ social_image: "/assets/images/moos-dawg-2026-social.png"
 social_image_alt: "Agentic Coding × MOOS-IvP, introducing the moos-ivp-skills plugin for MOOS-DAWG 2026"
 ---
 
+The companion article, [**Benchmarking MOOS-IvP Skills**]({{ '/benchmark_2026/' | relative_url }}), examines 440 runs with and
+without the plugin, including completion, engineering conformance, and the
+limits of the comparison.
+
 > **A note for readers:** MOOS-IvP is an open-source collection of C++ modules
 > for building autonomy systems on robotic platforms, particularly autonomous
 > marine vehicles. This article assumes familiarity with MOOS communities,

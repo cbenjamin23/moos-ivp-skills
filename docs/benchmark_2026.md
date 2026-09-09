@@ -56,7 +56,7 @@ rate is the percentage of attempts that satisfy the whole request.
 Conformance refers to the type of criteria that, if omitted, would make an
 experienced MOOS-IvP developer pause and say "something isn't right here". A
 result can therefore be complete while losing conformance points: it does what
-the request asks but misses an important project practice. Reviewers assess
+the request asks but misses an important MOOS-IvP convention. Reviewers assess
 criteria such as whether
 an app puts recurring logic in `Iterate()`, a mission launcher exposes
 configurable port settings, or a self-evaluating mission uses the existing

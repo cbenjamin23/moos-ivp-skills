@@ -253,10 +253,11 @@ movement and collision avoidance. Completion falls to 11 of 20 in baseline
 and 16 of 20 with skills.
 
 Task 6 adds contact-report routing, active waypoint updates, vehicle motion,
-and collision avoidance around the app.
-Because these are separate prompts and runs, the comparison is not a controlled
-estimate of the cost of integration. It does show that near-perfect results on
-the standalone application do not settle the mission question.
+and collision avoidance around the app. Task 2 and Task 6 were separate
+benchmark tasks with separate fresh runs. Task 6 did not continue from a Task 2
+implementation, so this is not a controlled estimate of integration cost. It
+does show that near-perfect results on the standalone application do not settle
+the mission question.
 
 Task 5 adds another perspective. It asks for patrol, release, timed shadowing,
 return, and hold controls across two vehicles. Sol completes two of five

@@ -323,10 +323,11 @@ skill file during the run. It does not prove that the agent read the guidance
 in full or used it effectively. Since all 220 skills runs accessed their
 required skills, finding the right skill was rarely the obstacle here.
 
-The study also records live validation: commands that attempt to launch
-the software or mission, going beyond reading source files or compiling code.
-Here, “live” refers to execution in the benchmark environment, not a field
-deployment of a physical vehicle. A recorded launch attempt need not succeed.
+The study also records live validation: an attempt to launch the built app,
+behavior, or mission and check it in execution, rather than inferring from the
+source and build that it should satisfy the request. Here, “live” refers to
+execution in the benchmark environment, not a field deployment of a physical
+vehicle. A recorded launch attempt need not succeed.
 
 {% include benchmark-figure.html file="observed-validation" title="Observed live validation by model" alt="Runs with recorded live validation, baseline then skills, out of 55: Luna 23 and 35. Terra 24 and 38. Sol 30 and 44. Astra 20 and 27." caption="Figure 6. More skills attempts include recorded execution checks in every model. These are observations of agent activity. They do not establish that testing caused the completion differences or that every check was adequate." %}
 

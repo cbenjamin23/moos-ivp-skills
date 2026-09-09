@@ -303,9 +303,9 @@ and 20 skills answers are complete, leaving little room to distinguish models.
 
 Conformance still separates the tasks: tight-loop enumeration rises from
 53.2% to 73.9%, while diagnosis rises from 45.4% to 48.5%. An answer can give
-a plausible explanation and still fall short on timestamped support, log
-coverage, or a reproducible method. The grading-history section explains the
-revision to Task 11.
+a plausible explanation and still fall short on timestamped support, complete
+log coverage, or enough detail for another reviewer to repeat the analysis. The
+grading-history section explains the revision to Task 11.
 
 ## Skill use and validation
 {: #what-the-agents-actually-did }

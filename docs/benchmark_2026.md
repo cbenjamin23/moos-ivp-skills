@@ -327,17 +327,18 @@ behavior, or mission in the benchmark simulation and check it in execution,
 rather than inferring from the source and build that it should satisfy the
 request. A recorded launch attempt need not succeed.
 
-For an app task, live validation can put the app in a temporary mission or test
-harness. That scaffold exercises the app without changing the requested
-deliverable.
-
 {% include benchmark-figure.html file="observed-validation" title="Observed live validation by model" alt="Runs with recorded live validation, baseline then skills, out of 55: Luna 23 and 35. Terra 24 and 38. Sol 30 and 44. Astra 20 and 27." caption="Figure 6. More skills attempts include recorded execution checks in every model. These are observations of agent activity. They do not establish that testing caused the completion differences or that every check was adequate." %}
 
 Skills runs also record more live validation in every model. This is consistent
-with workflows that ask the agent to exercise the app or mission it has
-built. The counts are observational: they cannot establish how much of the
+with workflows that ask the agent to exercise the app, behavior, or mission it
+has built. The counts are observational: they cannot establish how much of the
 completion improvement came from testing. They also span analysis tasks that
 require no new mission.
+
+For example, an app or behavior task can use a temporary mission or test
+harness for live validation. The scaffold exercises the requested deliverable
+without changing it, showing that validation is useful beyond mission-building
+tasks.
 
 ## Time and cost
 {: #time-and-cost-of-the-work }

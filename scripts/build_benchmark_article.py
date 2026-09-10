@@ -3,7 +3,7 @@
 
 Without --benchmark-repo, render from the checked-in public chart data only.
 No participant execution, grading, or benchmark-tree writes are performed.
-See docs/benchmark-2026-sources.md for provenance and reproduction commands.
+See docs/benchmark_2026.md for provenance and reproduction commands.
 """
 
 import argparse
@@ -421,22 +421,45 @@ def render(data):
         fig.text(.16,.065,"Cost observations: 55 per group, except Astra skills (54). Missing cost is excluded.",fontsize=9,color=muted)
         save(fig,"participant-efficiency")
 
-        fig=canvas("Completion differences across grading revisions",
-                   "Skills minus baseline completion · points = difference · lines = 95% bootstrap intervals",6.4)
-        ax=axis(fig,[.31,.17,.60,.59],26,False)
-        ax.set_xticks([0,5,10,15,20,25],["0%","+5%","+10%","+15%","+20%","+25%"])
-        ax.axvline(0,color=muted,linewidth=1)
-        for i,s in enumerate(STAGES):
-            g=data["stages"][s]; x=100*g["overall"]["difference"]
-            lo,hi=[100*v for v in g["bootstrap"]["interval_95"]]
-            ax.plot([lo,hi],[i,i],color="#2b658e",linewidth=2)
-            ax.plot(x,i,"o",color=colors["skills"],markersize=8)
-            ax.text(x,i-.20,f"+{x:.1f}%",ha="center",fontsize=11)
-        ax.set_yticks(range(len(STAGES)),["Original grading", "Earlier correction", "Runtime corrections",
-                                        "Task 11 revision", "Full Task 9 audit"])
-        ax.set_ylim(len(STAGES)-.45,-.6)
-        fig.text(.04,.10,"Difference between rates · resampled attempts within the same tasks and models",fontsize=9,color=muted)
-        save(fig,"grading-sensitivity")
+        robustness = data["robustness"]
+        observed = 100 * robustness["overall"]["difference"]
+        bootstrap_lo, bootstrap_hi = [
+            100 * value for value in robustness["stratified_bootstrap"]["interval_95"]
+        ]
+
+        def difference_range(key):
+            values = [100 * group["difference"] for group in robustness[key].values()]
+            return min(values), max(values)
+
+        stability_checks = [
+            ("Resample repeated attempts", bootstrap_lo, bootstrap_hi),
+            ("Remove one task", *difference_range("leave_one_task_out")),
+            ("Remove one model", *difference_range("leave_one_model_out")),
+            ("Remove one kind of work", *difference_range("leave_one_family_out")),
+        ]
+        fig = canvas("Completion advantage under stability checks",
+                     "Skills minus baseline completion · every range stays above zero", 6.2)
+        ax = axis(fig, [.38, .20, .55, .58], 25, False)
+        ax.set_xticks([0, 5, 10, 15, 20, 25],
+                      ["0%", "+5%", "+10%", "+15%", "+20%", "+25%"])
+        ax.axvline(0, color=muted, linewidth=1)
+        ax.axvline(observed, color="#16796e", linewidth=1.4,
+                   linestyle=(0, (4, 4)))
+        for i, (label, low, high) in enumerate(stability_checks):
+            ax.plot([low, high], [i, i], color="#2b658e", linewidth=6,
+                    solid_capstyle="round")
+            ax.plot([low, high], [i, i], "o", color=colors["skills"],
+                    markersize=5)
+            ax.text(low, i - .20, f"+{low:.1f}%", ha="left", fontsize=10,
+                    color=ink)
+            ax.text(high, i - .20, f"+{high:.1f}%", ha="right", fontsize=10,
+                    color=ink)
+        ax.set_yticks(range(len(stability_checks)),
+                      [label for label, _, _ in stability_checks])
+        ax.set_ylim(len(stability_checks) - .45, -.6)
+        fig.text(.38, .10, f"Dashed line: observed +{observed:.1f}% completion advantage",
+                 fontsize=9, color=muted)
+        save(fig, "result-stability")
 
         fig=canvas("Recorded live-validation attempts",
                    "Attempts with recorded execution checks · running a check does not establish correctness",5.4)

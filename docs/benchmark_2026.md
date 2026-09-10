@@ -78,8 +78,8 @@ not met produce an 80% score.
 Conformance is averaged across all runs, including incomplete ones. Each run
 and each criterion counts equally. The percentage measures adherence to the
 tested practices. Later examples show what was missed. The
-[source guide]({{ '/benchmark_2026/sources/' | relative_url }}) gives the full
-rules and a half-credit alternative.
+[chart-data download]({{ '/assets/data/benchmark-2026.json' | relative_url }})
+also includes a half-credit alternative.
 
 ## Tasks and conditions
 {: #what-the-benchmark-asked }
@@ -376,53 +376,36 @@ report success after collision monitoring or test-case setup fails. These false
 passes show a harness reliability problem, not evidence that skills generally
 worsen vehicle behavior.
 
-The harness guidance should require a known-failure case, verify each verdict
-against recorded mission events, and prevent missing monitoring or failed setup
-from producing a pass. It should also preserve enough evidence to explain an
-inconsistent grade. Repeating Task 9 with revised guidance would test whether
-these changes work.
+One possible next step is to strengthen the harness guidance. It could suggest
+a known-failure case, compare each verdict with the recorded mission events,
+and treat missing monitoring or failed setup as a failure rather than a pass.
+Repeating Task 9 would show whether that guidance helps.
 
 ## How stable is the result?
 {: #a-result-that-survives-the-sensitivity-checks }
 
-Repeated attempts let us estimate how much the completion difference might vary
-within this study. A bootstrap repeatedly resamples the observed attempts and
-recalculates the skills advantage. The middle 95% of those estimates ranges
-from +10.9 to +21.4 percentage points around the observed +15.9-point result.
-Because the range stays above zero, it supports an overall skills advantage
-within this study. It does not predict performance on unseen tasks.
+The observed completion advantage is +15.9 percentage points. To see how much
+that number might vary if the benchmark were repeated, we recalculated it 20,000
+times using random selections from the attempts already collected. Each
+selection keeps the same tasks, models, and conditions and draws five attempts
+from every group. An attempt can be selected more than once. This method is
+called bootstrapping.
 
-Removing any one task leaves a completion
-difference between +14.0 and +20.0 points. Removing any one model leaves a
-difference between +10.9 and +22.4 points. Removing any one task family also
-leaves the overall direction positive. No single task or model creates the
-overall result.
+The middle 95% of the resampled results fall between +10.9 and +21.4 points. The
+result also stays positive when any one task, model, or kind of work is removed.
+No single part of the benchmark creates the overall advantage.
+
+{% include benchmark-figure.html file="result-stability" title="Completion advantage under stability checks" alt="Skills-minus-baseline completion advantage. The middle 95% of 20,000 resampled results fall between +10.9 and +21.4 percentage points. Leave-one-out ranges are +14.0 to +20.0 after removing one task, +10.9 to +22.4 after removing one model, and +11.2 to +19.4 after removing one kind of work. The observed result is +15.9 points." caption="Figure 8. The first row shows the middle 95% of 20,000 resampled results. The others show the smallest and largest result after removing one task, model, or kind of work. Every range stays above zero." %}
+
+Submitted files were reviewed under anonymous identifiers. Reviewers did not
+see which model produced the work or whether skills were available.
+Functionality and conformance were scored separately, and uncertain cases
+received further review.
 
 The scope still matters. The plugin's developer selected the tasks,
 conformance reflects the skills' practices, and model-based reviewers can make
 mistakes. A broader task set and independent replication would test how far the
 result generalizes.
-
-<details class="benchmark-details" markdown="1">
-<summary>How the work was graded and uncertainty estimated</summary>
-
-The benchmark combines checks of the submitted files and running software
-with model-based reviewers, which are separate agent sessions assigned to
-grade the work. For code and mission tasks, reviewers receive copies of the
-submitted files under anonymous identifiers. They are not given the producing
-model, whether skills were available, the paired result, the agent's
-conversation, or its time and token use. Functionality and conformance are
-reviewed separately. Disagreements or unresolved evidence receive further
-review to reach a judgment.
-
-The bootstrap uses 20,000 resamples and a fixed random seed. For each task,
-model, and condition, it draws five attempts from that group's five observed
-attempts. Baseline and skills are resampled separately rather than keeping
-the original pairs together. The eleven tasks remain fixed throughout. The
-[source guide]({{ '/benchmark_2026/sources/' | relative_url }}) gives the exact
-method settings and the separate method used for model-level intervals.
-
-</details>
 
 ## Implications for the plugin
 {: #what-this-means-for-the-plugin }
@@ -437,17 +420,27 @@ effort would help establish how far the benefits carry into everyday development
 ## Data and sources
 {: #evidence-and-reproduction }
 
-All seven figures use the accepted 440-run summaries. SVG, PNG, and numeric
-data downloads appear below each figure. The source guide records the exact
-benchmark revision, the current folder layout, and the reproduction commands.
+All eight figures use the accepted 440-run summaries. SVG, PNG, and numeric
+data downloads appear below each figure. The source revision and reproduction
+steps follow.
 
 - [Chart data, task prompts, and source hashes (JSON)]({{ '/assets/data/benchmark-2026.json' | relative_url }}): model and task results, task-by-model counts, exact task wording, uncertainty, timing, cost coverage, and observed process counts.
-- [Source notes and reproduction guide]({{ '/benchmark_2026/sources/' | relative_url }}): metric definitions, source-document mapping, and commands for rebuilding the figures.
+- [Figure generator](https://github.com/cbenjamin23/moos-ivp-skills/blob/main/scripts/build_benchmark_article.py): the script that reads the included data and creates the SVG and PNG charts.
 - [MOOS-DAWG introduction]({{ '/moos_dawg_2026/' | relative_url }}): the plugin architecture, individual workflows, and examples from development projects.
 
-The included data contains the numeric summaries, task prompts, and source identifiers.
-The full participant transcripts, reviewer records, and original runtime
-evidence remain in the private benchmark repository. Rebuilding a chart from
-this snapshot reproduces its presentation. Independently reproducing the
-underlying judgments requires access to that evidence and its evaluation
-environment.
+The data comes from `benchmark/evaluation/` at commit
+`100f4a93b2eec9acc93a3fbcefa6c1be71891083` in the private benchmark
+repository. The public JSON contains an allowlisted export of numeric
+summaries, task prompts, source identifiers, and hashes. Participant
+transcripts, reviewer workspaces, and original runtime evidence remain private.
+
+To rebuild the figures from the public data:
+
+```bash
+python3 -m venv /tmp/moos-article-plots
+/tmp/moos-article-plots/bin/pip install -r scripts/requirements-benchmark-article.txt
+/tmp/moos-article-plots/bin/python scripts/build_benchmark_article.py
+```
+
+Rebuilding the charts reproduces their presentation. Reproducing the underlying
+judgments requires the private evidence and evaluation environment.

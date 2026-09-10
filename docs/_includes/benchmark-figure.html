@@ -4,7 +4,7 @@
   {% when 'task-completion' %}{% assign figure_height = 900 %}
   {% when 'task-model-completion' %}{% assign figure_height = 820 %}
   {% when 'participant-efficiency' %}{% assign figure_height = 810 %}
-  {% when 'grading-sensitivity' %}{% assign figure_height = 640 %}
+  {% when 'result-stability' %}{% assign figure_height = 620 %}
 {% endcase %}
 {% assign benchmark_asset_revision = site.time | date: '%s' %}
 <figure class="article-figure benchmark-figure" id="figure-{{ include.file }}">

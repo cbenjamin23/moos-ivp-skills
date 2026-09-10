@@ -435,11 +435,9 @@ these findings generalize.
 
 Skills improved conformance to MOOS-IvP practice across all four models,
 including tasks that agents already completed reliably. Completion gains were
-largest in behaviors and missions. One useful direction for the next package
-revision is to address the harness's false-pass failures and test whether
-stronger validation improves those results. Broader task sets and measurements
-of integration and maintenance effort would help establish how far the benefits
-carry into everyday development.
+largest in behaviors and missions. Future work could strengthen the harness
+against false passes and test the plugin on broader tasks, including the effort
+required to integrate and maintain the results.
 
 This matters for real robots because software conventions can prevent
 operational problems. Configurable ports avoid network conflicts, live
@@ -447,8 +445,7 @@ validation catches failures before deployment, and truthful harnesses keep
 failed scenarios from being reported as passes. This benchmark uses simulation,
 so it does not measure field safety. It does show that domain skills help coding
 agents produce more complete MOOS-IvP work that follows the practices experienced
-developers rely on. Human review and hardware testing remain essential before
-deployment.
+developers rely on for real-world deployment.
 
 The design follows ideas used in software-agent benchmarks such as
 [SWE-bench](https://arxiv.org/abs/2310.06770), where an agent works from a

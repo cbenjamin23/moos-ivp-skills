@@ -19,9 +19,8 @@ article_nav:
   - { id: what-the-agents-actually-did, title: Skill use and validation }
   - { id: time-and-cost-of-the-work, title: Time and cost }
   - { id: what-to-improve-next, title: Failures and next steps }
-  - { id: a-result-that-survives-the-sensitivity-checks, title: "Would different attempts change the completion advantage?" }
+  - { id: a-result-that-survives-the-sensitivity-checks, title: "Would different attempts change the results?" }
   - { id: what-this-means-for-the-plugin, title: Implications for the plugin }
-  - { id: evidence-and-reproduction, title: Data and sources }
 ---
 
 ## Study setup
@@ -440,26 +439,6 @@ harness's false-pass failures and test whether stronger validation improves
 those results. Broader task sets and measurements of integration and maintenance
 effort would help establish how far the benefits carry into everyday development.
 
-## Data and sources
-{: #evidence-and-reproduction }
-
-All nine figures use the final 440-run results from `benchmark/evaluation/` at
-commit `100f4a93` in the private benchmark repository. The public [chart data
-(JSON)]({{ '/assets/data/benchmark-2026.json' | relative_url }}) includes the
-model and task results, exact task prompts, uncertainty estimates, timing and
-cost summaries, recorded skill use and live-validation counts, and identifiers
-for the exact source files. The [figure
-generator](https://github.com/cbenjamin23/moos-ivp-skills/blob/main/scripts/build_benchmark_article.py)
-creates the downloadable SVG and PNG charts from that file.
-
-Participant transcripts, reviewer workspaces, and original runtime evidence
-remain private. The public files reproduce the charts, but independently
-reproducing the grading requires those original materials.
-
-To rebuild the figures from the public data:
-
-```bash
-python3 -m venv /tmp/moos-article-plots
-/tmp/moos-article-plots/bin/pip install -r scripts/requirements-benchmark-article.txt
-/tmp/moos-article-plots/bin/python scripts/build_benchmark_article.py
-```
+*Data availability: The chart-data downloads contain the aggregate results and
+exact task prompts. Participant transcripts, reviewer workspaces, and runtime
+evidence are private.*

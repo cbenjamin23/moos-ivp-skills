@@ -1112,6 +1112,129 @@
       "skills": 220
     }
   },
+  "conformance_stability": {
+    "leave_one_family_out": {
+      "Applications": {
+        "baseline": 0.5445821549425842,
+        "difference": 0.30452976562722167,
+        "skills": 0.8491119205698059
+      },
+      "Behaviors": {
+        "baseline": 0.5169710438314731,
+        "difference": 0.3205297656272217,
+        "skills": 0.8375008094586948
+      },
+      "Evaluation and harnesses": {
+        "baseline": 0.5917173546617991,
+        "difference": 0.2597398311564978,
+        "skills": 0.8514571858182969
+      },
+      "Log analysis": {
+        "baseline": 0.5769866023470316,
+        "difference": 0.3347535233509794,
+        "skills": 0.911740125698011
+      },
+      "Missions": {
+        "baseline": 0.5803303969858798,
+        "difference": 0.25338694884033697,
+        "skills": 0.8337173458262168
+      }
+    },
+    "leave_one_model_out": {
+      "astra-high": {
+        "baseline": 0.5318049728226658,
+        "difference": 0.30382138488971344,
+        "skills": 0.8356263577123793
+      },
+      "luna-high": {
+        "baseline": 0.5835793516559328,
+        "difference": 0.2951225647976943,
+        "skills": 0.878701916453627
+      },
+      "sol-high": {
+        "baseline": 0.5478300861585668,
+        "difference": 0.29565984279666035,
+        "skills": 0.8434899289552271
+      },
+      "terra-high": {
+        "baseline": 0.5835999146294738,
+        "difference": 0.2874936222959301,
+        "skills": 0.8710935369254039
+      }
+    },
+    "leave_one_task_out": {
+      "task-01": {
+        "baseline": 0.5648739394483258,
+        "difference": 0.28882678906449955,
+        "skills": 0.8537007285128253
+      },
+      "task-02": {
+        "baseline": 0.5431239394483258,
+        "difference": 0.3103267890644995,
+        "skills": 0.8534507285128253
+      },
+      "task-03": {
+        "baseline": 0.5398739394483257,
+        "difference": 0.3094767890644995,
+        "skills": 0.8493507285128252
+      },
+      "task-04": {
+        "baseline": 0.5432739394483258,
+        "difference": 0.3040767890644994,
+        "skills": 0.8473507285128252
+      },
+      "task-05": {
+        "baseline": 0.5710220875964739,
+        "difference": 0.2811879001756107,
+        "skills": 0.8522099877720846
+      },
+      "task-06": {
+        "baseline": 0.5720277856021719,
+        "difference": 0.2787979429106533,
+        "skills": 0.8508257285128252
+      },
+      "task-07": {
+        "baseline": 0.5569623232867096,
+        "difference": 0.2928772941150046,
+        "skills": 0.8498396174017142
+      },
+      "task-08": {
+        "baseline": 0.5663441775435639,
+        "difference": 0.2849020055147159,
+        "skills": 0.8512461830582798
+      },
+      "task-09": {
+        "baseline": 0.5840753811003812,
+        "difference": 0.27394063159063153,
+        "skills": 0.8580160126910127
+      },
+      "task-10": {
+        "baseline": 0.5646474992218855,
+        "difference": 0.3044067091444196,
+        "skills": 0.8690542083663051
+      },
+      "task-11": {
+        "baseline": 0.5725143823387686,
+        "difference": 0.32194825093596147,
+        "skills": 0.8944626332747301
+      }
+    },
+    "overall": {
+      "baseline": 0.5617035813166598,
+      "difference": 0.29552435369499963,
+      "skills": 0.8572279350116594
+    },
+    "stratified_bootstrap": {
+      "estimate": 0.29555197018384033,
+      "interval_95": [
+        0.28252162746755305,
+        0.30889966545255504
+      ],
+      "replicates": 20000,
+      "scope": "Nonparametric resampling of per-run conformance within each fixed task/model/condition stratum; this interval describes repeated runs in this benchmark, not uncertainty over unseen tasks.",
+      "seed": 20260814
+    }
+  },
   "evaluation": "evaluation-440-v2.0",
   "mission_case_criteria": {
     "baseline": {
@@ -1619,7 +1742,7 @@
       "seed": 20260814
     }
   },
-  "schema_version": 4,
+  "schema_version": 5,
   "source_layout": "consolidated",
   "source_repository": "cbenjamin23/moos-ivp-skills-benchmark-private",
   "source_revision": "100f4a93b2eec9acc93a3fbcefa6c1be71891083",

@@ -10,7 +10,8 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-from statistics import median
+import random
+from statistics import mean, median
 import subprocess
 import tempfile
 
@@ -26,6 +27,13 @@ TASKS = [
     "Mission + behavior", "Self-evaluating mission", "Nine-case harness",
     "Tight-loop enumeration", "Henry/Gilda diagnosis",
 ]
+TASK_FAMILIES = {
+    "Applications": (1, 2),
+    "Behaviors": (3, 4),
+    "Missions": (5, 6, 7),
+    "Evaluation and harnesses": (8, 9),
+    "Log analysis": (10, 11),
+}
 
 
 def require(condition, message):
@@ -146,6 +154,91 @@ def export_data(repo, source_ref):
         ("90–100%", .9, 1.01),
     ]
 
+    def quantile(values, probability):
+        ordered = sorted(values)
+        return ordered[round((len(ordered) - 1) * probability)]
+
+    conformance_strata = {}
+    for task in range(1, 12):
+        for model in MODELS:
+            for condition in CONDITIONS:
+                group = sorted(
+                    (record for record in records
+                     if record["task"] == task
+                     and record["model_id"] == model
+                     and record["condition"] == condition),
+                    key=lambda record: record["repetition"],
+                )
+                require(len(group) == 5, "Expected five runs per conformance stratum")
+                conformance_strata[(task, model, condition)] = [
+                    conformance_score(record) for record in group
+                ]
+
+    completion_bootstrap = robustness["versions"]["audited"]["stratified_bootstrap"]
+    bootstrap_seed = completion_bootstrap["seed"]
+    bootstrap_replicates = completion_bootstrap["replicates"]
+    generator = random.Random(bootstrap_seed)
+    conformance_differences = []
+    for _ in range(bootstrap_replicates):
+        stratum_differences = []
+        for task in range(1, 12):
+            for model in MODELS:
+                rates = {}
+                for condition in CONDITIONS:
+                    observations = conformance_strata[(task, model, condition)]
+                    rates[condition] = mean(
+                        generator.choice(observations) for _ in observations
+                    )
+                stratum_differences.append(rates["skills"] - rates["baseline"])
+        conformance_differences.append(mean(stratum_differences))
+
+    def conformance_summary(group):
+        scores = {
+            condition: [conformance_score(record) for record in group
+                        if record["condition"] == condition]
+            for condition in CONDITIONS
+        }
+        require(all(scores.values()), "Conformance subset cannot be empty")
+        result = {condition: mean(values) for condition, values in scores.items()}
+        result["difference"] = result["skills"] - result["baseline"]
+        return result
+
+    conformance_stability = {
+        "overall": conformance_summary(records),
+        "stratified_bootstrap": {
+            "estimate": mean(conformance_differences),
+            "interval_95": [
+                quantile(conformance_differences, .025),
+                quantile(conformance_differences, .975),
+            ],
+            "replicates": bootstrap_replicates,
+            "seed": bootstrap_seed,
+            "scope": (
+                "Nonparametric resampling of per-run conformance within each fixed "
+                "task/model/condition stratum; this interval describes repeated runs "
+                "in this benchmark, not uncertainty over unseen tasks."
+            ),
+        },
+        "leave_one_task_out": {
+            f"task-{task:02}": conformance_summary(
+                [record for record in records if record["task"] != task]
+            )
+            for task in range(1, 12)
+        },
+        "leave_one_model_out": {
+            model: conformance_summary(
+                [record for record in records if record["model_id"] != model]
+            )
+            for model in MODELS
+        },
+        "leave_one_family_out": {
+            family: conformance_summary(
+                [record for record in records if record["task"] not in tasks]
+            )
+            for family, tasks in TASK_FAMILIES.items()
+        },
+    }
+
     audited = aggregate["versions"]["audited"]
     completion_losses = {m: {c: 0 for c in CONDITIONS} for m in MODELS}
     for record in records:
@@ -160,7 +253,7 @@ def export_data(repo, source_ref):
         require(not is_complete or was_complete, "Unexpected completion upgrade in coverage audit")
         completion_losses[record["model_id"]][record["condition"]] += int(was_complete and not is_complete)
     data = {
-        "schema_version": 4,
+        "schema_version": 5,
         "source_revision": revision,
         "source_repository": "cbenjamin23/moos-ivp-skills-benchmark-private",
         "evaluation": "evaluation-440-v2.0",
@@ -196,6 +289,7 @@ def export_data(repo, source_ref):
             "runs": {condition: len(conformance_scores[condition])
                      for condition in CONDITIONS},
         },
+        "conformance_stability": conformance_stability,
         "by_model": {m: summary(audited["by_model"][m]) for m in MODELS},
         "by_task": {t: summary(g) for t, g in audited["by_task"].items()},
         "by_task_model": {t: {c: {"complete": g[c]["completion_count"],
@@ -496,40 +590,53 @@ def render(data):
         fig.text(.16,.065,"Cost observations: 55 per group, except Astra skills (54). Missing cost is excluded.",fontsize=9,color=muted)
         save(fig,"participant-efficiency")
 
-        robustness = data["robustness"]
-        bootstrap_lo, bootstrap_hi = [
-            100 * value for value in robustness["stratified_bootstrap"]["interval_95"]
-        ]
+        completion_stability = data["robustness"]
+        conformance_stability = data["conformance_stability"]
 
-        def difference_range(key):
-            values = [100 * group["difference"] for group in robustness[key].values()]
+        def difference_range(stability, key):
+            values = [100 * group["difference"] for group in stability[key].values()]
             return min(values), max(values)
 
-        stability_checks = [
-            ("Different sets of five attempts", bootstrap_lo, bootstrap_hi),
-            ("Exclude each task in turn", *difference_range("leave_one_task_out")),
-            ("Exclude each model in turn", *difference_range("leave_one_model_out")),
-            ("Exclude each task category in turn", *difference_range("leave_one_family_out")),
+        def stability_checks(stability):
+            bootstrap = tuple(
+                100 * value
+                for value in stability["stratified_bootstrap"]["interval_95"]
+            )
+            return [
+                bootstrap,
+                difference_range(stability, "leave_one_task_out"),
+                difference_range(stability, "leave_one_model_out"),
+                difference_range(stability, "leave_one_family_out"),
+            ]
+
+        row_labels = [
+            "Different sets of five attempts",
+            "Exclude each task in turn",
+            "Exclude each model in turn",
+            "Exclude each task category in turn",
         ]
-        fig = canvas("How much the completion advantage could vary",
-                     "Skills minus baseline completion · every range remains positive", 6.2)
-        ax = axis(fig, [.42, .20, .51, .58], 25, False)
-        ax.set_xticks([0, 5, 10, 15, 20, 25],
-                      ["0%", "+5%", "+10%", "+15%", "+20%", "+25%"])
-        ax.axvline(0, color=muted, linewidth=1)
-        for i, (label, low, high) in enumerate(stability_checks):
-            ax.plot([low, high], [i, i], color="#2b658e", linewidth=6,
-                    solid_capstyle="round")
-            ax.plot([low, high], [i, i], "o", color=colors["skills"],
-                    markersize=5)
-            ax.text(low, i - .20, f"+{low:.1f}%", ha="left", fontsize=10,
-                    color=ink)
-            ax.text(high, i - .20, f"+{high:.1f}%", ha="right", fontsize=10,
-                    color=ink)
-        ax.set_yticks(range(len(stability_checks)),
-                      [label for label, _, _ in stability_checks])
-        ax.set_ylim(len(stability_checks) - .45, -.6)
-        fig.text(.42, .10,
+        fig = canvas("How much the measured advantages could vary",
+                     "Skills minus baseline · completion and mean conformance", 6.6)
+        for left, title, stability in [
+            (.34, "Completion", completion_stability),
+            (.68, "Conformance", conformance_stability),
+        ]:
+            ax = axis(fig, [left, .20, .27, .56], 35, False)
+            ax.set_title(title, loc="left", fontsize=11, fontweight="bold", pad=15)
+            ax.set_xticks([0, 10, 20, 30], ["0%", "+10%", "+20%", "+30%"])
+            ax.axvline(0, color=muted, linewidth=1)
+            checks = stability_checks(stability)
+            for i, (low, high) in enumerate(checks):
+                ax.plot([low, high], [i, i], color="#2b658e", linewidth=6,
+                        solid_capstyle="round")
+                ax.plot([low, high], [i, i], "o", color=colors["skills"],
+                        markersize=5)
+                ax.text((low + high) / 2, i - .20,
+                        f"+{low:.1f}% to +{high:.1f}%", ha="center",
+                        fontsize=8.5, color=ink)
+            ax.set_yticks(range(len(row_labels)), row_labels if left == .34 else [])
+            ax.set_ylim(len(row_labels) - .45, -.6)
+        fig.text(.34, .10,
                  "Task categories: applications · behaviors · missions · evaluation / harnesses · log analysis",
                  fontsize=8.5, color=muted)
         save(fig, "result-stability")

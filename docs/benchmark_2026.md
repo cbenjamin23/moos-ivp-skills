@@ -393,34 +393,32 @@ a known-failure case, compare each verdict with the recorded mission events,
 and treat missing monitoring or failed setup as a failure rather than a pass.
 Repeating Task 9 would show whether that guidance helps.
 
-## Would different attempts change the completion advantage?
+## Would different attempts change the results?
 {: #a-result-that-survives-the-sensitivity-checks }
 
-The 15.9-point completion advantage comes from five baseline and five skills
-attempts for every task and model. Another set of attempts would not produce
-exactly the same completion advantage. This analysis estimates how much that
-completion difference could move because of run-to-run variation.
+The 15.9-point completion advantage and 29.6-point conformance advantage come
+from five baseline and five skills attempts for every task and model. Another
+set of attempts would produce slightly different values. This analysis
+estimates how much each difference could move because of run-to-run variation.
 
-For every task and model, we randomly redraw five baseline completion outcomes
-and five skills completion outcomes from the attempts already collected. The
-same outcome can be drawn more than once. We then recalculate the overall
-completion advantage and repeat the process 20,000 times. This standard
-uncertainty check is called bootstrap resampling. Keeping each group separate
-preserves the benchmark's original mix of tasks, models, and conditions.
+For every task and model, we randomly redraw five baseline attempts and five
+skills attempts from those already collected. The same attempt can be drawn
+more than once. We then recalculate the completion and mean conformance
+advantages and repeat the process 20,000 times. This standard uncertainty check
+is called bootstrap resampling. Keeping each group separate preserves the
+benchmark's original mix of tasks, models, and conditions.
 
-The middle 95% of the recalculated completion advantages fall between +10.9 and
-+21.4 percentage points. If that range included zero, the observed completion
-advantage could plausibly disappear with a different set of attempts. It does
-not. This supports a skills completion advantage for these tasks and models,
-but it does not predict the completion difference for new tasks or future
-models.
+The middle 95% of the recalculated advantages range from +10.9% to +21.4% for
+completion and +28.3% to +30.9% for conformance. Neither range includes zero.
+This supports positive skills advantages on both measures for these tasks and
+models, but it does not predict the differences for new tasks or future models.
 
-The completion advantage also stays positive when we exclude each task, model,
-or task category in turn. The five categories are applications, behaviors,
-missions, evaluation and harnesses, and log analysis. No single part of the
-benchmark creates the overall completion advantage.
+Both advantages stay positive when we exclude each task, model, or task
+category in turn. The five categories are applications, behaviors, missions,
+evaluation and harnesses, and log analysis. No single part of the benchmark
+creates either overall advantage.
 
-{% include benchmark-figure.html file="result-stability" title="How much the completion advantage could vary" alt="Skills-minus-baseline completion advantage. Different sets of five attempts give a middle 95% range from +10.9 to +21.4 percentage points. Ranges after excluding each item in turn are +14.0 to +20.0 for tasks, +10.9 to +22.4 for models, and +11.2 to +19.4 for task categories. The five task categories are applications, behaviors, missions, evaluation and harnesses, and log analysis." caption="Figure 9. The first row shows how the result could vary with different sets of five attempts. The other rows show the smallest and largest completion advantage after excluding each task, model, or task category in turn. Every range stays above zero." %}
+{% include benchmark-figure.html file="result-stability" title="How much the measured advantages could vary" alt="Skills-minus-baseline completion and mean conformance advantages. Different sets of five attempts give middle 95% ranges of +10.9 to +21.4 percent for completion and +28.3 to +30.9 percent for conformance. After excluding each item in turn, completion ranges are +14.0 to +20.0 for tasks, +10.9 to +22.4 for models, and +11.2 to +19.4 for task categories. Conformance ranges are +27.4 to +32.2 for tasks, +28.7 to +30.4 for models, and +25.3 to +33.5 for task categories." caption="Figure 9. The first row shows how both measured advantages could vary with different sets of five attempts. The other rows show the smallest and largest values after excluding each task, model, or task category in turn. Every range stays above zero." %}
 
 Submitted files were reviewed under anonymous identifiers. Reviewers did not
 see which model produced the work or whether skills were available.

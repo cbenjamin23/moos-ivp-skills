@@ -1,6 +1,7 @@
 {% assign figure_height = 540 %}
 {% case include.file %}
   {% when 'model-completion' %}{% assign figure_height = 570 %}
+  {% when 'conformance-distribution' %}{% assign figure_height = 580 %}
   {% when 'task-completion' %}{% assign figure_height = 900 %}
   {% when 'task-model-completion' %}{% assign figure_height = 820 %}
   {% when 'participant-efficiency' %}{% assign figure_height = 810 %}

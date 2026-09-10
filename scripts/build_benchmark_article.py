@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+from statistics import median
 import subprocess
 import tempfile
 
@@ -117,6 +118,34 @@ def export_data(repo, source_ref):
             } for c in CONDITIONS
         }
 
+    def conformance_score(record):
+        labels = record["audited"]["conformance"].values()
+        resolved = [label for label in labels
+                    if label in {"met", "partially_met", "not_met"}]
+        require(resolved, "Each run must have at least one resolved applicable criterion")
+        return sum(label == "met" for label in resolved) / len(resolved)
+
+    conformance_scores = {
+        condition: [conformance_score(record) for record in records
+                    if record["condition"] == condition]
+        for condition in CONDITIONS
+    }
+    for condition in CONDITIONS:
+        scores = conformance_scores[condition]
+        require(len(scores) == 220, f"Expected 220 {condition} conformance scores")
+        require(abs(sum(scores) / len(scores)
+                    - aggregate["versions"]["audited"]["overall"][condition]
+                    ["conformance_met_resolved_applicable"]["mean"]) < 1e-12,
+                f"{condition} per-run conformance scores disagree with aggregate")
+    conformance_bands = [
+        ("0–19%", 0, .2),
+        ("20–39%", .2, .4),
+        ("40–59%", .4, .6),
+        ("60–79%", .6, .8),
+        ("80–89%", .8, .9),
+        ("90–100%", .9, 1.01),
+    ]
+
     audited = aggregate["versions"]["audited"]
     completion_losses = {m: {c: 0 for c in CONDITIONS} for m in MODELS}
     for record in records:
@@ -131,7 +160,7 @@ def export_data(repo, source_ref):
         require(not is_complete or was_complete, "Unexpected completion upgrade in coverage audit")
         completion_losses[record["model_id"]][record["condition"]] += int(was_complete and not is_complete)
     data = {
-        "schema_version": 3,
+        "schema_version": 4,
         "source_revision": revision,
         "source_repository": "cbenjamin23/moos-ivp-skills-benchmark-private",
         "evaluation": "evaluation-440-v2.0",
@@ -148,6 +177,25 @@ def export_data(repo, source_ref):
             "previous_stage": "pre_task09_coverage",
         },
         "overall": summary(audited["overall"]),
+        "conformance_distribution": {
+            "bands": [
+                {
+                    "label": label,
+                    **{
+                        condition: sum(low <= score < high
+                                       for score in conformance_scores[condition])
+                        for condition in CONDITIONS
+                    },
+                }
+                for label, low, high in conformance_bands
+            ],
+            "median": {
+                condition: median(conformance_scores[condition])
+                for condition in CONDITIONS
+            },
+            "runs": {condition: len(conformance_scores[condition])
+                     for condition in CONDITIONS},
+        },
         "by_model": {m: summary(audited["by_model"][m]) for m in MODELS},
         "by_task": {t: summary(g) for t, g in audited["by_task"].items()},
         "by_task_model": {t: {c: {"complete": g[c]["completion_count"],
@@ -319,6 +367,33 @@ def render(data):
             ax.set_yticks(range(4),[m.split("-")[0].title() for m in MODELS] if field=="complete" else [])
             ax.invert_yaxis()
         save(fig,"model-completion")
+
+        distribution = data["conformance_distribution"]
+        fig = canvas("How individual conformance scores shifted",
+                     "Number of attempts in each score range · 220 per condition", 5.8)
+        legend(fig, .84)
+        ax = fig.add_axes([.10, .17, .85, .53], facecolor="none")
+        ax.set_axisbelow(True)
+        ax.grid(axis="y", color=line, linewidth=.7, linestyle=(0, (3, 4)))
+        ax.tick_params(axis="both", length=0)
+        bands = distribution["bands"]
+        x = np.arange(len(bands))
+        width = .34
+        for i, condition in enumerate(CONDITIONS):
+            values = [band[condition] for band in bands]
+            positions = x + (-width / 2 if i == 0 else width / 2)
+            ax.bar(positions, values, width=width, color=colors[condition],
+                   edgecolor="#5f7486" if condition == "baseline" else colors[condition],
+                   linewidth=.6)
+            for position, value in zip(positions, values):
+                ax.text(position, value + 2, str(value), ha="center", va="bottom",
+                        fontsize=10, color=ink)
+        ax.set_xticks(x, [band["label"] for band in bands])
+        ax.set_ylabel("Attempts", fontsize=10, labelpad=10)
+        ax.set_ylim(0, 140)
+        ax.set_yticks([0, 35, 70, 105, 140])
+        save(fig, "conformance-distribution")
+
         fig = canvas("Completion and conformance by task",
                      "20 attempts per task and condition · connected points compare baseline with skills", 9)
         fig.legend(handles=[Line2D([], [], marker=marker, linestyle="none", markersize=7,
@@ -490,7 +565,7 @@ def render(data):
             social.text(x,.09,"Baseline → skills",color="#d9e7f0",fontsize=13)
         social.savefig(FIGURES / "social.png",dpi=100,metadata={"Software":"Matplotlib"})
         plt.close(social)
-    print(f"Rendered eight SVG/PNG figure pairs in {FIGURES.relative_to(ROOT)}")
+    print(f"Rendered nine SVG/PNG figure pairs in {FIGURES.relative_to(ROOT)}")
 
 
 def main():

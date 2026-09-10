@@ -164,6 +164,19 @@ would miss.
 | Sol | 72.7% → 85.5% | +12.7% | 60.3% → 89.8% | +29.5% |
 | Astra | 94.5% → 90.9% | −3.6% | 65.1% → 92.2% | +27.1% |
 
+### How individual conformance scores shifted
+
+The average gain reflects a broad shift across individual attempts. Median
+conformance rises from 56.3% in the baseline to 92.0% with skills. Only 3 of
+220 baseline attempts reach at least 90%, compared with 129 skills attempts.
+Scores below 60% fall from 116 to 20.
+
+{% include benchmark-figure.html file="conformance-distribution" title="How individual conformance scores shifted" alt="Number of individual attempts by conformance score range, baseline then skills: 0 to 19 percent, 2 and 0; 20 to 39 percent, 39 and 8; 40 to 59 percent, 75 and 12; 60 to 79 percent, 74 and 24; 80 to 89 percent, 27 and 47; 90 to 100 percent, 3 and 129. Each condition includes 220 attempts." caption="Figure 2. Individual conformance scores shift toward the upper ranges with skills. Scores at or above 90% rise from 3 to 129 attempts, while scores below 60% fall from 116 to 20." %}
+
+Completion is scored separately. An attempt can follow most engineering
+criteria yet remain incomplete if it misses one required function. Conformance
+adds detail without replacing the functional result.
+
 With only 55 attempts per condition for each model, small differences should
 be read cautiously. The 95% uncertainty intervals for Sol's and Astra's
 completion differences include zero, so these samples do not clearly separate
@@ -178,7 +191,7 @@ In each example below, baseline and skills complete all five attempts. The
 conformance scores show how closely each result follows the specified
 engineering practices.
 
-{% include benchmark-figure.html file="model-conformance" title="Conformance in examples with equal completion" alt="Each condition completes all five runs. Mean conformance baseline/skills: Task 01 Astra BatteryWatch 44.0/95.0%. Task 02 Sol contact-waypoint app 79.0/98.0%. Task 05 Astra patrol/shadow mission 56.3/95.6%." caption="Figure 2. Selected examples with equal, perfect completion. The bars show a separate conformance difference that a pass/fail summary would hide." %}
+{% include benchmark-figure.html file="model-conformance" title="Conformance in examples with equal completion" alt="Each condition completes all five runs. Mean conformance baseline/skills: Task 01 Astra BatteryWatch 44.0/95.0%. Task 02 Sol contact-waypoint app 79.0/98.0%. Task 05 Astra patrol/shadow mission 56.3/95.6%." caption="Figure 3. Selected examples with equal, perfect completion. The bars show a separate conformance difference that a pass/fail summary would hide." %}
 
 Astra's BatteryWatch application moves from 44.0% to 95.0% conformance.
 The skills runs fully meet the startup-configuration, recurring-computation,
@@ -234,7 +247,7 @@ interpretation is that the package is especially useful where the agent must
 coordinate several MOOS-IvP components and conventions. This study does not
 isolate which instructions account for the difference.
 
-{% include benchmark-figure.html file="task-completion" title="Completion and conformance by task" alt="Connected baseline and skills points for eleven tasks. Completion counts out of 20: 19/20, 19/19, 7/13, 10/17, 7/13, 11/16, 9/15, 12/17, 6/1, 13/15, 18/20. Mean conformance baseline/skills: 53.0/89.2%, 74.8/89.5%, 78.0/93.6%, 74.6/95.6%, 46.9/90.7%, 45.8/92.1%, 60.9/93.1%, 51.5/91.7%, 33.8/84.9%, 53.2/73.9%, 45.4/48.5%." caption="Figure 3. Circles show baseline. Diamonds show skills. Completion improves on nine tasks, ties on Task 2, and falls on Task 9. Mean conformance improves on all eleven when the four models are pooled. Counts use 20 attempts per condition. The separate conformance panel reports percentages, not pass counts." %}
+{% include benchmark-figure.html file="task-completion" title="Completion and conformance by task" alt="Connected baseline and skills points for eleven tasks. Completion counts out of 20: 19/20, 19/19, 7/13, 10/17, 7/13, 11/16, 9/15, 12/17, 6/1, 13/15, 18/20. Mean conformance baseline/skills: 53.0/89.2%, 74.8/89.5%, 78.0/93.6%, 74.6/95.6%, 46.9/90.7%, 45.8/92.1%, 60.9/93.1%, 51.5/91.7%, 33.8/84.9%, 53.2/73.9%, 45.4/48.5%." caption="Figure 4. Circles show baseline. Diamonds show skills. Completion improves on nine tasks, ties on Task 2, and falls on Task 9. Mean conformance improves on all eleven when the four models are pooled. Counts use 20 attempts per condition. The separate conformance panel reports percentages, not pass counts." %}
 
 The conformance panel shows why a completion-only task ranking would be
 incomplete. The contact-waypoint app ties at 19/20 complete while mean
@@ -267,7 +280,7 @@ task-by-model view shows how differently each model arrives at it.
 
 ### Differences between models and repeated attempts
 
-{% include benchmark-figure.html file="task-model-completion" title="Completion for each task and model" alt="An eleven-row matrix of completion counts out of five, with adjacent baseline and skills columns for Luna, Terra, Sol, and Astra. The harness row is Luna 1/0, Terra 0/0, Sol 0/0, and Astra 5/1." caption="Figure 4. Each cell shows the number complete out of five attempts. Adjacent baseline and skills columns show where the models improve, tie, or regress." %}
+{% include benchmark-figure.html file="task-model-completion" title="Completion for each task and model" alt="An eleven-row matrix of completion counts out of five, with adjacent baseline and skills columns for Luna, Terra, Sol, and Astra. The harness row is Luna 1/0, Terra 0/0, Sol 0/0, and Astra 5/1." caption="Figure 5. Each cell shows the number complete out of five attempts. Adjacent baseline and skills columns show where the models improve, tie, or regress." %}
 
 Across the 44 task–model combinations, skills produce more complete attempts
 in 21, the same number in 20, and fewer in three. Luna moves from 0/5 to 4/5
@@ -282,7 +295,7 @@ condition. Astra completes 5/5 baseline attempts and 1/5 with skills. The
 other declining combination is Luna's tight-loop enumeration, from 1/5 to
 0/5.
 
-{% include benchmark-figure.html file="repeated-completion" title="Distribution of completion across repeated attempts" alt="Numbers of task-model combinations with 0, 1, 2, 3, 4, and 5 completions out of five: baseline 10, 3, 4, 3, 9, 15. Skills 4, 3, 2, 4, 8, 23. Each row sums to 44 combinations." caption="Figure 5. Each segment counts task–model combinations with that many complete attempts. Perfect five-attempt completion occurs in 23 of 44 combinations with skills, versus 15 without. Combinations with no complete attempt fall from ten to four. These are observed repeat counts, not estimated probabilities of future success." %}
+{% include benchmark-figure.html file="repeated-completion" title="Distribution of completion across repeated attempts" alt="Numbers of task-model combinations with 0, 1, 2, 3, 4, and 5 completions out of five: baseline 10, 3, 4, 3, 9, 15. Skills 4, 3, 2, 4, 8, 23. Each row sums to 44 combinations." caption="Figure 6. Each segment counts task–model combinations with that many complete attempts. Perfect five-attempt completion occurs in 23 of 44 combinations with skills, versus 15 without. Combinations with no complete attempt fall from ten to four. These are observed repeat counts, not estimated probabilities of future success." %}
 
 The repeated attempts distinguish an occasional success from a result that
 holds across all five tries. Sol completes every attempt on eight of eleven
@@ -303,8 +316,7 @@ and 20 skills answers are complete, leaving little room to distinguish models.
 Conformance still separates the tasks: tight-loop enumeration rises from
 53.2% to 73.9%, while diagnosis rises from 45.4% to 48.5%. An answer can give
 a plausible explanation and still fall short on timestamped support, complete
-log coverage, or enough detail for another reviewer to repeat the analysis. The
-grading-history section explains the revision to Task 11.
+log coverage, or enough detail for another reviewer to repeat the analysis.
 
 ## Skill use and validation
 {: #what-the-agents-actually-did }
@@ -327,7 +339,7 @@ behavior, or mission in the benchmark simulation and check it in execution,
 rather than inferring from the source and build that it should satisfy the
 request. A recorded launch attempt need not succeed.
 
-{% include benchmark-figure.html file="observed-validation" title="Observed live validation by model" alt="Runs with recorded live validation, baseline then skills, out of 55: Luna 23 and 35. Terra 24 and 38. Sol 30 and 44. Astra 20 and 27." caption="Figure 6. More skills attempts include recorded execution checks in every model. These are observations of agent activity. They do not establish that testing caused the completion differences or that every check was adequate." %}
+{% include benchmark-figure.html file="observed-validation" title="Observed live validation by model" alt="Runs with recorded live validation, baseline then skills, out of 55: Luna 23 and 35. Terra 24 and 38. Sol 30 and 44. Astra 20 and 27." caption="Figure 7. More skills attempts include recorded execution checks in every model. These are observations of agent activity. They do not establish that testing caused the completion differences or that every check was adequate." %}
 
 Skills runs also record more live validation in every model. This is consistent
 with workflows that ask the agent to exercise the app, behavior, or mission it
@@ -348,7 +360,7 @@ Cost is estimated from recorded token usage using API rates as of August 10,
 API-equivalent estimate, not a subscription charge or invoice. Those rates stay
 fixed so later price changes do not alter the comparison.
 
-{% include benchmark-figure.html file="participant-efficiency" title="Participant time and estimated cost" alt="Median minutes baseline/skills: Luna 8.86/9.93, Terra 6.35/7.05, Sol 8.38/9.54, Astra 9.20/11.15. Median estimated USD: 0.149/0.141, 0.597/0.791, 2.352/2.367, 1.864/2.468." caption="Figure 7. Median elapsed time and estimated model-use cost per attempt. Both include available measurements from complete and incomplete runs. Grading work is excluded." %}
+{% include benchmark-figure.html file="participant-efficiency" title="Participant time and estimated cost" alt="Median minutes baseline/skills: Luna 8.86/9.93, Terra 6.35/7.05, Sol 8.38/9.54, Astra 9.20/11.15. Median estimated USD: 0.149/0.141, 0.597/0.791, 2.352/2.367, 1.864/2.468." caption="Figure 8. Median elapsed time and estimated model-use cost per attempt. Both include available measurements from complete and incomplete runs. Grading work is excluded." %}
 
 Cost moves differently from elapsed time. Luna's median estimate decreases
 slightly, from $0.149 to $0.141. Terra's increases from $0.597 to $0.791. Sol's
@@ -407,7 +419,7 @@ The completion advantage also stays positive when any one task, model, or kind
 of work is removed. No single part of the benchmark creates the overall
 completion advantage.
 
-{% include benchmark-figure.html file="result-stability" title="How much the completion advantage could vary" alt="Skills-minus-baseline completion advantage. Different sets of attempts give a middle 95% range from +10.9 to +21.4 percentage points. Leave-one-out ranges are +14.0 to +20.0 without one task, +10.9 to +22.4 without one model, and +11.2 to +19.4 without one kind of work. The observed completion advantage is +15.9 points." caption="Figure 8. The first row estimates variation in the completion advantage across different attempts on the same tasks and models. The other rows show the smallest and largest completion advantage after omitting each task, model, or kind of work in turn. Every range remains positive." %}
+{% include benchmark-figure.html file="result-stability" title="How much the completion advantage could vary" alt="Skills-minus-baseline completion advantage. Different sets of attempts give a middle 95% range from +10.9 to +21.4 percentage points. Leave-one-out ranges are +14.0 to +20.0 without one task, +10.9 to +22.4 without one model, and +11.2 to +19.4 without one kind of work. The observed completion advantage is +15.9 points." caption="Figure 9. The first row estimates variation in the completion advantage across different attempts on the same tasks and models. The other rows show the smallest and largest completion advantage after omitting each task, model, or kind of work in turn. Every range remains positive." %}
 
 Submitted files were reviewed under anonymous identifiers. Reviewers did not
 see which model produced the work or whether skills were available.
@@ -432,7 +444,7 @@ effort would help establish how far the benefits carry into everyday development
 ## Data and sources
 {: #evidence-and-reproduction }
 
-All eight figures use the final 440-run results from `benchmark/evaluation/` at
+All nine figures use the final 440-run results from `benchmark/evaluation/` at
 commit `100f4a93` in the private benchmark repository. The public [chart data
 (JSON)]({{ '/assets/data/benchmark-2026.json' | relative_url }}) includes the
 model and task results, exact task prompts, uncertainty estimates, timing and

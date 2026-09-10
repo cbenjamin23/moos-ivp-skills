@@ -1070,6 +1070,48 @@
       }
     }
   },
+  "conformance_distribution": {
+    "bands": [
+      {
+        "baseline": 2,
+        "label": "0\u201319%",
+        "skills": 0
+      },
+      {
+        "baseline": 39,
+        "label": "20\u201339%",
+        "skills": 8
+      },
+      {
+        "baseline": 75,
+        "label": "40\u201359%",
+        "skills": 12
+      },
+      {
+        "baseline": 74,
+        "label": "60\u201379%",
+        "skills": 24
+      },
+      {
+        "baseline": 27,
+        "label": "80\u201389%",
+        "skills": 47
+      },
+      {
+        "baseline": 3,
+        "label": "90\u2013100%",
+        "skills": 129
+      }
+    ],
+    "median": {
+      "baseline": 0.5634920634920635,
+      "skills": 0.9196774193548387
+    },
+    "runs": {
+      "baseline": 220,
+      "skills": 220
+    }
+  },
   "evaluation": "evaluation-440-v2.0",
   "mission_case_criteria": {
     "baseline": {
@@ -1577,7 +1619,7 @@
       "seed": 20260814
     }
   },
-  "schema_version": 3,
+  "schema_version": 4,
   "source_layout": "consolidated",
   "source_repository": "cbenjamin23/moos-ivp-skills-benchmark-private",
   "source_revision": "100f4a93b2eec9acc93a3fbcefa6c1be71891083",

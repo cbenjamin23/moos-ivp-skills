@@ -436,8 +436,11 @@ these findings generalize.
 Skills improved conformance to MOOS-IvP practice across all four models,
 including tasks that agents already completed reliably. Completion gains were
 largest in behaviors and missions. Future work could strengthen the harness
-against false passes and test the plugin on broader tasks, including the effort
-required to integrate and maintain the results.
+skill and test multi-model workflows, such as a Luna run followed by an Astra
+run that reviews and improves the result. This would better represent
+development beyond a single attempt and measure how much effort it takes to
+integrate generated work into a larger project and maintain it as the project
+changes.
 
 This matters for real robots because software conventions can prevent
 operational problems. Configurable ports avoid network conflicts, live

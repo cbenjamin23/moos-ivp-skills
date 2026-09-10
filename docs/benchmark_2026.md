@@ -336,9 +336,8 @@ completion improvement came from testing. They also span analysis tasks that
 require no new mission.
 
 For example, an app or behavior task can use a temporary mission or test
-harness for live validation. The scaffold exercises the requested deliverable
-without changing it, showing that validation is useful beyond mission-building
-tasks.
+harness for live validation. This lets the agent test the deliverable without
+changing it.
 
 ## Time and cost
 {: #time-and-cost-of-the-work }

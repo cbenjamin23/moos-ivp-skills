@@ -56,11 +56,10 @@ Conformance refers to the type of criteria that, if omitted, would make an
 experienced MOOS-IvP developer pause and say "something isn't right here". A
 result can therefore be complete while losing conformance points: it does what
 the request asks but misses an important MOOS-IvP convention. Reviewers assess
-criteria such as whether
-an app puts recurring logic in `Iterate()`, a mission launcher exposes
-configurable port settings, or a self-evaluating mission uses the existing
-`pMissionEval` utility instead of unnecessarily creating a brand new utility.
-Both conditions were judged against the same criteria.
+criteria such as whether an app puts recurring logic in `Iterate()`, a mission
+launcher exposes configurable port settings, or a self-evaluating mission uses
+the existing `pMissionEval` utility instead of unnecessarily creating a brand
+new utility. Both conditions were judged against the same criteria.
 
 For example, a two-vehicle mission may patrol and shadow correctly but still
 lose conformance points if its launchers hard-code the MOOSDB or pShare ports.
@@ -196,8 +195,8 @@ engineering practices.
 Astra's BatteryWatch application moves from 44.0% to 95.0% conformance.
 The skills runs fully meet the startup-configuration, recurring-computation,
 mail-registration, and AppCasting-diagnostics criteria in all five attempts.
-The baseline runs only partially meet the criterion that assigns recurring
-computation to `Iterate()` in all five attempts. Sol's contact-waypoint
+The baseline runs only partly meet the criterion requiring recurring
+computation in `Iterate()` in all five attempts. Sol's contact-waypoint
 application provides another example, rising
 from 79.0% to 98.0% conformance while retaining full completion.
 
@@ -219,9 +218,9 @@ and a viewer. They also cover mission documentation:
 | Expected runtime and operator components | 1/5 | 5/5 |
 | Mission documentation | 0/5 | 5/5 |
 
-The baseline documentation was partially met in all five runs. It existed,
-but did not fully meet the documentation criterion. Four baseline runs also
-partially met the runtime-and-operator criterion.
+All five baseline runs include documentation, but none fully meet the
+documentation criterion. Four baseline runs also partly meet the
+runtime-and-operator criterion.
 
 The functional result is tied at 5/5, but skills meet these integration and
 operation criteria more consistently. Those differences remain visible in
@@ -236,16 +235,18 @@ receive half credit. It remains positive under both scoring rules.
 ## Results by task
 {: #where-the-difference-appears }
 
-The two application tasks are already close to 100% completion: together, the
-baseline completes 38 of 40 runs and skills completes 39. On these tasks, binary completion offers
-little room to show a benefit, even when implementation practices differ.
+The two application tasks are already close to 100% completion: 38 of 40
+baseline runs and 39 of 40 skills runs are complete. On these tasks, binary
+completion offers little room to show a benefit, even when implementation
+practices differ.
 
-The behavior tasks show a larger separation. Baseline completes 17 of 40 runs.
-Skills completes 30. The mission tasks move from 27 of 60 to 44. Those are
-differences of 32.5 and 28.3 percentage points, respectively. A reasonable
-interpretation is that the package is especially useful where the agent must
-coordinate several MOOS-IvP components and conventions. This study does not
-isolate which instructions account for the difference.
+The behavior tasks show a larger separation: 17 of 40 baseline runs and 30 of
+40 skills runs are complete. The mission tasks move from 27 of 60 baseline runs
+to 44 of 60 skills runs. Those are differences of 32.5 and 28.3 percentage
+points, respectively. A reasonable interpretation is that the package is
+especially useful where the agent must coordinate several MOOS-IvP components
+and conventions. This study does not isolate which instructions account for
+the difference.
 
 {% include benchmark-figure.html file="task-completion" title="Completion and conformance by task" alt="Connected baseline and skills points for eleven tasks. Completion counts out of 20: 19/20, 19/19, 7/13, 10/17, 7/13, 11/16, 9/15, 12/17, 6/1, 13/15, 18/20. Mean conformance baseline/skills: 53.0/89.2%, 74.8/89.5%, 78.0/93.6%, 74.6/95.6%, 46.9/90.7%, 45.8/92.1%, 60.9/93.1%, 51.5/91.7%, 33.8/84.9%, 53.2/73.9%, 45.4/48.5%." caption="Figure 4. Circles show baseline. Diamonds show skills. Completion improves on nine tasks, ties on Task 2, and falls on Task 9. Mean conformance improves on all eleven when the four models are pooled. Counts use 20 attempts per condition. The separate conformance panel reports percentages, not pass counts." %}
 
@@ -254,8 +255,8 @@ incomplete. The contact-waypoint app ties at 19/20 complete while mean
 conformance rises from 74.8% to 89.5%. The three ordinary mission tasks improve
 by about 32–46 percentage points in conformance. The harness has the largest
 conformance increase, from 33.8% to 84.9%, alongside a completion decline.
-Higher adherence to the specified practices does not resolve its failures
-to report truthful outcomes.
+Those attempts follow most of the specified practices while still failing the
+required verdict.
 
 ### Application versus integrated mission
 
@@ -344,9 +345,9 @@ request. A recorded launch attempt need not succeed.
 Skills runs also record more live validation in every model. This is consistent
 with workflows that ask the agent to exercise the app, behavior, or mission it
 has built. The counts are observational: they cannot establish how much of the
-completion improvement came from testing. They also span analysis tasks that
-require no new mission, and an app or behavior task can use a temporary mission
-or test harness to exercise its deliverable.
+completion improvement came from testing. The counts also include analysis
+tasks that require no new mission. An app or behavior task can use a temporary
+mission or test harness to exercise its deliverable.
 
 ## Time and cost
 {: #time-and-cost-of-the-work }
@@ -376,11 +377,11 @@ conformance improvement or estimate total project savings.
 ## Failures and next steps
 {: #what-to-improve-next }
 
-Task 9 identifies a specific weakness in the harness workflow. Baseline
-completes 6/20 runs and skills completes 1/20, despite substantially higher
-conformance with skills. Completion does not require every simulated route to
-succeed. It requires the harness verdict to match what happened: a collision
-reported as FAIL is valid, while a collision reported as PASS is not.
+Task 9 identifies a specific weakness in the harness workflow. Six of 20
+baseline runs and one of 20 skills runs are complete, despite substantially
+higher conformance with skills. Completion does not require every simulated
+route to succeed. It requires the harness verdict to match what happened: a
+collision reported as FAIL is valid, while a collision reported as PASS is not.
 
 In one Astra skills run, the log places the vehicle inside the obstacle while
 the result says `grade=pass`, `hit=false`, and `collisions=0`. Other harnesses

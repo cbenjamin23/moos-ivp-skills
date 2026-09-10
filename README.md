@@ -1,6 +1,7 @@
 # MOOS-IvP Skills
 
-**MOOS-DAWG 2026 article:** [Agentic Coding × MOOS-IvP](https://cbenjamin23.github.io/moos-ivp-skills/moos_dawg_2026/)
+**Articles:** [Benchmarking MOOS-IvP Skills](https://cbenjamin23.github.io/moos-ivp-skills/benchmark_2026/)
+· [Agentic Coding × MOOS-IvP](https://cbenjamin23.github.io/moos-ivp-skills/moos_dawg_2026/)
 
 Portable `SKILL.md` workflows for MOOS-IvP development: apps, behaviors,
 missions, self-evaluating scenarios, test harnesses, documentation lookup, and

@@ -497,7 +497,6 @@ def render(data):
         save(fig,"participant-efficiency")
 
         robustness = data["robustness"]
-        observed = 100 * robustness["overall"]["difference"]
         bootstrap_lo, bootstrap_hi = [
             100 * value for value in robustness["stratified_bootstrap"]["interval_95"]
         ]
@@ -507,19 +506,17 @@ def render(data):
             return min(values), max(values)
 
         stability_checks = [
-            ("Different sets of attempts", bootstrap_lo, bootstrap_hi),
-            ("Without one task", *difference_range("leave_one_task_out")),
-            ("Without one model", *difference_range("leave_one_model_out")),
-            ("Without one kind of work", *difference_range("leave_one_family_out")),
+            ("Different sets of five attempts", bootstrap_lo, bootstrap_hi),
+            ("Exclude each task in turn", *difference_range("leave_one_task_out")),
+            ("Exclude each model in turn", *difference_range("leave_one_model_out")),
+            ("Exclude each task category in turn", *difference_range("leave_one_family_out")),
         ]
         fig = canvas("How much the completion advantage could vary",
                      "Skills minus baseline completion · every range remains positive", 6.2)
-        ax = axis(fig, [.38, .20, .55, .58], 25, False)
+        ax = axis(fig, [.42, .20, .51, .58], 25, False)
         ax.set_xticks([0, 5, 10, 15, 20, 25],
                       ["0%", "+5%", "+10%", "+15%", "+20%", "+25%"])
         ax.axvline(0, color=muted, linewidth=1)
-        ax.axvline(observed, color="#16796e", linewidth=1.4,
-                   linestyle=(0, (4, 4)))
         for i, (label, low, high) in enumerate(stability_checks):
             ax.plot([low, high], [i, i], color="#2b658e", linewidth=6,
                     solid_capstyle="round")
@@ -532,8 +529,9 @@ def render(data):
         ax.set_yticks(range(len(stability_checks)),
                       [label for label, _, _ in stability_checks])
         ax.set_ylim(len(stability_checks) - .45, -.6)
-        fig.text(.38, .10, f"Dashed line: observed +{observed:.1f}% completion advantage",
-                 fontsize=9, color=muted)
+        fig.text(.42, .10,
+                 "Task categories: applications · behaviors · missions · evaluation / harnesses · log analysis",
+                 fontsize=8.5, color=muted)
         save(fig, "result-stability")
 
         fig=canvas("Recorded live-validation attempts",

@@ -415,11 +415,12 @@ not. This supports a skills completion advantage for these tasks and models,
 but it does not predict the completion difference for new tasks or future
 models.
 
-The completion advantage also stays positive when any one task, model, or kind
-of work is removed. No single part of the benchmark creates the overall
-completion advantage.
+The completion advantage also stays positive when we exclude each task, model,
+or task category in turn. The five categories are applications, behaviors,
+missions, evaluation and harnesses, and log analysis. No single part of the
+benchmark creates the overall completion advantage.
 
-{% include benchmark-figure.html file="result-stability" title="How much the completion advantage could vary" alt="Skills-minus-baseline completion advantage. Different sets of attempts give a middle 95% range from +10.9 to +21.4 percentage points. Leave-one-out ranges are +14.0 to +20.0 without one task, +10.9 to +22.4 without one model, and +11.2 to +19.4 without one kind of work. The observed completion advantage is +15.9 points." caption="Figure 9. The first row estimates variation in the completion advantage across different attempts on the same tasks and models. The other rows show the smallest and largest completion advantage after omitting each task, model, or kind of work in turn. Every range remains positive." %}
+{% include benchmark-figure.html file="result-stability" title="How much the completion advantage could vary" alt="Skills-minus-baseline completion advantage. Different sets of five attempts give a middle 95% range from +10.9 to +21.4 percentage points. Ranges after excluding each item in turn are +14.0 to +20.0 for tasks, +10.9 to +22.4 for models, and +11.2 to +19.4 for task categories. The five task categories are applications, behaviors, missions, evaluation and harnesses, and log analysis." caption="Figure 9. The first row shows how the result could vary with different sets of five attempts. The other rows show the smallest and largest completion advantage after excluding each task, model, or task category in turn. Every range stays above zero." %}
 
 Submitted files were reviewed under anonymous identifiers. Reviewers did not
 see which model produced the work or whether skills were available.

@@ -333,11 +333,8 @@ Skills runs also record more live validation in every model. This is consistent
 with workflows that ask the agent to exercise the app, behavior, or mission it
 has built. The counts are observational: they cannot establish how much of the
 completion improvement came from testing. They also span analysis tasks that
-require no new mission.
-
-For example, an app or behavior task can use a temporary mission or test
-harness for live validation. This lets the agent test the deliverable without
-changing it.
+require no new mission, and an app or behavior task can use a temporary mission
+or test harness to exercise its deliverable.
 
 ## Time and cost
 {: #time-and-cost-of-the-work }

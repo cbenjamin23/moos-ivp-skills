@@ -19,7 +19,7 @@ article_nav:
   - { id: what-the-agents-actually-did, title: Skill use and validation }
   - { id: time-and-cost-of-the-work, title: Time and cost }
   - { id: what-to-improve-next, title: Failures and next steps }
-  - { id: a-result-that-survives-the-sensitivity-checks, title: "Would different attempts change the result?" }
+  - { id: a-result-that-survives-the-sensitivity-checks, title: "Would different attempts change the completion advantage?" }
   - { id: what-this-means-for-the-plugin, title: Implications for the plugin }
   - { id: evidence-and-reproduction, title: Data and sources }
 ---
@@ -381,31 +381,33 @@ a known-failure case, compare each verdict with the recorded mission events,
 and treat missing monitoring or failed setup as a failure rather than a pass.
 Repeating Task 9 would show whether that guidance helps.
 
-## Would different attempts change the result?
+## Would different attempts change the completion advantage?
 {: #a-result-that-survives-the-sensitivity-checks }
 
 The 15.9-point completion advantage comes from five baseline and five skills
 attempts for every task and model. Another set of attempts would not produce
-exactly the same number. This analysis estimates how much the result could move
-because of that run-to-run variation.
+exactly the same completion advantage. This analysis estimates how much that
+completion difference could move because of run-to-run variation.
 
-For every task and model, we randomly redraw five baseline results and five
-skills results from the attempts already collected. The same result can be
-drawn more than once. We then recalculate the overall advantage and repeat the
-process 20,000 times. This standard uncertainty check is called bootstrap
-resampling. Keeping each group separate preserves the benchmark's original mix
-of tasks, models, and conditions.
+For every task and model, we randomly redraw five baseline completion outcomes
+and five skills completion outcomes from the attempts already collected. The
+same outcome can be drawn more than once. We then recalculate the overall
+completion advantage and repeat the process 20,000 times. This standard
+uncertainty check is called bootstrap resampling. Keeping each group separate
+preserves the benchmark's original mix of tasks, models, and conditions.
 
-The middle 95% of the recalculated results fall between +10.9 and +21.4 points.
-If that range included zero, the observed advantage could plausibly disappear
-with a different set of attempts. It does not. This supports a skills advantage
-for these tasks and models, but it does not predict the result for new tasks or
-future models.
+The middle 95% of the recalculated completion advantages fall between +10.9 and
++21.4 percentage points. If that range included zero, the observed completion
+advantage could plausibly disappear with a different set of attempts. It does
+not. This supports a skills completion advantage for these tasks and models,
+but it does not predict the completion difference for new tasks or future
+models.
 
-The advantage also stays positive when any one task, model, or kind of work is
-removed. No single part of the benchmark creates the overall result.
+The completion advantage also stays positive when any one task, model, or kind
+of work is removed. No single part of the benchmark creates the overall
+completion advantage.
 
-{% include benchmark-figure.html file="result-stability" title="How much the completion advantage could vary" alt="Skills-minus-baseline completion advantage. Different sets of attempts give a middle 95% range from +10.9 to +21.4 percentage points. Leave-one-out ranges are +14.0 to +20.0 without one task, +10.9 to +22.4 without one model, and +11.2 to +19.4 without one kind of work. The observed result is +15.9 points." caption="Figure 8. The first row estimates run-to-run variation for the same tasks and models. The other rows show the smallest and largest result after omitting each task, model, or kind of work in turn. Every range remains positive." %}
+{% include benchmark-figure.html file="result-stability" title="How much the completion advantage could vary" alt="Skills-minus-baseline completion advantage. Different sets of attempts give a middle 95% range from +10.9 to +21.4 percentage points. Leave-one-out ranges are +14.0 to +20.0 without one task, +10.9 to +22.4 without one model, and +11.2 to +19.4 without one kind of work. The observed completion advantage is +15.9 points." caption="Figure 8. The first row estimates variation in the completion advantage across different attempts on the same tasks and models. The other rows show the smallest and largest completion advantage after omitting each task, model, or kind of work in turn. Every range remains positive." %}
 
 Submitted files were reviewed under anonymous identifiers. Reviewers did not
 see which model produced the work or whether skills were available.
@@ -414,8 +416,8 @@ received further review.
 
 The scope still matters. The plugin's developer selected the tasks,
 conformance reflects the skills' practices, and model-based reviewers can make
-mistakes. A broader task set and independent replication would test how far the
-result generalizes.
+mistakes. A broader task set and independent replication would test how far
+these findings generalize.
 
 ## Implications for the plugin
 {: #what-this-means-for-the-plugin }

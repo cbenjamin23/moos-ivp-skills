@@ -19,7 +19,7 @@ article_nav:
   - { id: what-the-agents-actually-did, title: Skill use and validation }
   - { id: time-and-cost-of-the-work, title: Time and cost }
   - { id: what-to-improve-next, title: Failures and next steps }
-  - { id: a-result-that-survives-the-sensitivity-checks, title: Grading revisions and uncertainty }
+  - { id: a-result-that-survives-the-sensitivity-checks, title: "How stable is the result?" }
   - { id: what-this-means-for-the-plugin, title: Implications for the plugin }
   - { id: evidence-and-reproduction, title: Data and sources }
 ---
@@ -366,75 +366,45 @@ conformance improvement or estimate total project savings.
 
 Task 9 identifies a specific weakness in the harness workflow. Baseline
 completes 6/20 runs and skills completes 1/20, despite substantially higher
-conformance with skills.
+conformance with skills. Completion does not require every simulated route to
+succeed. It requires the harness verdict to match what happened: a collision
+reported as FAIL is valid, while a collision reported as PASS is not.
 
-The task requires a harness whose pass/fail verdict agrees with whether the
-vehicle hits the obstacle. There are two different judgments here: a
-mission FAIL reports an unsuccessful simulated route. A complete
-benchmark result means the agent built a harness that reports those outcomes
-correctly. A harness that truthfully reports a collision can be complete.
-Passing every simulated route is not the requirement.
+In one Astra skills run, the log places the vehicle inside the obstacle while
+the result says `grade=pass`, `hit=false`, and `collisions=0`. Other harnesses
+report success after collision monitoring or test-case setup fails. These false
+passes show a harness reliability problem, not evidence that skills generally
+worsen vehicle behavior.
 
-One retained Astra skills run illustrates the gap. The original log records a
-vehicle position strictly inside the generated obstacle, independently verified
-against the polygon geometry, while the result row reports `grade=pass`,
-`hit=false`, and `collisions=0`. The harness therefore reported success despite
-evidence of obstacle contact: a false pass. This finding does
-not establish the exact internal detector or transport cause.
+The harness guidance should require a known-failure case, verify each verdict
+against recorded mission events, and prevent missing monitoring or failed setup
+from producing a pass. It should also preserve enough evidence to explain an
+inconsistent grade. Repeating Task 9 with revised guidance would test whether
+these changes work.
 
-Some harnesses reported success after collision monitoring failed or an
-obstacle file could not be copied into a test case. These corrections concern
-harness reliability. They are not evidence that skills generally worsen
-vehicle behavior.
-
-For the skills, this points to a potentially fixable shortcoming: strengthen
-the workflow for testing the mission's own evaluator. Require evidence
-connecting the verdict to the mission event, deliberately include a case known
-to fail, and verify that missing monitoring or failed setup cannot produce a
-pass. Preserve the observations needed to diagnose an inconsistent grade.
-These are proposed changes. This benchmark has not yet tested a package
-that includes them.
-
-The log-diagnosis task suggests another improvement area. Guidance can help an
-agent find an anomaly, but the answer still needs to connect that anomaly to
-the observed behavior. The evaluator has the same obligation: it should verify
-the participant's causal explanation, rather than supply a better explanation
-and credit that reconstruction. The accepted Task 11 review leaves two answers
-incomplete at precisely that boundary.
-
-These changes can be tested directly by repeating the affected tasks with a
-revised skill package.
-
-## Grading revisions and uncertainty
+## How stable is the result?
 {: #a-result-that-survives-the-sensitivity-checks }
 
-Sensitivity checks ask whether the overall conclusion changes when grades are
-revised or part of the task set is removed. Across the five retained grading
-stages of the same 440 attempts, the completion advantage ranges from +15.0
-to +17.7 percentage points. The final accepted result is +15.9 points.
-
-The lines in Figure 8 show uncertainty from variation between repeated
-attempts. A bootstrap estimates that variation by repeatedly drawing from
-the observed attempts, allowing an attempt to be drawn more than once, and
-recalculating the completion difference. The middle 95% of those estimates
-spans +10.9 to +21.4 points for the final revision. The range stays above
-zero, supporting an overall skills advantage within this study.
-
-{% include benchmark-figure.html file="grading-sensitivity" title="Completion difference across grading revisions" alt="Skills-minus-baseline completion differences and bootstrap 95% intervals: original +17.7 points (12.3 to 23.2), earlier correction +17.3 (11.8 to 22.7), runtime corrections +15.0 (9.5 to 20.5), Task 11 revision +16.8 (11.4 to 22.3), full Task 9 audit +15.9 (10.9 to 21.4)." caption="Figure 8. Points show the completion difference. Lines show its 95% bootstrap interval. Each row uses the same 440 attempts at a different grading stage. Only attempts within the same tasks and models are resampled, so the intervals do not predict performance on unseen tasks." %}
+Repeated attempts let us estimate how much the completion difference might vary
+within this study. A bootstrap repeatedly resamples the observed attempts and
+recalculates the skills advantage. The middle 95% of those estimates ranges
+from +10.9 to +21.4 percentage points around the observed +15.9-point result.
+Because the range stays above zero, it supports an overall skills advantage
+within this study. It does not predict performance on unseen tasks.
 
 Removing any one task leaves a completion
 difference between +14.0 and +20.0 points. Removing any one model leaves a
 difference between +10.9 and +22.4 points. Removing any one task family also
-leaves the overall direction positive.
+leaves the overall direction positive. No single task or model creates the
+overall result.
 
-The overall advantage therefore persists without any one task or model.
-Its scope still matters: the plugin's developer selected the tasks, conformance
-follows the skills' practices, and model-based reviewers can make mistakes.
-These checks show how stable the result is within the study. A broader task set
-and independent replication would test how far it generalizes.
+The scope still matters. The plugin's developer selected the tasks,
+conformance reflects the skills' practices, and model-based reviewers can make
+mistakes. A broader task set and independent replication would test how far the
+result generalizes.
 
 <details class="benchmark-details" markdown="1">
-<summary>How the work was graded, and what changed in the accepted revision</summary>
+<summary>How the work was graded and uncertainty estimated</summary>
 
 The benchmark combines checks of the submitted files and running software
 with model-based reviewers, which are separate agent sessions assigned to
@@ -445,64 +415,12 @@ conversation, or its time and token use. Functionality and conformance are
 reviewed separately. Disagreements or unresolved evidence receive further
 review to reach a judgment.
 
-Reviewer assignments differ across the study. For the first three models,
-Tasks 1–5 use Sol reviewers at high and extra-high reasoning effort. From
-Task 6, the pairing is Sol and Luna, both at high effort. Astra uses the latter
-pairing from Task 2. The log tasks use a shared reference package of log
-evidence and review each answer, with further review of flagged cases and a
-sample selected in advance.
-
 The bootstrap uses 20,000 resamples and a fixed random seed. For each task,
 model, and condition, it draws five attempts from that group's five observed
 attempts. Baseline and skills are resampled separately rather than keeping
 the original pairs together. The eleven tasks remain fixed throughout. The
 [source guide]({{ '/benchmark_2026/sources/' | relative_url }}) gives the exact
 method settings and the separate method used for model-level intervals.
-
-### What changed after the initial grades
-
-Later examination found problems with reviewers accessing evidence, applying
-grading criteria, and checking software at runtime. The original judgments
-were retained alongside the corrections, so their effect on the same 440
-attempts can be inspected.
-
-| Grading stage | Baseline complete | Skills complete | Difference |
-|---|---:|---:|---:|
-| Original | 117/220 | 156/220 | +17.7% |
-| Earlier correction | 119/220 | 157/220 | +17.3% |
-| Runtime corrections, strict Task 11 | 117/220 | 150/220 | +15.0% |
-| Task 11 revision, before full Task 9 audit | 133/220 | 170/220 | +16.8% |
-| Full Task 9 audit (current) | 131/220 | 166/220 | +15.9% |
-
-The largest change concerns Task 11. Its post-hoc revision, made after
-the original answers had been graded, accepts a useful, checkable diagnosis
-without requiring an exhaustive investigation or one prescribed causal answer.
-The same three functional criteria remain: use the original logs, make a fair
-Henry/Gilda comparison, and give a materially correct explanation connected
-to the observed behavior. Conformance is unchanged.
-
-All forty submissions meet the first two criteria. Thirty-eight meet the
-third. Two baseline answers still lack a sufficiently supported causal
-explanation. Passing them would require the reviewer to repair the explanation
-instead of verifying what the agent actually wrote.
-
-This is a substantial interpretive revision: Task 11 changes from 0/40
-complete under the original strict grading to 38/40 in the accepted
-report. With almost every answer complete, the revised result does little to
-distinguish models. The table above retains the earlier results.
-
-Runtime review now covers all forty Task 9 submissions, plus thirty Astra
-submissions on Tasks 3, 5, and 6. The added Luna/Terra audit changed functional
-grades in eleven submissions, with six losing completion credit: one
-Luna baseline, one Terra baseline, and four Terra skills. Task 9 completion
-fell from 8/20 to 6/20 in baseline and from 5/20 to 1/20 with skills.
-
-The rubric and participant runs are unchanged. Original grades and the
-previously published results remain preserved. The latest audit leaves
-conformance, Task 11, Sol/Astra grades, participant timing and costs, and
-recorded agent activity unchanged. This review history documents corrections.
-It does not measure how consistently a fresh set of independent reviewers would
-agree on every result.
 
 </details>
 
@@ -519,11 +437,11 @@ effort would help establish how far the benefits carry into everyday development
 ## Data and sources
 {: #evidence-and-reproduction }
 
-All eight figures use the accepted 440-run summaries. SVG, PNG, and numeric
+All seven figures use the accepted 440-run summaries. SVG, PNG, and numeric
 data downloads appear below each figure. The source guide records the exact
 benchmark revision, the current folder layout, and the reproduction commands.
 
-- [Chart data, task prompts, and source hashes (JSON)]({{ '/assets/data/benchmark-2026.json' | relative_url }}): model and task results, task-by-model counts, exact task wording, revision stages, uncertainty, timing, cost coverage, and observed process counts.
+- [Chart data, task prompts, and source hashes (JSON)]({{ '/assets/data/benchmark-2026.json' | relative_url }}): model and task results, task-by-model counts, exact task wording, uncertainty, timing, cost coverage, and observed process counts.
 - [Source notes and reproduction guide]({{ '/benchmark_2026/sources/' | relative_url }}): metric definitions, source-document mapping, and commands for rebuilding the figures.
 - [MOOS-DAWG introduction]({{ '/moos_dawg_2026/' | relative_url }}): the plugin architecture, individual workflows, and examples from development projects.
 

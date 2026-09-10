@@ -432,19 +432,18 @@ effort would help establish how far the benefits carry into everyday development
 ## Data and sources
 {: #evidence-and-reproduction }
 
-All eight figures use the accepted 440-run summaries. SVG, PNG, and numeric
-data downloads appear below each figure. The source revision and reproduction
-steps follow.
+All eight figures use the final 440-run results from `benchmark/evaluation/` at
+commit `100f4a93` in the private benchmark repository. The public [chart data
+(JSON)]({{ '/assets/data/benchmark-2026.json' | relative_url }}) includes the
+model and task results, exact task prompts, uncertainty estimates, timing and
+cost summaries, recorded skill use and live-validation counts, and identifiers
+for the exact source files. The [figure
+generator](https://github.com/cbenjamin23/moos-ivp-skills/blob/main/scripts/build_benchmark_article.py)
+creates the downloadable SVG and PNG charts from that file.
 
-- [Chart data, task prompts, and source hashes (JSON)]({{ '/assets/data/benchmark-2026.json' | relative_url }}): model and task results, task-by-model counts, exact task wording, uncertainty, timing, cost coverage, and observed process counts.
-- [Figure generator](https://github.com/cbenjamin23/moos-ivp-skills/blob/main/scripts/build_benchmark_article.py): the script that reads the included data and creates the SVG and PNG charts.
-- [MOOS-DAWG introduction]({{ '/moos_dawg_2026/' | relative_url }}): the plugin architecture, individual workflows, and examples from development projects.
-
-The data comes from `benchmark/evaluation/` at commit
-`100f4a93b2eec9acc93a3fbcefa6c1be71891083` in the private benchmark
-repository. The public JSON contains an allowlisted export of numeric
-summaries, task prompts, source identifiers, and hashes. Participant
-transcripts, reviewer workspaces, and original runtime evidence remain private.
+Participant transcripts, reviewer workspaces, and original runtime evidence
+remain private. The public files reproduce the charts, but independently
+reproducing the grading requires those original materials.
 
 To rebuild the figures from the public data:
 
@@ -453,6 +452,3 @@ python3 -m venv /tmp/moos-article-plots
 /tmp/moos-article-plots/bin/pip install -r scripts/requirements-benchmark-article.txt
 /tmp/moos-article-plots/bin/python scripts/build_benchmark_article.py
 ```
-
-Rebuilding the charts reproduces their presentation. Reproducing the underlying
-judgments requires the private evidence and evaluation environment.

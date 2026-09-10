@@ -172,9 +172,10 @@ Scores below 60% fall from 116 to 20.
 
 {% include benchmark-figure.html file="conformance-distribution" title="How individual conformance scores shifted" alt="Number of individual attempts by conformance score range, baseline then skills: 0 to 19 percent, 2 and 0; 20 to 39 percent, 39 and 8; 40 to 59 percent, 75 and 12; 60 to 79 percent, 74 and 24; 80 to 89 percent, 27 and 47; 90 to 100 percent, 3 and 129. Each condition includes 220 attempts." caption="Figure 2. Individual conformance scores shift toward the upper ranges with skills. Scores at or above 90% rise from 3 to 129 attempts, while scores below 60% fall from 116 to 20." %}
 
-Completion is scored separately. An attempt can follow most engineering
-criteria yet remain incomplete if it misses one required function. Conformance
-adds detail without replacing the functional result.
+Across all 440 runs, skills improve both aggregate completion and average
+conformance. The measures still answer different questions. Of the 132
+attempts that meet at least 90% of the conformance criteria, 25 are incomplete
+because they miss at least one required function.
 
 With only 55 attempts per condition for each model, small differences should
 be read cautiously. The 95% uncertainty intervals for Sol's and Astra's

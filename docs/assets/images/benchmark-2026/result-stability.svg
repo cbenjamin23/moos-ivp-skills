@@ -2,12 +2,12 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="720pt" height="446.4pt" viewBox="0 0 720 446.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
- <title>Completion advantage under stability checks</title>
+ <title>How much the completion advantage could vary</title>
  <metadata>
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:title>Completion advantage under stability checks</dc:title>
+    <dc:title>How much the completion advantage could vary</dc:title>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -333,35 +333,90 @@ L 669.6 98.208
     <g id="ytick_1">
      <g id="line2d_13"/>
      <g id="text_7">
-      <!-- Resample repeated attempts -->
-      <g style="fill: #172b3c" transform="translate(110.720625 141.35006) scale(0.11 -0.11)">
+      <!-- Different sets of attempts -->
+      <g style="fill: #172b3c" transform="translate(129.4 141.35006) scale(0.11 -0.11)">
        <defs>
-        <path id="PlusJakartaSans-Regular-c6" d="M 563 0 
+        <path id="PlusJakartaSans-Regular-24" d="M 563 0 
 L 563 4768 
-L 2202 4768 
-Q 2669 4768 3021 4585 
-Q 3373 4403 3568 4073 
-Q 3763 3744 3763 3309 
-Q 3763 2803 3497 2444 
-Q 3232 2086 2778 1939 
-L 3891 0 
-L 3290 0 
-L 2125 2054 
-L 2470 1856 
-L 1075 1856 
-L 1075 0 
+L 2131 4768 
+Q 2842 4768 3366 4477 
+Q 3891 4186 4179 3651 
+Q 4467 3117 4467 2387 
+Q 4467 1664 4179 1126 
+Q 3891 589 3366 294 
+Q 2842 0 2131 0 
 L 563 0 
 z
-M 1075 2336 
-L 2227 2336 
-Q 2534 2336 2764 2454 
-Q 2995 2573 3123 2793 
-Q 3251 3014 3251 3315 
-Q 3251 3616 3123 3833 
-Q 2995 4051 2764 4169 
-Q 2534 4288 2227 4288 
+M 1075 480 
+L 2131 480 
+Q 2682 480 3085 713 
+Q 3488 947 3709 1376 
+Q 3930 1805 3930 2387 
+Q 3930 2970 3706 3395 
+Q 3482 3821 3078 4054 
+Q 2675 4288 2131 4288 
 L 1075 4288 
-L 1075 2336 
+L 1075 480 
+z
+" transform="scale(0.015625)"/>
+        <path id="PlusJakartaSans-Regular-1f7" d="M 493 0 
+L 493 3430 
+L 973 3430 
+L 973 0 
+L 493 0 
+z
+M 493 4064 
+L 493 4768 
+L 973 4768 
+L 973 4064 
+L 493 4064 
+z
+" transform="scale(0.015625)"/>
+        <path id="PlusJakartaSans-Regular-339" d="M 845 0 
+L 845 2950 
+L 160 2950 
+L 160 3430 
+L 845 3430 
+L 845 3738 
+Q 845 4096 1005 4342 
+Q 1165 4589 1427 4717 
+Q 1690 4845 1990 4845 
+Q 2054 4845 2137 4835 
+Q 2221 4826 2272 4813 
+L 2272 4378 
+Q 2227 4390 2150 4393 
+Q 2074 4397 2042 4397 
+Q 1734 4397 1529 4249 
+Q 1325 4102 1325 3738 
+L 1325 3430 
+L 3251 3430 
+L 3251 2950 
+L 1325 2950 
+L 1325 0 
+L 845 0 
+z
+M 3296 0 
+L 3296 2950 
+L 2611 2950 
+L 2611 3430 
+L 3296 3430 
+L 3296 3738 
+Q 3296 4096 3456 4342 
+Q 3616 4589 3878 4717 
+Q 4141 4845 4442 4845 
+Q 4506 4845 4589 4835 
+Q 4672 4826 4723 4813 
+L 4723 4378 
+Q 4678 4390 4601 4393 
+Q 4525 4397 4493 4397 
+Q 4186 4397 3981 4249 
+Q 3776 4102 3776 3738 
+L 3776 3430 
+L 4614 3430 
+L 4614 2950 
+L 3776 2950 
+L 3776 0 
+L 3296 0 
 z
 " transform="scale(0.015625)"/>
         <path id="PlusJakartaSans-Regular-1a2" d="M 2054 -77 
@@ -398,6 +453,72 @@ Q 2989 160 2697 41
 Q 2406 -77 2054 -77 
 z
 " transform="scale(0.015625)"/>
+        <path id="PlusJakartaSans-Regular-28c" d="M 493 0 
+L 493 3430 
+L 973 3430 
+L 973 2867 
+L 909 2950 
+Q 1030 3194 1276 3334 
+Q 1523 3475 1875 3475 
+L 2093 3475 
+L 2093 2995 
+L 1792 2995 
+Q 1421 2995 1197 2764 
+Q 973 2534 973 2112 
+L 973 0 
+L 493 0 
+z
+" transform="scale(0.015625)"/>
+        <path id="PlusJakartaSans-Regular-246" d="M 493 0 
+L 493 3430 
+L 973 3430 
+L 973 2765 
+L 864 2790 
+Q 992 3123 1283 3315 
+Q 1574 3507 1958 3507 
+Q 2323 3507 2614 3340 
+Q 2906 3174 3075 2883 
+Q 3245 2592 3245 2227 
+L 3245 0 
+L 2765 0 
+L 2765 2042 
+Q 2765 2355 2653 2572 
+Q 2541 2790 2339 2908 
+Q 2138 3027 1875 3027 
+Q 1613 3027 1408 2908 
+Q 1203 2790 1088 2569 
+Q 973 2349 973 2042 
+L 973 0 
+L 493 0 
+z
+" transform="scale(0.015625)"/>
+        <path id="PlusJakartaSans-Regular-2b0" d="M 1805 -38 
+Q 1344 -38 1094 230 
+Q 845 499 845 998 
+L 845 2950 
+L 211 2950 
+L 211 3430 
+L 371 3430 
+Q 589 3430 717 3574 
+Q 845 3718 845 3936 
+L 845 4224 
+L 1325 4224 
+L 1325 3430 
+L 2080 3430 
+L 2080 2950 
+L 1325 2950 
+L 1325 998 
+Q 1325 826 1376 694 
+Q 1427 563 1552 486 
+Q 1677 410 1888 410 
+Q 1939 410 2009 416 
+Q 2080 422 2131 429 
+L 2131 0 
+Q 2054 -19 1958 -28 
+Q 1862 -38 1805 -38 
+z
+" transform="scale(0.015625)"/>
+        <path id="PlusJakartaSans-Regular-389" transform="scale(0.015625)"/>
         <path id="PlusJakartaSans-Regular-2a4" d="M 1683 -77 
 Q 1190 -77 819 172 
 Q 448 422 282 851 
@@ -431,6 +552,59 @@ Q 2906 1248 2906 902
 Q 2906 621 2749 397 
 Q 2592 173 2317 48 
 Q 2042 -77 1683 -77 
+z
+" transform="scale(0.015625)"/>
+        <path id="PlusJakartaSans-Regular-264" d="M 2099 -77 
+Q 1613 -77 1216 156 
+Q 819 390 585 796 
+Q 352 1203 352 1722 
+Q 352 2234 582 2637 
+Q 813 3040 1206 3273 
+Q 1600 3507 2099 3507 
+Q 2598 3507 2992 3276 
+Q 3386 3046 3613 2643 
+Q 3840 2240 3840 1722 
+Q 3840 1197 3603 790 
+Q 3366 384 2972 153 
+Q 2579 -77 2099 -77 
+z
+M 2099 403 
+Q 2445 403 2723 576 
+Q 3002 749 3165 1049 
+Q 3328 1350 3328 1722 
+Q 3328 2093 3165 2387 
+Q 3002 2682 2723 2854 
+Q 2445 3027 2099 3027 
+Q 1754 3027 1475 2854 
+Q 1197 2682 1030 2387 
+Q 864 2093 864 1722 
+Q 864 1350 1030 1049 
+Q 1197 749 1475 576 
+Q 1754 403 2099 403 
+z
+" transform="scale(0.015625)"/>
+        <path id="PlusJakartaSans-Regular-1d1" d="M 845 0 
+L 845 2950 
+L 160 2950 
+L 160 3430 
+L 845 3430 
+L 845 3738 
+Q 845 4096 1005 4342 
+Q 1165 4589 1427 4717 
+Q 1690 4845 1990 4845 
+Q 2054 4845 2137 4835 
+Q 2221 4826 2272 4813 
+L 2272 4378 
+Q 2227 4390 2150 4393 
+Q 2074 4397 2042 4397 
+Q 1734 4397 1529 4249 
+Q 1325 4102 1325 3738 
+L 1325 3430 
+L 2163 3430 
+L 2163 2950 
+L 1325 2950 
+L 1325 0 
+L 845 0 
 z
 " transform="scale(0.015625)"/>
         <path id="PlusJakartaSans-Regular-12d" d="M 1485 -77 
@@ -542,56 +716,150 @@ Q 1299 749 1577 576
 Q 1856 403 2202 403 
 z
 " transform="scale(0.015625)"/>
-        <path id="PlusJakartaSans-Regular-227" d="M 493 0 
+       </defs>
+       <use xlink:href="#PlusJakartaSans-Regular-24"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1f7" transform="translate(74.203125 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-339" transform="translate(97.109375 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(171.703125 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-28c" transform="translate(233.203125 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(267 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-246" transform="translate(328.5 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(385.796875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(424.59375 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2a4" transform="translate(441.59375 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(492.5 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(554 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2a4" transform="translate(592.796875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(643.703125 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(660.703125 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1d1" transform="translate(724.203125 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(763.5 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-12d" transform="translate(780.5 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(836.703125 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(875.5 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(912.296875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-240" transform="translate(973.796875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-287" transform="translate(1064.59375 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(1130.296875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2a4" transform="translate(1169.09375 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_14"/>
+     <g id="text_8">
+      <!-- Without one task -->
+      <g style="fill: #172b3c" transform="translate(175.82 203.738494) scale(0.11 -0.11)">
+       <defs>
+        <path id="PlusJakartaSans-Regular-118" d="M 1440 0 
+L 70 4768 
+L 589 4768 
+L 1773 499 
+L 1664 499 
+L 2880 4768 
+L 3424 4768 
+L 4634 499 
+L 4518 499 
+L 5709 4768 
+L 6227 4768 
+L 4858 0 
+L 4314 0 
+L 3091 4288 
+L 3206 4288 
+L 1984 0 
+L 1440 0 
+z
+" transform="scale(0.015625)"/>
+        <path id="PlusJakartaSans-Regular-1e8" d="M 493 0 
 L 493 4845 
 L 973 4845 
+L 973 2765 
+L 864 2790 
+Q 992 3123 1283 3315 
+Q 1574 3507 1958 3507 
+Q 2323 3507 2614 3340 
+Q 2906 3174 3075 2883 
+Q 3245 2592 3245 2227 
+L 3245 0 
+L 2765 0 
+L 2765 2042 
+Q 2765 2355 2649 2572 
+Q 2534 2790 2332 2908 
+Q 2131 3027 1875 3027 
+Q 1619 3027 1414 2908 
+Q 1210 2790 1091 2569 
+Q 973 2349 973 2042 
 L 973 0 
 L 493 0 
 z
 " transform="scale(0.015625)"/>
-        <path id="PlusJakartaSans-Regular-389" transform="scale(0.015625)"/>
-        <path id="PlusJakartaSans-Regular-28c" d="M 493 0 
-L 493 3430 
-L 973 3430 
-L 973 2867 
-L 909 2950 
-Q 1030 3194 1276 3334 
-Q 1523 3475 1875 3475 
-L 2093 3475 
-L 2093 2995 
-L 1792 2995 
-Q 1421 2995 1197 2764 
-Q 973 2534 973 2112 
+        <path id="PlusJakartaSans-Regular-2c0" d="M 1709 -77 
+Q 1350 -77 1056 92 
+Q 762 262 592 566 
+Q 422 870 422 1267 
+L 422 3430 
+L 902 3430 
+L 902 1325 
+Q 902 1050 1014 842 
+Q 1126 634 1328 518 
+Q 1530 403 1792 403 
+Q 2054 403 2259 521 
+Q 2464 640 2579 861 
+Q 2694 1082 2694 1389 
+L 2694 3430 
+L 3174 3430 
+L 3174 0 
+L 2694 0 
+L 2694 666 
+L 2803 640 
+Q 2682 307 2387 115 
+Q 2093 -77 1709 -77 
+z
+" transform="scale(0.015625)"/>
+        <path id="PlusJakartaSans-Regular-222" d="M 493 0 
+L 493 4845 
+L 973 4845 
+L 973 1453 
+L 768 1485 
+L 2694 3430 
+L 3315 3430 
+L 1971 2054 
+L 3437 0 
+L 2861 0 
+L 1485 1901 
+L 1792 1875 
+L 813 864 
+L 973 1261 
 L 973 0 
 L 493 0 
 z
 " transform="scale(0.015625)"/>
-        <path id="PlusJakartaSans-Regular-2b0" d="M 1805 -38 
-Q 1344 -38 1094 230 
-Q 845 499 845 998 
-L 845 2950 
-L 211 2950 
-L 211 3430 
-L 371 3430 
-Q 589 3430 717 3574 
-Q 845 3718 845 3936 
-L 845 4224 
-L 1325 4224 
-L 1325 3430 
-L 2080 3430 
-L 2080 2950 
-L 1325 2950 
-L 1325 998 
-Q 1325 826 1376 694 
-Q 1427 563 1552 486 
-Q 1677 410 1888 410 
-Q 1939 410 2009 416 
-Q 2080 422 2131 429 
-L 2131 0 
-Q 2054 -19 1958 -28 
-Q 1862 -38 1805 -38 
-z
-" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#PlusJakartaSans-Regular-118"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1f7" transform="translate(98.40625 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(121.3125 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1e8" transform="translate(160.109375 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(217.40625 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2c0" transform="translate(282.90625 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(340.203125 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(379 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(396 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-246" transform="translate(461.5 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(518.796875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(580.296875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(597.296875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-12d" transform="translate(635.09375 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2a4" transform="translate(692.296875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-222" transform="translate(743.203125 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_15"/>
+     <g id="text_9">
+      <!-- Without one model -->
+      <g style="fill: #172b3c" transform="translate(164.082656 266.126928) scale(0.11 -0.11)">
+       <defs>
         <path id="PlusJakartaSans-Regular-19b" d="M 2042 -77 
 Q 1562 -77 1178 156 
 Q 794 390 573 796 
@@ -626,209 +894,40 @@ Q 1178 749 1450 576
 Q 1722 403 2067 403 
 z
 " transform="scale(0.015625)"/>
-       </defs>
-       <use xlink:href="#PlusJakartaSans-Regular-c6"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(61.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-2a4" transform="translate(122.59375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-12d" transform="translate(173.5 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-240" transform="translate(230.703125 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-287" transform="translate(321.5 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-227" transform="translate(388.203125 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(411.109375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(472.609375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-28c" transform="translate(489.609375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(523.40625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-287" transform="translate(584.90625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(651.609375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-12d" transform="translate(712.109375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(768.3125 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(805.109375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-19b" transform="translate(866.609375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(933.3125 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-12d" transform="translate(950.3125 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(1006.515625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(1045.3125 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(1082.109375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-240" transform="translate(1143.609375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-287" transform="translate(1234.40625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(1300.109375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-2a4" transform="translate(1338.90625 0)"/>
-      </g>
-     </g>
-    </g>
-    <g id="ytick_2">
-     <g id="line2d_14"/>
-     <g id="text_8">
-      <!-- Remove one task -->
-      <g style="fill: #172b3c" transform="translate(174.599688 203.738494) scale(0.11 -0.11)">
-       <defs>
-        <path id="PlusJakartaSans-Regular-264" d="M 2099 -77 
-Q 1613 -77 1216 156 
-Q 819 390 585 796 
-Q 352 1203 352 1722 
-Q 352 2234 582 2637 
-Q 813 3040 1206 3273 
-Q 1600 3507 2099 3507 
-Q 2598 3507 2992 3276 
-Q 3386 3046 3613 2643 
-Q 3840 2240 3840 1722 
-Q 3840 1197 3603 790 
-Q 3366 384 2972 153 
-Q 2579 -77 2099 -77 
-z
-M 2099 403 
-Q 2445 403 2723 576 
-Q 3002 749 3165 1049 
-Q 3328 1350 3328 1722 
-Q 3328 2093 3165 2387 
-Q 3002 2682 2723 2854 
-Q 2445 3027 2099 3027 
-Q 1754 3027 1475 2854 
-Q 1197 2682 1030 2387 
-Q 864 2093 864 1722 
-Q 864 1350 1030 1049 
-Q 1197 749 1475 576 
-Q 1754 403 2099 403 
-z
-" transform="scale(0.015625)"/>
-        <path id="PlusJakartaSans-Regular-305" d="M 1408 0 
-L 70 3430 
-L 608 3430 
-L 1734 422 
-L 1562 422 
-L 2694 3430 
-L 3238 3430 
-L 1888 0 
-L 1408 0 
-z
-" transform="scale(0.015625)"/>
-        <path id="PlusJakartaSans-Regular-246" d="M 493 0 
-L 493 3430 
-L 973 3430 
-L 973 2765 
-L 864 2790 
-Q 992 3123 1283 3315 
-Q 1574 3507 1958 3507 
-Q 2323 3507 2614 3340 
-Q 2906 3174 3075 2883 
-Q 3245 2592 3245 2227 
-L 3245 0 
-L 2765 0 
-L 2765 2042 
-Q 2765 2355 2653 2572 
-Q 2541 2790 2339 2908 
-Q 2138 3027 1875 3027 
-Q 1613 3027 1408 2908 
-Q 1203 2790 1088 2569 
-Q 973 2349 973 2042 
-L 973 0 
-L 493 0 
-z
-" transform="scale(0.015625)"/>
-        <path id="PlusJakartaSans-Regular-222" d="M 493 0 
+        <path id="PlusJakartaSans-Regular-227" d="M 493 0 
 L 493 4845 
 L 973 4845 
-L 973 1453 
-L 768 1485 
-L 2694 3430 
-L 3315 3430 
-L 1971 2054 
-L 3437 0 
-L 2861 0 
-L 1485 1901 
-L 1792 1875 
-L 813 864 
-L 973 1261 
 L 973 0 
 L 493 0 
 z
 " transform="scale(0.015625)"/>
        </defs>
-       <use xlink:href="#PlusJakartaSans-Regular-c6"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(61.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-240" transform="translate(122.59375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(213.390625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-305" transform="translate(277.890625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(328.59375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(390.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(407.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-246" transform="translate(472.59375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(529.890625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(591.390625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(608.390625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-12d" transform="translate(646.1875 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-2a4" transform="translate(703.390625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-222" transform="translate(754.296875 0)"/>
-      </g>
-     </g>
-    </g>
-    <g id="ytick_3">
-     <g id="line2d_15"/>
-     <g id="text_9">
-      <!-- Remove one model -->
-      <g style="fill: #172b3c" transform="translate(162.862344 266.126928) scale(0.11 -0.11)">
-       <use xlink:href="#PlusJakartaSans-Regular-c6"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(61.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-240" transform="translate(122.59375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(213.390625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-305" transform="translate(277.890625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(328.59375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(390.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(407.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-246" transform="translate(472.59375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(529.890625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(591.390625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-240" transform="translate(608.390625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(699.1875 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-19b" transform="translate(764.6875 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(831.390625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-227" transform="translate(892.890625 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-118"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1f7" transform="translate(98.40625 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(121.3125 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1e8" transform="translate(160.109375 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(217.40625 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2c0" transform="translate(282.90625 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(340.203125 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(379 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(396 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-246" transform="translate(461.5 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(518.796875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(580.296875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-240" transform="translate(597.296875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(688.09375 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-19b" transform="translate(753.59375 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(820.296875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-227" transform="translate(881.796875 0)"/>
       </g>
      </g>
     </g>
     <g id="ytick_4">
      <g id="line2d_16"/>
      <g id="text_10">
-      <!-- Remove one kind of work -->
-      <g style="fill: #172b3c" transform="translate(133.834375 328.515361) scale(0.11 -0.11)">
+      <!-- Without one kind of work -->
+      <g style="fill: #172b3c" transform="translate(135.054688 328.515361) scale(0.11 -0.11)">
        <defs>
-        <path id="PlusJakartaSans-Regular-1f7" d="M 493 0 
-L 493 3430 
-L 973 3430 
-L 973 0 
-L 493 0 
-z
-M 493 4064 
-L 493 4768 
-L 973 4768 
-L 973 4064 
-L 493 4064 
-z
-" transform="scale(0.015625)"/>
-        <path id="PlusJakartaSans-Regular-1d1" d="M 845 0 
-L 845 2950 
-L 160 2950 
-L 160 3430 
-L 845 3430 
-L 845 3738 
-Q 845 4096 1005 4342 
-Q 1165 4589 1427 4717 
-Q 1690 4845 1990 4845 
-Q 2054 4845 2137 4835 
-Q 2221 4826 2272 4813 
-L 2272 4378 
-Q 2227 4390 2150 4393 
-Q 2074 4397 2042 4397 
-Q 1734 4397 1529 4249 
-Q 1325 4102 1325 3738 
-L 1325 3430 
-L 2163 3430 
-L 2163 2950 
-L 1325 2950 
-L 1325 0 
-L 845 0 
-z
-" transform="scale(0.015625)"/>
         <path id="PlusJakartaSans-Regular-306" d="M 1248 0 
 L 70 3430 
 L 614 3430 
@@ -849,29 +948,30 @@ L 1248 0
 z
 " transform="scale(0.015625)"/>
        </defs>
-       <use xlink:href="#PlusJakartaSans-Regular-c6"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(61.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-240" transform="translate(122.59375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(213.390625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-305" transform="translate(277.890625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(328.59375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(390.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(407.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-246" transform="translate(472.59375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(529.890625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(591.390625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-222" transform="translate(608.390625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1f7" transform="translate(663.1875 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-246" transform="translate(686.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-19b" transform="translate(743.390625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(810.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(827.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-1d1" transform="translate(890.59375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(929.890625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-306" transform="translate(946.890625 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(1025.59375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-28c" transform="translate(1091.09375 0)"/>
-       <use xlink:href="#PlusJakartaSans-Regular-222" transform="translate(1124.890625 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-118"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1f7" transform="translate(98.40625 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(121.3125 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1e8" transform="translate(160.109375 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(217.40625 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2c0" transform="translate(282.90625 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(340.203125 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(379 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(396 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-246" transform="translate(461.5 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(518.796875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(580.296875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-222" transform="translate(597.296875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1f7" transform="translate(652.09375 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-246" transform="translate(675 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-19b" transform="translate(732.296875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(799 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(816 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-1d1" transform="translate(879.5 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(918.796875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-306" transform="translate(935.796875 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(1014.5 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-28c" transform="translate(1080 0)"/>
+       <use xlink:href="#PlusJakartaSans-Regular-222" transform="translate(1113.796875 0)"/>
       </g>
      </g>
     </g>
@@ -1101,36 +1201,22 @@ z
    </g>
   </g>
   <g id="text_19">
-   <!-- Completion advantage under stability checks -->
+   <!-- How much the completion advantage could vary -->
    <g style="fill: #0e3c65" transform="translate(28.8 27.36) scale(0.17 -0.17)">
     <defs>
-     <path id="PlusJakartaSans-Bold-1d" d="M 2701 -77 
-Q 2189 -77 1757 108 
-Q 1325 294 1001 627 
-Q 678 960 499 1408 
-Q 320 1856 320 2387 
-Q 320 2918 496 3369 
-Q 672 3821 995 4150 
-Q 1318 4480 1753 4662 
-Q 2189 4845 2701 4845 
-Q 3213 4845 3619 4672 
-Q 4026 4499 4307 4214 
-Q 4589 3930 4710 3590 
-L 3930 3226 
-Q 3795 3584 3475 3817 
-Q 3155 4051 2701 4051 
-Q 2253 4051 1910 3840 
-Q 1568 3629 1379 3257 
-Q 1190 2886 1190 2387 
-Q 1190 1888 1379 1513 
-Q 1568 1139 1910 928 
-Q 2253 717 2701 717 
-Q 3155 717 3475 950 
-Q 3795 1184 3930 1542 
-L 4710 1178 
-Q 4589 838 4307 553 
-Q 4026 269 3619 96 
-Q 3213 -77 2701 -77 
+     <path id="PlusJakartaSans-Bold-5a" d="M 461 0 
+L 461 4768 
+L 1331 4768 
+L 1331 2688 
+L 3360 2688 
+L 3360 4768 
+L 4237 4768 
+L 4237 0 
+L 3360 0 
+L 3360 1920 
+L 1331 1920 
+L 1331 0 
+L 461 0 
 z
 " transform="scale(0.015625)"/>
      <path id="PlusJakartaSans-Bold-264" d="M 2093 -77 
@@ -1162,6 +1248,26 @@ Q 1370 960 1587 825
 Q 1805 691 2093 691 
 z
 " transform="scale(0.015625)"/>
+     <path id="PlusJakartaSans-Bold-306" d="M 1267 0 
+L 70 3482 
+L 954 3482 
+L 1830 838 
+L 1523 845 
+L 2458 3482 
+L 3200 3482 
+L 4128 845 
+L 3821 838 
+L 4698 3482 
+L 5581 3482 
+L 4384 0 
+L 3635 0 
+L 2688 2758 
+L 2970 2758 
+L 2010 0 
+L 1267 0 
+z
+" transform="scale(0.015625)"/>
+     <path id="PlusJakartaSans-Bold-389" transform="scale(0.015625)"/>
      <path id="PlusJakartaSans-Bold-240" d="M 390 0 
 L 390 3482 
 L 1178 3482 
@@ -1197,6 +1303,139 @@ Q 1395 2605 1312 2438
 Q 1229 2272 1229 2042 
 L 1229 0 
 L 390 0 
+z
+" transform="scale(0.015625)"/>
+     <path id="PlusJakartaSans-Bold-2c0" d="M 1632 -77 
+Q 1229 -77 931 102 
+Q 634 282 477 602 
+Q 320 922 320 1350 
+L 320 3482 
+L 1158 3482 
+L 1158 1421 
+Q 1158 1203 1244 1040 
+Q 1331 877 1494 784 
+Q 1658 691 1862 691 
+Q 2067 691 2227 784 
+Q 2387 877 2476 1043 
+Q 2566 1210 2566 1440 
+L 2566 3482 
+L 3405 3482 
+L 3405 0 
+L 2611 0 
+L 2611 685 
+L 2682 563 
+Q 2560 243 2281 83 
+Q 2003 -77 1632 -77 
+z
+" transform="scale(0.015625)"/>
+     <path id="PlusJakartaSans-Bold-194" d="M 2067 -77 
+Q 1549 -77 1136 163 
+Q 723 403 486 816 
+Q 250 1229 250 1747 
+Q 250 2266 486 2675 
+Q 723 3085 1136 3321 
+Q 1549 3558 2067 3558 
+Q 2438 3558 2758 3427 
+Q 3078 3296 3312 3069 
+Q 3546 2842 3648 2528 
+L 2912 2208 
+Q 2816 2470 2589 2630 
+Q 2362 2790 2067 2790 
+Q 1792 2790 1577 2656 
+Q 1363 2522 1241 2285 
+Q 1120 2048 1120 1741 
+Q 1120 1434 1241 1197 
+Q 1363 960 1577 825 
+Q 1792 691 2067 691 
+Q 2368 691 2592 851 
+Q 2816 1011 2912 1280 
+L 3648 947 
+Q 3546 653 3315 419 
+Q 3085 186 2765 54 
+Q 2445 -77 2067 -77 
+z
+" transform="scale(0.015625)"/>
+     <path id="PlusJakartaSans-Bold-1e8" d="M 390 0 
+L 390 4845 
+L 1229 4845 
+L 1229 2797 
+L 1114 2918 
+Q 1235 3232 1513 3395 
+Q 1792 3558 2163 3558 
+Q 2547 3558 2844 3392 
+Q 3142 3226 3308 2928 
+Q 3475 2630 3475 2240 
+L 3475 0 
+L 2637 0 
+L 2637 2042 
+Q 2637 2272 2547 2438 
+Q 2458 2605 2301 2697 
+Q 2144 2790 1933 2790 
+Q 1728 2790 1568 2697 
+Q 1408 2605 1318 2438 
+Q 1229 2272 1229 2042 
+L 1229 0 
+L 390 0 
+z
+" transform="scale(0.015625)"/>
+     <path id="PlusJakartaSans-Bold-2b0" d="M 1978 -38 
+Q 1389 -38 1065 285 
+Q 742 608 742 1197 
+L 742 2733 
+L 141 2733 
+L 141 3482 
+L 205 3482 
+Q 461 3482 601 3616 
+Q 742 3750 742 4006 
+L 742 4275 
+L 1581 4275 
+L 1581 3482 
+L 2381 3482 
+L 2381 2733 
+L 1581 2733 
+L 1581 1242 
+Q 1581 1069 1641 947 
+Q 1702 826 1833 762 
+Q 1965 698 2170 698 
+Q 2214 698 2275 704 
+Q 2336 710 2394 717 
+L 2394 0 
+Q 2304 -13 2189 -25 
+Q 2074 -38 1978 -38 
+z
+" transform="scale(0.015625)"/>
+     <path id="PlusJakartaSans-Bold-1a2" d="M 2042 -77 
+Q 1504 -77 1101 166 
+Q 698 410 474 826 
+Q 250 1242 250 1747 
+Q 250 2272 477 2678 
+Q 704 3085 1097 3321 
+Q 1491 3558 1978 3558 
+Q 2387 3558 2697 3424 
+Q 3008 3290 3225 3053 
+Q 3443 2816 3558 2512 
+Q 3674 2208 3674 1856 
+Q 3674 1766 3664 1670 
+Q 3654 1574 3629 1504 
+L 941 1504 
+L 941 2144 
+L 3155 2144 
+L 2758 1843 
+Q 2816 2138 2729 2368 
+Q 2643 2598 2448 2732 
+Q 2253 2867 1978 2867 
+Q 1715 2867 1510 2736 
+Q 1306 2605 1200 2352 
+Q 1094 2099 1120 1741 
+Q 1094 1421 1206 1174 
+Q 1318 928 1539 793 
+Q 1760 659 2048 659 
+Q 2336 659 2537 780 
+Q 2739 902 2854 1107 
+L 3533 774 
+Q 3430 525 3212 333 
+Q 2995 141 2697 32 
+Q 2400 -77 2042 -77 
 z
 " transform="scale(0.015625)"/>
      <path id="PlusJakartaSans-Bold-287" d="M 390 -1280 
@@ -1240,66 +1479,6 @@ L 1229 0
 L 390 0 
 z
 " transform="scale(0.015625)"/>
-     <path id="PlusJakartaSans-Bold-1a2" d="M 2042 -77 
-Q 1504 -77 1101 166 
-Q 698 410 474 826 
-Q 250 1242 250 1747 
-Q 250 2272 477 2678 
-Q 704 3085 1097 3321 
-Q 1491 3558 1978 3558 
-Q 2387 3558 2697 3424 
-Q 3008 3290 3225 3053 
-Q 3443 2816 3558 2512 
-Q 3674 2208 3674 1856 
-Q 3674 1766 3664 1670 
-Q 3654 1574 3629 1504 
-L 941 1504 
-L 941 2144 
-L 3155 2144 
-L 2758 1843 
-Q 2816 2138 2729 2368 
-Q 2643 2598 2448 2732 
-Q 2253 2867 1978 2867 
-Q 1715 2867 1510 2736 
-Q 1306 2605 1200 2352 
-Q 1094 2099 1120 1741 
-Q 1094 1421 1206 1174 
-Q 1318 928 1539 793 
-Q 1760 659 2048 659 
-Q 2336 659 2537 780 
-Q 2739 902 2854 1107 
-L 3533 774 
-Q 3430 525 3212 333 
-Q 2995 141 2697 32 
-Q 2400 -77 2042 -77 
-z
-" transform="scale(0.015625)"/>
-     <path id="PlusJakartaSans-Bold-2b0" d="M 1978 -38 
-Q 1389 -38 1065 285 
-Q 742 608 742 1197 
-L 742 2733 
-L 141 2733 
-L 141 3482 
-L 205 3482 
-Q 461 3482 601 3616 
-Q 742 3750 742 4006 
-L 742 4275 
-L 1581 4275 
-L 1581 3482 
-L 2381 3482 
-L 2381 2733 
-L 1581 2733 
-L 1581 1242 
-Q 1581 1069 1641 947 
-Q 1702 826 1833 762 
-Q 1965 698 2170 698 
-Q 2214 698 2275 704 
-Q 2336 710 2394 717 
-L 2394 0 
-Q 2304 -13 2189 -25 
-Q 2074 -38 1978 -38 
-z
-" transform="scale(0.015625)"/>
      <path id="PlusJakartaSans-Bold-1f7" d="M 390 0 
 L 390 3482 
 L 1229 3482 
@@ -1336,7 +1515,6 @@ L 1229 0
 L 390 0 
 z
 " transform="scale(0.015625)"/>
-     <path id="PlusJakartaSans-Bold-389" transform="scale(0.015625)"/>
      <path id="PlusJakartaSans-Bold-12d" d="M 1446 -77 
 Q 1082 -77 813 44 
 Q 544 166 397 393 
@@ -1465,29 +1643,6 @@ Q 1357 1158 1565 1036
 Q 1773 915 2042 915 
 z
 " transform="scale(0.015625)"/>
-     <path id="PlusJakartaSans-Bold-2c0" d="M 1632 -77 
-Q 1229 -77 931 102 
-Q 634 282 477 602 
-Q 320 922 320 1350 
-L 320 3482 
-L 1158 3482 
-L 1158 1421 
-Q 1158 1203 1244 1040 
-Q 1331 877 1494 784 
-Q 1658 691 1862 691 
-Q 2067 691 2227 784 
-Q 2387 877 2476 1043 
-Q 2566 1210 2566 1440 
-L 2566 3482 
-L 3405 3482 
-L 3405 0 
-L 2611 0 
-L 2611 685 
-L 2682 563 
-Q 2560 243 2281 83 
-Q 2003 -77 1632 -77 
-z
-" transform="scale(0.015625)"/>
      <path id="PlusJakartaSans-Bold-28c" d="M 390 0 
 L 390 3482 
 L 1178 3482 
@@ -1502,75 +1657,6 @@ Q 1664 2778 1446 2557
 Q 1229 2336 1229 1939 
 L 1229 0 
 L 390 0 
-z
-" transform="scale(0.015625)"/>
-     <path id="PlusJakartaSans-Bold-2a4" d="M 1715 -77 
-Q 1158 -77 745 188 
-Q 333 454 179 909 
-L 806 1210 
-Q 941 915 1181 748 
-Q 1421 582 1715 582 
-Q 1946 582 2080 684 
-Q 2214 787 2214 954 
-Q 2214 1056 2160 1123 
-Q 2106 1190 2013 1238 
-Q 1920 1286 1811 1318 
-L 1242 1478 
-Q 800 1606 573 1868 
-Q 346 2131 346 2490 
-Q 346 2810 509 3050 
-Q 672 3290 963 3424 
-Q 1254 3558 1632 3558 
-Q 2125 3558 2502 3321 
-Q 2880 3085 3040 2656 
-L 2400 2355 
-Q 2310 2592 2099 2733 
-Q 1888 2874 1626 2874 
-Q 1414 2874 1292 2778 
-Q 1171 2682 1171 2528 
-Q 1171 2432 1222 2361 
-Q 1274 2291 1366 2246 
-Q 1459 2202 1581 2163 
-L 2138 1997 
-Q 2566 1869 2800 1613 
-Q 3034 1357 3034 986 
-Q 3034 672 2867 432 
-Q 2701 192 2406 57 
-Q 2112 -77 1715 -77 
-z
-" transform="scale(0.015625)"/>
-     <path id="PlusJakartaSans-Bold-193" d="M 2291 -77 
-Q 1914 -77 1597 73 
-Q 1280 224 1094 506 
-L 1178 672 
-L 1178 0 
-L 390 0 
-L 390 4845 
-L 1229 4845 
-L 1229 2790 
-L 1101 2963 
-Q 1280 3245 1587 3401 
-Q 1894 3558 2298 3558 
-Q 2790 3558 3187 3315 
-Q 3584 3072 3817 2662 
-Q 4051 2253 4051 1741 
-Q 4051 1235 3820 819 
-Q 3590 403 3193 163 
-Q 2797 -77 2291 -77 
-z
-M 2195 691 
-Q 2483 691 2707 825 
-Q 2931 960 3056 1197 
-Q 3181 1434 3181 1741 
-Q 3181 2048 3056 2281 
-Q 2931 2515 2707 2652 
-Q 2483 2790 2195 2790 
-Q 1920 2790 1699 2656 
-Q 1478 2522 1353 2282 
-Q 1229 2042 1229 1741 
-Q 1229 1434 1353 1197 
-Q 1478 960 1699 825 
-Q 1920 691 2195 691 
 z
 " transform="scale(0.015625)"/>
      <path id="PlusJakartaSans-Bold-30c" d="M 813 -1408 
@@ -1595,122 +1681,55 @@ Q 1645 -1158 1392 -1283
 Q 1139 -1408 813 -1408 
 z
 " transform="scale(0.015625)"/>
-     <path id="PlusJakartaSans-Bold-194" d="M 2067 -77 
-Q 1549 -77 1136 163 
-Q 723 403 486 816 
-Q 250 1229 250 1747 
-Q 250 2266 486 2675 
-Q 723 3085 1136 3321 
-Q 1549 3558 2067 3558 
-Q 2438 3558 2758 3427 
-Q 3078 3296 3312 3069 
-Q 3546 2842 3648 2528 
-L 2912 2208 
-Q 2816 2470 2589 2630 
-Q 2362 2790 2067 2790 
-Q 1792 2790 1577 2656 
-Q 1363 2522 1241 2285 
-Q 1120 2048 1120 1741 
-Q 1120 1434 1241 1197 
-Q 1363 960 1577 825 
-Q 1792 691 2067 691 
-Q 2368 691 2592 851 
-Q 2816 1011 2912 1280 
-L 3648 947 
-Q 3546 653 3315 419 
-Q 3085 186 2765 54 
-Q 2445 -77 2067 -77 
-z
-" transform="scale(0.015625)"/>
-     <path id="PlusJakartaSans-Bold-1e8" d="M 390 0 
-L 390 4845 
-L 1229 4845 
-L 1229 2797 
-L 1114 2918 
-Q 1235 3232 1513 3395 
-Q 1792 3558 2163 3558 
-Q 2547 3558 2844 3392 
-Q 3142 3226 3308 2928 
-Q 3475 2630 3475 2240 
-L 3475 0 
-L 2637 0 
-L 2637 2042 
-Q 2637 2272 2547 2438 
-Q 2458 2605 2301 2697 
-Q 2144 2790 1933 2790 
-Q 1728 2790 1568 2697 
-Q 1408 2605 1318 2438 
-Q 1229 2272 1229 2042 
-L 1229 0 
-L 390 0 
-z
-" transform="scale(0.015625)"/>
-     <path id="PlusJakartaSans-Bold-222" d="M 390 0 
-L 390 4845 
-L 1229 4845 
-L 1229 1670 
-L 909 1766 
-L 2547 3482 
-L 3590 3482 
-L 2304 2080 
-L 3616 0 
-L 2656 0 
-L 1517 1805 
-L 2016 1907 
-L 966 781 
-L 1229 1293 
-L 1229 0 
-L 390 0 
-z
-" transform="scale(0.015625)"/>
     </defs>
-    <use xlink:href="#PlusJakartaSans-Bold-1d"/>
-    <use xlink:href="#PlusJakartaSans-Bold-264" transform="translate(76.40625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-240" transform="translate(141.609375 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-287" transform="translate(234.015625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-227" transform="translate(301.21875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-1a2" transform="translate(326.421875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-2b0" transform="translate(387.625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-1f7" transform="translate(428.921875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-264" transform="translate(454.125 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-246" transform="translate(519.328125 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-389" transform="translate(578.625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-12d" transform="translate(596.421875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-19b" transform="translate(654.421875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-305" transform="translate(721.625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-12d" transform="translate(776.21875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-246" transform="translate(834.21875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-2b0" transform="translate(893.515625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-12d" transform="translate(934.609375 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-1d3" transform="translate(992.609375 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-1a2" transform="translate(1057.8125 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-389" transform="translate(1119.015625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-2c0" transform="translate(1136.8125 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-246" transform="translate(1196.109375 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-19b" transform="translate(1255.40625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-1a2" transform="translate(1322.609375 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-28c" transform="translate(1383.8125 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-389" transform="translate(1421.21875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-2a4" transform="translate(1439.015625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-2b0" transform="translate(1490.421875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-12d" transform="translate(1531.515625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-193" transform="translate(1589.515625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-1f7" transform="translate(1656.71875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-227" transform="translate(1681.921875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-1f7" transform="translate(1707.125 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-2b0" transform="translate(1732.328125 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-30c" transform="translate(1773.625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-389" transform="translate(1832.21875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-194" transform="translate(1850.015625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-1e8" transform="translate(1910.8125 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-1a2" transform="translate(1970.109375 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-194" transform="translate(2031.3125 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-222" transform="translate(2092.109375 0)"/>
-    <use xlink:href="#PlusJakartaSans-Bold-2a4" transform="translate(2149.8125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-5a"/>
+    <use xlink:href="#PlusJakartaSans-Bold-264" transform="translate(73.296875 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-306" transform="translate(137.5 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-389" transform="translate(225.796875 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-240" transform="translate(243.59375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-2c0" transform="translate(336 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-194" transform="translate(395.296875 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-1e8" transform="translate(456.09375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-389" transform="translate(515.390625 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-2b0" transform="translate(533.1875 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-1e8" transform="translate(574.484375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-1a2" transform="translate(633.78125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-389" transform="translate(694.984375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-194" transform="translate(712.78125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-264" transform="translate(773.578125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-240" transform="translate(838.78125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-287" transform="translate(931.1875 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-227" transform="translate(998.390625 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-1a2" transform="translate(1023.59375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-2b0" transform="translate(1084.796875 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-1f7" transform="translate(1126.09375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-264" transform="translate(1151.296875 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-246" transform="translate(1216.5 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-389" transform="translate(1275.796875 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-12d" transform="translate(1293.59375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-19b" transform="translate(1351.59375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-305" transform="translate(1418.796875 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-12d" transform="translate(1473.390625 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-246" transform="translate(1531.390625 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-2b0" transform="translate(1590.6875 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-12d" transform="translate(1631.78125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-1d3" transform="translate(1689.78125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-1a2" transform="translate(1754.984375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-389" transform="translate(1816.1875 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-194" transform="translate(1833.984375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-264" transform="translate(1894.78125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-2c0" transform="translate(1959.984375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-227" transform="translate(2019.28125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-19b" transform="translate(2044.484375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-389" transform="translate(2111.6875 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-305" transform="translate(2129.484375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-12d" transform="translate(2184.078125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-28c" transform="translate(2242.078125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Bold-30c" transform="translate(2279.484375 0)"/>
    </g>
   </g>
   <g id="text_20">
-   <!-- Skills minus baseline completion · every range stays above zero -->
+   <!-- Skills minus baseline completion · every range remains positive -->
    <g style="fill: #526b7e" transform="translate(28.8 48.96) scale(0.1 -0.1)">
     <defs>
      <path id="PlusJakartaSans-Regular-d6" d="M 2170 -77 
@@ -1748,29 +1767,6 @@ Q 3712 1696 3712 1222
 Q 3712 838 3517 547 
 Q 3322 256 2973 89 
 Q 2624 -77 2170 -77 
-z
-" transform="scale(0.015625)"/>
-     <path id="PlusJakartaSans-Regular-2c0" d="M 1709 -77 
-Q 1350 -77 1056 92 
-Q 762 262 592 566 
-Q 422 870 422 1267 
-L 422 3430 
-L 902 3430 
-L 902 1325 
-Q 902 1050 1014 842 
-Q 1126 634 1328 518 
-Q 1530 403 1792 403 
-Q 2054 403 2259 521 
-Q 2464 640 2579 861 
-Q 2694 1082 2694 1389 
-L 2694 3430 
-L 3174 3430 
-L 3174 0 
-L 2694 0 
-L 2694 666 
-L 2803 640 
-Q 2682 307 2387 115 
-Q 2093 -77 1709 -77 
 z
 " transform="scale(0.015625)"/>
      <path id="PlusJakartaSans-Regular-193" d="M 2227 -77 
@@ -1841,6 +1837,17 @@ L 1171 1363
 L 659 1363 
 z
 " transform="scale(0.015625)"/>
+     <path id="PlusJakartaSans-Regular-305" d="M 1408 0 
+L 70 3430 
+L 608 3430 
+L 1734 422 
+L 1562 422 
+L 2694 3430 
+L 3238 3430 
+L 1888 0 
+L 1408 0 
+z
+" transform="scale(0.015625)"/>
      <path id="PlusJakartaSans-Regular-30c" d="M 563 -1408 
 Q 461 -1408 355 -1392 
 Q 250 -1376 147 -1338 
@@ -1908,21 +1915,6 @@ Q 1178 870 1450 700
 Q 1722 531 2067 531 
 z
 " transform="scale(0.015625)"/>
-     <path id="PlusJakartaSans-Regular-334" d="M 141 0 
-L 141 416 
-L 2208 3136 
-L 2298 2950 
-L 250 2950 
-L 250 3430 
-L 2720 3430 
-L 2720 3014 
-L 659 294 
-L 570 480 
-L 2733 480 
-L 2733 0 
-L 141 0 
-z
-" transform="scale(0.015625)"/>
     </defs>
     <use xlink:href="#PlusJakartaSans-Regular-d6"/>
     <use xlink:href="#PlusJakartaSans-Regular-222" transform="translate(64.59375 0)"/>
@@ -1971,22 +1963,22 @@ z
     <use xlink:href="#PlusJakartaSans-Regular-1d3" transform="translate(2010.03125 0)"/>
     <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(2076.234375 0)"/>
     <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(2137.734375 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-2a4" transform="translate(2154.734375 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(2205.640625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-12d" transform="translate(2243.4375 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-30c" transform="translate(2300.640625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-2a4" transform="translate(2354.234375 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(2405.140625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-12d" transform="translate(2422.140625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-193" transform="translate(2479.34375 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(2546.046875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-305" transform="translate(2610.546875 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(2661.25 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(2722.75 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-334" transform="translate(2739.75 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(2784.65625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-28c" transform="translate(2846.15625 0)"/>
-    <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(2879.953125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-28c" transform="translate(2154.734375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(2188.53125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-240" transform="translate(2250.03125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-12d" transform="translate(2340.828125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-1f7" transform="translate(2398.03125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-246" transform="translate(2420.9375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-2a4" transform="translate(2478.234375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-389" transform="translate(2529.140625 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-287" transform="translate(2546.140625 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-264" transform="translate(2612.84375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-2a4" transform="translate(2678.34375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-1f7" transform="translate(2729.25 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-2b0" transform="translate(2752.15625 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-1f7" transform="translate(2790.953125 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-305" transform="translate(2813.859375 0)"/>
+    <use xlink:href="#PlusJakartaSans-Regular-1a2" transform="translate(2864.5625 0)"/>
    </g>
   </g>
   <g id="text_21">
@@ -2102,29 +2094,6 @@ L 3379 1363
 L 499 1363 
 z
 " transform="scale(0.015625)"/>
-     <path id="PlusJakartaSans-Regular-1e8" d="M 493 0 
-L 493 4845 
-L 973 4845 
-L 973 2765 
-L 864 2790 
-Q 992 3123 1283 3315 
-Q 1574 3507 1958 3507 
-Q 2323 3507 2614 3340 
-Q 2906 3174 3075 2883 
-Q 3245 2592 3245 2227 
-L 3245 0 
-L 2765 0 
-L 2765 2042 
-Q 2765 2355 2649 2572 
-Q 2534 2790 2332 2908 
-Q 2131 3027 1875 3027 
-Q 1619 3027 1414 2908 
-Q 1210 2790 1091 2569 
-Q 973 2349 973 2042 
-L 973 0 
-L 493 0 
-z
-" transform="scale(0.015625)"/>
     </defs>
     <use xlink:href="#PlusJakartaSans-Regular-92"/>
     <use xlink:href="#PlusJakartaSans-Regular-9f" transform="translate(83.59375 0)"/>
@@ -2169,29 +2138,6 @@ z
    <!-- Dashed line: observed +15.9% completion advantage -->
    <g style="fill: #526b7e" transform="translate(273.6 401.76) scale(0.09 -0.09)">
     <defs>
-     <path id="PlusJakartaSans-Regular-24" d="M 563 0 
-L 563 4768 
-L 2131 4768 
-Q 2842 4768 3366 4477 
-Q 3891 4186 4179 3651 
-Q 4467 3117 4467 2387 
-Q 4467 1664 4179 1126 
-Q 3891 589 3366 294 
-Q 2842 0 2131 0 
-L 563 0 
-z
-M 1075 480 
-L 2131 480 
-Q 2682 480 3085 713 
-Q 3488 947 3709 1376 
-Q 3930 1805 3930 2387 
-Q 3930 2970 3706 3395 
-Q 3482 3821 3078 4054 
-Q 2675 4288 2131 4288 
-L 1075 4288 
-L 1075 480 
-z
-" transform="scale(0.015625)"/>
      <path id="PlusJakartaSans-Regular-395" d="M 659 0 
 L 659 704 
 L 1171 704 

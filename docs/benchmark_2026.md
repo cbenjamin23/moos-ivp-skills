@@ -19,7 +19,7 @@ article_nav:
   - { id: what-the-agents-actually-did, title: Skill use and validation }
   - { id: time-and-cost-of-the-work, title: Time and cost }
   - { id: what-to-improve-next, title: Failures and next steps }
-  - { id: a-result-that-survives-the-sensitivity-checks, title: "How stable is the result?" }
+  - { id: a-result-that-survives-the-sensitivity-checks, title: "Would different attempts change the result?" }
   - { id: what-this-means-for-the-plugin, title: Implications for the plugin }
   - { id: evidence-and-reproduction, title: Data and sources }
 ---
@@ -381,21 +381,31 @@ a known-failure case, compare each verdict with the recorded mission events,
 and treat missing monitoring or failed setup as a failure rather than a pass.
 Repeating Task 9 would show whether that guidance helps.
 
-## How stable is the result?
+## Would different attempts change the result?
 {: #a-result-that-survives-the-sensitivity-checks }
 
-The observed completion advantage is +15.9 percentage points. To see how much
-that number might vary if the benchmark were repeated, we recalculated it 20,000
-times using random selections from the attempts already collected. Each
-selection keeps the same tasks, models, and conditions and draws five attempts
-from every group. An attempt can be selected more than once. This method is
-called bootstrapping.
+The 15.9-point completion advantage comes from five baseline and five skills
+attempts for every task and model. Another set of attempts would not produce
+exactly the same number. This analysis estimates how much the result could move
+because of that run-to-run variation.
 
-The middle 95% of the resampled results fall between +10.9 and +21.4 points. The
-result also stays positive when any one task, model, or kind of work is removed.
-No single part of the benchmark creates the overall advantage.
+For every task and model, we randomly redraw five baseline results and five
+skills results from the attempts already collected. The same result can be
+drawn more than once. We then recalculate the overall advantage and repeat the
+process 20,000 times. This standard uncertainty check is called bootstrap
+resampling. Keeping each group separate preserves the benchmark's original mix
+of tasks, models, and conditions.
 
-{% include benchmark-figure.html file="result-stability" title="Completion advantage under stability checks" alt="Skills-minus-baseline completion advantage. The middle 95% of 20,000 resampled results fall between +10.9 and +21.4 percentage points. Leave-one-out ranges are +14.0 to +20.0 after removing one task, +10.9 to +22.4 after removing one model, and +11.2 to +19.4 after removing one kind of work. The observed result is +15.9 points." caption="Figure 8. The first row shows the middle 95% of 20,000 resampled results. The others show the smallest and largest result after removing one task, model, or kind of work. Every range stays above zero." %}
+The middle 95% of the recalculated results fall between +10.9 and +21.4 points.
+If that range included zero, the observed advantage could plausibly disappear
+with a different set of attempts. It does not. This supports a skills advantage
+for these tasks and models, but it does not predict the result for new tasks or
+future models.
+
+The advantage also stays positive when any one task, model, or kind of work is
+removed. No single part of the benchmark creates the overall result.
+
+{% include benchmark-figure.html file="result-stability" title="How much the completion advantage could vary" alt="Skills-minus-baseline completion advantage. Different sets of attempts give a middle 95% range from +10.9 to +21.4 percentage points. Leave-one-out ranges are +14.0 to +20.0 without one task, +10.9 to +22.4 without one model, and +11.2 to +19.4 without one kind of work. The observed result is +15.9 points." caption="Figure 8. The first row estimates run-to-run variation for the same tasks and models. The other rows show the smallest and largest result after omitting each task, model, or kind of work in turn. Every range remains positive." %}
 
 Submitted files were reviewed under anonymous identifiers. Reviewers did not
 see which model produced the work or whether skills were available.

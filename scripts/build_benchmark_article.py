@@ -432,13 +432,13 @@ def render(data):
             return min(values), max(values)
 
         stability_checks = [
-            ("Resample repeated attempts", bootstrap_lo, bootstrap_hi),
-            ("Remove one task", *difference_range("leave_one_task_out")),
-            ("Remove one model", *difference_range("leave_one_model_out")),
-            ("Remove one kind of work", *difference_range("leave_one_family_out")),
+            ("Different sets of attempts", bootstrap_lo, bootstrap_hi),
+            ("Without one task", *difference_range("leave_one_task_out")),
+            ("Without one model", *difference_range("leave_one_model_out")),
+            ("Without one kind of work", *difference_range("leave_one_family_out")),
         ]
-        fig = canvas("Completion advantage under stability checks",
-                     "Skills minus baseline completion · every range stays above zero", 6.2)
+        fig = canvas("How much the completion advantage could vary",
+                     "Skills minus baseline completion · every range remains positive", 6.2)
         ax = axis(fig, [.38, .20, .55, .58], 25, False)
         ax.set_xticks([0, 5, 10, 15, 20, 25],
                       ["0%", "+5%", "+10%", "+15%", "+20%", "+25%"])

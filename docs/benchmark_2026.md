@@ -20,7 +20,7 @@ article_nav:
   - { id: time-and-cost-of-the-work, title: Time and cost }
   - { id: what-to-improve-next, title: Failures and next steps }
   - { id: a-result-that-survives-the-sensitivity-checks, title: "Would different attempts change the results?" }
-  - { id: what-this-means-for-the-plugin, title: Implications for the plugin }
+  - { id: conclusion, title: Conclusion }
 ---
 
 ## Study setup
@@ -430,15 +430,38 @@ conformance reflects the skills' practices, and model-based reviewers can make
 mistakes. A broader task set and independent replication would test how far
 these findings generalize.
 
-## Implications for the plugin
-{: #what-this-means-for-the-plugin }
+## Conclusion
+{: #conclusion }
 
 Skills improved conformance to MOOS-IvP practice across all four models,
 including tasks that agents already completed reliably. Completion gains were
-largest in behaviors and missions. The next package revision can target the
-harness's false-pass failures and test whether stronger validation improves
-those results. Broader task sets and measurements of integration and maintenance
-effort would help establish how far the benefits carry into everyday development.
+largest in behaviors and missions. One useful direction for the next package
+revision is to address the harness's false-pass failures and test whether
+stronger validation improves those results. Broader task sets and measurements
+of integration and maintenance effort would help establish how far the benefits
+carry into everyday development.
+
+This matters for real robots because software conventions can prevent
+operational problems. Configurable ports avoid network conflicts, live
+validation catches failures before deployment, and truthful harnesses keep
+failed scenarios from being reported as passes. This benchmark uses simulation,
+so it does not measure field safety. It does show that domain skills help coding
+agents produce more complete MOOS-IvP work that follows the practices experienced
+developers rely on. Human review and hardware testing remain essential before
+deployment.
+
+The design follows ideas used in software-agent benchmarks such as
+[SWE-bench](https://arxiv.org/abs/2310.06770), where an agent works from a
+request inside a real repository, and robotics research such as [Code as
+Policies](https://openreview.net/forum?id=fmtvpopfLC6) and
+[GenSim](https://openreview.net/forum?id=14YqPG4cm0), where generated robot code
+is exercised in simulation. This study applies those ideas to complete
+MOOS-IvP development workflows and separately measures functional completion
+and domain-specific engineering practice.
+
+The private benchmark archive contains a detailed report for each of the eleven
+tasks, including model-level results, criterion breakdowns, and failure
+analysis. This article presents the main findings across the study.
 
 *Data availability: The chart-data downloads contain the aggregate results and
 exact task prompts. Participant transcripts, reviewer workspaces, and runtime

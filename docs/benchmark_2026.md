@@ -435,20 +435,11 @@ these findings generalize.
 
 Skills improved conformance to MOOS-IvP practice across all four models,
 including tasks that agents already completed reliably. Completion gains were
-largest in behaviors and missions. Future work could strengthen the harness
-skill and test multi-model workflows, such as a Luna run followed by an Astra
-run that reviews and improves the result. This would better represent
-development beyond a single attempt and measure how much effort it takes to
-integrate generated work into a larger project and maintain it as the project
-changes.
+largest in behaviors and missions.
 
-This matters for real robots because software conventions can prevent
-operational problems. Configurable ports avoid network conflicts, live
-validation catches failures before deployment, and truthful harnesses keep
-failed scenarios from being reported as passes. This benchmark uses simulation,
-so it does not measure field safety. It does show that domain skills help coding
-agents produce more complete MOOS-IvP work that follows the practices experienced
-developers rely on for real-world deployment.
+These results support using domain skills to help coding agents produce more
+complete MOOS-IvP software that follows the practices experienced developers
+rely on for real-world deployment.
 
 The design follows ideas used in software-agent benchmarks such as
 [SWE-bench](https://arxiv.org/abs/2310.06770), where an agent works from a
@@ -462,6 +453,12 @@ and domain-specific engineering practice.
 The private benchmark archive contains a detailed report for each of the eleven
 tasks, including model-level results, criterion breakdowns, and failure
 analysis. This article presents the main findings across the study.
+
+Future work could strengthen the harness skill and test multi-model workflows,
+such as a Luna run followed by an Astra run that reviews and improves the
+result. This would better represent development beyond a single attempt and
+measure how much effort it takes to integrate generated work into a larger
+project and maintain it as the project changes.
 
 *Data availability: The chart-data downloads contain the aggregate results and
 exact task prompts. Participant transcripts, reviewer workspaces, and runtime

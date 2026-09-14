@@ -56,26 +56,43 @@ Conformance refers to the type of criteria that, if omitted, would make an
 experienced MOOS-IvP developer pause and say "something isn't right here". A
 result can therefore be complete while losing conformance points: it does what
 the request asks but misses an important MOOS-IvP convention. Reviewers assess
-criteria such as whether an app puts recurring logic in `Iterate()`, a mission
-launcher exposes configurable port settings, or a self-evaluating mission uses
-the existing `pMissionEval` utility instead of unnecessarily creating a brand
-new utility. Both conditions were judged against the same criteria.
+both conditions against the same criteria.
 
-For example, a two-vehicle mission may patrol and shadow correctly but still
-lose conformance points if its launchers hard-code the MOOSDB or pShare ports.
-Another implementation may follow the expected MOOS structure but mishandle
-alert acknowledgment, making it incomplete. Completion and conformance capture
-these different shortcomings, and we keep their scores separate.
+#### A concrete example: Task 2
 
-For each run, reviewers use the conformance criteria defined for that task. The
-score is the share of applicable criteria fully met. A partly met criterion
-means the mechanism exists but is incomplete or inconsistent. Partial and unmet
-criteria receive no credit. Eight fully met criteria, one partly met, and one
-not met produce an 80% score.
+Task 2 asks the agent to build `pContactWaypoint`, an app that directs a vehicle
+toward a selected contact. The same app is judged in two different ways.
 
-Conformance is averaged across all runs, including incomplete ones. Each run
-and each criterion counts equally. The percentage measures adherence to the
-tested practices. Later examples show what was missed. The
+**Completion criteria.** All five must be satisfied:
+
+- `pContactWaypoint` builds as a MOOS app.
+- The configured contact determines which reported position is used.
+- Valid moving-contact reports produce configurable active-waypoint updates.
+- Missing or invalid contact data never produces an invalid waypoint.
+- Operator-facing status identifies the selected contact and current waypoint.
+
+**Example conformance criteria.** These are five of the engineering criteria
+applied to the task:
+
+- Configuration is read in `OnStartUp()`, with invalid or unknown settings
+  handled clearly.
+- Incoming contact reports are type-checked before use.
+- Recurring waypoint calculations and publications happen in `Iterate()`.
+- The standard `--help`, `--example`, and `--interface` commands work and
+  accurately describe the app.
+- The app can be launched and exercised through a normal MOOS mission using
+  `pAntler` and a `ProcessConfig` block.
+
+Completion is recorded as complete or incomplete. Conformance is scored as the
+share of applicable criteria fully met. A partly met criterion means the
+mechanism exists but is incomplete or inconsistent. Partial and unmet criteria
+receive no credit. Eight fully met criteria, one partly met, and one not met
+produce an 80% conformance score.
+
+We average each run's conformance score across all runs, including incomplete
+ones. Each run and each applicable criterion receives equal weight. The
+percentage measures adherence to the tested practices. Later examples show what
+was missed. The
 [chart-data download]({{ '/assets/data/benchmark-2026.json' | relative_url }})
 also includes a half-credit alternative.
 

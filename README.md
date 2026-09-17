@@ -28,6 +28,7 @@ carry self-contained copies generated from that source for distribution.
 - `moos-ivp-docs` - consult upstream MOOS-IvP docs and local source.
 - `moos-alog-analysis` - analyze existing `.alog` files with MOOS log tools.
 - `moos-ivp-installer` - install or repair an upstream MOOS-IvP checkout.
+- `moos-ivp-repo-builder` - create and validate a MOOS-IvP extension repository.
 - `moos-ivp-eval-mission-builder` - build self-evaluating test missions.
 - `moos-ivp-harness-builder` - build multi-case test harnesses, including `nspatch` variants.
 - `moos-map-builder` - create and verify TIFF background maps through a GUI or CLI.

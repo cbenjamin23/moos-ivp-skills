@@ -19,3 +19,9 @@ study examines 440 runs across eleven MOOS-IvP tasks, separating functional
 completion, engineering conformance, elapsed time, and participant cost.
 
 [Read **Benchmarking MOOS-IvP Skills**]({{ '/benchmark_2026/' | relative_url }})
+
+## Plugin support
+
+[Report an issue](https://github.com/cbenjamin23/moos-ivp-skills/issues) ·
+[Privacy policy]({{ '/plugin-privacy/' | relative_url }}) ·
+[Terms of use]({{ '/plugin-terms/' | relative_url }})

@@ -50,6 +50,12 @@ from `skills/` into the place it expects skill-style instructions.
 
 For more detailed instructions, see `INSTALL.md`.
 
+## Support and policies
+
+Report plugin issues through [GitHub Issues](https://github.com/cbenjamin23/moos-ivp-skills/issues).
+See the [privacy policy](docs/plugin-privacy.md) and [terms of use](docs/plugin-terms.md)
+for the plugin's data handling and license.
+
 ## Repository Layout
 
 ```text

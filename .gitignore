@@ -6,6 +6,7 @@ targ_*
 LOG_*/
 XLOG_*
 *.alog
+!submission/fixtures/*.alog
 .LastOpenedMOOSLogDirectory
 
 # Build and packaging output

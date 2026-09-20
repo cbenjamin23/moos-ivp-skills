@@ -44,9 +44,16 @@ https://github.com/cbenjamin23/moos-ivp-skills
 Then add it as a plugin marketplace in the Codex or Claude Code GUI, or ask the
 agent to install the `moos-ivp-skills` plugin from that link.
 
-If you are not using Codex or Claude Code, use the canonical `skills/`
-directory directly. Ask your agent or harness to copy or load the skill folders
-from `skills/` into the place it expects skill-style instructions.
+For agents supported by the open skills CLI, run:
+
+```sh
+npx skills add https://github.com/cbenjamin23/moos-ivp-skills
+```
+
+The command discovers all ten skills and lets you choose which skills and agent
+installations to configure. For other agents, use the canonical `skills/`
+directory directly and copy or load the skill folders into the place the agent
+expects skill-style instructions.
 
 For more detailed instructions, see `INSTALL.md`.
 

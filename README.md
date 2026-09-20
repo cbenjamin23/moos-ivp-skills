@@ -58,6 +58,8 @@ contents. To update skills installed through the CLI later, run:
 npx skills update
 ```
 
+You can also [browse the package on skills.sh](https://skills.sh/cbenjamin23/moos-ivp-skills).
+
 For other agents, use the canonical `skills/` directory directly and copy or
 load the skill folders into the place the agent expects skill-style
 instructions.

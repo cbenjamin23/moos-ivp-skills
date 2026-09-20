@@ -51,9 +51,16 @@ npx skills add https://github.com/cbenjamin23/moos-ivp-skills
 ```
 
 The command discovers all ten skills and lets you choose which skills and agent
-installations to configure. For other agents, use the canonical `skills/`
-directory directly and copy or load the skill folders into the place the agent
-expects skill-style instructions.
+installations to configure. New installations fetch the current repository
+contents. To update skills installed through the CLI later, run:
+
+```sh
+npx skills update
+```
+
+For other agents, use the canonical `skills/` directory directly and copy or
+load the skill folders into the place the agent expects skill-style
+instructions.
 
 For more detailed instructions, see `INSTALL.md`.
 
